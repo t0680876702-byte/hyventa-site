@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hyventa — Hire an AI employee. Put it to work.</title>
+<meta name="description" content="Hyventa — a department of specialized AI workers your company can hire in minutes. 24/7, any language, human handoff built in." />
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg-soft: #121829;
+    --card: #161d30;
+    --border: #26304d;
+    --text: #e8ecf6;
+    --muted: #97a2c0;
+    --accent: #6c8cff;
+    --accent-2: #9b6cff;
+    --start: #3ecf8e;
+    --business: #6c8cff;
+    --pro: #9b6cff;
+    --custom: #ff9f4a;
+    --radius: 22px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+    background: radial-gradient(1200px 600px at 50% -10%, #1a2340 0%, transparent 60%), var(--bg);
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Header ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 500;
+    background: rgba(10,14,26,.82); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -.5px; }
+  .brand .logo {
+    width: 32px; height: 32px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: grid; place-items: center; color: #fff; font-size: 18px; font-weight: 900;
+  }
+  .brand span.dot { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 26px; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600; transition: .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .lang { display: flex; gap: 4px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 999px; padding: 4px; }
+  .lang button {
+    border: none; background: transparent; color: var(--muted); cursor: pointer;
+    font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px; transition: .2s;
+  }
+  .lang button.active { background: var(--accent); color: #fff; }
+  .cta-btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; text-decoration: none;
+    font-weight: 700; font-size: 14px; padding: 10px 18px; border-radius: 999px; transition: .2s;
+    white-space: nowrap;
+  }
+  .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(108,140,255,.35); }
+  .burger { display: none; background: none; border: none; color: var(--text); font-size: 26px; cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero { text-align: center; padding: 60px 0 20px; }
+  .eyebrow {
+    display: inline-block; font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); background: rgba(108,140,255,.1); border: 1px solid rgba(108,140,255,.25);
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5.5vw, 58px); font-weight: 800; letter-spacing: -1.5px;
+    background: linear-gradient(120deg, #fff 20%, var(--accent) 60%, var(--accent-2) 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+  }
+  .hero p.sub { color: var(--muted); font-size: clamp(15px, 2.5vw, 20px); max-width: 660px; margin: 0 auto 26px; }
+  .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; text-decoration: none;
+    font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: 999px; transition: .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(108,140,255,.4); }
+  .btn-ghost {
+    background: var(--card); border: 1px solid var(--border); color: var(--text); text-decoration: none;
+    font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: 999px; transition: .2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); }
+  .points { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 900px; margin: 0 auto; }
+  .point {
+    font-size: 13px; color: var(--text); background: var(--bg-soft); border: 1px solid var(--border);
+    padding: 7px 14px; border-radius: 999px; display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ---------- Section shell ---------- */
+  section { padding: 64px 0; }
+  .sec-head { text-align: center; margin-bottom: 44px; }
+  .sec-head h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -.5px; margin-bottom: 12px; }
+  .sec-head p { color: var(--muted); font-size: 16px; max-width: 620px; margin: 0 auto; }
+
+  /* ---------- Carousel ---------- */
+  .carousel { position: relative; height: 620px; margin: 12px 0 4px; perspective: 1800px; overflow: hidden; }
+  .stage { position: absolute; inset: 0; transform-style: preserve-3d; }
+  .card {
+    position: absolute; top: 50%; left: 50%;
+    width: 340px; height: 560px; margin: -280px 0 0 -170px;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: transform .55s cubic-bezier(.22,.61,.36,1), opacity .55s ease, filter .55s ease;
+    will-change: transform, opacity; cursor: pointer; box-shadow: 0 24px 60px rgba(0,0,0,.5);
+  }
+  .card.active { cursor: default; border-color: var(--accent); }
+  .portrait { position: relative; width: 100%; flex-grow: 1; overflow: hidden; background: linear-gradient(135deg, #1c2540, #0a0e1a); }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .portrait .fallback { position: absolute; inset: 0; display: grid; place-items: center; font-size: 72px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; }
+  .portrait .tier { position: absolute; top: 12px; right: 12px; font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 5px 11px; border-radius: 8px; color: #0a0e1a; }
+  .tier.START { background: var(--start); }
+  .tier.BUSINESS { background: var(--business); color:#fff; }
+  .tier.PRO { background: var(--pro); color:#fff; }
+  .tier.CUSTOM { background: var(--custom); }
+  .portrait .name-plate { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 20px 16px; background: linear-gradient(to top, rgba(10,14,26,.96) 12%, rgba(10,14,26,.6) 55%, transparent 100%); }
+  .name-plate h3 { font-size: 26px; font-weight: 800; }
+  .name-plate .role { font-size: 13px; color: var(--accent); font-weight: 600; }
+  .detail { max-width: 720px; margin: 8px auto 0; text-align: center; min-height: 120px; transition: opacity .35s ease; }
+  .detail .blurb { color: var(--text); font-style: italic; font-size: 18px; margin-bottom: 10px; }
+  .detail .desc { color: var(--muted); font-size: 15px; margin-bottom: 14px; }
+  .detail .meta { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .chip { font-size: 12px; color: var(--muted); background: var(--bg-soft); border: 1px solid var(--border); padding: 4px 10px; border-radius: 8px; }
+  .controls { display: flex; align-items: center; justify-content: center; gap: 22px; margin-top: 18px; }
+  .nav-arrow { width: 52px; height: 52px; border-radius: 50%; cursor: pointer; background: var(--card); border: 1px solid var(--border); color: var(--text); font-size: 22px; display: grid; place-items: center; transition: .2s ease; user-select: none; }
+  .nav-arrow:hover { background: var(--accent); border-color: var(--accent); color:#fff; transform: scale(1.08); }
+  .dots { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: 360px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); cursor: pointer; transition: .2s ease; }
+  .dot.active { background: var(--accent); transform: scale(1.3); }
+  .hint { text-align:center; color: var(--muted); font-size: 13px; margin-top: 14px; }
+
+  /* ---------- How it works ---------- */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .step { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 22px; text-align: center; }
+  .step .num { width: 44px; height: 44px; margin: 0 auto 16px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-weight: 800; font-size: 20px; display: grid; place-items: center; }
+  .step h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .step p { color: var(--muted); font-size: 14px; }
+
+  /* ---------- Pricing ---------- */
+  .prices { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
+  .price { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px 24px; display: flex; flex-direction: column; }
+  .price.featured { border-color: var(--accent); box-shadow: 0 20px 50px rgba(108,140,255,.2); }
+  .price .badge-pop { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; }
+  .price h3 { font-size: 15px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .price .amount { font-size: 38px; font-weight: 800; letter-spacing: -1px; }
+  .price .amount small { font-size: 15px; font-weight: 600; color: var(--muted); }
+  .price .plan-desc { color: var(--muted); font-size: 14px; margin: 12px 0 18px; min-height: 40px; }
+  .price ul { list-style: none; margin-bottom: 24px; flex-grow: 1; }
+  .price ul li { font-size: 14px; padding: 7px 0; padding-left: 26px; position: relative; color: var(--text); }
+  .price ul li::before { content: "✓"; position: absolute; left: 0; color: var(--start); font-weight: 800; }
+  .price a.choose { text-align: center; text-decoration: none; font-weight: 700; font-size: 15px; padding: 12px; border-radius: 12px; transition: .2s; background: var(--bg-soft); border: 1px solid var(--border); color: var(--text); }
+  .price.featured a.choose { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; border: none; }
+  .price a.choose:hover { transform: translateY(-2px); }
+  .trial-note { text-align: center; color: var(--muted); font-size: 14px; margin-top: 24px; }
+
+  /* ---------- FAQ ---------- */
+  .faq { max-width: 780px; margin: 0 auto; }
+  .qa { background: var(--card); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 12px; overflow: hidden; }
+  .qa summary { cursor: pointer; padding: 18px 22px; font-weight: 700; font-size: 16px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .qa summary::-webkit-details-marker { display: none; }
+  .qa summary::after { content: "+"; color: var(--accent); font-size: 22px; font-weight: 400; }
+  .qa[open] summary::after { content: "−"; }
+  .qa .ans { padding: 0 22px 20px; color: var(--muted); font-size: 15px; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+  .contact-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; text-align: center; text-decoration: none; transition: .2s; }
+  .contact-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .contact-card .ico { font-size: 34px; margin-bottom: 12px; }
+  .contact-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .contact-card p { color: var(--muted); font-size: 14px; word-break: break-all; }
+
+  /* ---------- Footer ---------- */
+  footer.site { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 20px; }
+  .foot-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; align-items: center; }
+  .foot-brand { font-weight: 800; font-size: 18px; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 20px; }
+  .foot-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: .2s; }
+  .foot-links a:hover { color: var(--text); }
+  .foot-copy { color: var(--muted); font-size: 13px; width: 100%; text-align: center; margin-top: 10px; }
+
+  /* ---------- Ava widget ---------- */
+  #ava-bubble {
+    position: fixed; bottom: 22px; right: 22px; z-index: 900;
+    width: 64px; height: 64px; border-radius: 50%; cursor: pointer;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: grid; place-items: center; font-size: 30px; color: #fff;
+    box-shadow: 0 12px 34px rgba(108,140,255,.5); border: none; transition: .25s;
+  }
+  #ava-bubble:hover { transform: scale(1.08); }
+  #ava-bubble .pulse { position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 0 rgba(108,140,255,.5); animation: pulse 2.2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(108,140,255,.5);} 70% { box-shadow: 0 0 0 18px rgba(108,140,255,0);} 100% { box-shadow: 0 0 0 0 rgba(108,140,255,0);} }
+  #ava-panel {
+    position: fixed; bottom: 98px; right: 22px; z-index: 900;
+    width: 370px; max-width: calc(100vw - 44px); height: 520px; max-height: calc(100vh - 140px);
+    background: var(--bg-soft); border: 1px solid var(--border); border-radius: 20px;
+    display: none; flex-direction: column; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.6);
+  }
+  #ava-panel.open { display: flex; }
+  .ava-head { display: flex; align-items: center; gap: 12px; padding: 16px; background: linear-gradient(135deg, rgba(108,140,255,.18), rgba(155,108,255,.12)); border-bottom: 1px solid var(--border); }
+  .ava-head .av { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; font-size: 20px; color: #fff; font-weight: 800; }
+  .ava-head .who { flex-grow: 1; }
+  .ava-head .who b { font-size: 15px; display: block; }
+  .ava-head .who span { font-size: 12px; color: var(--start); display: flex; align-items: center; gap: 5px; }
+  .ava-head .who span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--start); display: inline-block; }
+  .ava-head .close { background: none; border: none; color: var(--muted); font-size: 22px; cursor: pointer; }
+  .ava-body { flex-grow: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .msg { max-width: 82%; padding: 10px 14px; border-radius: 14px; font-size: 14px; line-height: 1.45; }
+  .msg.bot { align-self: flex-start; background: var(--card); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+  .msg.user { align-self: flex-end; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; border-bottom-right-radius: 4px; }
+  .ava-foot { padding: 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+  .ava-foot input { flex-grow: 1; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 11px 16px; color: var(--text); font-size: 14px; outline: none; }
+  .ava-foot input:focus { border-color: var(--accent); }
+  .ava-foot button { width: 44px; height: 44px; border-radius: 50%; border: none; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-size: 18px; cursor: pointer; flex-shrink: 0; }
+  .ava-note { font-size: 11px; color: var(--muted); text-align: center; padding: 0 12px 10px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .prices { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .nav-links { position: fixed; top: 66px; left: 0; right: 0; flex-direction: column; background: var(--bg-soft); border-bottom: 1px solid var(--border); padding: 20px 24px; gap: 16px; display: none; }
+    .nav-links.show { display: flex; }
+    .burger { display: block; }
+  }
+  @media (max-width: 560px) {
+    .carousel { height: 560px; }
+    .card { width: 280px; height: 460px; margin: -230px 0 0 -140px; }
+    .prices { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+  }
+</style>
+<!-- HYVENTA-ENHANCEMENTS:START -->
+<style id="hv-enhance-css">
+/* ===== Hyventa enhancements (Ava greeter, cookie bar, voice) ===== */
+#ava-greeter{position:fixed;right:18px;bottom:96px;z-index:60;width:150px;cursor:pointer;filter:drop-shadow(0 12px 28px rgba(0,0,0,.45));transition:transform .25s ease;animation:greetIn .6s ease both}
+#ava-greeter:hover{transform:translateY(-6px) scale(1.03)}
+#ava-greeter img{width:100%;height:auto;display:block;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent);mask-image:linear-gradient(to bottom,#000 82%,transparent)}
+#ava-greeter .bubble-tip{position:absolute;top:-14px;right:8px;background:#fff;color:#0b0b12;font-size:12px;font-weight:600;padding:6px 10px;border-radius:12px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+#ava-greeter.hide{display:none}
+@keyframes greetIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:640px){#ava-greeter{width:104px;bottom:88px;right:10px}}
+
+/* Ava face in chat header */
+.ava-head-face{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:top center;margin-right:8px;border:2px solid rgba(255,255,255,.25);vertical-align:middle}
+
+/* Voice mic button */
+#ava-mic{border:none;background:transparent;cursor:pointer;font-size:18px;line-height:1;padding:0 8px;opacity:.8;transition:opacity .2s,transform .2s}
+#ava-mic:hover{opacity:1}
+#ava-mic.rec{color:#e5484d;animation:micPulse 1s infinite;opacity:1}
+@keyframes micPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+
+/* Cookie bar */
+#cookie-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:80;max-width:680px;width:calc(100% - 32px);background:rgba(18,18,26,.97);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 18px;display:none;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+#cookie-bar.show{display:flex}
+#cookie-bar p{margin:0;font-size:13px;color:#cfd0da;flex:1 1 260px}
+#cookie-bar a{color:#8ab4ff;text-decoration:underline}
+#cookie-bar .ck-actions{display:flex;gap:8px}
+#cookie-bar button{border-radius:10px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid transparent}
+#cookie-bar .ck-accept{background:linear-gradient(135deg,#6d5efc,#9b6bff);color:#fff}
+#cookie-bar .ck-decline{background:transparent;color:#cfd0da;border-color:rgba(255,255,255,.2)}
+
+</style>
+<!-- HYVENTA-ENHANCEMENTS:END -->
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><span class="logo">H</span>Hyventa<span class="dot">.</span></a>
+    <button class="burger" id="burger">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#team" data-i18n="nav_team">The Team</a>
+      <a href="#how" data-i18n="nav_how">How it works</a>
+      <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+      <div class="lang">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="es">ES</button>
+        <button data-lang="uk">UK</button>
+      </div>
+      <a href="#pricing" class="cta-btn" data-i18n="nav_cta">Start free</a>
+    </nav>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<!-- ================= HERO ================= -->
+<section class="hero wrap" style="padding-top:56px;">
+  <span class="eyebrow" data-i18n="hero_eyebrow">AI Employees</span>
+  <h1 data-i18n="hero_h1">Hire an AI employee. Put it to work.</h1>
+  <p class="sub" data-i18n="hero_sub">A department of specialized AI workers your company can onboard in minutes — no salary, no downtime, instant scale.</p>
+  <div class="hero-actions">
+    <a href="#pricing" class="btn-primary" data-i18n="hero_cta1">Start 7-day free trial</a>
+    <a href="#team" class="btn-ghost" data-i18n="hero_cta2">Meet the team</a>
+  </div>
+  <div class="points">
+    <span class="point" data-i18n="p1">🤖 Always states it's an AI</span>
+    <span class="point" data-i18n="p2">🧠 Remembers context</span>
+    <span class="point" data-i18n="p3">🙋 Human handoff built in</span>
+    <span class="point" data-i18n="p4">🌍 Any language</span>
+    <span class="point" data-i18n="p5">⚡ Works 24/7</span>
+  </div>
+</section>
+
+<!-- ================= TEAM / CAROUSEL ================= -->
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="team_h">Meet your AI team</h2>
+      <p data-i18n="team_sub">Twelve specialists, each trained for one job. Hire one, or the whole department.</p>
+    </div>
+  </div>
+  <div class="carousel"><div class="stage" id="stage"></div></div>
+  <div class="wrap"><div class="detail" id="detail"></div></div>
+  <div class="controls">
+    <div class="nav-arrow" id="prev" aria-label="Previous">‹</div>
+    <div class="dots" id="dots"></div>
+    <div class="nav-arrow" id="next" aria-label="Next">›</div>
+  </div>
+  <p class="hint" data-i18n="team_hint">Use ‹ › , the dots, arrow keys, or swipe — click any side card to bring it to the center.</p>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how" style="background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="how_h">How it works</h2>
+      <p data-i18n="how_sub">From "hello" to a working AI employee in one day.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h4 data-i18n="how1_h">Pick your employee</h4><p data-i18n="how1_p">Choose from 12 specialists — sales, support, reception, recruiting and more.</p></div>
+      <div class="step"><div class="num">2</div><h4 data-i18n="how2_h">We set it up</h4><p data-i18n="how2_p">We connect it to your channels and train it on your business. No coding for you.</p></div>
+      <div class="step"><div class="num">3</div><h4 data-i18n="how3_h">Try it free</h4><p data-i18n="how3_p">7 days free. Watch it handle real conversations and tasks before you pay.</p></div>
+      <div class="step"><div class="num">4</div><h4 data-i18n="how4_h">Scale up</h4><p data-i18n="how4_p">Add more employees or skills anytime. It grows with your company.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="price_h">Simple pricing</h2>
+      <p data-i18n="price_sub">Every plan starts with a 7-day free trial. No setup fee. Cancel anytime.</p>
+    </div>
+    <div class="prices">
+      <div class="price">
+        <h3>Start</h3>
+        <div class="amount">$99<small>/mo</small></div>
+        <p class="plan-desc" data-i18n="pl_start_d">For a solo business getting its first AI hire.</p>
+        <ul>
+          <li data-i18n="pl_start_1">1 AI employee of your choice</li>
+          <li data-i18n="pl_start_2">7 days free</li>
+          <li data-i18n="pl_start_3">Email &amp; chat support</li>
+        </ul>
+        <a href="#contact" class="choose" data-i18n="pl_choose">Start free</a>
+      </div>
+      <div class="price featured">
+        <span class="badge-pop" data-i18n="pl_popular">Most popular</span>
+        <h3>Business</h3>
+        <div class="amount">$249<small>/mo</small></div>
+        <p class="plan-desc" data-i18n="pl_biz_d">For growing teams that need a few roles covered.</p>
+        <ul>
+          <li data-i18n="pl_biz_1">Up to 3 AI employees</li>
+          <li data-i18n="pl_biz_2">Priority setup</li>
+          <li data-i18n="pl_biz_3">7 days free</li>
+        </ul>
+        <a href="#contact" class="choose" data-i18n="pl_choose">Start free</a>
+      </div>
+      <div class="price">
+        <h3>Pro</h3>
+        <div class="amount">$499<small>/mo</small></div>
+        <p class="plan-desc" data-i18n="pl_pro_d">For companies running a full AI department.</p>
+        <ul>
+          <li data-i18n="pl_pro_1">Up to 6 AI employees</li>
+          <li data-i18n="pl_pro_2">Add-on skills included</li>
+          <li data-i18n="pl_pro_3">Priority support</li>
+        </ul>
+        <a href="#contact" class="choose" data-i18n="pl_choose">Start free</a>
+      </div>
+      <div class="price">
+        <h3>Custom</h3>
+        <div class="amount" data-i18n="pl_custom_price">Let's talk</div>
+        <p class="plan-desc" data-i18n="pl_custom_d">The full team of 12 plus custom integrations.</p>
+        <ul>
+          <li data-i18n="pl_custom_1">All 12 AI employees</li>
+          <li data-i18n="pl_custom_2">Custom integrations</li>
+          <li data-i18n="pl_custom_3">Private deployment option</li>
+        </ul>
+        <a href="#contact" class="choose" data-i18n="pl_contact">Contact us</a>
+      </div>
+    </div>
+    <p class="trial-note" data-i18n="price_note">💡 Not sure which plan? Ask Ava in the corner — she'll recommend the right fit.</p>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" style="background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="faq_h">Frequently asked questions</h2>
+    </div>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="contact_h">Talk to us</h2>
+      <p data-i18n="contact_sub">Start your free trial or ask anything. We reply in your language.</p>
+    </div>
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:hellohyventa@gmail.com">
+        <div class="ico">✉️</div>
+        <h4 data-i18n="c_email">Email</h4>
+        <p>hellohyventa@gmail.com</p>
+      </a>
+      <a class="contact-card" href="https://t.me/hyventa_net" target="_blank" rel="noopener">
+        <div class="ico">✈️</div>
+        <h4>Telegram</h4>
+        <p>@hyventa_net</p>
+      </a>
+      <a class="contact-card" href="https://wa.me/380689611604" target="_blank" rel="noopener">
+        <div class="ico">💬</div>
+        <h4>WhatsApp</h4>
+        <p>+380 68 961 1604</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-brand">Hyventa<span style="color:var(--accent)">.</span></div>
+      <div class="foot-links">
+        <a href="privacy.html" data-i18n="f_privacy">Privacy Policy</a>
+        <a href="terms.html" data-i18n="f_terms">Terms of Service</a>
+        <a href="refund.html" data-i18n="f_refund">Refund Policy</a>
+        <a href="cookie.html" data-i18n="f_cookie">Cookie Policy</a>
+        <a href="imprint.html" data-i18n="f_contact">Contact</a>
+      </div>
+    </div>
+    <p class="foot-copy">© <span id="year"></span> Hyventa · <span data-i18n="f_rights">All rights reserved.</span> · hyventa.net</p>
+  </div>
+</footer>
+
+<!-- ================= AVA WIDGET ================= -->
+<button id="ava-bubble" aria-label="Chat with Ava"><span class="pulse"></span>💬</button>
+<div id="ava-panel">
+  <div class="ava-head">
+    <div class="av">A</div>
+    <div class="who"><b>Ava</b><span data-i18n="ava_status">AI Guide · online</span></div>
+    <button class="close" id="ava-close">×</button>
+  </div>
+  <div class="ava-body" id="ava-body"></div>
+  <div class="ava-foot">
+    <input id="ava-input" type="text" data-i18n-ph="ava_ph" placeholder="Ask about plans, agents, trial…" />
+    <button id="ava-send">➤</button>
+  </div>
+  <p class="ava-note" data-i18n="ava_note">Ava is an AI assistant. She may connect you to a human when needed.</p>
+</div>
+
+<script>
+/* ============ i18n dictionary ============ */
+const I18N = {
+  en: {
+    nav_team:"The Team", nav_how:"How it works", nav_pricing:"Pricing", nav_faq:"FAQ", nav_contact:"Contact", nav_cta:"Start free",
+    hero_eyebrow:"AI Employees", hero_h1:"Hire an AI employee. Put it to work.",
+    hero_sub:"A department of specialized AI workers your company can onboard in minutes — no salary, no downtime, instant scale.",
+    hero_cta1:"Start 7-day free trial", hero_cta2:"Meet the team",
+    p1:"🤖 Always states it's an AI", p2:"🧠 Remembers context", p3:"🙋 Human handoff built in", p4:"🌍 Any language", p5:"⚡ Works 24/7",
+    team_h:"Meet your AI team", team_sub:"Twelve specialists, each trained for one job. Hire one, or the whole department.",
+    team_hint:"Use ‹ › , the dots, arrow keys, or swipe — click any side card to bring it to the center.",
+    how_h:"How it works", how_sub:"From \"hello\" to a working AI employee in one day.",
+    how1_h:"Pick your employee", how1_p:"Choose from 12 specialists — sales, support, reception, recruiting and more.",
+    how2_h:"We set it up", how2_p:"We connect it to your channels and train it on your business. No coding for you.",
+    how3_h:"Try it free", how3_p:"7 days free. Watch it handle real conversations and tasks before you pay.",
+    how4_h:"Scale up", how4_p:"Add more employees or skills anytime. It grows with your company.",
+    price_h:"Simple pricing", price_sub:"Every plan starts with a 7-day free trial. No setup fee. Cancel anytime.",
+    pl_start_d:"For a solo business getting its first AI hire.", pl_start_1:"1 AI employee of your choice", pl_start_2:"7 days free", pl_start_3:"Email & chat support",
+    pl_popular:"Most popular", pl_biz_d:"For growing teams that need a few roles covered.", pl_biz_1:"Up to 3 AI employees", pl_biz_2:"Priority setup", pl_biz_3:"7 days free",
+    pl_pro_d:"For companies running a full AI department.", pl_pro_1:"Up to 6 AI employees", pl_pro_2:"Add-on skills included", pl_pro_3:"Priority support",
+    pl_custom_price:"Let's talk", pl_custom_d:"The full team of 12 plus custom integrations.", pl_custom_1:"All 12 AI employees", pl_custom_2:"Custom integrations", pl_custom_3:"Private deployment option",
+    pl_choose:"Start free", pl_contact:"Contact us",
+    price_note:"💡 Not sure which plan? Ask Ava in the corner — she'll recommend the right fit.",
+    faq_h:"Frequently asked questions",
+    contact_h:"Talk to us", contact_sub:"Start your free trial or ask anything. We reply in your language.", c_email:"Email",
+    f_privacy:"Privacy Policy", f_terms:"Terms of Service", f_refund:"Refund Policy", f_cookie:"Cookie Policy", f_contact:"Contact", f_rights:"All rights reserved.",
+    ava_status:"AI Guide · online", ava_ph:"Ask about plans, agents, trial…", ava_note:"Ava is an AI assistant. She may connect you to a human when needed.",
+    ava_hi:"Hi! I'm Ava, your AI guide at Hyventa 👋 I can help you pick the right AI employee, explain the plans, or start your free trial. What are you looking for?"
+  },
+  es: {
+    nav_team:"El equipo", nav_how:"Cómo funciona", nav_pricing:"Precios", nav_faq:"FAQ", nav_contact:"Contacto", nav_cta:"Prueba gratis",
+    hero_eyebrow:"Empleados IA", hero_h1:"Contrata un empleado con IA. Ponlo a trabajar.",
+    hero_sub:"Un departamento de trabajadores IA especializados que tu empresa puede incorporar en minutos: sin salario, sin pausas, escala al instante.",
+    hero_cta1:"Prueba gratis de 7 días", hero_cta2:"Conoce al equipo",
+    p1:"🤖 Siempre indica que es IA", p2:"🧠 Recuerda el contexto", p3:"🙋 Traspaso a humano integrado", p4:"🌍 Cualquier idioma", p5:"⚡ Trabaja 24/7",
+    team_h:"Conoce a tu equipo IA", team_sub:"Doce especialistas, cada uno entrenado para una tarea. Contrata uno o todo el departamento.",
+    team_hint:"Usa ‹ › , los puntos, las flechas o desliza — toca una tarjeta lateral para centrarla.",
+    how_h:"Cómo funciona", how_sub:"De \"hola\" a un empleado IA funcionando en un día.",
+    how1_h:"Elige tu empleado", how1_p:"Elige entre 12 especialistas: ventas, soporte, recepción, reclutamiento y más.",
+    how2_h:"Lo configuramos", how2_p:"Lo conectamos a tus canales y lo entrenamos con tu negocio. Sin programar.",
+    how3_h:"Pruébalo gratis", how3_p:"7 días gratis. Míralo gestionar conversaciones y tareas reales antes de pagar.",
+    how4_h:"Crece", how4_p:"Añade más empleados o habilidades cuando quieras. Crece con tu empresa.",
+    price_h:"Precios simples", price_sub:"Cada plan incluye 7 días de prueba gratis. Sin cuota de instalación. Cancela cuando quieras.",
+    pl_start_d:"Para un negocio en solitario con su primera IA.", pl_start_1:"1 empleado IA a elegir", pl_start_2:"7 días gratis", pl_start_3:"Soporte por email y chat",
+    pl_popular:"Más popular", pl_biz_d:"Para equipos en crecimiento que necesitan varios roles.", pl_biz_1:"Hasta 3 empleados IA", pl_biz_2:"Configuración prioritaria", pl_biz_3:"7 días gratis",
+    pl_pro_d:"Para empresas con un departamento IA completo.", pl_pro_1:"Hasta 6 empleados IA", pl_pro_2:"Habilidades extra incluidas", pl_pro_3:"Soporte prioritario",
+    pl_custom_price:"Hablemos", pl_custom_d:"El equipo completo de 12 más integraciones a medida.", pl_custom_1:"Los 12 empleados IA", pl_custom_2:"Integraciones a medida", pl_custom_3:"Opción de despliegue privado",
+    pl_choose:"Prueba gratis", pl_contact:"Contáctanos",
+    price_note:"💡 ¿No sabes qué plan? Pregúntale a Ava en la esquina — te recomendará el ideal.",
+    faq_h:"Preguntas frecuentes",
+    contact_h:"Habla con nosotros", contact_sub:"Empieza tu prueba gratis o pregunta lo que quieras. Respondemos en tu idioma.", c_email:"Correo",
+    f_privacy:"Política de privacidad", f_terms:"Términos del servicio", f_refund:"Política de reembolso", f_cookie:"Política de cookies", f_contact:"Contacto", f_rights:"Todos los derechos reservados.",
+    ava_status:"Guía IA · en línea", ava_ph:"Pregunta por planes, agentes, prueba…", ava_note:"Ava es una asistente IA. Puede conectarte con un humano cuando sea necesario.",
+    ava_hi:"¡Hola! Soy Ava, tu guía IA en Hyventa 👋 Puedo ayudarte a elegir el empleado IA adecuado, explicarte los planes o iniciar tu prueba gratis. ¿Qué buscas?"
+  },
+  uk: {
+    nav_team:"Команда", nav_how:"Як це працює", nav_pricing:"Тарифи", nav_faq:"Питання", nav_contact:"Контакти", nav_cta:"Почати безкоштовно",
+    hero_eyebrow:"AI-співробітники", hero_h1:"Найміть AI-співробітника. Доручіть йому роботу.",
+    hero_sub:"Відділ спеціалізованих AI-працівників, яких ваша компанія підключає за хвилини — без зарплати, без простоїв, миттєве масштабування.",
+    hero_cta1:"7 днів безкоштовно", hero_cta2:"Знайомство з командою",
+    p1:"🤖 Завжди каже, що він AI", p2:"🧠 Памʼятає контекст", p3:"🙋 Передача людині вбудована", p4:"🌍 Будь-яка мова", p5:"⚡ Працює 24/7",
+    team_h:"Ваша AI-команда", team_sub:"Дванадцять спеціалістів, кожен навчений для своєї задачі. Найміть одного або весь відділ.",
+    team_hint:"Використовуйте ‹ › , крапки, стрілки або свайп — торкніться бічної картки, щоб вивести її в центр.",
+    how_h:"Як це працює", how_sub:"Від \"привіт\" до готового AI-співробітника за один день.",
+    how1_h:"Оберіть співробітника", how1_p:"12 спеціалістів на вибір — продажі, підтримка, рецепція, рекрутинг та інші.",
+    how2_h:"Ми налаштовуємо", how2_p:"Підключаємо до ваших каналів і навчаємо на вашому бізнесі. Без коду з вашого боку.",
+    how3_h:"Спробуйте безкоштовно", how3_p:"7 днів безкоштовно. Подивіться на реальні розмови й задачі перед оплатою.",
+    how4_h:"Масштабуйте", how4_p:"Додавайте співробітників чи навички будь-коли. Росте разом з вашою компанією.",
+    price_h:"Прості тарифи", price_sub:"Кожен тариф починається з 7 днів безкоштовно. Без плати за налаштування. Скасування будь-коли.",
+    pl_start_d:"Для соло-бізнесу з першим AI-наймом.", pl_start_1:"1 AI-співробітник на вибір", pl_start_2:"7 днів безкоштовно", pl_start_3:"Підтримка e-mail і чат",
+    pl_popular:"Найпопулярніший", pl_biz_d:"Для команд, що ростуть і потребують кількох ролей.", pl_biz_1:"До 3 AI-співробітників", pl_biz_2:"Пріоритетне налаштування", pl_biz_3:"7 днів безкоштовно",
+    pl_pro_d:"Для компаній з повним AI-відділом.", pl_pro_1:"До 6 AI-співробітників", pl_pro_2:"Додаткові навички включені", pl_pro_3:"Пріоритетна підтримка",
+    pl_custom_price:"Обговорімо", pl_custom_d:"Повна команда з 12 плюс інтеграції під вас.", pl_custom_1:"Усі 12 AI-співробітників", pl_custom_2:"Інтеграції під вас", pl_custom_3:"Приватне розгортання",
+    pl_choose:"Почати безкоштовно", pl_contact:"Звʼязатися",
+    price_note:"💡 Не впевнені щодо тарифу? Запитайте Аву в кутку — вона підкаже.",
+    faq_h:"Часті запитання",
+    contact_h:"Напишіть нам", contact_sub:"Почніть безкоштовний період або запитайте що завгодно. Відповідаємо вашою мовою.", c_email:"Пошта",
+    f_privacy:"Політика конфіденційності", f_terms:"Умови користування", f_refund:"Політика повернення", f_cookie:"Політика файлів cookie", f_contact:"Контакти", f_rights:"Усі права захищені.",
+    ava_status:"AI-гід · онлайн", ava_ph:"Запитайте про тарифи, агентів, тріал…", ava_note:"Ава — це AI-асистент. За потреби вона зʼєднає вас із людиною.",
+    ava_hi:"Привіт! Я Ава, ваш AI-гід у Hyventa 👋 Допоможу обрати потрібного AI-співробітника, поясню тарифи або почну безкоштовний період. Що вас цікавить?"
+  }
+};
+
+/* ============ Agents data ============ */
+const agents = [
+  { file:"sarah",  name:"Sarah",  role:{en:"AI Sales Manager",es:"Gerente de Ventas IA",uk:"AI-менеджер продажів"}, tier:"BUSINESS",
+    blurb:{en:"\"Your always-on sales rep. Qualifies every lead, never sleeps.\"",es:"\"Tu comercial siempre activo. Califica cada lead, nunca duerme.\"",uk:"\"Ваш продавець без вихідних. Кваліфікує кожен лід, ніколи не спить.\""},
+    desc:{en:"Chats with inbound leads, qualifies them, scores intent, saves to CRM, and hands hot leads to a human.",es:"Chatea con leads entrantes, los califica, puntúa la intención, guarda en el CRM y pasa los leads calientes a un humano.",uk:"Спілкується з вхідними лідами, кваліфікує їх, оцінює намір, зберігає в CRM і передає гарячі ліди людині."},
+    chips:{en:["💬 Web chat","Real estate · Education · Clinics"],es:["💬 Chat web","Inmobiliaria · Educación · Clínicas"],uk:["💬 Веб-чат","Нерухомість · Освіта · Клініки"]} },
+  { file:"emma",   name:"Emma",   role:{en:"AI Receptionist",es:"Recepcionista IA",uk:"AI-рецепціоніст"}, tier:"START",
+    blurb:{en:"\"The receptionist who never misses a call or a booking.\"",es:"\"La recepcionista que nunca pierde una llamada ni una reserva.\"",uk:"\"Рецепціоніст, який ніколи не пропустить дзвінок чи запис.\""},
+    desc:{en:"Greets visitors, answers FAQs, books consultations, and logs every contact automatically.",es:"Saluda a los visitantes, responde preguntas, agenda consultas y registra cada contacto automáticamente.",uk:"Вітає відвідувачів, відповідає на питання, бронює консультації та фіксує кожен контакт автоматично."},
+    chips:{en:["💬 Web chat","Clinics · Salons · Services"],es:["💬 Chat web","Clínicas · Salones · Servicios"],uk:["💬 Веб-чат","Клініки · Салони · Послуги"]} },
+  { file:"olivia", name:"Olivia", role:{en:"AI Appointment Setter",es:"Agendadora IA",uk:"AI-планувальник зустрічей"}, tier:"BUSINESS",
+    blurb:{en:"\"Turns website curiosity into calendar meetings.\"",es:"\"Convierte la curiosidad web en reuniones en el calendario.\"",uk:"\"Перетворює цікавість на сайті на зустрічі в календарі.\""},
+    desc:{en:"Turns interest into booked meetings — qualifies the visitor and captures a preferred slot.",es:"Convierte el interés en reuniones agendadas: califica al visitante y captura un horario preferido.",uk:"Перетворює інтерес на заброньовані зустрічі — кваліфікує відвідувача й фіксує зручний час."},
+    chips:{en:["💬 Web chat","Sales teams · Agencies"],es:["💬 Chat web","Equipos de ventas · Agencias"],uk:["💬 Веб-чат","Відділи продажів · Агенції"]} },
+  { file:"alex",   name:"Alex",   role:{en:"AI Support Agent",es:"Agente de Soporte IA",uk:"AI-агент підтримки"}, tier:"BUSINESS",
+    blurb:{en:"\"Support that answers instantly and escalates only what matters.\"",es:"\"Soporte que responde al instante y escala solo lo importante.\"",uk:"\"Підтримка, що відповідає миттєво й ескалює лише важливе.\""},
+    desc:{en:"Triages support tickets, drafts replies, and auto-escalates urgent cases to a human.",es:"Clasifica tickets de soporte, redacta respuestas y escala casos urgentes a un humano.",uk:"Сортує звернення, готує відповіді й автоматично ескалює термінові випадки людині."},
+    chips:{en:["📝 Web form","SaaS · E-commerce"],es:["📝 Formulario web","SaaS · E-commerce"],uk:["📝 Веб-форма","SaaS · E-commerce"]} },
+  { file:"max",    name:"Max",    role:{en:"AI Knowledge Assistant",es:"Asistente de Conocimiento IA",uk:"AI-асистент знань"}, tier:"PRO",
+    blurb:{en:"\"Your knowledge base, but it talks back.\"",es:"\"Tu base de conocimiento, pero que responde.\"",uk:"\"Ваша база знань, яка відповідає.\""},
+    desc:{en:"Answers strictly from the company knowledge base and remembers facts per user.",es:"Responde estrictamente desde la base de conocimiento de la empresa y recuerda datos por usuario.",uk:"Відповідає лише з бази знань компанії та памʼятає факти по кожному користувачу."},
+    chips:{en:["💬 Web chat","Any content-heavy business"],es:["💬 Chat web","Negocios con mucho contenido"],uk:["💬 Веб-чат","Контентомісткий бізнес"]} },
+  { file:"daniel", name:"Daniel", role:{en:"AI Recruiter",es:"Reclutador IA",uk:"AI-рекрутер"}, tier:"PRO",
+    blurb:{en:"\"Screens every applicant in seconds, shortlists the best.\"",es:"\"Evalúa a cada candidato en segundos y preselecciona a los mejores.\"",uk:"\"Оцінює кожного кандидата за секунди й формує шорт-лист.\""},
+    desc:{en:"Screens applicants, scores fit, and routes each one to shortlist / review / rejected.",es:"Evalúa candidatos, puntúa la idoneidad y los enruta a preselección / revisión / rechazo.",uk:"Оцінює кандидатів, визначає відповідність і маршрутизує в шорт-лист / розгляд / відмову."},
+    chips:{en:["🔗 Webhook (ATS)","HR · Agencies"],es:["🔗 Webhook (ATS)","RRHH · Agencias"],uk:["🔗 Webhook (ATS)","HR · Агенції"]} },
+  { file:"boris",  name:"Boris",  role:{en:"AI Business Analyst",es:"Analista de Negocios IA",uk:"AI-бізнес-аналітик"}, tier:"PRO",
+    blurb:{en:"\"On-demand business analysis and market research.\"",es:"\"Análisis de negocio e investigación de mercado a demanda.\"",uk:"\"Бізнес-аналіз і дослідження ринку на вимогу.\""},
+    desc:{en:"Researches a company or site, runs web search, and produces an analysis report.",es:"Investiga una empresa o sitio, hace búsquedas web y genera un informe de análisis.",uk:"Досліджує компанію чи сайт, виконує веб-пошук і формує аналітичний звіт."},
+    chips:{en:["✈️ Telegram","Consulting · B2B"],es:["✈️ Telegram","Consultoría · B2B"],uk:["✈️ Telegram","Консалтинг · B2B"]} },
+  { file:"sophia", name:"Sophia", role:{en:"AI Marketing Manager",es:"Gerente de Marketing IA",uk:"AI-маркетолог"}, tier:"BUSINESS",
+    blurb:{en:"\"A content calendar that fills itself every morning.\"",es:"\"Un calendario de contenido que se llena solo cada mañana.\"",uk:"\"Контент-календар, що заповнюється сам щоранку.\""},
+    desc:{en:"Generates a daily batch of content ideas straight into a content calendar.",es:"Genera un lote diario de ideas de contenido directo en un calendario.",uk:"Генерує щоденну порцію ідей контенту одразу в календар."},
+    chips:{en:["⏰ Scheduled","SMM · Agencies"],es:["⏰ Programado","SMM · Agencias"],uk:["⏰ За розкладом","SMM · Агенції"]} },
+  { file:"leo",    name:"Leo",    role:{en:"AI Designer",es:"Diseñador IA",uk:"AI-дизайнер"}, tier:"CUSTOM",
+    blurb:{en:"\"An in-house designer that never runs out of ideas.\"",es:"\"Un diseñador interno al que nunca se le acaban las ideas.\"",uk:"\"Штатний дизайнер, у якого ніколи не закінчуються ідеї.\""},
+    desc:{en:"Generates vector and stock graphics through a full production pipeline.",es:"Genera gráficos vectoriales y de stock mediante un pipeline completo.",uk:"Генерує векторну та стокову графіку через повний конвеєр виробництва."},
+    chips:{en:["⚙️ Pipeline","Creative · Stock sellers"],es:["⚙️ Pipeline","Creativo · Venta de stock"],uk:["⚙️ Конвеєр","Креатив · Продаж стоку"]} },
+  { file:"vera",   name:"Vera",   role:{en:"AI Video Producer",es:"Productora de Video IA",uk:"AI-відеопродюсер"}, tier:"CUSTOM",
+    blurb:{en:"\"From prompt to finished video.\"",es:"\"Del prompt al video terminado.\"",uk:"\"Від промпту до готового відео.\""},
+    desc:{en:"Produces stock videos and mini-series from prompts, end to end.",es:"Produce videos de stock y miniseries desde prompts, de principio a fin.",uk:"Створює стокові відео та міні-серіали з промптів, від і до."},
+    chips:{en:["⚙️ Pipeline","Content studios"],es:["⚙️ Pipeline","Estudios de contenido"],uk:["⚙️ Конвеєр","Контент-студії"]} },
+  { file:"rooney", name:"Rooney", role:{en:"AI Composer",es:"Compositor IA",uk:"AI-композитор"}, tier:"CUSTOM",
+    blurb:{en:"\"Original soundtracks on demand.\"",es:"\"Bandas sonoras originales a demanda.\"",uk:"\"Оригінальні саундтреки на вимогу.\""},
+    desc:{en:"Generates original music tracks from a brief or mood.",es:"Genera pistas musicales originales a partir de un brief o estado de ánimo.",uk:"Генерує оригінальні музичні треки за брифом чи настроєм."},
+    chips:{en:["⚙️ Pipeline","Media · Ads · Games"],es:["⚙️ Pipeline","Medios · Anuncios · Juegos"],uk:["⚙️ Конвеєр","Медіа · Реклама · Ігри"]} },
+  { file:"nina",   name:"Nina",   role:{en:"AI Translator",es:"Traductora IA",uk:"AI-перекладач"}, tier:"START",
+    blurb:{en:"\"Speak to anyone, in any language, instantly.\"",es:"\"Habla con cualquiera, en cualquier idioma, al instante.\"",uk:"\"Спілкуйтеся з будь-ким, будь-якою мовою, миттєво.\""},
+    desc:{en:"Translates messages and content between languages in real time.",es:"Traduce mensajes y contenido entre idiomas en tiempo real.",uk:"Перекладає повідомлення та контент між мовами в реальному часі."},
+    chips:{en:["✈️ Telegram","International business"],es:["✈️ Telegram","Negocios internacionales"],uk:["✈️ Telegram","Міжнародний бізнес"]} },
+];
+
+/* ============ FAQ data ============ */
+const FAQ = {
+  en:[
+    ["Do the AI employees say they are AI?","Yes. Every Hyventa employee always identifies itself as an AI — it's built in and keeps you compliant with the EU AI Act."],
+    ["What happens after the 7-day free trial?","You simply choose a plan to keep going. No charge during the trial, and no auto-charge without your confirmation."],
+    ["Can it talk to my customers in their language?","Yes. Every employee replies in the visitor's language automatically — English, Spanish, Ukrainian and many more."],
+    ["What if the AI can't handle something?","Human handoff is built in. When a case needs a person, it escalates and notifies your team instantly."],
+    ["Is my data safe?","Your data stays in your workspace. We use business-grade AI providers that do not train on your data, and you can request deletion anytime. See our Privacy Policy."],
+    ["Do I need technical skills?","No. We set everything up for you and connect it to your channels. You just watch it work."]
+  ],
+  es:[
+    ["¿Los empleados IA dicen que son IA?","Sí. Cada empleado de Hyventa siempre se identifica como IA — está integrado y te mantiene en cumplimiento con la Ley de IA de la UE."],
+    ["¿Qué pasa tras la prueba gratis de 7 días?","Simplemente eliges un plan para continuar. Sin cargos durante la prueba y sin cobro automático sin tu confirmación."],
+    ["¿Puede hablar con mis clientes en su idioma?","Sí. Cada empleado responde en el idioma del visitante automáticamente — inglés, español, ucraniano y muchos más."],
+    ["¿Y si la IA no puede resolver algo?","El traspaso a humano está integrado. Cuando un caso necesita a una persona, escala y avisa a tu equipo al instante."],
+    ["¿Mis datos están seguros?","Tus datos permanecen en tu espacio. Usamos proveedores de IA de nivel empresarial que no entrenan con tus datos, y puedes pedir su eliminación cuando quieras. Consulta nuestra Política de Privacidad."],
+    ["¿Necesito conocimientos técnicos?","No. Lo configuramos todo por ti y lo conectamos a tus canales. Tú solo lo ves trabajar."]
+  ],
+  uk:[
+    ["Чи кажуть AI-співробітники, що вони AI?","Так. Кожен співробітник Hyventa завжди ідентифікує себе як AI — це вбудовано й відповідає вимогам Акту ЄС про ШІ."],
+    ["Що буде після 7 днів безкоштовно?","Ви просто обираєте тариф, щоб продовжити. Під час тріалу оплати немає, і без вашого підтвердження гроші не спишуться."],
+    ["Чи може він говорити з клієнтами їхньою мовою?","Так. Кожен співробітник автоматично відповідає мовою відвідувача — англійською, іспанською, українською та багатьма іншими."],
+    ["А якщо AI не може щось вирішити?","Передача людині вбудована. Коли випадок потребує людини, він ескалює й миттєво сповіщає вашу команду."],
+    ["Чи в безпеці мої дані?","Ваші дані лишаються у вашому просторі. Ми використовуємо AI-провайдерів бізнес-рівня, які не навчаються на ваших даних, і ви можете попросити видалення будь-коли. Див. Політику конфіденційності."],
+    ["Чи потрібні технічні навички?","Ні. Ми все налаштовуємо за вас і підключаємо до ваших каналів. Ви лише спостерігаєте за роботою."]
+  ]
+};
+
+/* ============ State + render ============ */
+let LANG = (navigator.language || "en").slice(0,2);
+if (!I18N[LANG]) LANG = "en";
+
+const stage  = document.getElementById('stage');
+const dotsEl = document.getElementById('dots');
+const detail = document.getElementById('detail');
+let current = 0;
+
+const cards = agents.map(function (a, i) {
+  const el = document.createElement('article');
+  el.className = 'card';
+  el.innerHTML =
+    '<div class="portrait">' +
+      '<div class="fallback">' + a.name.charAt(0) + '</div>' +
+      '<img src="images/' + a.file + '.png" alt="' + a.name + '" loading="lazy" ' +
+           'onload="this.previousElementSibling.style.display=\'none\'" ' +
+           'onerror="this.style.display=\'none\'">' +
+      '<span class="tier ' + a.tier + '">' + a.tier + '</span>' +
+      '<div class="name-plate"><h3>' + a.name + '</h3><div class="role" data-role="'+i+'"></div></div>' +
+    '</div>';
+  el.addEventListener('click', function () { go(i); });
+  stage.appendChild(el);
+  return el;
+});
+
+const dots = agents.map(function (a, i) {
+  const d = document.createElement('div');
+  d.className = 'dot'; d.title = a.name;
+  d.addEventListener('click', function () { go(i); });
+  dotsEl.appendChild(d);
+  return d;
+});
+
+function renderCarousel() {
+  const n = agents.length;
+  cards.forEach(function (el, i) {
+    let off = i - current;
+    if (off >  n / 2) off -= n;
+    if (off < -n / 2) off += n;
+    const abs = Math.abs(off);
+    const x = off * 210;
+    const scale = Math.max(0.55, 1 - abs * 0.16);
+    const rot = off === 0 ? 0 : (off < 0 ? 32 : -32);
+    const depth = -abs * 220;
+    const opacity = abs > 3 ? 0 : 1 - abs * 0.22;
+    el.style.transform = 'translateX(' + x + 'px) translateZ(' + depth + 'px) rotateY(' + rot + 'deg) scale(' + scale + ')';
+    el.style.opacity = opacity;
+    el.style.zIndex = String(100 - abs);
+    el.style.pointerEvents = abs > 3 ? 'none' : 'auto';
+    el.classList.toggle('active', off === 0);
+    el.querySelector('[data-role]').textContent = agents[i].role[LANG];
+  });
+  dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+  const a = agents[current];
+  const chips = a.chips[LANG].map(function (c) { return '<span class="chip">' + c + '</span>'; }).join('');
+  detail.style.opacity = 0;
+  setTimeout(function () {
+    detail.innerHTML = '<p class="blurb">' + a.blurb[LANG] + '</p><p class="desc">' + a.desc[LANG] + '</p><div class="meta">' + chips + '</div>';
+    detail.style.opacity = 1;
+  }, 160);
+}
+function go(i){ const n=agents.length; current=((i%n)+n)%n; renderCarousel(); }
+function next(){ go(current+1); } function prev(){ go(current-1); }
+document.getElementById('next').addEventListener('click', next);
+document.getElementById('prev').addEventListener('click', prev);
+document.addEventListener('keydown', function(e){ if(e.key==='ArrowRight')next(); if(e.key==='ArrowLeft')prev(); });
+let sx=null; const carousel=document.querySelector('.carousel');
+carousel.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+carousel.addEventListener('touchend',function(e){ if(sx===null)return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40){dx<0?next():prev();} sx=null; },{passive:true});
+
+function renderFAQ() {
+  const list = document.getElementById('faqList');
+  list.innerHTML = FAQ[LANG].map(function (qa) {
+    return '<details class="qa"><summary>' + qa[0] + '</summary><div class="ans">' + qa[1] + '</div></details>';
+  }).join('');
+}
+
+function applyLang(lang) {
+  LANG = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    const k = el.getAttribute('data-i18n');
+    if (I18N[lang][k] !== undefined) el.textContent = I18N[lang][k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+    const k = el.getAttribute('data-i18n-ph');
+    if (I18N[lang][k] !== undefined) el.setAttribute('placeholder', I18N[lang][k]);
+  });
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  renderCarousel();
+  renderFAQ();
+  // reset Ava greeting if empty
+  const body = document.getElementById('ava-body');
+  if (body && body.getAttribute('data-fresh') !== 'no') {
+    body.innerHTML = '<div class="msg bot">' + I18N[lang].ava_hi + '</div>';
+  }
+}
+
+document.querySelectorAll('.lang button').forEach(function (b) {
+  b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); });
+});
+
+/* ============ Nav burger ============ */
+document.getElementById('burger').addEventListener('click', function () {
+  document.getElementById('navLinks').classList.toggle('show');
+});
+document.querySelectorAll('#navLinks a').forEach(function (a) {
+  a.addEventListener('click', function () { document.getElementById('navLinks').classList.remove('show'); });
+});
+
+/* ============ Ava widget ============ */
+// Wire this to your Ava n8n webhook when ready:
+const AVA_WEBHOOK_URL = ""; // e.g. "https://achalex.app.n8n.cloud/webhook/ava"
+const bubble = document.getElementById('ava-bubble');
+const panel  = document.getElementById('ava-panel');
+const avaBody= document.getElementById('ava-body');
+const avaInput=document.getElementById('ava-input');
+const avaSend =document.getElementById('ava-send');
+const sessionId = 'web-' + Math.random().toString(36).slice(2) + Date.now();
+
+bubble.addEventListener('click', function () {
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) avaInput.focus();
+});
+document.getElementById('ava-close').addEventListener('click', function () { panel.classList.remove('open'); });
+
+function addMsg(text, who) {
+  const m = document.createElement('div');
+  m.className = 'msg ' + who;
+  m.textContent = text;
+  avaBody.appendChild(m);
+  avaBody.scrollTop = avaBody.scrollHeight;
+  avaBody.setAttribute('data-fresh', 'no');
+  return m;
+}
+
+async function sendToAva(text) {
+  addMsg(text, 'user');
+  avaInput.value = '';
+  const typing = addMsg('…', 'bot');
+  if (!AVA_WEBHOOK_URL) {
+    // Fallback until webhook is connected
+    const fb = { en:"Thanks! I'm not connected to the live brain yet — meanwhile, email hellohyventa@gmail.com or start your free trial from the Pricing section.",
+                 es:"¡Gracias! Aún no estoy conectada al cerebro en vivo — mientras tanto, escribe a hellohyventa@gmail.com o inicia tu prueba gratis en Precios.",
+                 uk:"Дякую! Я ще не підключена до живого мозку — а поки напишіть на hellohyventa@gmail.com або почніть безкоштовний період у розділі Тарифи." };
+    setTimeout(function(){ typing.textContent = fb[LANG]; }, 500);
+    return;
+  }
+  try {
+    const res = await fetch(AVA_WEBHOOK_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ chatInput: text, sessionId: sessionId, lang: LANG })
+    });
+    const data = await res.json();
+    typing.textContent = data.output || data.reply || data.text || JSON.stringify(data);
+  } catch (e) {
+    typing.textContent = { en:"Connection issue — please try again or email hellohyventa@gmail.com.",
+                           es:"Problema de conexión — inténtalo de nuevo o escribe a hellohyventa@gmail.com.",
+                           uk:"Проблема зʼєднання — спробуйте ще раз або напишіть на hellohyventa@gmail.com." }[LANG];
+  }
+}
+avaSend.addEventListener('click', function () { const t=avaInput.value.trim(); if(t) sendToAva(t); });
+avaInput.addEventListener('keydown', function (e) { if (e.key==='Enter'){ const t=avaInput.value.trim(); if(t) sendToAva(t); } });
+
+/* ============ Init ============ */
+document.getElementById('year').textContent = new Date().getFullYear();
+applyLang(LANG);
+go(0);
+</script>
+<!-- HYVENTA-ENHANCEMENTS:START -->
+<script id="hv-enhance-js">
+/* ===== Hyventa enhancements: Ava greeter, cookie bar, voice, Paddle ===== */
+(function(){
+  "use strict";
+
+  // ---- Paddle config (fill after approval) ----
+  window.HYVENTA_PADDLE = {
+    token: "PADDLE_CLIENT_TOKEN",   // e.g. "live_xxxxxxxx" — replace after Paddle approval
+    prices: {                        // Paddle Price IDs (pri_...) per plan
+      start:    "PRICE_START",
+      business: "PRICE_BUSINESS",
+      pro:      "PRICE_PRO"
+    }
+  };
+
+  var T = {
+    en: { tip:"Hi! I'm Ava 👋", ck:"We use cookies to run this site and improve your experience. See our",
+          ckl:"Cookie Policy", acc:"Accept", dec:"Decline", mic:"Voice input", soon:"Checkout opens after we finish onboarding. Contact us to start your free trial." },
+    es: { tip:"¡Hola! Soy Ava 👋", ck:"Usamos cookies para el funcionamiento del sitio y mejorar tu experiencia. Consulta nuestra",
+          ckl:"Política de Cookies", acc:"Aceptar", dec:"Rechazar", mic:"Entrada de voz", soon:"El pago se abrirá cuando terminemos el onboarding. Contáctanos para tu prueba gratis." },
+    uk: { tip:"Привіт! Я Ava 👋", ck:"Ми використовуємо cookie для роботи сайту та покращення досвіду. Див. нашу",
+          ckl:"Політику Cookie", acc:"Прийняти", dec:"Відхилити", mic:"Голосовий ввід", soon:"Оплата відкриється після завершення онбордингу. Напишіть нам, щоб почати безкоштовний період." }
+  };
+  function lang(){ var l=(document.documentElement.lang||localStorage.getItem("hv_lang")||"en").slice(0,2); return T[l]?l:"en"; }
+  function t(k){ return T[lang()][k]; }
+
+  function el(html){ var d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    var avaInput = document.getElementById("ava-input");
+
+    // ---- Ava standing greeter ----
+    if(!document.getElementById("ava-greeter")){
+      var g = el('<div id="ava-greeter" role="button" tabindex="0" aria-label="Chat with Ava"><span class="bubble-tip" id="ava-tip"></span><img src="images/ava.png" alt="Ava — AI Guide"></div>');
+      document.body.appendChild(g);
+      var tip=g.querySelector("#ava-tip"); if(tip) tip.textContent=t("tip");
+      function openAva(){
+        var bubble=document.getElementById("ava-bubble")||document.querySelector(".ava-bubble,[data-ava-open]");
+        if(bubble){ bubble.click(); } 
+        var panel=document.getElementById("ava-panel"); if(panel) panel.classList.add("open");
+        var inp=document.getElementById("ava-input"); if(inp) inp.focus();
+      }
+      g.addEventListener("click", openAva);
+      g.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" ") openAva(); });
+    }
+
+    // ---- Ava face in chat header ----
+    var head = document.querySelector("#ava-panel .ava-head, #ava-panel header, .ava-header");
+    if(head && !head.querySelector(".ava-head-face")){
+      var face=el('<img class="ava-head-face" src="images/ava.png" alt="Ava">');
+      head.insertBefore(face, head.firstChild);
+    }
+
+    // ---- Voice input (Web Speech API) ----
+    var SR = window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(SR && avaInput){
+      var sendBtn=document.getElementById("ava-send");
+      var mic=el('<button id="ava-mic" type="button" title="'+t("mic")+'" aria-label="'+t("mic")+'">🎤</button>');
+      if(sendBtn && sendBtn.parentNode){ sendBtn.parentNode.insertBefore(mic, sendBtn); }
+      else if(avaInput.parentNode){ avaInput.parentNode.appendChild(mic); }
+      var rec=new SR(); rec.interimResults=false; rec.maxAlternatives=1; var listening=false;
+      var langMap={en:"en-US",es:"es-ES",uk:"uk-UA"};
+      mic.addEventListener("click", function(){
+        if(listening){ rec.stop(); return; }
+        rec.lang=langMap[lang()]||"en-US";
+        try{ rec.start(); }catch(e){}
+      });
+      rec.onstart=function(){ listening=true; mic.classList.add("rec"); };
+      rec.onend=function(){ listening=false; mic.classList.remove("rec"); };
+      rec.onerror=function(){ listening=false; mic.classList.remove("rec"); };
+      rec.onresult=function(e){
+        var txt=e.results[0][0].transcript;
+        avaInput.value=(avaInput.value?avaInput.value+" ":"")+txt;
+        avaInput.focus();
+      };
+    }
+
+    // ---- Cookie bar ----
+    if(!localStorage.getItem("hv_cookie") && !document.getElementById("cookie-bar")){
+      var bar=el('<div id="cookie-bar" role="dialog" aria-live="polite"><p><span id="ck-text"></span> <a href="cookie.html" id="ck-link"></a>.</p><div class="ck-actions"><button class="ck-accept" id="ck-accept"></button><button class="ck-decline" id="ck-decline"></button></div></div>');
+      document.body.appendChild(bar);
+      bar.querySelector("#ck-text").textContent=t("ck");
+      bar.querySelector("#ck-link").textContent=t("ckl");
+      bar.querySelector("#ck-accept").textContent=t("acc");
+      bar.querySelector("#ck-decline").textContent=t("dec");
+      requestAnimationFrame(function(){ bar.classList.add("show"); });
+      function decide(v){ localStorage.setItem("hv_cookie",v); bar.classList.remove("show"); setTimeout(function(){bar.remove();},300); }
+      bar.querySelector("#ck-accept").addEventListener("click",function(){decide("accepted");});
+      bar.querySelector("#ck-decline").addEventListener("click",function(){decide("declined");});
+    }
+
+    // ---- Paddle checkout placeholders ----
+    var plans=[["start",["start","99"]],["business",["business","249"]],["pro",["pro","499"]]];
+    var pricing=document.getElementById("pricing");
+    if(pricing){
+      var cards=pricing.querySelectorAll(".plan, .tier, .price-card, [data-plan]");
+      pricing.querySelectorAll("a,button").forEach(function(btn){
+        if(btn.dataset.plan) return;
+        var card=btn.closest(".plan,.tier,.price-card,[data-plan]");
+        var key=card&&card.getAttribute("data-plan");
+        if(!key){ var txt=(card?card.textContent:"").toLowerCase();
+          if(txt.indexOf("business")>-1||txt.indexOf("249")>-1)key="business";
+          else if(txt.indexOf("pro")>-1||txt.indexOf("499")>-1)key="pro";
+          else if(txt.indexOf("start")>-1||txt.indexOf("99")>-1)key="start"; }
+        if(key && window.HYVENTA_PADDLE.prices[key]){
+          btn.setAttribute("data-plan",key);
+          btn.addEventListener("click",function(e){
+            var cfg=window.HYVENTA_PADDLE, pid=cfg.prices[key];
+            if(cfg.token.indexOf("PADDLE")===0 || String(pid).indexOf("PRICE")===0){
+              e.preventDefault(); alert(t("soon")); return;
+            }
+            if(window.Paddle){ e.preventDefault(); window.Paddle.Checkout.open({items:[{priceId:pid,quantity:1}]}); }
+          });
+        }
+      });
+    }
+  });
+})();
+/* To go live with Paddle after approval:
+   1) Add to <head>:  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+      then: Paddle.Environment.set("production"); Paddle.Initialize({token:"live_xxx"});
+   2) Replace token + PRICE_START/PRICE_BUSINESS/PRICE_PRO above with real values. */
+
+</script>
+<!-- HYVENTA-ENHANCEMENTS:END -->
+</body>
+</html>
