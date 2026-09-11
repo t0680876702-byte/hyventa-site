@@ -245,13 +245,13 @@
 <!-- HYVENTA-ENHANCEMENTS:START -->
 <style id="hv-enhance-css">
 /* ===== Hyventa enhancements (Ava greeter, cookie bar, voice) ===== */
-#ava-greeter{position:fixed;right:18px;bottom:96px;z-index:60;width:150px;cursor:pointer;filter:drop-shadow(0 12px 28px rgba(0,0,0,.45));transition:transform .25s ease;animation:greetIn .6s ease both}
+#ava-greeter{position:fixed;right:104px;bottom:14px;z-index:70;width:132px;cursor:pointer;filter:drop-shadow(0 12px 28px rgba(0,0,0,.45));transition:transform .25s ease;animation:greetIn .6s ease both}
 #ava-greeter:hover{transform:translateY(-6px) scale(1.03)}
-#ava-greeter img{width:100%;height:auto;display:block;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent);mask-image:linear-gradient(to bottom,#000 82%,transparent)}
-#ava-greeter .bubble-tip{position:absolute;top:-14px;right:8px;background:#fff;color:#0b0b12;font-size:12px;font-weight:600;padding:6px 10px;border-radius:12px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+#ava-greeter img{width:100%;height:auto;display:block;pointer-events:none;position:relative;z-index:1;-webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent);mask-image:linear-gradient(to bottom,#000 82%,transparent)}
+#ava-greeter .bubble-tip{position:absolute;top:-26px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;color:#0b0b12;font-size:12px;font-weight:600;padding:6px 10px;border-radius:12px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.3)}
 #ava-greeter.hide{display:none}
 @keyframes greetIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:640px){#ava-greeter{width:104px;bottom:88px;right:10px}}
+@media(max-width:640px){#ava-greeter{width:96px;bottom:12px;right:84px}}
 
 /* Ava face in chat header */
 .ava-head-face{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:top center;margin-right:8px;border:2px solid rgba(255,255,255,.25);vertical-align:middle}
