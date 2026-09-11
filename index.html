@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Hyventa — Hire an AI employee. Put it to work.</title>
 <meta name="description" content="Hyventa — a department of specialized AI workers your company can hire in minutes. 24/7, any language, human handoff built in." />
+<link rel="canonical" href="https://hyventa.net/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Hyventa" />
+<meta property="og:title" content="Hyventa — Hire an AI employee. Put it to work." />
+<meta property="og:description" content="A department of specialized AI workers your company can hire in minutes. 24/7, any language, human handoff built in." />
+<meta property="og:url" content="https://hyventa.net/" />
+<meta property="og:image" content="https://hyventa.net/images/sarah.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Hyventa — Hire an AI employee. Put it to work." />
+<meta name="twitter:description" content="A department of specialized AI workers your company can hire in minutes. 24/7, any language, human handoff built in." />
+<meta name="twitter:image" content="https://hyventa.net/images/sarah.png" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/images/ava.png" />
 <style>
   :root {
     --bg: #0a0e1a;
@@ -453,11 +466,11 @@
     <div class="foot-inner">
       <div class="foot-brand">Hyventa<span style="color:var(--accent)">.</span></div>
       <div class="foot-links">
-        <a href="privacy.html" data-i18n="f_privacy">Privacy Policy</a>
-        <a href="terms.html" data-i18n="f_terms">Terms of Service</a>
-        <a href="refund.html" data-i18n="f_refund">Refund Policy</a>
-        <a href="cookie.html" data-i18n="f_cookie">Cookie Policy</a>
-        <a href="imprint.html" data-i18n="f_contact">Contact</a>
+        <a href="/privacy" data-i18n="f_privacy">Privacy Policy</a>
+        <a href="/terms" data-i18n="f_terms">Terms of Service</a>
+        <a href="/refund" data-i18n="f_refund">Refund Policy</a>
+        <a href="/cookie" data-i18n="f_cookie">Cookie Policy</a>
+        <a href="/imprint" data-i18n="f_contact">Contact</a>
       </div>
     </div>
     <p class="foot-copy">© <span id="year"></span> Hyventa · <span data-i18n="f_rights">All rights reserved.</span> · hyventa.net</p>
@@ -895,7 +908,7 @@ go(0);
 
     // ---- Cookie bar ----
     if(!localStorage.getItem("hv_cookie") && !document.getElementById("cookie-bar")){
-      var bar=el('<div id="cookie-bar" role="dialog" aria-live="polite"><p><span id="ck-text"></span> <a href="cookie.html" id="ck-link"></a>.</p><div class="ck-actions"><button class="ck-accept" id="ck-accept"></button><button class="ck-decline" id="ck-decline"></button></div></div>');
+      var bar=el('<div id="cookie-bar" role="dialog" aria-live="polite"><p><span id="ck-text"></span> <a href="/cookie" id="ck-link"></a>.</p><div class="ck-actions"><button class="ck-accept" id="ck-accept"></button><button class="ck-decline" id="ck-decline"></button></div></div>');
       document.body.appendChild(bar);
       bar.querySelector("#ck-text").textContent=t("ck");
       bar.querySelector("#ck-link").textContent=t("ckl");
