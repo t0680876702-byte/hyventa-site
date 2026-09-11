@@ -248,7 +248,7 @@
 #ava-greeter{position:fixed;right:104px;bottom:14px;z-index:70;width:132px;cursor:pointer;filter:drop-shadow(0 12px 28px rgba(0,0,0,.45));transition:transform .25s ease;animation:greetIn .6s ease both}
 #ava-greeter:hover{transform:translateY(-6px) scale(1.03)}
 #ava-greeter img{width:100%;height:auto;display:block;pointer-events:none;position:relative;z-index:1;-webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent);mask-image:linear-gradient(to bottom,#000 82%,transparent)}
-#ava-greeter .bubble-tip{position:absolute;top:-26px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;color:#0b0b12;font-size:12px;font-weight:600;padding:6px 10px;border-radius:12px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+#ava-greeter .bubble-tip{position:absolute;top:-26px;left:50%;transform:translateX(-50%);z-index:5;background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#0b0b12;font-size:12px;font-weight:600;padding:6px 10px;border-radius:12px;white-space:nowrap;border:1px solid rgba(255,255,255,.6);box-shadow:0 6px 18px rgba(0,0,0,.25)}
 #ava-greeter.hide{display:none}
 @keyframes greetIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:640px){#ava-greeter{width:96px;bottom:12px;right:84px}#ava-bubble{bottom:120px;right:18px}}
@@ -758,7 +758,7 @@ document.querySelectorAll('#navLinks a').forEach(function (a) {
 
 /* ============ Ava widget ============ */
 // Wire this to your Ava n8n webhook when ready:
-const AVA_WEBHOOK_URL = ""; // e.g. "https://achalex.app.n8n.cloud/webhook/ava"
+const AVA_WEBHOOK_URL = "https://achalex.app.n8n.cloud/webhook/ava"; // e.g. "https://achalex.app.n8n.cloud/webhook/ava"
 const bubble = document.getElementById('ava-bubble');
 const panel  = document.getElementById('ava-panel');
 const avaBody= document.getElementById('ava-body');
