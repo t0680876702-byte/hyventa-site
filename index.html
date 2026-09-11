@@ -287,11 +287,20 @@
 
 </style>
 <!-- HYVENTA-ENHANCEMENTS:END -->
+
 <!-- HYVENTA-V2:START -->
 <style id="hv-v2-css">
 
 /* ===== Hyventa V2: slogan, calculator, profile modal, Boris widget ===== */
-#hv-slogan{margin-top:14px;font-size:clamp(15px,2.2vw,20px);font-weight:700;background:linear-gradient(135deg,#6d5efc,#9b6bff);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.2px}
+#hv-slogan{margin-top:14px;font-size:clamp(16px,2.4vw,22px);font-weight:800;color:#c3b5ff;letter-spacing:.2px;text-shadow:0 1px 12px rgba(109,94,252,.25)}
+@supports((-webkit-background-clip:text) or (background-clip:text)){#hv-slogan{background:linear-gradient(135deg,#8f82ff,#b98bff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}}
+/* Hero team collage */
+#hv-collage{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px;max-width:520px}
+#hv-collage figure{margin:0;width:64px;text-align:center}
+#hv-collage img{width:64px;height:64px;border-radius:14px;object-fit:cover;object-position:top center;border:2px solid rgba(255,255,255,.14);background:#1a1a24;box-shadow:0 6px 18px rgba(0,0,0,.35);transition:transform .18s,border-color .18s;cursor:pointer}
+#hv-collage img:hover{transform:translateY(-4px);border-color:#8f82ff}
+#hv-collage figcaption{margin-top:4px;font-size:10px;color:#9aa0ae}
+@media(max-width:760px){#hv-collage{justify-content:center;margin-left:auto;margin-right:auto}#hv-collage figure{width:56px}#hv-collage img{width:56px;height:56px}}
 
 /* Cost calculator */
 #hv-calc{padding:64px 0;background:var(--bg-soft,#12121a);border-top:1px solid var(--border,rgba(255,255,255,.1));border-bottom:1px solid var(--border,rgba(255,255,255,.1))}
@@ -339,8 +348,11 @@
 .hv-ask{padding:12px 20px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.2));background:rgba(255,255,255,.05);color:#fff;font-weight:600;cursor:pointer}
 
 /* Boris widget (bottom-left) */
-#boris-bubble{position:fixed;left:18px;bottom:18px;z-index:70;width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;font-size:24px;background:linear-gradient(135deg,#2f6df6,#22a1f6);color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.4)}
+#boris-bubble{position:fixed;left:18px;bottom:18px;z-index:70;width:60px;height:60px;border-radius:50%;border:2px solid rgba(47,109,246,.7);cursor:pointer;padding:0;overflow:hidden;background:linear-gradient(135deg,#2f6df6,#22a1f6);color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.4)}
+#boris-bubble img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 #boris-bubble:hover{transform:translateY(-2px)}
+.boris-head .bav{overflow:hidden;padding:0}
+.boris-head .bav img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 #boris-panel{position:fixed;left:18px;bottom:84px;z-index:71;width:340px;max-width:calc(100vw - 36px);height:460px;max-height:70vh;background:#14141c;border:1px solid var(--border,rgba(255,255,255,.12));border-radius:16px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
 #boris-panel.open{display:flex}
 .boris-head{display:flex;align-items:center;gap:10px;padding:12px 14px;background:linear-gradient(135deg,#2f6df6,#22a1f6);color:#fff}
@@ -1323,6 +1335,346 @@ go(0);
       var bb=el('<button id="boris-bubble" aria-label="Chat with Boris">📊</button>');
       var bp=el('<div id="boris-panel">'+
         '<div class="boris-head"><div class="bav">B</div><div class="who"><b>Boris</b><span id="boris-status"></span></div><button class="bclose" id="boris-close">×</button></div>'+
+        '<div class="boris-body" id="boris-body"></div>'+
+        '<div class="boris-foot"><input id="boris-input" type="text"><button id="boris-send">➤</button></div>'+
+        '<p class="boris-note" id="boris-note"></p></div>');
+      document.body.appendChild(bb); document.body.appendChild(bp);
+      var bsession="web-boris-"+Math.random().toString(36).slice(2)+Date.now();
+      var bbody=document.getElementById("boris-body");
+      var binput=document.getElementById("boris-input");
+      var greeted=false;
+      function badd(text,who){ var m=document.createElement("div"); m.className="msg "+who; m.textContent=text; bbody.appendChild(m); bbody.scrollTop=bbody.scrollHeight; return m; }
+      function openBoris(){ bp.classList.add("open"); if(!greeted){ badd(t("boris_hi"),"bot"); greeted=true; } binput.focus(); }
+      bb.addEventListener("click", function(){ bp.classList.contains("open") ? bp.classList.remove("open") : openBoris(); });
+      document.getElementById("boris-close").addEventListener("click", function(){ bp.classList.remove("open"); });
+      function bsend(){
+        var text=binput.value.trim(); if(!text) return;
+        badd(text,"user"); binput.value="";
+        var ty=badd("…","bot");
+        fetch(BORIS_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chatInput:text,sessionId:bsession,lang:lang()})})
+          .then(function(r){ return r.json(); })
+          .then(function(d){ ty.textContent=d.output||d.reply||d.text||JSON.stringify(d); })
+          .catch(function(){ ty.textContent=t("boris_err"); });
+      }
+      document.getElementById("boris-send").addEventListener("click", bsend);
+      binput.addEventListener("keydown", function(e){ if(e.key==="Enter") bsend(); });
+    }
+
+    /* ---- language sync ---- */
+    document.querySelectorAll(".lang button").forEach(function(b){ b.addEventListener("click", function(){ setTimeout(refreshLang,0); }); });
+    refreshLang();
+  });
+})();
+
+</script>
+<!-- HYVENTA-V2:END -->
+<!-- HYVENTA-V2:START -->
+<script id="hv-v2-js">
+
+(function(){
+  "use strict";
+
+  var BORIS_URL = "https://achalex.app.n8n.cloud/webhook/boris";
+
+  var L = {
+    en:{ slogan:"Upgrade your business. Give it superpowers.",
+      view_profile:"View profile",
+      calc_h:"Cost calculator", calc_sub:"Estimate your monthly cost in seconds.",
+      calc_emp:"How many AI employees?", calc_bill:"Billing", calc_month:"Monthly", calc_year:"Yearly (2 months free)",
+      calc_addons:"Extra skills", calc_plan:"Recommended plan", calc_total:"Estimated total",
+      calc_cta:"Start free trial", per_mo:"/mo", per_yr:"/yr", lets_talk:"Let's talk",
+      calc_note:"Final price confirmed before you pay. Ask Ava for a tailored quote.",
+      profile_examples:"Work examples", profile_how:"How it works", profile_hire:"Hire", profile_ask:"Ask Ava", profile_close:"Close",
+      boris_status:"AI Business Analyst · online", boris_ph:"Ask about growth, market, analysis…",
+      boris_note:"Boris is an AI assistant. He may connect you to a human.",
+      boris_hi:"Hi, I'm Boris, your AI business analyst. Tell me about your company and I'll suggest growth ideas and the right AI employees.",
+      boris_err:"Connection issue — please try again or email hellohyventa@gmail.com." },
+    es:{ slogan:"Mejora tu negocio. Dale superpoderes.",
+      view_profile:"Ver perfil",
+      calc_h:"Calculadora de costes", calc_sub:"Estima tu coste mensual en segundos.",
+      calc_emp:"¿Cuántos empleados IA?", calc_bill:"Facturación", calc_month:"Mensual", calc_year:"Anual (2 meses gratis)",
+      calc_addons:"Habilidades extra", calc_plan:"Plan recomendado", calc_total:"Total estimado",
+      calc_cta:"Prueba gratis", per_mo:"/mes", per_yr:"/año", lets_talk:"Hablemos",
+      calc_note:"Precio final confirmado antes de pagar. Pídele a Ava un presupuesto a medida.",
+      profile_examples:"Ejemplos de trabajo", profile_how:"Cómo funciona", profile_hire:"Contratar", profile_ask:"Pregunta a Ava", profile_close:"Cerrar",
+      boris_status:"Analista de Negocios IA · en línea", boris_ph:"Pregunta sobre crecimiento, mercado, análisis…",
+      boris_note:"Boris es un asistente IA. Puede conectarte con un humano.",
+      boris_hi:"Hola, soy Boris, tu analista de negocios IA. Cuéntame sobre tu empresa y te daré ideas de crecimiento.",
+      boris_err:"Problema de conexión — inténtalo de nuevo o escribe a hellohyventa@gmail.com." },
+    uk:{ slogan:"Прокачайте свій бізнес. Дайте йому суперсили.",
+      view_profile:"Переглянути профіль",
+      calc_h:"Калькулятор вартості", calc_sub:"Оцініть щомісячну вартість за секунди.",
+      calc_emp:"Скільки AI-співробітників?", calc_bill:"Оплата", calc_month:"Щомісяця", calc_year:"Щороку (2 місяці безкоштовно)",
+      calc_addons:"Додаткові навички", calc_plan:"Рекомендований тариф", calc_total:"Орієнтовна сума",
+      calc_cta:"Почати безкоштовно", per_mo:"/міс", per_yr:"/рік", lets_talk:"Обговорімо",
+      calc_note:"Остаточна ціна підтверджується перед оплатою. Запитайте Аву про індивідуальну пропозицію.",
+      profile_examples:"Приклади роботи", profile_how:"Як це працює", profile_hire:"Найняти", profile_ask:"Запитати Аву", profile_close:"Закрити",
+      boris_status:"AI-бізнес-аналітик · онлайн", boris_ph:"Запитайте про зростання, ринок, аналіз…",
+      boris_note:"Борис — AI-асистент. За потреби зʼєднає вас із людиною.",
+      boris_hi:"Привіт, я Борис, ваш AI-бізнес-аналітик. Розкажіть про вашу компанію — і я запропоную ідеї зростання та відповідних AI-співробітників.",
+      boris_err:"Проблема зʼєднання — спробуйте ще раз або напишіть на hellohyventa@gmail.com." }
+  };
+
+  function lang(){ var l=(document.documentElement.lang||localStorage.getItem("hv_lang")||"en").slice(0,2); return L[l]?l:"en"; }
+  function t(k){ var d=L[lang()]; return (d&&d[k]!==undefined)?d[k]:L.en[k]; }
+  function el(h){ var d=document.createElement("div"); d.innerHTML=h.trim(); return d.firstChild; }
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  /* ---- Character profiles (article + examples + how) ---- */
+  var P = {
+    sarah:{ role:{en:"AI Sales Manager",es:"Gerente de Ventas IA",uk:"AI-менеджер продажів"},
+      article:{en:"Sarah works your inbound leads around the clock. She greets every visitor, asks the right qualifying questions, scores buying intent and hands the hottest leads straight to your team — so no opportunity ever goes cold.",
+        uk:"Сара опрацьовує вхідні ліди цілодобово. Вона вітає кожного відвідувача, ставить правильні кваліфікаційні запитання, оцінює намір купити й передає найгарячіші ліди вашій команді — жодна можливість не втрачається."},
+      examples:{en:["Qualified 40 website leads overnight and flagged 6 as hot","Booked a product demo directly from a chat conversation","Pushed a new lead with full context into the CRM"],
+        uk:["За ніч кваліфікувала 40 лідів із сайту й позначила 6 як гарячі","Записала на демо прямо з чату","Додала новий лід із повним контекстом у CRM"]},
+      how:{en:["Chats with each visitor and asks qualifying questions","Scores intent and saves the lead to your CRM","Notifies a human the moment a lead is hot"],
+        uk:["Спілкується з відвідувачем і ставить кваліфікаційні запитання","Оцінює намір і зберігає лід у CRM","Сповіщає людину, щойно лід став гарячим"]} },
+
+    emma:{ role:{en:"AI Receptionist",es:"Recepcionista IA",uk:"AI-рецепціоніст"},
+      article:{en:"Emma is the receptionist who never misses a call or a booking. She greets visitors, answers common questions, schedules consultations and logs every contact automatically — day or night.",
+        uk:"Емма — рецепціоніст, який ніколи не пропустить дзвінок чи запис. Вона вітає відвідувачів, відповідає на типові запитання, планує консультації й автоматично фіксує кожен контакт — удень і вночі."},
+      examples:{en:["Booked 3 consultations while the office was closed","Answered pricing and opening-hours questions instantly","Logged every new contact with source and intent"],
+        uk:["Записала 3 консультації, поки офіс був зачинений","Миттєво відповіла на питання про ціни та години роботи","Зафіксувала кожен новий контакт із джерелом і наміром"]},
+      how:{en:["Greets visitors and answers FAQs","Books consultations into your calendar","Logs each contact automatically"],
+        uk:["Вітає відвідувачів і відповідає на часті питання","Записує консультації у ваш календар","Автоматично фіксує кожен контакт"]} },
+
+    olivia:{ role:{en:"AI Appointment Setter",es:"Agendadora IA",uk:"AI-планувальник зустрічей"},
+      article:{en:"Olivia turns website curiosity into meetings on your calendar. She qualifies each visitor, captures their preferred time slot and confirms the booking — filling your pipeline while you focus on closing.",
+        uk:"Олівія перетворює цікавість на сайті на зустрічі у вашому календарі. Вона кваліфікує кожного відвідувача, фіксує зручний час і підтверджує бронювання — наповнює вашу воронку, поки ви закриваєте угоди."},
+      examples:{en:["Turned a casual visitor into a booked sales call","Captured preferred time zones and slots automatically","Reminded a lead and reduced no-shows"],
+        uk:["Перетворила випадкового відвідувача на заброньований дзвінок","Автоматично зафіксувала часові пояси й слоти","Нагадала ліду й зменшила неявки"]},
+      how:{en:["Qualifies the visitor's interest","Captures a preferred meeting slot","Confirms and books the meeting"],
+        uk:["Кваліфікує інтерес відвідувача","Фіксує зручний час зустрічі","Підтверджує й бронює зустріч"]} },
+
+    alex:{ role:{en:"AI Support Agent",es:"Agente de Soporte IA",uk:"AI-агент підтримки"},
+      article:{en:"Alex handles support so your team only touches what matters. He triages incoming tickets, drafts accurate replies from your knowledge base and auto-escalates urgent cases to a human.",
+        uk:"Алекс бере на себе підтримку, щоб команда займалася лише важливим. Він сортує звернення, готує точні відповіді з бази знань і автоматично ескалює термінові випадки людині."},
+      examples:{en:["Resolved a password-reset request end to end","Drafted a refund reply for an agent to approve","Escalated an outage report to the on-call team"],
+        uk:["Повністю вирішив запит на скидання пароля","Підготував відповідь щодо повернення для підтвердження агентом","Ескалював звіт про збій черговій команді"]},
+      how:{en:["Triages every incoming ticket","Drafts a reply from your knowledge base","Escalates urgent cases to a human"],
+        uk:["Сортує кожне вхідне звернення","Готує відповідь із бази знань","Ескалює термінові випадки людині"]} },
+
+    max:{ role:{en:"AI Knowledge Assistant",es:"Asistente de Conocimiento IA",uk:"AI-асистент знань"},
+      article:{en:"Max is your knowledge base that talks back. He answers strictly from your company's documents, remembers facts per user and never makes things up — perfect for content-heavy businesses.",
+        uk:"Макс — це ваша база знань, яка відповідає. Він відповідає лише з документів компанії, памʼятає факти по кожному користувачу й нічого не вигадує — ідеально для контентомісткого бізнесу."},
+      examples:{en:["Answered a policy question with an exact source","Remembered a customer's plan across chats","Declined to answer outside the knowledge base"],
+        uk:["Відповів на питання про політику з точним джерелом","Запамʼятав тариф клієнта між чатами","Відмовився відповідати поза базою знань"]},
+      how:{en:["Reads only your approved documents","Remembers facts for each user","Answers with grounded, sourced replies"],
+        uk:["Читає лише ваші затверджені документи","Памʼятає факти для кожного користувача","Відповідає обґрунтовано, з джерелами"]} },
+
+    daniel:{ role:{en:"AI Recruiter",es:"Reclutador IA",uk:"AI-рекрутер"},
+      article:{en:"Daniel screens every applicant in seconds and shortlists the best. He scores each candidate against your criteria and routes them to shortlist, review or rejected — so hiring never bottlenecks.",
+        uk:"Даніель оцінює кожного кандидата за секунди й формує шорт-лист найкращих. Він оцінює кандидатів за вашими критеріями та маршрутизує в шорт-лист, розгляд або відмову — найм не гальмує."},
+      examples:{en:["Screened 120 applicants and shortlisted 9","Scored a candidate against the role's must-haves","Sent a polite rejection with feedback"],
+        uk:["Оцінив 120 заявок і сформував шорт-лист із 9","Оцінив кандидата за ключовими вимогами ролі","Надіслав ввічливу відмову зі зворотним звʼязком"]},
+      how:{en:["Reads each application","Scores fit against your criteria","Routes to shortlist / review / rejected"],
+        uk:["Читає кожну заявку","Оцінює відповідність вашим критеріям","Маршрутизує в шорт-лист / розгляд / відмову"]} },
+
+    boris:{ role:{en:"AI Business Analyst",es:"Analista de Negocios IA",uk:"AI-бізнес-аналітик"},
+      article:{en:"Boris delivers on-demand business analysis and market research. He researches a company or website, runs live web search and produces a clear analysis report with growth recommendations. Chat with him in the bottom-left corner.",
+        uk:"Борис надає бізнес-аналіз і дослідження ринку на вимогу. Він досліджує компанію чи сайт, виконує живий веб-пошук і формує зрозумілий аналітичний звіт із рекомендаціями для зростання. Спілкуйтеся з ним у лівому нижньому куті."},
+      examples:{en:["Analyzed a competitor's site and summarized the gaps","Suggested 3 growth ideas with matching AI employees","Produced a short market snapshot for a niche"],
+        uk:["Проаналізував сайт конкурента й підсумував прогалини","Запропонував 3 ідеї зростання з відповідними AI-співробітниками","Підготував короткий огляд ринку для ніші"]},
+      how:{en:["Researches your company or site","Runs live web search for context","Delivers an analysis with recommendations"],
+        uk:["Досліджує вашу компанію чи сайт","Виконує живий веб-пошук для контексту","Надає аналіз із рекомендаціями"]} },
+
+    sophia:{ role:{en:"AI Marketing Manager",es:"Gerente de Marketing IA",uk:"AI-маркетолог"},
+      article:{en:"Sophia fills your content calendar every morning. She generates a daily batch of on-brand content ideas and drops them straight into your calendar, so marketing never runs dry.",
+        uk:"Софія заповнює ваш контент-календар щоранку. Вона генерує щоденну порцію ідей у стилі бренду й одразу додає їх у календар, тож маркетинг ніколи не простоює."},
+      examples:{en:["Generated a week of post ideas overnight","Filled the content calendar with themed campaigns","Adapted ideas to a seasonal promotion"],
+        uk:["За ніч згенерувала ідеї постів на тиждень","Заповнила контент-календар тематичними кампаніями","Адаптувала ідеї під сезонну акцію"]},
+      how:{en:["Generates on-brand content ideas daily","Organizes them into a content calendar","Keeps the pipeline full automatically"],
+        uk:["Щодня генерує ідеї контенту в стилі бренду","Організовує їх у контент-календар","Автоматично тримає воронку повною"]} },
+
+    leo:{ role:{en:"AI Designer",es:"Diseñador IA",uk:"AI-дизайнер"},
+      article:{en:"Leo is an in-house designer that never runs out of ideas. He generates vector and stock graphics through a full production pipeline — ready-to-use visuals on demand.",
+        uk:"Лео — штатний дизайнер, у якого ніколи не закінчуються ідеї. Він генерує векторну та стокову графіку через повний виробничий конвеєр — готові візуали на вимогу."},
+      examples:{en:["Produced a set of social media graphics","Generated vector icons for a landing page","Created stock-ready illustrations for a campaign"],
+        uk:["Створив набір графіки для соцмереж","Згенерував векторні іконки для лендингу","Створив стокові ілюстрації для кампанії"]},
+      how:{en:["Takes your brief or theme","Runs a full generation pipeline","Delivers ready-to-use graphics"],
+        uk:["Бере ваш бриф або тему","Запускає повний конвеєр генерації","Надає готову до використання графіку"]} },
+
+    vera:{ role:{en:"AI Video Producer",es:"Productora de Video IA",uk:"AI-відеопродюсер"},
+      article:{en:"Vera takes you from prompt to finished video. She produces stock videos and mini-series end to end — ideal for content studios and ad teams.",
+        uk:"Віра веде вас від промпту до готового відео. Вона створює стокові відео та міні-серіали від і до — ідеально для контент-студій і рекламних команд."},
+      examples:{en:["Produced a 30-second promo from a prompt","Generated a mini-series of product clips","Rendered stock footage for an ad campaign"],
+        uk:["Створила 30-секундне промо з промпту","Згенерувала міні-серіал роликів про продукт","Відрендерила стокові кадри для реклами"]},
+      how:{en:["Takes your prompt or script","Produces the video end to end","Delivers finished, ready-to-post clips"],
+        uk:["Бере ваш промпт або сценарій","Створює відео від і до","Надає готові до публікації ролики"]} },
+
+    rooney:{ role:{en:"AI Composer",es:"Compositor IA",uk:"AI-композитор"},
+      article:{en:"Rooney writes original soundtracks on demand. He generates royalty-free music from a brief or mood — perfect for media, ads and games.",
+        uk:"Руні пише оригінальні саундтреки на вимогу. Він генерує музику без роялті за брифом чи настроєм — ідеально для медіа, реклами та ігор."},
+      examples:{en:["Composed a background track for a promo","Generated three mood variations for an ad","Produced a loop for a game level"],
+        uk:["Створив фонову доріжку для промо","Згенерував три варіації настрою для реклами","Створив луп для ігрового рівня"]},
+      how:{en:["Takes a brief or mood","Generates original music","Delivers royalty-free tracks"],
+        uk:["Бере бриф або настрій","Генерує оригінальну музику","Надає треки без роялті"]} },
+
+    nina:{ role:{en:"AI Translator",es:"Traductora IA",uk:"AI-перекладач"},
+      article:{en:"Nina lets you speak to anyone, in any language, instantly. She translates messages and content in real time — so international business feels effortless.",
+        uk:"Ніна дає змогу спілкуватися з будь-ким, будь-якою мовою, миттєво. Вона перекладає повідомлення та контент у реальному часі — міжнародний бізнес стає легким."},
+      examples:{en:["Translated a live chat between two languages","Localized a product description into 5 languages","Kept a Telegram thread bilingual in real time"],
+        uk:["Переклала живий чат між двома мовами","Локалізувала опис продукту 5 мовами","Тримала гілку в Telegram двомовною в реальному часі"]},
+      how:{en:["Detects the source language","Translates in real time","Keeps conversations flowing across languages"],
+        uk:["Визначає мову оригіналу","Перекладає в реальному часі","Тримає розмову плавною між мовами"]} }
+  };
+
+  function pget(file,key){ var o=P[file]; if(!o||!o[key]) return null; var lg=lang(); return o[key][lg]||o[key].en||null; }
+  function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+
+  var hvBill = "month";
+
+  function calc(){
+    var empEl=document.getElementById("hv-emp"), addEl=document.getElementById("hv-addons");
+    if(!empEl) return;
+    var n=+empEl.value, a=+addEl.value, yearly=(hvBill==="year");
+    document.getElementById("hv-emp-val").textContent=n;
+    document.getElementById("hv-addons-val").textContent=a;
+    var plan, base;
+    if(n<=1){plan="Start";base=99;}
+    else if(n<=3){plan="Business";base=249;}
+    else if(n<=6){plan="Pro";base=499;}
+    else{plan="Custom";base=0;}
+    document.getElementById("hv-plan").textContent = (plan==="Custom") ? t("lets_talk") : plan;
+    var per = yearly ? t("per_yr") : t("per_mo");
+    var totalEl=document.getElementById("hv-total");
+    if(plan==="Custom"){
+      var est=n*79 + a*49; var val=yearly?est*10:est;
+      totalEl.innerHTML="~$"+val.toLocaleString()+"<span>"+per+"</span>";
+    } else {
+      var monthly=base + a*49; var val2=yearly?monthly*10:monthly;
+      totalEl.innerHTML="$"+val2.toLocaleString()+"<span>"+per+"</span>";
+    }
+  }
+
+  function refreshLang(){
+    var s=document.getElementById("hv-slogan"); if(s) s.textContent=t("slogan");
+    var map={"hvc-h":"calc_h","hvc-sub":"calc_sub","hvc-l-emp":"calc_emp","hvc-l-bill":"calc_bill",
+      "hvc-b-month":"calc_month","hvc-b-year":"calc_year","hvc-l-addons":"calc_addons",
+      "hvc-l-plan":"calc_plan","hvc-l-total":"calc_total","hvc-note":"calc_note"};
+    Object.keys(map).forEach(function(id){ var e=document.getElementById(id); if(e) e.textContent=t(map[id]); });
+    var cta=document.getElementById("hv-cta"); if(cta) cta.textContent=t("calc_cta");
+    var pb=document.querySelector(".hv-profile-btn"); if(pb) pb.textContent=t("view_profile");
+    var bs=document.getElementById("boris-status"); if(bs) bs.textContent=t("boris_status");
+    var bi=document.getElementById("boris-input"); if(bi) bi.setAttribute("placeholder",t("boris_ph"));
+    var bn=document.getElementById("boris-note"); if(bn) bn.textContent=t("boris_note");
+    calc();
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+
+    /* ---- A. Side slogan ---- */
+    var hs=document.querySelector('[data-i18n="hero_sub"]');
+    if(hs && !document.getElementById("hv-slogan")){
+      var sl=el('<p id="hv-slogan"></p>'); sl.textContent=t("slogan");
+      hs.parentNode.insertBefore(sl, hs.nextSibling);
+      // Team collage of 12 portraits under the slogan
+      var files=["sarah","emma","olivia","alex","max","daniel","boris","sophia","leo","vera","rooney","nina"];
+      var col=el('<div id="hv-collage" aria-label="Hyventa AI team"></div>');
+      files.forEach(function(f){
+        var fig=document.createElement("figure");
+        fig.innerHTML='<img src="images/'+f+'.png" alt="'+f+'" loading="lazy" onerror="this.parentNode.style.display=\'none\'"><figcaption>'+f.charAt(0).toUpperCase()+f.slice(1)+'</figcaption>';
+        fig.querySelector("img").addEventListener("click", function(){ if(typeof openProfile==="function") openProfile(f); });
+        col.appendChild(fig);
+      });
+      sl.parentNode.insertBefore(col, sl.nextSibling);
+    }
+
+    /* ---- B. Cost calculator (before #pricing) ---- */
+    var pricing=document.getElementById("pricing");
+    if(pricing && !document.getElementById("hv-calc")){
+      var sec=el('<section id="hv-calc"><div class="wrap">'+
+        '<div class="sec-head"><h2 id="hvc-h"></h2><p id="hvc-sub"></p></div>'+
+        '<div class="hvc-grid">'+
+          '<div class="hvc-controls">'+
+            '<label id="hvc-l-emp"></label>'+
+            '<input type="range" id="hv-emp" min="1" max="12" value="1">'+
+            '<div class="hvc-val"><span id="hv-emp-val">1</span></div>'+
+            '<label id="hvc-l-bill"></label>'+
+            '<div class="hvc-seg"><button type="button" data-bill="month" id="hvc-b-month" class="active"></button><button type="button" data-bill="year" id="hvc-b-year"></button></div>'+
+            '<label id="hvc-l-addons"></label>'+
+            '<input type="range" id="hv-addons" min="0" max="5" value="0">'+
+            '<div class="hvc-val"><span id="hv-addons-val">0</span></div>'+
+          '</div>'+
+          '<div class="hvc-result">'+
+            '<div class="hvc-plan-label" id="hvc-l-plan"></div>'+
+            '<div class="hvc-plan" id="hv-plan">Start</div>'+
+            '<div class="hvc-total-label" id="hvc-l-total"></div>'+
+            '<div class="hvc-total" id="hv-total"></div>'+
+            '<a href="#contact" class="hvc-cta" id="hv-cta"></a>'+
+            '<p class="hvc-note" id="hvc-note"></p>'+
+          '</div>'+
+        '</div></div></section>');
+      pricing.parentNode.insertBefore(sec, pricing);
+      document.getElementById("hv-emp").addEventListener("input", calc);
+      document.getElementById("hv-addons").addEventListener("input", calc);
+      document.getElementById("hvc-b-month").addEventListener("click", function(){ hvBill="month"; this.classList.add("active"); document.getElementById("hvc-b-year").classList.remove("active"); calc(); });
+      document.getElementById("hvc-b-year").addEventListener("click", function(){ hvBill="year"; this.classList.add("active"); document.getElementById("hvc-b-month").classList.remove("active"); calc(); });
+    }
+
+    /* ---- C. Clickable character profiles ---- */
+    window.openProfile = function openProfile(file){
+      if(!P[file]) return;
+      var activeName=document.querySelector(".card.active .name-plate h3");
+      var name = activeName ? activeName.textContent : cap(file);
+      var role = (P[file].role && (P[file].role[lang()]||P[file].role.en)) || "";
+      var article=pget(file,"article")||"";
+      var examples=pget(file,"examples")||[];
+      var how=pget(file,"how")||[];
+      var exHtml=examples.map(function(x){return "<li>"+esc(x)+"</li>";}).join("");
+      var howHtml=how.map(function(x){return "<li>"+esc(x)+"</li>";}).join("");
+      var ov=el('<div id="hv-modal" role="dialog" aria-modal="true"><div class="hv-modal-card">'+
+        '<button class="hv-modal-close" aria-label="'+esc(t("profile_close"))+'">×</button>'+
+        '<div class="hv-modal-hero"><img src="images/'+file+'.png" alt="'+esc(name)+'" onerror="this.style.display=\'none\'">'+
+          '<div><h3>'+esc(name)+'</h3><div class="hv-modal-role">'+esc(role)+'</div></div></div>'+
+        '<div class="hv-modal-body">'+
+          '<p class="hv-modal-article">'+esc(article)+'</p>'+
+          '<h4>'+esc(t("profile_examples"))+'</h4><ul class="hv-modal-ex">'+exHtml+'</ul>'+
+          '<h4>'+esc(t("profile_how"))+'</h4><ol class="hv-modal-how">'+howHtml+'</ol>'+
+          '<div class="hv-modal-cta"><a href="#contact" class="hvc-cta hv-hire">'+esc(t("profile_hire"))+' '+esc(name)+'</a>'+
+          '<button type="button" class="hv-ask">'+esc(t("profile_ask"))+'</button></div>'+
+        '</div></div></div>');
+      document.body.appendChild(ov);
+      document.body.style.overflow="hidden";
+      function close(){ ov.remove(); document.body.style.overflow=""; }
+      ov.addEventListener("click", function(e){ if(e.target===ov) close(); });
+      ov.querySelector(".hv-modal-close").addEventListener("click", close);
+      ov.querySelector(".hv-hire").addEventListener("click", close);
+      ov.querySelector(".hv-ask").addEventListener("click", function(){ close(); var b=document.getElementById("ava-bubble"); if(b) b.click(); });
+      document.addEventListener("keydown", function esckey(e){ if(e.key==="Escape"){ close(); document.removeEventListener("keydown",esckey);} });
+      requestAnimationFrame(function(){ ov.classList.add("show"); });
+    }
+
+    // "View profile" button appended into carousel detail, re-added on re-render
+    var detail=document.getElementById("detail");
+    function addProfileBtn(){
+      if(!detail || detail.querySelector(".hv-profile-btn")) return;
+      var b=el('<button type="button" class="hv-profile-btn"></button>'); b.textContent=t("view_profile");
+      b.addEventListener("click", function(){
+        var img=document.querySelector(".card.active img[src*='images/']");
+        if(!img) return; var m=img.getAttribute("src").match(/images\/([^\/.]+)\.png/);
+        if(m) openProfile(m[1]);
+      });
+      detail.appendChild(b);
+    }
+    if(detail){
+      addProfileBtn();
+      try{ new MutationObserver(addProfileBtn).observe(detail,{childList:true}); }catch(e){}
+    }
+    // Clicking the centered card also opens its profile
+    document.addEventListener("click", function(e){
+      var card=e.target.closest ? e.target.closest(".card") : null;
+      if(!card || !card.classList.contains("active")) return;
+      var img=card.querySelector("img[src*='images/']"); if(!img) return;
+      var m=img.getAttribute("src").match(/images\/([^\/.]+)\.png/);
+      if(m && P[m[1]]) openProfile(m[1]);
+    });
+
+    /* ---- D. Boris widget (bottom-left) ---- */
+    if(!document.getElementById("boris-bubble")){
+      var bb=el('<button id="boris-bubble" aria-label="Chat with Boris"><img src="images/boris.png" alt="Boris" onerror="this.parentNode.textContent=\'📊\'"></button>');
+      var bp=el('<div id="boris-panel">'+
+        '<div class="boris-head"><div class="bav"><img src="images/boris.png" alt="Boris" onerror="this.parentNode.textContent=\'B\'"></div><div class="who"><b>Boris</b><span id="boris-status"></span></div><button class="bclose" id="boris-close">×</button></div>'+
         '<div class="boris-body" id="boris-body"></div>'+
         '<div class="boris-foot"><input id="boris-input" type="text"><button id="boris-send">➤</button></div>'+
         '<p class="boris-note" id="boris-note"></p></div>');
