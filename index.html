@@ -290,6 +290,8 @@
 
 
 
+
+
 <!-- HYVENTA-V2:START -->
 <style id="hv-v2-css">
 
@@ -1085,6 +1087,8 @@ go(0);
 
 
 
+
+
 <!-- HYVENTA-V2:START -->
 <script id="hv-v2-js">
 
@@ -1493,8 +1497,10 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
       var note=mk('p','hv-slot-note','Bundle plans cover eligible AI employees by complexity (slot-based), not any six agents.'); pricing.insertBefore(note, tgl.nextSibling);
       bm.addEventListener('click',function(){ hvBill3='month'; bm.classList.add('active'); by.classList.remove('active'); });
       by.addEventListener('click',function(){ hvBill3='year'; by.classList.add('active'); bm.classList.remove('active'); });
-      var tiers=['tier-starter','tier-business','tier-pro']; var allA=pricing.getElementsByTagName('a'); var ctas=[]; for(var q=0;q<allA.length;q++){ if((allA[q].getAttribute('href')||'')==='#contact') ctas.push(allA[q]); }
-      for(var c=0;c<tiers.length && c<ctas.length;c++){ (function(slug,elm){ var pr=(window.HV_PRICING||{})[slug]; elm.addEventListener('click',function(ev){ track('trial_click',{plan:slug}); var pid=(hvBill3==='year')?(pr&&pr.pa):(pr&&pr.pm); if(pid && window.Paddle){ ev.preventDefault(); track('checkout_started',{plan:slug,price_id:pid}); Paddle.Checkout.open({items:[{priceId:pid,quantity:1}]}); } }); })(tiers[c],ctas[c]); }
+      function hvOpenCheckout(pid,slug){ var tries=0; (function go(){ if(window.Paddle && Paddle.Checkout){ track('checkout_started',{plan:slug,price_id:pid}); Paddle.Checkout.open({items:[{priceId:pid,quantity:1}]}); } else if(tries++<40){ setTimeout(go,125); } })(); }
+      function hvBindTierCtas(){ var cards=pricing.querySelectorAll('.prices .price'); var tiers=['tier-starter','tier-business','tier-pro']; for(var c=0;c<cards.length && c<tiers.length;c++){ (function(card,slug){ var elm=card.querySelector('a.choose')||card.querySelector('a[href]'); if(!elm||elm.getAttribute('data-hv-bound')==='1') return; elm.setAttribute('data-hv-bound','1'); elm.addEventListener('click',function(ev){ ev.preventDefault(); track('trial_click',{plan:slug}); var pr=(window.HV_PRICING||{})[slug]||{}; var pid=(hvBill3==='year')?pr.pa:pr.pm; if(pid){ hvOpenCheckout(pid,slug); } }); })(cards[c],tiers[c]); } }
+      hvBindTierCtas();
+      try{ new MutationObserver(hvBindTierCtas).observe(pricing,{childList:true,subtree:true}); }catch(e){}
     }
     function badgeFor(cls){ if(!cls) return 'Advanced'; if(cls.indexOf('A')===0) return 'Simple'; if(cls.indexOf('C')===0) return 'Premium'; if(cls.indexOf('D')===0) return 'Custom'; return 'Advanced'; }
     function enrich(ov){ var img=ov.querySelector('.hv-modal-hero img'); if(!img) return; var mm=(img.getAttribute('src')||'').match(/images/([^/.]+).png/); if(!mm) return; var slug=mm[1]; var pr=(window.HV_PRICING||{})[slug]; track('agent_page_view',{agent:slug}); if(!pr) return; var body=ov.querySelector('.hv-modal-body'); if(!body||body.querySelector('.hv-modal-price')) return; var box=mk('div','hv-modal-price',null); box.appendChild(mk('span','hv-badge',badgeFor(pr.cls))); if(pr.cta==='contact' || !pr.m){ box.appendChild(mk('div','hv-price-line','Custom quote')); var la=mk('a','hvc-cta','Contact sales'); la.setAttribute('href','#contact'); box.appendChild(la); } else { var pl=mk('div','hv-price-line',null); pl.appendChild(document.createTextNode('$'+pr.m)); var s1=mk('span',null,'/mo'); pl.appendChild(s1); pl.appendChild(document.createTextNode(' · $'+pr.a)); var s2=mk('span',null,'/yr'); pl.appendChild(s2); box.appendChild(pl); box.appendChild(mk('div','hv-usage',pr.usage||'')); var bb=mk('button','hvc-cta','Start 7-day free trial'); bb.type='button'; bb.addEventListener('click',function(){ track('trial_click',{agent:slug}); var pid=pr.pm; if(pid&&window.Paddle){ track('checkout_started',{agent:slug,price_id:pid}); Paddle.Checkout.open({items:[{priceId:pid,quantity:1}]}); } else { location.hash='#contact'; } }); box.appendChild(bb); } var cta=body.querySelector('.hv-modal-cta'); if(cta) body.insertBefore(box,cta); else body.appendChild(box); }
