@@ -299,6 +299,9 @@
 
 
 
+
+
+
 <!-- HYVENTA-V2:START -->
 <style id="hv-v2-css">
 
@@ -1130,6 +1133,9 @@ go(0);
 
 
 
+
+
+
 <!-- HYVENTA-V2:START -->
 <script id="hv-v2-js">
 
@@ -1643,5 +1649,73 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
 })();
 </script>
 <!-- HYVENTA-V4:END -->
+<!-- HYVENTA-V5:START -->
+<style id="hv-v5-css">
+#detail .meta{display:none}
+.card .card-chips{position:absolute;left:12px;right:12px;bottom:14px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;z-index:3;pointer-events:none}
+.card .card-chips .cc{font-size:10.5px;line-height:1;padding:5px 9px;border-radius:999px;background:rgba(16,22,44,.72);border:1px solid rgba(108,140,255,.45);color:#cdd8ff;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 2px 10px rgba(0,0,0,.35);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.card.active .card-chips .cc{border-color:rgba(155,108,255,.6);color:#e7ecff}
+.card .portrait img{-webkit-mask-image:linear-gradient(to bottom,#000 66%,transparent);mask-image:linear-gradient(to bottom,#000 66%,transparent)}
+.carousel{cursor:grab}
+#boris-bubble.hv-boris-standing{width:104px;height:150px;border-radius:16px;background:transparent;border:none;box-shadow:none;overflow:visible;padding:0;display:flex;align-items:flex-end;justify-content:center}
+#boris-bubble.hv-boris-standing img{width:100%;height:auto;object-fit:contain;border-radius:0;-webkit-mask-image:linear-gradient(to bottom,#000 84%,transparent);mask-image:linear-gradient(to bottom,#000 84%,transparent);filter:drop-shadow(0 8px 22px rgba(47,109,246,.45))}
+#boris-bubble.hv-boris-standing .hv-boris-base{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:86px;height:22px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(108,140,255,.55),rgba(155,108,255,.25) 55%,transparent 72%);filter:blur(2px);z-index:0;pointer-events:none;animation:hvBorisPulse 3s ease-in-out infinite}
+#boris-bubble.hv-boris-standing .hv-boris-label{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);font-size:11px;font-weight:600;letter-spacing:.2px;color:#cdd8ff;background:rgba(12,17,34,.82);border:1px solid rgba(108,140,255,.5);border-radius:999px;padding:3px 10px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.4);z-index:2}
+@keyframes hvBorisPulse{0%,100%{opacity:.7;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
+@media(max-width:640px){#boris-bubble.hv-boris-standing{width:74px;height:110px}#boris-bubble.hv-boris-standing .hv-boris-label{font-size:9.5px;padding:2px 7px}.card .card-chips .cc{font-size:9px;padding:4px 7px}}
+</style>
+<script id="hv-v5-js">
+(function(){
+  function ready(fn){ if(document.readyState!==(String.fromCharCode(108)+String.fromCharCode(111)+String.fromCharCode(97)+String.fromCharCode(100)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(103))) fn(); else document.addEventListener(String.fromCharCode(68)+String.fromCharCode(79)+String.fromCharCode(77)+String.fromCharCode(67)+String.fromCharCode(111)+String.fromCharCode(110)+String.fromCharCode(116)+String.fromCharCode(101)+String.fromCharCode(110)+String.fromCharCode(116)+String.fromCharCode(76)+String.fromCharCode(111)+String.fromCharCode(97)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(100), fn); }
+  ready(function(){ setTimeout(boot, 300); });
+  function boot(){ try{ init(); }catch(e){} }
+  function currentLang(){ try{ if(typeof LANG!==(String.fromCharCode(117)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(102)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(100))) return LANG; }catch(e){} return String.fromCharCode(101)+String.fromCharCode(110); }
+  function agentsList(){ try{ if(typeof agents!==(String.fromCharCode(117)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(102)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(100))) return agents; }catch(e){} return null; }
+  function chipsFor(a){ try{ var L=currentLang(); var arr=(a.chips&&(a.chips[L]||a.chips.en))||[]; return arr; }catch(e){ return []; } }
+  function injectChips(){
+    var stage=document.getElementById(String.fromCharCode(115)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(103)+String.fromCharCode(101));
+    var list=agentsList();
+    if(!stage||!list) return;
+    var cards=stage.querySelectorAll(String.fromCharCode(46)+String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(100));
+    for(var i=0;i<cards.length;i++){
+      var el=cards[i]; var a=list[i]; if(!a) continue;
+      var box=el.querySelector(String.fromCharCode(46)+String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(100)+String.fromCharCode(45)+String.fromCharCode(99)+String.fromCharCode(104)+String.fromCharCode(105)+String.fromCharCode(112)+String.fromCharCode(115));
+      if(!box){ box=document.createElement(String.fromCharCode(100)+String.fromCharCode(105)+String.fromCharCode(118)); box.className=String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(100)+String.fromCharCode(45)+String.fromCharCode(99)+String.fromCharCode(104)+String.fromCharCode(105)+String.fromCharCode(112)+String.fromCharCode(115); el.appendChild(box); }
+      var arr=chipsFor(a); var html=[];
+      for(var j=0;j<arr.length;j++){ html.push(String.fromCharCode(60)+String.fromCharCode(115)+String.fromCharCode(112)+String.fromCharCode(97)+String.fromCharCode(110)+String.fromCharCode(32)+String.fromCharCode(99)+String.fromCharCode(108)+String.fromCharCode(97)+String.fromCharCode(115)+String.fromCharCode(115)+String.fromCharCode(61)+String.fromCharCode(99)+String.fromCharCode(99)+String.fromCharCode(62)+arr[j]+String.fromCharCode(60)+String.fromCharCode(47)+String.fromCharCode(115)+String.fromCharCode(112)+String.fromCharCode(97)+String.fromCharCode(110)+String.fromCharCode(62)); }
+      box.innerHTML=html.join(String.fromCharCode(32));
+    }
+  }
+  function hoverRotate(){
+    var carousel=document.querySelector(String.fromCharCode(46)+String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(108));
+    if(!carousel||carousel.getAttribute(String.fromCharCode(100)+String.fromCharCode(97)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(53))) return;
+    carousel.setAttribute(String.fromCharCode(100)+String.fromCharCode(97)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(53), String.fromCharCode(49));
+    var timer=null;
+    function step(){ try{ if(typeof next!==(String.fromCharCode(117)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(102)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(100))){ next(); } }catch(e){} }
+    carousel.addEventListener(String.fromCharCode(109)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(101)+String.fromCharCode(110)+String.fromCharCode(116)+String.fromCharCode(101)+String.fromCharCode(114), function(){ if(timer) return; timer=setInterval(step,1600); });
+    carousel.addEventListener(String.fromCharCode(109)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(108)+String.fromCharCode(101)+String.fromCharCode(97)+String.fromCharCode(118)+String.fromCharCode(101), function(){ if(timer){ clearInterval(timer); timer=null; } });
+    var stage=document.getElementById(String.fromCharCode(115)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(103)+String.fromCharCode(101));
+    if(stage){ var cs=stage.querySelectorAll(String.fromCharCode(46)+String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(100)); for(var i=0;i<cs.length;i++){ (function(idx){ cs[idx].addEventListener(String.fromCharCode(109)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(101)+String.fromCharCode(110)+String.fromCharCode(116)+String.fromCharCode(101)+String.fromCharCode(114), function(){ try{ if(typeof go!==(String.fromCharCode(117)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(102)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(100))){ go(idx); } }catch(e){} }); })(i); } }
+  }
+  function removeAvaTip(){ var tip=document.getElementById(String.fromCharCode(97)+String.fromCharCode(118)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(116)+String.fromCharCode(105)+String.fromCharCode(112)); if(tip&&tip.parentNode){ tip.parentNode.removeChild(tip); } }
+  function borisStanding(){
+    var bb=document.getElementById(String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(117)+String.fromCharCode(98)+String.fromCharCode(98)+String.fromCharCode(108)+String.fromCharCode(101));
+    if(!bb||bb.getAttribute(String.fromCharCode(100)+String.fromCharCode(97)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(53))) return;
+    bb.setAttribute(String.fromCharCode(100)+String.fromCharCode(97)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(53), String.fromCharCode(49));
+    bb.classList.add(String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(115)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(103));
+    if(!bb.querySelector(String.fromCharCode(46)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(97)+String.fromCharCode(115)+String.fromCharCode(101))){ var base=document.createElement(String.fromCharCode(115)+String.fromCharCode(112)+String.fromCharCode(97)+String.fromCharCode(110)); base.className=String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(97)+String.fromCharCode(115)+String.fromCharCode(101); bb.appendChild(base); }
+    if(!document.getElementById(String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(108)+String.fromCharCode(97)+String.fromCharCode(98)+String.fromCharCode(101)+String.fromCharCode(108))){ var lbl=document.createElement(String.fromCharCode(115)+String.fromCharCode(112)+String.fromCharCode(97)+String.fromCharCode(110)); lbl.id=String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(108)+String.fromCharCode(97)+String.fromCharCode(98)+String.fromCharCode(101)+String.fromCharCode(108); lbl.className=String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(108)+String.fromCharCode(97)+String.fromCharCode(98)+String.fromCharCode(101)+String.fromCharCode(108); lbl.textContent=String.fromCharCode(66)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(115)+String.fromCharCode(115)+String.fromCharCode(32)+String.fromCharCode(65)+String.fromCharCode(110)+String.fromCharCode(97)+String.fromCharCode(108)+String.fromCharCode(121)+String.fromCharCode(115)+String.fromCharCode(116); bb.appendChild(lbl); }
+  }
+  function init(){
+    hoverRotate();
+    injectChips();
+    removeAvaTip();
+    borisStanding();
+    var last=currentLang();
+    setInterval(function(){ var L=currentLang(); if(L!==last){ last=L; injectChips(); } removeAvaTip(); }, 600);
+  }
+})();
+</script>
+<!-- HYVENTA-V5:END -->
 </body>
 </html>
