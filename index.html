@@ -754,6 +754,7 @@ const I18N = {
 
 /* ============ Agents data ============ */
 const agents = [
+ { file:"stella", name:"Stella", role:{en:"AI Stylist",es:"Estilista IA",uk:"AI-стиліст"}, tier:"BUSINESS", blurb:{en:"“Shows any outfit worn on a model — front and back.”",es:"“Muestra cualquier look puesto en una modelo — de frente y de espaldas.”",uk:"“Показує будь-який образ на моделі — спереду та ззаду.”"}, desc:{en:"Clients send a garment photo; Stella returns it worn on a model from two angles.",es:"Los clientes envían una foto de la prenda; Stella la devuelve puesta en una modelo desde dos ángulos.",uk:"Клієнти надсилають фото одягу; Stella повертає його на моделі з двох ракурсів."}, chips:{en:["📝 Web form","E-commerce · Fashion · Retail"],es:["📝 Formulario web","E-commerce · Moda · Retail"],uk:["📝 Веб-форма","E-commerce · Мода · Ритейл"]} },
   { file:"sarah",  name:"Sarah",  role:{en:"AI Sales Manager",es:"Gerente de Ventas IA",uk:"AI-менеджер продажів"}, tier:"BUSINESS",
     blurb:{en:"\"Your always-on sales rep. Qualifies every lead, never sleeps.\"",es:"\"Tu comercial siempre activo. Califica cada lead, nunca duerme.\"",uk:"\"Ваш продавець без вихідних. Кваліфікує кожен лід, ніколи не спить.\""},
     desc:{en:"Chats with inbound leads, qualifies them, scores intent, saves to CRM, and hands hot leads to a human.",es:"Chatea con leads entrantes, los califica, puntúa la intención, guarda en el CRM y pasa los leads calientes a un humano.",uk:"Спілкується з вхідними лідами, кваліфікує їх, оцінює намір, зберігає в CRM і передає гарячі ліди людині."},
@@ -1211,6 +1212,7 @@ go(0);
 
   /* ---- Character profiles (article + examples + how) ---- */
   var P = {
+ stella:{ role:{en:"AI Stylist",es:"Estilista IA",uk:"AI-стиліст"}, article:{en:"Stella turns a single garment photo into a ready-to-use product visual. A client submits the clothing item through a web form and Stella generates it worn on a model, shown from the front and the back — perfect for online stores, lookbooks and marketplace listings.",es:"Stella convierte la foto de una prenda en un visual de producto listo para usar. El cliente la envía por un formulario web y Stella la genera puesta en una modelo, de frente y de espaldas — ideal para tiendas online, lookbooks y marketplaces.",uk:"Stella перетворює одне фото одягу на готовий продуктовий візуал. Клієнт надсилає річ через веб-форму, а Stella генерує її на моделі — спереду та ззаду — ідеально для інтернет-магазинів, лукбуків і маркетплейсів."}, examples:{en:["Turned a flat-lay dress photo into a model shot in under a minute","Produced front and back views for a marketplace listing","Generated on-model visuals for a full outfit set"],es:["Convirtió una foto de vestido en plano en una toma con modelo en menos de un minuto","Generó vistas de frente y espalda para un anuncio de marketplace","Creó visuales sobre modelo para un conjunto completo"],uk:["Перетворила фото сукні на знімок на моделі менш ніж за хвилину","Створила вигляди спереду та ззаду для картки товару","Згенерувала візуали на моделі для повного образу"]}, how:{en:["Client submits a garment photo via web form","Stella generates the item worn on a model","Returns front and back views by email"],es:["El cliente envía una foto de la prenda por formulario web","Stella la genera puesta en una modelo","Devuelve vistas de frente y espalda por correo"],uk:["Клієнт надсилає фото одягу через веб-форму","Stella генерує річ на моделі","Повертає вигляди спереду та ззаду на email"]} },
     sarah:{ role:{en:"AI Sales Manager",es:"Gerente de Ventas IA",uk:"AI-менеджер продажів"},
       article:{en:"Sarah works your inbound leads around the clock. She greets every visitor, asks the right qualifying questions, scores buying intent and hands the hottest leads straight to your team — so no opportunity ever goes cold.",
         uk:"Сара опрацьовує вхідні ліди цілодобово. Вона вітає кожного відвідувача, ставить правильні кваліфікаційні запитання, оцінює намір купити й передає найгарячіші ліди вашій команді — жодна можливість не втрачається."},
@@ -1358,7 +1360,7 @@ go(0);
       var sl=el('<p id="hv-slogan"></p>'); sl.textContent=t("slogan");
       hs.parentNode.insertBefore(sl, hs.nextSibling);
       // Team collage of 12 portraits under the slogan
-      var files=["sarah","emma","olivia","alex","max","daniel","boris","sophia","leo","vera","rooney","nina"];
+      var files=["sarah","stella","emma","olivia","alex","max","daniel","boris","sophia","leo","vera","rooney","nina"];
       var col=el('<div id="hv-collage" aria-label="Hyventa AI team"></div>');
       files.forEach(function(f){
         var fig=document.createElement("figure");
@@ -1743,5 +1745,8 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
 })();
 </script>
 <!-- HYVENTA-V5:END -->
+<!-- HYVENTA-STELLA:START -->
+<script id="hv-stella-js">(function(){function ready(fn){if(document.readyState!=='loading')fn();else document.addEventListener('DOMContentLoaded',fn);}function lang(){try{if(typeof LANG!=='undefined')return LANG;}catch(e){}return 'en';}var LBL={en:'Try it on your clothes',es:'Pruébalo con tu ropa',uk:'Приміряти ваш одяг'};var U='https://achalex.app.n8n.cloud/form/virtual-try-on';function enhance(m){if(!m||m.getAttribute('data-stella'))return;if(!m.querySelector("img[src*='stella.png']"))return;m.setAttribute('data-stella','1');var cta=m.querySelector('.hv-modal-cta');if(!cta)return;var a=document.createElement('a');a.className='hvc-cta';a.href=U;a.target='_blank';a.rel='noopener';a.textContent=LBL[lang()]||LBL.en;cta.insertBefore(a,cta.firstChild);}ready(function(){try{new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){var nn=ms[i].addedNodes;for(var j=0;j<nn.length;j++){var el=nn[j];if(el.nodeType!==1)continue;if(el.id==='hv-modal')enhance(el);else if(el.querySelector){var mm=el.querySelector('#hv-modal');if(mm)enhance(mm);}}}}).observe(document.body,{childList:true});}catch(e){}});})();</script>
+<!-- HYVENTA-STELLA:END -->
 </body>
 </html>
