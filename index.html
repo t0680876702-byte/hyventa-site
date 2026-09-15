@@ -305,6 +305,9 @@
 
 
 
+
+
+
 <!-- HYVENTA-V2:START -->
 <style id="hv-v2-css">
 
@@ -1143,6 +1146,10 @@ go(0);
 
 
 
+
+
+
+
 <!-- HYVENTA-V2:START -->
 <script id="hv-v2-js">
 
@@ -1696,9 +1703,18 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
   function hoverRotate(){
     var stage=document.getElementById(String.fromCharCode(115)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(103)+String.fromCharCode(101));
     if(!stage||stage.getAttribute(String.fromCharCode(100)+String.fromCharCode(97)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(53)+String.fromCharCode(104))) return;
+    var box=(stage.closest?stage.closest(String.fromCharCode(46)+String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(108)):null)||stage.parentNode||stage;
     stage.setAttribute(String.fromCharCode(100)+String.fromCharCode(97)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(53)+String.fromCharCode(104), String.fromCharCode(49));
-    var cs=stage.querySelectorAll(String.fromCharCode(46)+String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(100));
-    for(var i=0;i<cs.length;i++){ (function(idx){ var el=cs[idx]; el.addEventListener(String.fromCharCode(109)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(101)+String.fromCharCode(110)+String.fromCharCode(116)+String.fromCharCode(101)+String.fromCharCode(114), function(){ try{ if(typeof go!==(String.fromCharCode(117)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(102)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(100))){ go(idx); } }catch(e){} }); })(i); }
+    var armed=true; var DEAD=90;
+    box.addEventListener(String.fromCharCode(109)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(109)+String.fromCharCode(111)+String.fromCharCode(118)+String.fromCharCode(101), function(e){
+      if(typeof go===(String.fromCharCode(117)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(102)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(100))) return;
+      var r=box.getBoundingClientRect(); var relX=e.clientX-(r.left+r.width/2);
+      if(Math.abs(relX)<DEAD){ armed=true; return; }
+      if(!armed) return; armed=false;
+      var cur=(typeof current!==(String.fromCharCode(117)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(102)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(100)))?current:0;
+      try{ go(cur+(relX>0?1:-1)); }catch(e){}
+    });
+    box.addEventListener(String.fromCharCode(109)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(108)+String.fromCharCode(101)+String.fromCharCode(97)+String.fromCharCode(118)+String.fromCharCode(101), function(){ armed=true; });
   }
   function removeAvaTip(){ var tip=document.getElementById(String.fromCharCode(97)+String.fromCharCode(118)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(116)+String.fromCharCode(105)+String.fromCharCode(112)); if(tip&&tip.parentNode){ tip.parentNode.removeChild(tip); } }
   function borisStanding(){
