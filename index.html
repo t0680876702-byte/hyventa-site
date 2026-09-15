@@ -296,6 +296,9 @@
 
 
 
+
+
+
 <!-- HYVENTA-V2:START -->
 <style id="hv-v2-css">
 
@@ -1124,6 +1127,9 @@ go(0);
 
 
 
+
+
+
 <!-- HYVENTA-V2:START -->
 <script id="hv-v2-js">
 
@@ -1563,6 +1569,8 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
     ['hv-slogan','hv-collage','hv-hero-sub2','hv-hero-cta'].forEach(function(id){
       var n=document.getElementById(id); if(n && n.parentNode) n.parentNode.removeChild(n);
     });
+    var dupRows=document.querySelectorAll('.hv-hero-cta');
+    for(var d=0; d<dupRows.length; d++){ if(dupRows[d] && dupRows[d].parentNode) dupRows[d].parentNode.removeChild(dupRows[d]); }
 
     if(!hero.getAttribute('data-hv-v4')){
       hero.setAttribute('data-hv-v4','1');
