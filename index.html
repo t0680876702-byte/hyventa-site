@@ -1,67 +1,1647 @@
-~)^�+-zo�<!-- HYVENTA-V5:START -->
-<style id="hv-v5-css">
-.card .card-chips{position:absolute;left:12px;right:12px;bottom:14px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;z-index:3;pointer-events:none}
-.card .card-chips .cc{font-size:10.5px;line-height:1;padding:5px 9px;border-radius:999px;background:rgba(16,22,44,.72);border:1px solid rgba(108,140,255,.45);color:#cdd8ff;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 2px 10px rgba(0,0,0,.35);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
-.card.active .card-chips .cc{border-color:rgba(155,108,255,.6);color:#e7ecff}
-.card .portrait img{-webkit-mask-image:linear-gradient(to bottom,#000 66%,transparent);mask-image:linear-gradient(to bottom,#000 66%,transparent)}
-.carousel{cursor:grab}
-#boris-bubble.hv-boris-standing{width:104px;height:150px;border-radius:16px;background:transparent;border:none;box-shadow:none;overflow:visible;padding:0;display:flex;align-items:flex-end;justify-content:center}
-#boris-bubble.hv-boris-standing img{width:100%;height:auto;object-fit:contain;border-radius:0;-webkit-mask-image:linear-gradient(to bottom,#000 84%,transparent);mask-image:linear-gradient(to bottom,#000 84%,transparent);filter:drop-shadow(0 8px 22px rgba(47,109,246,.45))}
-#boris-bubble.hv-boris-standing .hv-boris-base{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:86px;height:22px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(108,140,255,.55),rgba(155,108,255,.25) 55%,transparent 72%);filter:blur(2px);z-index:0;pointer-events:none;animation:hvBorisPulse 3s ease-in-out infinite}
-#boris-bubble.hv-boris-standing .hv-boris-label{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);font-size:11px;font-weight:600;letter-spacing:.2px;color:#cdd8ff;background:rgba(12,17,34,.82);border:1px solid rgba(108,140,255,.5);border-radius:999px;padding:3px 10px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.4);z-index:2}
-@keyframes hvBorisPulse{0%,100%{opacity:.7;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
-@media(max-width:640px){#boris-bubble.hv-boris-standing{width:74px;height:110px}#boris-bubble.hv-boris-standing .hv-boris-label{font-size:9.5px;padding:2px 7px}.card .card-chips .cc{font-size:9px;padding:4px 7px}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hyventa — Hire an AI employee. Put it to work.</title>
+<meta name="description" content="Hyventa — a department of specialized AI workers your company can hire in minutes. 24/7, any language, human handoff built in." />
+<link rel="canonical" href="https://hyventa.net/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Hyventa" />
+<meta property="og:title" content="Hyventa — Hire an AI employee. Put it to work." />
+<meta property="og:description" content="A department of specialized AI workers your company can hire in minutes. 24/7, any language, human handoff built in." />
+<meta property="og:url" content="https://hyventa.net/" />
+<meta property="og:image" content="https://hyventa.net/images/sarah.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Hyventa — Hire an AI employee. Put it to work." />
+<meta name="twitter:description" content="A department of specialized AI workers your company can hire in minutes. 24/7, any language, human handoff built in." />
+<meta name="twitter:image" content="https://hyventa.net/images/sarah.png" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/images/ava.png" />
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg-soft: #121829;
+    --card: #161d30;
+    --border: #26304d;
+    --text: #e8ecf6;
+    --muted: #97a2c0;
+    --accent: #6c8cff;
+    --accent-2: #9b6cff;
+    --start: #3ecf8e;
+    --business: #6c8cff;
+    --pro: #9b6cff;
+    --custom: #ff9f4a;
+    --radius: 22px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+    background: radial-gradient(1200px 600px at 50% -10%, #1a2340 0%, transparent 60%), var(--bg);
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Header ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 500;
+    background: rgba(10,14,26,.82); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -.5px; }
+  .brand .logo {
+    width: 32px; height: 32px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: grid; place-items: center; color: #fff; font-size: 18px; font-weight: 900;
+  }
+  .brand span.dot { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 26px; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600; transition: .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .lang { display: flex; gap: 4px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 999px; padding: 4px; }
+  .lang button {
+    border: none; background: transparent; color: var(--muted); cursor: pointer;
+    font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px; transition: .2s;
+  }
+  .lang button.active { background: var(--accent); color: #fff; }
+  .cta-btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; text-decoration: none;
+    font-weight: 700; font-size: 14px; padding: 10px 18px; border-radius: 999px; transition: .2s;
+    white-space: nowrap;
+  }
+  .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(108,140,255,.35); }
+  .burger { display: none; background: none; border: none; color: var(--text); font-size: 26px; cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero { text-align: center; padding: 60px 0 20px; }
+  .eyebrow {
+    display: inline-block; font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); background: rgba(108,140,255,.1); border: 1px solid rgba(108,140,255,.25);
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5.5vw, 58px); font-weight: 800; letter-spacing: -1.5px;
+    background: linear-gradient(120deg, #fff 20%, var(--accent) 60%, var(--accent-2) 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+  }
+  .hero p.sub { color: var(--muted); font-size: clamp(15px, 2.5vw, 20px); max-width: 660px; margin: 0 auto 26px; }
+  .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; text-decoration: none;
+    font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: 999px; transition: .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(108,140,255,.4); }
+  .btn-ghost {
+    background: var(--card); border: 1px solid var(--border); color: var(--text); text-decoration: none;
+    font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: 999px; transition: .2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); }
+  .points { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 900px; margin: 0 auto; }
+  .point {
+    font-size: 13px; color: var(--text); background: var(--bg-soft); border: 1px solid var(--border);
+    padding: 7px 14px; border-radius: 999px; display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ---------- Section shell ---------- */
+  section { padding: 64px 0; }
+  .sec-head { text-align: center; margin-bottom: 44px; }
+  .sec-head h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -.5px; margin-bottom: 12px; }
+  .sec-head p { color: var(--muted); font-size: 16px; max-width: 620px; margin: 0 auto; }
+
+  /* ---------- Carousel ---------- */
+  .carousel { position: relative; height: 620px; margin: 12px 0 4px; perspective: 1800px; overflow: hidden; }
+  .stage { position: absolute; inset: 0; transform-style: preserve-3d; }
+  .card {
+    position: absolute; top: 50%; left: 50%;
+    width: 340px; height: 560px; margin: -280px 0 0 -170px;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: transform .55s cubic-bezier(.22,.61,.36,1), opacity .55s ease, filter .55s ease;
+    will-change: transform, opacity; cursor: pointer; box-shadow: 0 24px 60px rgba(0,0,0,.5);
+  }
+  .card.active { cursor: default; border-color: var(--accent); }
+  .portrait { position: relative; width: 100%; flex-grow: 1; overflow: hidden; background: linear-gradient(135deg, #1c2540, #0a0e1a); }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .portrait .fallback { position: absolute; inset: 0; display: grid; place-items: center; font-size: 72px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; }
+  .portrait .tier { position: absolute; top: 12px; right: 12px; font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 5px 11px; border-radius: 8px; color: #0a0e1a; }
+  .tier.START { background: var(--start); }
+  .tier.BUSINESS { background: var(--business); color:#fff; }
+  .tier.PRO { background: var(--pro); color:#fff; }
+  .tier.CUSTOM { background: var(--custom); }
+  .portrait .name-plate { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 20px 16px; background: linear-gradient(to top, rgba(10,14,26,.96) 12%, rgba(10,14,26,.6) 55%, transparent 100%); }
+  .name-plate h3 { font-size: 26px; font-weight: 800; }
+  .name-plate .role { font-size: 13px; color: var(--accent); font-weight: 600; }
+  .detail { max-width: 720px; margin: 8px auto 0; text-align: center; min-height: 120px; transition: opacity .35s ease; }
+  .detail .blurb { color: var(--text); font-style: italic; font-size: 18px; margin-bottom: 10px; }
+  .detail .desc { color: var(--muted); font-size: 15px; margin-bottom: 14px; }
+  .detail .meta { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .chip { font-size: 12px; color: var(--muted); background: var(--bg-soft); border: 1px solid var(--border); padding: 4px 10px; border-radius: 8px; }
+  .controls { display: flex; align-items: center; justify-content: center; gap: 22px; margin-top: 18px; }
+  .nav-arrow { width: 52px; height: 52px; border-radius: 50%; cursor: pointer; background: var(--card); border: 1px solid var(--border); color: var(--text); font-size: 22px; display: grid; place-items: center; transition: .2s ease; user-select: none; }
+  .nav-arrow:hover { background: var(--accent); border-color: var(--accent); color:#fff; transform: scale(1.08); }
+  .dots { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: 360px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); cursor: pointer; transition: .2s ease; }
+  .dot.active { background: var(--accent); transform: scale(1.3); }
+  .hint { text-align:center; color: var(--muted); font-size: 13px; margin-top: 14px; }
+
+  /* ---------- How it works ---------- */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .step { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 22px; text-align: center; }
+  .step .num { width: 44px; height: 44px; margin: 0 auto 16px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-weight: 800; font-size: 20px; display: grid; place-items: center; }
+  .step h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .step p { color: var(--muted); font-size: 14px; }
+
+  /* ---------- Pricing ---------- */
+  .prices { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
+  .price { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px 24px; display: flex; flex-direction: column; }
+  .price.featured { border-color: var(--accent); box-shadow: 0 20px 50px rgba(108,140,255,.2); }
+  .price .badge-pop { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; }
+  .price h3 { font-size: 15px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .price .amount { font-size: 38px; font-weight: 800; letter-spacing: -1px; }
+  .price .amount small { font-size: 15px; font-weight: 600; color: var(--muted); }
+  .price .plan-desc { color: var(--muted); font-size: 14px; margin: 12px 0 18px; min-height: 40px; }
+  .price ul { list-style: none; margin-bottom: 24px; flex-grow: 1; }
+  .price ul li { font-size: 14px; padding: 7px 0; padding-left: 26px; position: relative; color: var(--text); }
+  .price ul li::before { content: "✓"; position: absolute; left: 0; color: var(--start); font-weight: 800; }
+  .price a.choose { text-align: center; text-decoration: none; font-weight: 700; font-size: 15px; padding: 12px; border-radius: 12px; transition: .2s; background: var(--bg-soft); border: 1px solid var(--border); color: var(--text); }
+  .price.featured a.choose { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; border: none; }
+  .price a.choose:hover { transform: translateY(-2px); }
+  .trial-note { text-align: center; color: var(--muted); font-size: 14px; margin-top: 24px; }
+
+  /* ---------- FAQ ---------- */
+  .faq { max-width: 780px; margin: 0 auto; }
+  .qa { background: var(--card); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 12px; overflow: hidden; }
+  .qa summary { cursor: pointer; padding: 18px 22px; font-weight: 700; font-size: 16px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .qa summary::-webkit-details-marker { display: none; }
+  .qa summary::after { content: "+"; color: var(--accent); font-size: 22px; font-weight: 400; }
+  .qa[open] summary::after { content: "−"; }
+  .qa .ans { padding: 0 22px 20px; color: var(--muted); font-size: 15px; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+  .contact-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; text-align: center; text-decoration: none; transition: .2s; }
+  .contact-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .contact-card .ico { font-size: 34px; margin-bottom: 12px; }
+  .contact-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .contact-card p { color: var(--muted); font-size: 14px; word-break: break-all; }
+
+  /* ---------- Footer ---------- */
+  footer.site { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 20px; }
+  .foot-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; align-items: center; }
+  .foot-brand { font-weight: 800; font-size: 18px; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 20px; }
+  .foot-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: .2s; }
+  .foot-links a:hover { color: var(--text); }
+  .foot-copy { color: var(--muted); font-size: 13px; width: 100%; text-align: center; margin-top: 10px; }
+
+  /* ---------- Ava widget ---------- */
+  #ava-bubble {
+    position: fixed; bottom: 150px; right: 26px; z-index: 901;
+    width: 64px; height: 64px; border-radius: 50%; cursor: pointer;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: grid; place-items: center; font-size: 30px; color: #fff;
+    box-shadow: 0 12px 34px rgba(108,140,255,.5); border: none; transition: .25s;
+  }
+  #ava-bubble:hover { transform: scale(1.08); }
+  #ava-bubble .pulse { position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 0 rgba(108,140,255,.5); animation: pulse 2.2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(108,140,255,.5);} 70% { box-shadow: 0 0 0 18px rgba(108,140,255,0);} 100% { box-shadow: 0 0 0 0 rgba(108,140,255,0);} }
+  #ava-panel {
+    position: fixed; bottom: 98px; right: 22px; z-index: 900;
+    width: 370px; max-width: calc(100vw - 44px); height: 520px; max-height: calc(100vh - 140px);
+    background: var(--bg-soft); border: 1px solid var(--border); border-radius: 20px;
+    display: none; flex-direction: column; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.6);
+  }
+  #ava-panel.open { display: flex; }
+  .ava-head { display: flex; align-items: center; gap: 12px; padding: 16px; background: linear-gradient(135deg, rgba(108,140,255,.18), rgba(155,108,255,.12)); border-bottom: 1px solid var(--border); }
+  .ava-head .av { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; font-size: 20px; color: #fff; font-weight: 800; }
+  .ava-head .who { flex-grow: 1; }
+  .ava-head .who b { font-size: 15px; display: block; }
+  .ava-head .who span { font-size: 12px; color: var(--start); display: flex; align-items: center; gap: 5px; }
+  .ava-head .who span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--start); display: inline-block; }
+  .ava-head .close { background: none; border: none; color: var(--muted); font-size: 22px; cursor: pointer; }
+  .ava-body { flex-grow: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .msg { max-width: 82%; padding: 10px 14px; border-radius: 14px; font-size: 14px; line-height: 1.45; }
+  .msg.bot { align-self: flex-start; background: var(--card); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+  .msg.user { align-self: flex-end; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; border-bottom-right-radius: 4px; }
+  .ava-foot { padding: 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+  .ava-foot input { flex-grow: 1; background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 11px 16px; color: var(--text); font-size: 14px; outline: none; }
+  .ava-foot input:focus { border-color: var(--accent); }
+  .ava-foot button { width: 44px; height: 44px; border-radius: 50%; border: none; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-size: 18px; cursor: pointer; flex-shrink: 0; }
+  .ava-note { font-size: 11px; color: var(--muted); text-align: center; padding: 0 12px 10px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .prices { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .nav-links { position: fixed; top: 66px; left: 0; right: 0; flex-direction: column; background: var(--bg-soft); border-bottom: 1px solid var(--border); padding: 20px 24px; gap: 16px; display: none; }
+    .nav-links.show { display: flex; }
+    .burger { display: block; }
+  }
+  @media (max-width: 560px) {
+    .carousel { height: 560px; }
+    .card { width: 280px; height: 460px; margin: -230px 0 0 -140px; }
+    .prices { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+  }
 </style>
-<script id="hv-v5-js">
+<!-- HYVENTA-ENHANCEMENTS:START -->
+<style id="hv-enhance-css">
+/* ===== Hyventa enhancements (Ava greeter, cookie bar, voice) ===== */
+#ava-greeter{position:fixed;right:104px;bottom:14px;z-index:70;width:132px;cursor:pointer;filter:drop-shadow(0 12px 28px rgba(0,0,0,.45));transition:transform .25s ease;animation:greetIn .6s ease both}
+#ava-greeter:hover{transform:translateY(-6px) scale(1.03)}
+#ava-greeter img{width:100%;height:auto;display:block;pointer-events:none;position:relative;z-index:1;-webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent);mask-image:linear-gradient(to bottom,#000 82%,transparent)}
+#ava-greeter .bubble-tip{position:absolute;top:-26px;left:50%;transform:translateX(-50%);z-index:5;background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#0b0b12;font-size:12px;font-weight:600;padding:6px 10px;border-radius:12px;white-space:nowrap;border:1px solid rgba(255,255,255,.6);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+#ava-greeter.hide{display:none}
+@keyframes greetIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:640px){#ava-greeter{width:96px;bottom:12px;right:84px}#ava-bubble{bottom:120px;right:18px}}
+
+/* Ava face in chat header */
+.ava-head-face{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:top center;margin-right:8px;border:2px solid rgba(255,255,255,.25);vertical-align:middle}
+
+/* Voice mic button */
+#ava-mic{border:none;background:transparent;cursor:pointer;font-size:18px;line-height:1;padding:0 8px;opacity:.8;transition:opacity .2s,transform .2s}
+#ava-mic:hover{opacity:1}
+#ava-mic.rec{color:#e5484d;animation:micPulse 1s infinite;opacity:1}
+@keyframes micPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+
+/* Cookie bar */
+#cookie-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:80;max-width:680px;width:calc(100% - 32px);background:rgba(18,18,26,.97);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 18px;display:none;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+#cookie-bar.show{display:flex}
+#cookie-bar p{margin:0;font-size:13px;color:#cfd0da;flex:1 1 260px}
+#cookie-bar a{color:#8ab4ff;text-decoration:underline}
+#cookie-bar .ck-actions{display:flex;gap:8px}
+#cookie-bar button{border-radius:10px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid transparent}
+#cookie-bar .ck-accept{background:linear-gradient(135deg,#6d5efc,#9b6bff);color:#fff}
+#cookie-bar .ck-decline{background:transparent;color:#cfd0da;border-color:rgba(255,255,255,.2)}
+
+</style>
+<!-- HYVENTA-ENHANCEMENTS:END -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- HYVENTA-V2:START -->
+<style id="hv-v2-css">
+
+/* ===== Hyventa V2: slogan, calculator, profile modal, Boris widget ===== */
+#hv-slogan{margin-top:14px;font-size:clamp(16px,2.4vw,22px);font-weight:800;color:#c3b5ff;letter-spacing:.2px;text-shadow:0 1px 12px rgba(109,94,252,.25)}
+@supports((-webkit-background-clip:text) or (background-clip:text)){#hv-slogan{background:linear-gradient(135deg,#8f82ff,#b98bff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}}
+/* Hero team collage */
+#hv-collage{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px;max-width:520px}
+#hv-collage figure{margin:0;width:64px;text-align:center}
+#hv-collage img{width:64px;height:64px;border-radius:14px;object-fit:cover;object-position:top center;border:2px solid rgba(255,255,255,.14);background:#1a1a24;box-shadow:0 6px 18px rgba(0,0,0,.35);transition:transform .18s,border-color .18s;cursor:pointer}
+#hv-collage img:hover{transform:translateY(-4px);border-color:#8f82ff}
+#hv-collage figcaption{margin-top:4px;font-size:10px;color:#9aa0ae}
+@media(max-width:760px){#hv-collage{justify-content:center;margin-left:auto;margin-right:auto}#hv-collage figure{width:56px}#hv-collage img{width:56px;height:56px}}
+
+/* Cost calculator */
+#hv-calc{padding:64px 0;background:var(--bg-soft,#12121a);border-top:1px solid var(--border,rgba(255,255,255,.1));border-bottom:1px solid var(--border,rgba(255,255,255,.1))}
+#hv-calc .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+#hv-calc .sec-head{text-align:center;margin-bottom:28px}
+#hv-calc .sec-head h2{margin:0 0 6px;color:#fff}
+#hv-calc .sec-head p{margin:0;color:#9aa0ae}
+.hvc-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:stretch}
+@media(max-width:760px){.hvc-grid{grid-template-columns:1fr}}
+.hvc-controls,.hvc-result{background:rgba(255,255,255,.03);border:1px solid var(--border,rgba(255,255,255,.1));border-radius:18px;padding:24px}
+.hvc-controls label{display:block;margin:18px 0 8px;font-weight:600;color:#cfd0da;font-size:14px}
+.hvc-controls label:first-child{margin-top:0}
+.hvc-controls input[type=range]{width:100%;accent-color:#8a6bff}
+.hvc-val{text-align:right;font-weight:700;color:#fff;font-size:15px;margin-top:4px}
+.hvc-seg{display:flex;gap:8px}
+.hvc-seg button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.15));background:transparent;color:#cfd0da;font-weight:600;cursor:pointer;font-size:13px}
+.hvc-seg button.active{background:linear-gradient(135deg,#6d5efc,#9b6bff);color:#fff;border-color:transparent}
+.hvc-result{display:flex;flex-direction:column;justify-content:center;text-align:center}
+.hvc-plan-label,.hvc-total-label{color:#9aa0ae;font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+.hvc-plan{font-size:22px;font-weight:800;color:#fff;margin:4px 0 16px}
+.hvc-total{font-size:40px;font-weight:800;color:#fff;line-height:1}
+.hvc-total span{font-size:16px;font-weight:600;color:#9aa0ae;margin-left:4px}
+.hvc-cta{display:inline-block;margin-top:18px;padding:12px 22px;border-radius:12px;background:linear-gradient(135deg,#6d5efc,#9b6bff);color:#fff;font-weight:700;text-decoration:none;cursor:pointer;border:none}
+.hvc-note{margin-top:12px;font-size:12px;color:#9aa0ae}
+
+/* View profile button in carousel detail */
+.hv-profile-btn{margin-top:16px;padding:10px 18px;border-radius:10px;border:1px solid var(--border,rgba(255,255,255,.2));background:rgba(255,255,255,.05);color:#fff;font-weight:600;cursor:pointer;font-size:13px}
+.hv-profile-btn:hover{background:rgba(255,255,255,.12)}
+
+/* Profile modal */
+#hv-modal{position:fixed;inset:0;z-index:120;background:rgba(6,6,12,.72);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .2s}
+#hv-modal.show{opacity:1}
+.hv-modal-card{background:#14141c;border:1px solid var(--border,rgba(255,255,255,.12));border-radius:20px;max-width:640px;width:100%;max-height:88vh;overflow:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.hv-modal-close{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;z-index:2}
+.hv-modal-hero{display:flex;align-items:center;gap:16px;padding:24px;background:linear-gradient(135deg,rgba(109,94,252,.28),rgba(155,107,255,.06));border-bottom:1px solid var(--border,rgba(255,255,255,.1))}
+.hv-modal-hero img{width:88px;height:88px;border-radius:16px;object-fit:cover;object-position:top center;border:2px solid rgba(255,255,255,.15);background:#222}
+.hv-modal-hero h3{margin:0;font-size:24px;color:#fff}
+.hv-modal-role{color:#b9a8ff;font-size:14px;font-weight:600;margin-top:2px}
+.hv-modal-body{padding:24px}
+.hv-modal-article{color:#cfd0da;line-height:1.6;font-size:15px;margin:0}
+.hv-modal-body h4{color:#fff;margin:22px 0 10px;font-size:15px}
+.hv-modal-ex,.hv-modal-how{margin:0;padding-left:20px;color:#cfd0da;line-height:1.6;font-size:14px}
+.hv-modal-ex li,.hv-modal-how li{margin-bottom:6px}
+.hv-modal-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.hv-ask{padding:12px 20px;border-radius:12px;border:1px solid var(--border,rgba(255,255,255,.2));background:rgba(255,255,255,.05);color:#fff;font-weight:600;cursor:pointer}
+
+/* Boris widget (bottom-left) */
+#boris-bubble{position:fixed;left:18px;bottom:18px;z-index:70;width:60px;height:60px;border-radius:50%;border:2px solid rgba(47,109,246,.7);cursor:pointer;padding:0;overflow:hidden;background:linear-gradient(135deg,#2f6df6,#22a1f6);color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.4)}
+#boris-bubble img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+#boris-bubble:hover{transform:translateY(-2px)}
+.boris-head .bav{overflow:hidden;padding:0}
+.boris-head .bav img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+#boris-panel{position:fixed;left:18px;bottom:84px;z-index:71;width:340px;max-width:calc(100vw - 36px);height:460px;max-height:70vh;background:#14141c;border:1px solid var(--border,rgba(255,255,255,.12));border-radius:16px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#boris-panel.open{display:flex}
+.boris-head{display:flex;align-items:center;gap:10px;padding:12px 14px;background:linear-gradient(135deg,#2f6df6,#22a1f6);color:#fff}
+.boris-head .bav{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-weight:700}
+.boris-head .who b{display:block;font-size:14px}
+.boris-head .who span{font-size:11px;opacity:.9}
+.boris-head .bclose{margin-left:auto;background:transparent;border:none;color:#fff;font-size:20px;cursor:pointer}
+.boris-body{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.boris-body .msg{max-width:85%;padding:9px 12px;border-radius:12px;font-size:14px;line-height:1.45;white-space:pre-wrap}
+.boris-body .msg.bot{background:rgba(255,255,255,.06);color:#e7e8ee;align-self:flex-start}
+.boris-body .msg.user{background:linear-gradient(135deg,#2f6df6,#22a1f6);color:#fff;align-self:flex-end}
+.boris-foot{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border,rgba(255,255,255,.1))}
+.boris-foot input{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--border,rgba(255,255,255,.12));border-radius:10px;padding:10px;color:#fff;font-size:14px;outline:none}
+.boris-foot button{border:none;border-radius:10px;background:linear-gradient(135deg,#2f6df6,#22a1f6);color:#fff;width:42px;cursor:pointer;font-size:16px}
+.boris-note{margin:0;padding:0 12px 10px;font-size:11px;color:#9aa0ae}
+
+</style>
+<!-- HYVENTA-V2:END -->
+<!-- HYVENTA-V3:START -->
+<style id="hv-v3-css">
+.hv-sec{padding:64px 20px;max-width:1080px;margin:0 auto}
+.hv-sec h2{color:#fff;text-align:center;margin:0 0 8px}
+.hv-sec .sub{color:#9aa0ae;text-align:center;margin:0 0 28px}
+.hv-hero-sub2{margin-top:10px;color:#c9cbd6;font-size:clamp(14px,2vw,18px);max-width:640px}
+.hv-hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.hv-btn-primary{padding:12px 22px;border-radius:12px;background:linear-gradient(135deg,#6d5efc,#9b6bff);color:#fff;font-weight:700;text-decoration:none}
+.hv-btn-secondary{padding:12px 22px;border-radius:12px;border:1px solid rgba(255,255,255,.2);color:#fff;text-decoration:none}
+.hv-flow{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:stretch}
+.hv-step{flex:1;min-width:150px;max-width:180px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;text-align:center;color:#cfd0da}
+.hv-step .n{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#6d5efc,#9b6bff);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:8px}
+.hv-roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:760px){.hv-roi-grid{grid-template-columns:1fr}}
+.hv-roi-controls,.hv-roi-out{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:20px}
+.hv-roi-controls label{display:block;margin:14px 0 6px;color:#cfd0da;font-size:13px;font-weight:600}
+.hv-roi-controls input{width:100%;accent-color:#8a6bff}
+.hv-roi-out .row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);color:#cfd0da}
+.hv-roi-out .row b{color:#fff}
+.hv-roi-net{font-size:26px;font-weight:800;color:#fff;margin-top:12px;text-align:center}
+.hv-trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.hv-trust-grid{grid-template-columns:1fr}}
+.hv-trust-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px;color:#cfd0da}
+.hv-trust-card b{color:#fff;display:block;margin-bottom:6px}
+.hv-faq2 details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;margin-bottom:10px;color:#cfd0da}
+.hv-faq2 summary{color:#fff;cursor:pointer;font-weight:600}
+.hv-bill-toggle{display:flex;gap:8px;justify-content:center;margin:0 auto 12px;max-width:440px}
+.hv-bill-toggle button{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:transparent;color:#cfd0da;font-weight:600;cursor:pointer;font-size:13px}
+.hv-bill-toggle button.active{background:linear-gradient(135deg,#6d5efc,#9b6bff);color:#fff;border-color:transparent}
+.hv-slot-note{text-align:center;color:#9aa0ae;font-size:12px;margin:0 0 20px}
+.hv-modal-price{margin-top:18px;padding:16px;border-radius:14px;background:rgba(109,94,252,.1);border:1px solid rgba(109,94,252,.3)}
+.hv-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#b9a8ff;margin-bottom:8px}
+.hv-price-line{font-size:20px;font-weight:800;color:#fff}
+.hv-price-line span{font-size:13px;font-weight:600;color:#9aa0ae}
+.hv-usage{color:#9aa0ae;font-size:13px;margin:6px 0 12px}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2HX1QP3CLW"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2HX1QP3CLW');</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1121346313914632');fbq('track','PageView');</script>
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script>try{if(window.Paddle){Paddle.Environment.set('sandbox');Paddle.Setup({token:'test_68329176c81d97756099317a58d'});}}catch(e){}</script>
+<!-- HYVENTA-V3:END -->
+<!-- HYVENTA-V4:START -->
+<style id="hv-v4-css">
+.hv-hero-v4{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;text-align:left;position:relative;padding:72px 0 44px;overflow:visible}
+.hv-hero-v4 .hv-hero-left{text-align:left;position:relative;z-index:2}
+.hv-hero-v4 .eyebrow{margin-bottom:18px}
+.hv-hero-v4 h1{text-align:left;background:none;-webkit-text-fill-color:#f3f6ff;color:#f3f6ff;line-height:1.05}
+.hv-hero-v4 h1 .hv-grad{background:linear-gradient(120deg,#6c8cff 0%,#9b6cff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.hv-hero-v4 .sub{max-width:560px}
+.hv-hero-v4 .hero-actions{justify-content:flex-start}
+.hv-hero-v4 .points{justify-content:flex-start}
+.hv-hero-visual{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center;z-index:1}
+.hv-hero-glow{position:absolute;inset:-10% -6% -10% -6%;background:radial-gradient(circle at 58% 46%,rgba(108,140,255,.38),rgba(155,108,255,.14) 42%,transparent 72%);filter:blur(8px);pointer-events:none}
+.hv-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(108,140,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(108,140,255,.09) 1px,transparent 1px);background-size:38px 38px;-webkit-mask-image:radial-gradient(circle at 56% 50%,#000 52%,transparent 80%);mask-image:radial-gradient(circle at 56% 50%,#000 52%,transparent 80%);pointer-events:none}
+.hv-hero-orbit{position:absolute;border-radius:50%;border:1px solid rgba(140,160,255,.16);pointer-events:none}
+.hv-o1{width:300px;height:300px;animation:hvspin 26s linear infinite}
+.hv-o2{width:392px;height:392px;border-color:rgba(155,108,255,.13);animation:hvspin 42s linear infinite reverse}
+.hv-o3{width:484px;height:484px;border-color:rgba(108,140,255,.08);animation:hvspin 64s linear infinite}
+@keyframes hvspin{to{transform:rotate(360deg)}}
+.hv-hero-planet{position:absolute;width:224px;height:224px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#3c4f96,#12172f 72%);box-shadow:0 0 90px rgba(108,140,255,.45),inset -22px -22px 60px rgba(0,0,0,.6),inset 16px 16px 42px rgba(155,108,255,.22);pointer-events:none}
+.hv-hero-particles{position:absolute;inset:0;pointer-events:none}
+.hv-hero-particles i{position:absolute;left:var(--x);top:var(--y);width:4px;height:4px;border-radius:50%;background:#9db4ff;box-shadow:0 0 8px 2px rgba(140,170,255,.7);opacity:.6;animation:hvfloat 6s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes hvfloat{0%,100%{transform:translateY(0);opacity:.25}50%{transform:translateY(-14px);opacity:.85}}
+.hv-hero-img{position:relative;z-index:3;max-width:100%;max-height:540px;object-fit:contain;filter:drop-shadow(0 24px 70px rgba(108,140,255,.42))}
+.hv-hero-visual.hv-noimg .hv-hero-planet{width:264px;height:264px}
+@media(max-width:860px){.hv-hero-v4{grid-template-columns:1fr;text-align:center;padding:48px 0 32px}.hv-hero-v4 .hv-hero-left{text-align:center}.hv-hero-v4 h1{text-align:center}.hv-hero-v4 .sub{margin-left:auto;margin-right:auto}.hv-hero-v4 .hero-actions,.hv-hero-v4 .points{justify-content:center}.hv-hero-visual{min-height:320px}.hv-hero-img{max-height:320px}.hv-o3{width:360px;height:360px}.hv-o2{width:300px;height:300px}.hv-o1{width:230px;height:230px}.hv-hero-planet{width:180px;height:180px}}
+</style>
+<!-- HYVENTA-V4:END -->
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><span class="logo">H</span>Hyventa<span class="dot">.</span></a>
+    <button class="burger" id="burger">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#team" data-i18n="nav_team">The Team</a>
+      <a href="#how" data-i18n="nav_how">How it works</a>
+      <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+      <div class="lang">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="es">ES</button>
+        <button data-lang="uk">UK</button>
+      </div>
+      <a href="#pricing" class="cta-btn" data-i18n="nav_cta">Start free</a>
+    </nav>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<!-- ================= HERO ================= -->
+<section class="hero wrap" style="padding-top:56px;">
+  <span class="eyebrow" data-i18n="hero_eyebrow">AI Employees</span>
+  <h1 data-i18n="hero_h1">Hire an AI employee. Put it to work.</h1>
+  <p class="sub" data-i18n="hero_sub">A department of specialized AI workers your company can onboard in minutes — no salary, no downtime, instant scale.</p>
+  <div class="hero-actions">
+    <a href="#pricing" class="btn-primary" data-i18n="hero_cta1">Start 7-day free trial</a>
+    <a href="#team" class="btn-ghost" data-i18n="hero_cta2">Meet the team</a>
+  </div>
+  <div class="points">
+    <span class="point" data-i18n="p1">🤖 Always states it's an AI</span>
+    <span class="point" data-i18n="p2">🧠 Remembers context</span>
+    <span class="point" data-i18n="p3">🙋 Human handoff built in</span>
+    <span class="point" data-i18n="p4">🌍 Any language</span>
+    <span class="point" data-i18n="p5">⚡ Works 24/7</span>
+  </div>
+</section>
+
+<!-- ================= TEAM / CAROUSEL ================= -->
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="team_h">Meet your AI team</h2>
+      <p data-i18n="team_sub">Twelve specialists, each trained for one job. Hire one, or the whole department.</p>
+    </div>
+  </div>
+  <div class="carousel"><div class="stage" id="stage"></div></div>
+  <div class="wrap"><div class="detail" id="detail"></div></div>
+  <div class="controls">
+    <div class="nav-arrow" id="prev" aria-label="Previous">‹</div>
+    <div class="dots" id="dots"></div>
+    <div class="nav-arrow" id="next" aria-label="Next">›</div>
+  </div>
+  <p class="hint" data-i18n="team_hint">Use ‹ › , the dots, arrow keys, or swipe — click any side card to bring it to the center.</p>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how" style="background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="how_h">How it works</h2>
+      <p data-i18n="how_sub">From "hello" to a working AI employee in one day.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h4 data-i18n="how1_h">Pick your employee</h4><p data-i18n="how1_p">Choose from 12 specialists — sales, support, reception, recruiting and more.</p></div>
+      <div class="step"><div class="num">2</div><h4 data-i18n="how2_h">We set it up</h4><p data-i18n="how2_p">We connect it to your channels and train it on your business. No coding for you.</p></div>
+      <div class="step"><div class="num">3</div><h4 data-i18n="how3_h">Try it free</h4><p data-i18n="how3_p">7 days free. Watch it handle real conversations and tasks before you pay.</p></div>
+      <div class="step"><div class="num">4</div><h4 data-i18n="how4_h">Scale up</h4><p data-i18n="how4_p">Add more employees or skills anytime. It grows with your company.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="price_h">Simple pricing</h2>
+      <p data-i18n="price_sub">Every plan starts with a 7-day free trial. No setup fee. Cancel anytime.</p>
+    </div>
+    <div class="prices">
+      <div class="price">
+        <h3>Start</h3>
+        <div class="amount">$99<small>/mo</small></div>
+        <p class="plan-desc" data-i18n="pl_start_d">For a solo business getting its first AI hire.</p>
+        <ul>
+          <li data-i18n="pl_start_1">1 AI employee of your choice</li>
+          <li data-i18n="pl_start_2">7 days free</li>
+          <li data-i18n="pl_start_3">Email &amp; chat support</li>
+        </ul>
+        <a href="#contact" class="choose" data-i18n="pl_choose">Start free</a>
+      </div>
+      <div class="price featured">
+        <span class="badge-pop" data-i18n="pl_popular">Most popular</span>
+        <h3>Business</h3>
+        <div class="amount">$249<small>/mo</small></div>
+        <p class="plan-desc" data-i18n="pl_biz_d">For growing teams that need a few roles covered.</p>
+        <ul>
+          <li data-i18n="pl_biz_1">Up to 3 AI employees</li>
+          <li data-i18n="pl_biz_2">Priority setup</li>
+          <li data-i18n="pl_biz_3">7 days free</li>
+        </ul>
+        <a href="#contact" class="choose" data-i18n="pl_choose">Start free</a>
+      </div>
+      <div class="price">
+        <h3>Pro</h3>
+        <div class="amount">$499<small>/mo</small></div>
+        <p class="plan-desc" data-i18n="pl_pro_d">For companies running a full AI department.</p>
+        <ul>
+          <li data-i18n="pl_pro_1">Up to 6 AI employees</li>
+          <li data-i18n="pl_pro_2">Add-on skills included</li>
+          <li data-i18n="pl_pro_3">Priority support</li>
+        </ul>
+        <a href="#contact" class="choose" data-i18n="pl_choose">Start free</a>
+      </div>
+      <div class="price">
+        <h3>Custom</h3>
+        <div class="amount" data-i18n="pl_custom_price">Let's talk</div>
+        <p class="plan-desc" data-i18n="pl_custom_d">The full team of 12 plus custom integrations.</p>
+        <ul>
+          <li data-i18n="pl_custom_1">All 12 AI employees</li>
+          <li data-i18n="pl_custom_2">Custom integrations</li>
+          <li data-i18n="pl_custom_3">Private deployment option</li>
+        </ul>
+        <a href="#contact" class="choose" data-i18n="pl_contact">Contact us</a>
+      </div>
+    </div>
+    <p class="trial-note" data-i18n="price_note">💡 Not sure which plan? Ask Ava in the corner — she'll recommend the right fit.</p>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" style="background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="faq_h">Frequently asked questions</h2>
+    </div>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="contact_h">Talk to us</h2>
+      <p data-i18n="contact_sub">Start your free trial or ask anything. We reply in your language.</p>
+    </div>
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:hellohyventa@gmail.com">
+        <div class="ico">✉️</div>
+        <h4 data-i18n="c_email">Email</h4>
+        <p>hellohyventa@gmail.com</p>
+      </a>
+      <a class="contact-card" href="https://t.me/hyventa_net" target="_blank" rel="noopener">
+        <div class="ico">✈️</div>
+        <h4>Telegram</h4>
+        <p>@hyventa_net</p>
+      </a>
+      <a class="contact-card" href="https://wa.me/380689611604" target="_blank" rel="noopener">
+        <div class="ico">💬</div>
+        <h4>WhatsApp</h4>
+        <p>+380 68 961 1604</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-brand">Hyventa<span style="color:var(--accent)">.</span></div>
+      <div class="foot-links">
+        <a href="/privacy" data-i18n="f_privacy">Privacy Policy</a>
+        <a href="/terms" data-i18n="f_terms">Terms of Service</a>
+        <a href="/refund" data-i18n="f_refund">Refund Policy</a>
+        <a href="/cookie" data-i18n="f_cookie">Cookie Policy</a>
+        <a href="/imprint" data-i18n="f_contact">Contact</a>
+      </div>
+    </div>
+    <p class="foot-copy">© <span id="year"></span> Hyventa · <span data-i18n="f_rights">All rights reserved.</span> · hyventa.net</p>
+  </div>
+</footer>
+
+<!-- ================= AVA WIDGET ================= -->
+<button id="ava-bubble" aria-label="Chat with Ava"><span class="pulse"></span>💬</button>
+<div id="ava-panel">
+  <div class="ava-head">
+    <div class="av">A</div>
+    <div class="who"><b>Ava</b><span data-i18n="ava_status">AI Guide · online</span></div>
+    <button class="close" id="ava-close">×</button>
+  </div>
+  <div class="ava-body" id="ava-body"></div>
+  <div class="ava-foot">
+    <input id="ava-input" type="text" data-i18n-ph="ava_ph" placeholder="Ask about plans, agents, trial…" />
+    <button id="ava-send">➤</button>
+  </div>
+  <p class="ava-note" data-i18n="ava_note">Ava is an AI assistant. She may connect you to a human when needed.</p>
+</div>
+
+<script>
+/* ============ i18n dictionary ============ */
+const I18N = {
+  en: {
+    nav_team:"The Team", nav_how:"How it works", nav_pricing:"Pricing", nav_faq:"FAQ", nav_contact:"Contact", nav_cta:"Start free",
+    hero_eyebrow:"AI Employees", hero_h1:"Hire an AI employee. Put it to work.",
+    hero_sub:"A department of specialized AI workers your company can onboard in minutes — no salary, no downtime, instant scale.",
+    hero_cta1:"Start 7-day free trial", hero_cta2:"Meet the team",
+    p1:"🤖 Always states it's an AI", p2:"🧠 Remembers context", p3:"🙋 Human handoff built in", p4:"🌍 Any language", p5:"⚡ Works 24/7",
+    team_h:"Meet your AI team", team_sub:"Twelve specialists, each trained for one job. Hire one, or the whole department.",
+    team_hint:"Use ‹ › , the dots, arrow keys, or swipe — click any side card to bring it to the center.",
+    how_h:"How it works", how_sub:"From \"hello\" to a working AI employee in one day.",
+    how1_h:"Pick your employee", how1_p:"Choose from 12 specialists — sales, support, reception, recruiting and more.",
+    how2_h:"We set it up", how2_p:"We connect it to your channels and train it on your business. No coding for you.",
+    how3_h:"Try it free", how3_p:"7 days free. Watch it handle real conversations and tasks before you pay.",
+    how4_h:"Scale up", how4_p:"Add more employees or skills anytime. It grows with your company.",
+    price_h:"Simple pricing", price_sub:"Every plan starts with a 7-day free trial. No setup fee. Cancel anytime.",
+    pl_start_d:"For a solo business getting its first AI hire.", pl_start_1:"1 AI employee of your choice", pl_start_2:"7 days free", pl_start_3:"Email & chat support",
+    pl_popular:"Most popular", pl_biz_d:"For growing teams that need a few roles covered.", pl_biz_1:"Up to 3 AI employees", pl_biz_2:"Priority setup", pl_biz_3:"7 days free",
+    pl_pro_d:"For companies running a full AI department.", pl_pro_1:"Up to 6 AI employees", pl_pro_2:"Add-on skills included", pl_pro_3:"Priority support",
+    pl_custom_price:"Let's talk", pl_custom_d:"The full team of 12 plus custom integrations.", pl_custom_1:"All 12 AI employees", pl_custom_2:"Custom integrations", pl_custom_3:"Private deployment option",
+    pl_choose:"Start free", pl_contact:"Contact us",
+    price_note:"💡 Not sure which plan? Ask Ava in the corner — she'll recommend the right fit.",
+    faq_h:"Frequently asked questions",
+    contact_h:"Talk to us", contact_sub:"Start your free trial or ask anything. We reply in your language.", c_email:"Email",
+    f_privacy:"Privacy Policy", f_terms:"Terms of Service", f_refund:"Refund Policy", f_cookie:"Cookie Policy", f_contact:"Contact", f_rights:"All rights reserved.",
+    ava_status:"AI Guide · online", ava_ph:"Ask about plans, agents, trial…", ava_note:"Ava is an AI assistant. She may connect you to a human when needed.",
+    ava_hi:"Hi! I'm Ava, your AI guide at Hyventa 👋 I can help you pick the right AI employee, explain the plans, or start your free trial. What are you looking for?"
+  },
+  es: {
+    nav_team:"El equipo", nav_how:"Cómo funciona", nav_pricing:"Precios", nav_faq:"FAQ", nav_contact:"Contacto", nav_cta:"Prueba gratis",
+    hero_eyebrow:"Empleados IA", hero_h1:"Contrata un empleado con IA. Ponlo a trabajar.",
+    hero_sub:"Un departamento de trabajadores IA especializados que tu empresa puede incorporar en minutos: sin salario, sin pausas, escala al instante.",
+    hero_cta1:"Prueba gratis de 7 días", hero_cta2:"Conoce al equipo",
+    p1:"🤖 Siempre indica que es IA", p2:"🧠 Recuerda el contexto", p3:"🙋 Traspaso a humano integrado", p4:"🌍 Cualquier idioma", p5:"⚡ Trabaja 24/7",
+    team_h:"Conoce a tu equipo IA", team_sub:"Doce especialistas, cada uno entrenado para una tarea. Contrata uno o todo el departamento.",
+    team_hint:"Usa ‹ › , los puntos, las flechas o desliza — toca una tarjeta lateral para centrarla.",
+    how_h:"Cómo funciona", how_sub:"De \"hola\" a un empleado IA funcionando en un día.",
+    how1_h:"Elige tu empleado", how1_p:"Elige entre 12 especialistas: ventas, soporte, recepción, reclutamiento y más.",
+    how2_h:"Lo configuramos", how2_p:"Lo conectamos a tus canales y lo entrenamos con tu negocio. Sin programar.",
+    how3_h:"Pruébalo gratis", how3_p:"7 días gratis. Míralo gestionar conversaciones y tareas reales antes de pagar.",
+    how4_h:"Crece", how4_p:"Añade más empleados o habilidades cuando quieras. Crece con tu empresa.",
+    price_h:"Precios simples", price_sub:"Cada plan incluye 7 días de prueba gratis. Sin cuota de instalación. Cancela cuando quieras.",
+    pl_start_d:"Para un negocio en solitario con su primera IA.", pl_start_1:"1 empleado IA a elegir", pl_start_2:"7 días gratis", pl_start_3:"Soporte por email y chat",
+    pl_popular:"Más popular", pl_biz_d:"Para equipos en crecimiento que necesitan varios roles.", pl_biz_1:"Hasta 3 empleados IA", pl_biz_2:"Configuración prioritaria", pl_biz_3:"7 días gratis",
+    pl_pro_d:"Para empresas con un departamento IA completo.", pl_pro_1:"Hasta 6 empleados IA", pl_pro_2:"Habilidades extra incluidas", pl_pro_3:"Soporte prioritario",
+    pl_custom_price:"Hablemos", pl_custom_d:"El equipo completo de 12 más integraciones a medida.", pl_custom_1:"Los 12 empleados IA", pl_custom_2:"Integraciones a medida", pl_custom_3:"Opción de despliegue privado",
+    pl_choose:"Prueba gratis", pl_contact:"Contáctanos",
+    price_note:"💡 ¿No sabes qué plan? Pregúntale a Ava en la esquina — te recomendará el ideal.",
+    faq_h:"Preguntas frecuentes",
+    contact_h:"Habla con nosotros", contact_sub:"Empieza tu prueba gratis o pregunta lo que quieras. Respondemos en tu idioma.", c_email:"Correo",
+    f_privacy:"Política de privacidad", f_terms:"Términos del servicio", f_refund:"Política de reembolso", f_cookie:"Política de cookies", f_contact:"Contacto", f_rights:"Todos los derechos reservados.",
+    ava_status:"Guía IA · en línea", ava_ph:"Pregunta por planes, agentes, prueba…", ava_note:"Ava es una asistente IA. Puede conectarte con un humano cuando sea necesario.",
+    ava_hi:"¡Hola! Soy Ava, tu guía IA en Hyventa 👋 Puedo ayudarte a elegir el empleado IA adecuado, explicarte los planes o iniciar tu prueba gratis. ¿Qué buscas?"
+  },
+  uk: {
+    nav_team:"Команда", nav_how:"Як це працює", nav_pricing:"Тарифи", nav_faq:"Питання", nav_contact:"Контакти", nav_cta:"Почати безкоштовно",
+    hero_eyebrow:"AI-співробітники", hero_h1:"Найміть AI-співробітника. Доручіть йому роботу.",
+    hero_sub:"Відділ спеціалізованих AI-працівників, яких ваша компанія підключає за хвилини — без зарплати, без простоїв, миттєве масштабування.",
+    hero_cta1:"7 днів безкоштовно", hero_cta2:"Знайомство з командою",
+    p1:"🤖 Завжди каже, що він AI", p2:"🧠 Памʼятає контекст", p3:"🙋 Передача людині вбудована", p4:"🌍 Будь-яка мова", p5:"⚡ Працює 24/7",
+    team_h:"Ваша AI-команда", team_sub:"Дванадцять спеціалістів, кожен навчений для своєї задачі. Найміть одного або весь відділ.",
+    team_hint:"Використовуйте ‹ › , крапки, стрілки або свайп — торкніться бічної картки, щоб вивести її в центр.",
+    how_h:"Як це працює", how_sub:"Від \"привіт\" до готового AI-співробітника за один день.",
+    how1_h:"Оберіть співробітника", how1_p:"12 спеціалістів на вибір — продажі, підтримка, рецепція, рекрутинг та інші.",
+    how2_h:"Ми налаштовуємо", how2_p:"Підключаємо до ваших каналів і навчаємо на вашому бізнесі. Без коду з вашого боку.",
+    how3_h:"Спробуйте безкоштовно", how3_p:"7 днів безкоштовно. Подивіться на реальні розмови й задачі перед оплатою.",
+    how4_h:"Масштабуйте", how4_p:"Додавайте співробітників чи навички будь-коли. Росте разом з вашою компанією.",
+    price_h:"Прості тарифи", price_sub:"Кожен тариф починається з 7 днів безкоштовно. Без плати за налаштування. Скасування будь-коли.",
+    pl_start_d:"Для соло-бізнесу з першим AI-наймом.", pl_start_1:"1 AI-співробітник на вибір", pl_start_2:"7 днів безкоштовно", pl_start_3:"Підтримка e-mail і чат",
+    pl_popular:"Найпопулярніший", pl_biz_d:"Для команд, що ростуть і потребують кількох ролей.", pl_biz_1:"До 3 AI-співробітників", pl_biz_2:"Пріоритетне налаштування", pl_biz_3:"7 днів безкоштовно",
+    pl_pro_d:"Для компаній з повним AI-відділом.", pl_pro_1:"До 6 AI-співробітників", pl_pro_2:"Додаткові навички включені", pl_pro_3:"Пріоритетна підтримка",
+    pl_custom_price:"Обговорімо", pl_custom_d:"Повна команда з 12 плюс інтеграції під вас.", pl_custom_1:"Усі 12 AI-співробітників", pl_custom_2:"Інтеграції під вас", pl_custom_3:"Приватне розгортання",
+    pl_choose:"Почати безкоштовно", pl_contact:"Звʼязатися",
+    price_note:"💡 Не впевнені щодо тарифу? Запитайте Аву в кутку — вона підкаже.",
+    faq_h:"Часті запитання",
+    contact_h:"Напишіть нам", contact_sub:"Почніть безкоштовний період або запитайте що завгодно. Відповідаємо вашою мовою.", c_email:"Пошта",
+    f_privacy:"Політика конфіденційності", f_terms:"Умови користування", f_refund:"Політика повернення", f_cookie:"Політика файлів cookie", f_contact:"Контакти", f_rights:"Усі права захищені.",
+    ava_status:"AI-гід · онлайн", ava_ph:"Запитайте про тарифи, агентів, тріал…", ava_note:"Ава — це AI-асистент. За потреби вона зʼєднає вас із людиною.",
+    ava_hi:"Привіт! Я Ава, ваш AI-гід у Hyventa 👋 Допоможу обрати потрібного AI-співробітника, поясню тарифи або почну безкоштовний період. Що вас цікавить?"
+  }
+};
+
+/* ============ Agents data ============ */
+const agents = [
+  { file:"sarah",  name:"Sarah",  role:{en:"AI Sales Manager",es:"Gerente de Ventas IA",uk:"AI-менеджер продажів"}, tier:"BUSINESS",
+    blurb:{en:"\"Your always-on sales rep. Qualifies every lead, never sleeps.\"",es:"\"Tu comercial siempre activo. Califica cada lead, nunca duerme.\"",uk:"\"Ваш продавець без вихідних. Кваліфікує кожен лід, ніколи не спить.\""},
+    desc:{en:"Chats with inbound leads, qualifies them, scores intent, saves to CRM, and hands hot leads to a human.",es:"Chatea con leads entrantes, los califica, puntúa la intención, guarda en el CRM y pasa los leads calientes a un humano.",uk:"Спілкується з вхідними лідами, кваліфікує їх, оцінює намір, зберігає в CRM і передає гарячі ліди людині."},
+    chips:{en:["💬 Web chat","Real estate · Education · Clinics"],es:["💬 Chat web","Inmobiliaria · Educación · Clínicas"],uk:["💬 Веб-чат","Нерухомість · Освіта · Клініки"]} },
+  { file:"emma",   name:"Emma",   role:{en:"AI Receptionist",es:"Recepcionista IA",uk:"AI-рецепціоніст"}, tier:"START",
+    blurb:{en:"\"The receptionist who never misses a call or a booking.\"",es:"\"La recepcionista que nunca pierde una llamada ni una reserva.\"",uk:"\"Рецепціоніст, який ніколи не пропустить дзвінок чи запис.\""},
+    desc:{en:"Greets visitors, answers FAQs, books consultations, and logs every contact automatically.",es:"Saluda a los visitantes, responde preguntas, agenda consultas y registra cada contacto automáticamente.",uk:"Вітає відвідувачів, відповідає на питання, бронює консультації та фіксує кожен контакт автоматично."},
+    chips:{en:["💬 Web chat","Clinics · Salons · Services"],es:["💬 Chat web","Clínicas · Salones · Servicios"],uk:["💬 Веб-чат","Клініки · Салони · Послуги"]} },
+  { file:"olivia", name:"Olivia", role:{en:"AI Appointment Setter",es:"Agendadora IA",uk:"AI-планувальник зустрічей"}, tier:"BUSINESS",
+    blurb:{en:"\"Turns website curiosity into calendar meetings.\"",es:"\"Convierte la curiosidad web en reuniones en el calendario.\"",uk:"\"Перетворює цікавість на сайті на зустрічі в календарі.\""},
+    desc:{en:"Turns interest into booked meetings — qualifies the visitor and captures a preferred slot.",es:"Convierte el interés en reuniones agendadas: califica al visitante y captura un horario preferido.",uk:"Перетворює інтерес на заброньовані зустрічі — кваліфікує відвідувача й фіксує зручний час."},
+    chips:{en:["💬 Web chat","Sales teams · Agencies"],es:["💬 Chat web","Equipos de ventas · Agencias"],uk:["💬 Веб-чат","Відділи продажів · Агенції"]} },
+  { file:"alex",   name:"Alex",   role:{en:"AI Support Agent",es:"Agente de Soporte IA",uk:"AI-агент підтримки"}, tier:"BUSINESS",
+    blurb:{en:"\"Support that answers instantly and escalates only what matters.\"",es:"\"Soporte que responde al instante y escala solo lo importante.\"",uk:"\"Підтримка, що відповідає миттєво й ескалює лише важливе.\""},
+    desc:{en:"Triages support tickets, drafts replies, and auto-escalates urgent cases to a human.",es:"Clasifica tickets de soporte, redacta respuestas y escala casos urgentes a un humano.",uk:"Сортує звернення, готує відповіді й автоматично ескалює термінові випадки людині."},
+    chips:{en:["📝 Web form","SaaS · E-commerce"],es:["📝 Formulario web","SaaS · E-commerce"],uk:["📝 Веб-форма","SaaS · E-commerce"]} },
+  { file:"max",    name:"Max",    role:{en:"AI Knowledge Assistant",es:"Asistente de Conocimiento IA",uk:"AI-асистент знань"}, tier:"PRO",
+    blurb:{en:"\"Your knowledge base, but it talks back.\"",es:"\"Tu base de conocimiento, pero que responde.\"",uk:"\"Ваша база знань, яка відповідає.\""},
+    desc:{en:"Answers strictly from the company knowledge base and remembers facts per user.",es:"Responde estrictamente desde la base de conocimiento de la empresa y recuerda datos por usuario.",uk:"Відповідає лише з бази знань компанії та памʼятає факти по кожному користувачу."},
+    chips:{en:["💬 Web chat","Any content-heavy business"],es:["💬 Chat web","Negocios con mucho contenido"],uk:["💬 Веб-чат","Контентомісткий бізнес"]} },
+  { file:"daniel", name:"Daniel", role:{en:"AI Recruiter",es:"Reclutador IA",uk:"AI-рекрутер"}, tier:"PRO",
+    blurb:{en:"\"Screens every applicant in seconds, shortlists the best.\"",es:"\"Evalúa a cada candidato en segundos y preselecciona a los mejores.\"",uk:"\"Оцінює кожного кандидата за секунди й формує шорт-лист.\""},
+    desc:{en:"Screens applicants, scores fit, and routes each one to shortlist / review / rejected.",es:"Evalúa candidatos, puntúa la idoneidad y los enruta a preselección / revisión / rechazo.",uk:"Оцінює кандидатів, визначає відповідність і маршрутизує в шорт-лист / розгляд / відмову."},
+    chips:{en:["🔗 Webhook (ATS)","HR · Agencies"],es:["🔗 Webhook (ATS)","RRHH · Agencias"],uk:["🔗 Webhook (ATS)","HR · Агенції"]} },
+  { file:"boris",  name:"Boris",  role:{en:"AI Business Analyst",es:"Analista de Negocios IA",uk:"AI-бізнес-аналітик"}, tier:"PRO",
+    blurb:{en:"\"On-demand business analysis and market research.\"",es:"\"Análisis de negocio e investigación de mercado a demanda.\"",uk:"\"Бізнес-аналіз і дослідження ринку на вимогу.\""},
+    desc:{en:"Researches a company or site, runs web search, and produces an analysis report.",es:"Investiga una empresa o sitio, hace búsquedas web y genera un informe de análisis.",uk:"Досліджує компанію чи сайт, виконує веб-пошук і формує аналітичний звіт."},
+    chips:{en:["✈️ Telegram","Consulting · B2B"],es:["✈️ Telegram","Consultoría · B2B"],uk:["✈️ Telegram","Консалтинг · B2B"]} },
+  { file:"sophia", name:"Sophia", role:{en:"AI Marketing Manager",es:"Gerente de Marketing IA",uk:"AI-маркетолог"}, tier:"BUSINESS",
+    blurb:{en:"\"A content calendar that fills itself every morning.\"",es:"\"Un calendario de contenido que se llena solo cada mañana.\"",uk:"\"Контент-календар, що заповнюється сам щоранку.\""},
+    desc:{en:"Generates a daily batch of content ideas straight into a content calendar.",es:"Genera un lote diario de ideas de contenido directo en un calendario.",uk:"Генерує щоденну порцію ідей контенту одразу в календар."},
+    chips:{en:["⏰ Scheduled","SMM · Agencies"],es:["⏰ Programado","SMM · Agencias"],uk:["⏰ За розкладом","SMM · Агенції"]} },
+  { file:"leo",    name:"Leo",    role:{en:"AI Designer",es:"Diseñador IA",uk:"AI-дизайнер"}, tier:"CUSTOM",
+    blurb:{en:"\"An in-house designer that never runs out of ideas.\"",es:"\"Un diseñador interno al que nunca se le acaban las ideas.\"",uk:"\"Штатний дизайнер, у якого ніколи не закінчуються ідеї.\""},
+    desc:{en:"Generates vector and stock graphics through a full production pipeline.",es:"Genera gráficos vectoriales y de stock mediante un pipeline completo.",uk:"Генерує векторну та стокову графіку через повний конвеєр виробництва."},
+    chips:{en:["⚙️ Pipeline","Creative · Stock sellers"],es:["⚙️ Pipeline","Creativo · Venta de stock"],uk:["⚙️ Конвеєр","Креатив · Продаж стоку"]} },
+  { file:"vera",   name:"Vera",   role:{en:"AI Video Producer",es:"Productora de Video IA",uk:"AI-відеопродюсер"}, tier:"CUSTOM",
+    blurb:{en:"\"From prompt to finished video.\"",es:"\"Del prompt al video terminado.\"",uk:"\"Від промпту до готового відео.\""},
+    desc:{en:"Produces stock videos and mini-series from prompts, end to end.",es:"Produce videos de stock y miniseries desde prompts, de principio a fin.",uk:"Створює стокові відео та міні-серіали з промптів, від і до."},
+    chips:{en:["⚙️ Pipeline","Content studios"],es:["⚙️ Pipeline","Estudios de contenido"],uk:["⚙️ Конвеєр","Контент-студії"]} },
+  { file:"rooney", name:"Rooney", role:{en:"AI Composer",es:"Compositor IA",uk:"AI-композитор"}, tier:"CUSTOM",
+    blurb:{en:"\"Original soundtracks on demand.\"",es:"\"Bandas sonoras originales a demanda.\"",uk:"\"Оригінальні саундтреки на вимогу.\""},
+    desc:{en:"Generates original music tracks from a brief or mood.",es:"Genera pistas musicales originales a partir de un brief o estado de ánimo.",uk:"Генерує оригінальні музичні треки за брифом чи настроєм."},
+    chips:{en:["⚙️ Pipeline","Media · Ads · Games"],es:["⚙️ Pipeline","Medios · Anuncios · Juegos"],uk:["⚙️ Конвеєр","Медіа · Реклама · Ігри"]} },
+  { file:"nina",   name:"Nina",   role:{en:"AI Translator",es:"Traductora IA",uk:"AI-перекладач"}, tier:"START",
+    blurb:{en:"\"Speak to anyone, in any language, instantly.\"",es:"\"Habla con cualquiera, en cualquier idioma, al instante.\"",uk:"\"Спілкуйтеся з будь-ким, будь-якою мовою, миттєво.\""},
+    desc:{en:"Translates messages and content between languages in real time.",es:"Traduce mensajes y contenido entre idiomas en tiempo real.",uk:"Перекладає повідомлення та контент між мовами в реальному часі."},
+    chips:{en:["✈️ Telegram","International business"],es:["✈️ Telegram","Negocios internacionales"],uk:["✈️ Telegram","Міжнародний бізнес"]} },
+];
+
+/* ============ FAQ data ============ */
+const FAQ = {
+  en:[
+    ["Do the AI employees say they are AI?","Yes. Every Hyventa employee always identifies itself as an AI — it's built in and keeps you compliant with the EU AI Act."],
+    ["What happens after the 7-day free trial?","You simply choose a plan to keep going. No charge during the trial, and no auto-charge without your confirmation."],
+    ["Can it talk to my customers in their language?","Yes. Every employee replies in the visitor's language automatically — English, Spanish, Ukrainian and many more."],
+    ["What if the AI can't handle something?","Human handoff is built in. When a case needs a person, it escalates and notifies your team instantly."],
+    ["Is my data safe?","Your data stays in your workspace. We use business-grade AI providers that do not train on your data, and you can request deletion anytime. See our Privacy Policy."],
+    ["Do I need technical skills?","No. We set everything up for you and connect it to your channels. You just watch it work."]
+  ],
+  es:[
+    ["¿Los empleados IA dicen que son IA?","Sí. Cada empleado de Hyventa siempre se identifica como IA — está integrado y te mantiene en cumplimiento con la Ley de IA de la UE."],
+    ["¿Qué pasa tras la prueba gratis de 7 días?","Simplemente eliges un plan para continuar. Sin cargos durante la prueba y sin cobro automático sin tu confirmación."],
+    ["¿Puede hablar con mis clientes en su idioma?","Sí. Cada empleado responde en el idioma del visitante automáticamente — inglés, español, ucraniano y muchos más."],
+    ["¿Y si la IA no puede resolver algo?","El traspaso a humano está integrado. Cuando un caso necesita a una persona, escala y avisa a tu equipo al instante."],
+    ["¿Mis datos están seguros?","Tus datos permanecen en tu espacio. Usamos proveedores de IA de nivel empresarial que no entrenan con tus datos, y puedes pedir su eliminación cuando quieras. Consulta nuestra Política de Privacidad."],
+    ["¿Necesito conocimientos técnicos?","No. Lo configuramos todo por ti y lo conectamos a tus canales. Tú solo lo ves trabajar."]
+  ],
+  uk:[
+    ["Чи кажуть AI-співробітники, що вони AI?","Так. Кожен співробітник Hyventa завжди ідентифікує себе як AI — це вбудовано й відповідає вимогам Акту ЄС про ШІ."],
+    ["Що буде після 7 днів безкоштовно?","Ви просто обираєте тариф, щоб продовжити. Під час тріалу оплати немає, і без вашого підтвердження гроші не спишуться."],
+    ["Чи може він говорити з клієнтами їхньою мовою?","Так. Кожен співробітник автоматично відповідає мовою відвідувача — англійською, іспанською, українською та багатьма іншими."],
+    ["А якщо AI не може щось вирішити?","Передача людині вбудована. Коли випадок потребує людини, він ескалює й миттєво сповіщає вашу команду."],
+    ["Чи в безпеці мої дані?","Ваші дані лишаються у вашому просторі. Ми використовуємо AI-провайдерів бізнес-рівня, які не навчаються на ваших даних, і ви можете попросити видалення будь-коли. Див. Політику конфіденційності."],
+    ["Чи потрібні технічні навички?","Ні. Ми все налаштовуємо за вас і підключаємо до ваших каналів. Ви лише спостерігаєте за роботою."]
+  ]
+};
+
+/* ============ State + render ============ */
+let LANG = (navigator.language || "en").slice(0,2);
+if (!I18N[LANG]) LANG = "en";
+
+const stage  = document.getElementById('stage');
+const dotsEl = document.getElementById('dots');
+const detail = document.getElementById('detail');
+let current = 0;
+
+const cards = agents.map(function (a, i) {
+  const el = document.createElement('article');
+  el.className = 'card';
+  el.innerHTML =
+    '<div class="portrait">' +
+      '<div class="fallback">' + a.name.charAt(0) + '</div>' +
+      '<img src="images/' + a.file + '.png" alt="' + a.name + '" loading="lazy" ' +
+           'onload="this.previousElementSibling.style.display=\'none\'" ' +
+           'onerror="this.style.display=\'none\'">' +
+      '<span class="tier ' + a.tier + '">' + a.tier + '</span>' +
+      '<div class="name-plate"><h3>' + a.name + '</h3><div class="role" data-role="'+i+'"></div></div>' +
+    '</div>';
+  el.addEventListener('click', function () { go(i); });
+  stage.appendChild(el);
+  return el;
+});
+
+const dots = agents.map(function (a, i) {
+  const d = document.createElement('div');
+  d.className = 'dot'; d.title = a.name;
+  d.addEventListener('click', function () { go(i); });
+  dotsEl.appendChild(d);
+  return d;
+});
+
+function renderCarousel() {
+  const n = agents.length;
+  cards.forEach(function (el, i) {
+    let off = i - current;
+    if (off >  n / 2) off -= n;
+    if (off < -n / 2) off += n;
+    const abs = Math.abs(off);
+    const x = off * 210;
+    const scale = Math.max(0.55, 1 - abs * 0.16);
+    const rot = off === 0 ? 0 : (off < 0 ? 32 : -32);
+    const depth = -abs * 220;
+    const opacity = abs > 3 ? 0 : 1 - abs * 0.22;
+    el.style.transform = 'translateX(' + x + 'px) translateZ(' + depth + 'px) rotateY(' + rot + 'deg) scale(' + scale + ')';
+    el.style.opacity = opacity;
+    el.style.zIndex = String(100 - abs);
+    el.style.pointerEvents = abs > 3 ? 'none' : 'auto';
+    el.classList.toggle('active', off === 0);
+    el.querySelector('[data-role]').textContent = agents[i].role[LANG];
+  });
+  dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+  const a = agents[current];
+  const chips = a.chips[LANG].map(function (c) { return '<span class="chip">' + c + '</span>'; }).join('');
+  detail.style.opacity = 0;
+  setTimeout(function () {
+    detail.innerHTML = '<p class="blurb">' + a.blurb[LANG] + '</p><p class="desc">' + a.desc[LANG] + '</p><div class="meta">' + chips + '</div>';
+    detail.style.opacity = 1;
+  }, 160);
+}
+function go(i){ const n=agents.length; current=((i%n)+n)%n; renderCarousel(); }
+function next(){ go(current+1); } function prev(){ go(current-1); }
+document.getElementById('next').addEventListener('click', next);
+document.getElementById('prev').addEventListener('click', prev);
+document.addEventListener('keydown', function(e){ if(e.key==='ArrowRight')next(); if(e.key==='ArrowLeft')prev(); });
+let sx=null; const carousel=document.querySelector('.carousel');
+carousel.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+carousel.addEventListener('touchend',function(e){ if(sx===null)return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40){dx<0?next():prev();} sx=null; },{passive:true});
+
+function renderFAQ() {
+  const list = document.getElementById('faqList');
+  list.innerHTML = FAQ[LANG].map(function (qa) {
+    return '<details class="qa"><summary>' + qa[0] + '</summary><div class="ans">' + qa[1] + '</div></details>';
+  }).join('');
+}
+
+function applyLang(lang) {
+  LANG = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    const k = el.getAttribute('data-i18n');
+    if (I18N[lang][k] !== undefined) el.textContent = I18N[lang][k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+    const k = el.getAttribute('data-i18n-ph');
+    if (I18N[lang][k] !== undefined) el.setAttribute('placeholder', I18N[lang][k]);
+  });
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  renderCarousel();
+  renderFAQ();
+  // reset Ava greeting if empty
+  const body = document.getElementById('ava-body');
+  if (body && body.getAttribute('data-fresh') !== 'no') {
+    body.innerHTML = '<div class="msg bot">' + I18N[lang].ava_hi + '</div>';
+  }
+}
+
+document.querySelectorAll('.lang button').forEach(function (b) {
+  b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); });
+});
+
+/* ============ Nav burger ============ */
+document.getElementById('burger').addEventListener('click', function () {
+  document.getElementById('navLinks').classList.toggle('show');
+});
+document.querySelectorAll('#navLinks a').forEach(function (a) {
+  a.addEventListener('click', function () { document.getElementById('navLinks').classList.remove('show'); });
+});
+
+/* ============ Ava widget ============ */
+// Wire this to your Ava n8n webhook when ready:
+const AVA_WEBHOOK_URL = "https://achalex.app.n8n.cloud/webhook/ava"; // e.g. "https://achalex.app.n8n.cloud/webhook/ava"
+const bubble = document.getElementById('ava-bubble');
+const panel  = document.getElementById('ava-panel');
+const avaBody= document.getElementById('ava-body');
+const avaInput=document.getElementById('ava-input');
+const avaSend =document.getElementById('ava-send');
+const sessionId = 'web-' + Math.random().toString(36).slice(2) + Date.now();
+
+bubble.addEventListener('click', function () {
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) avaInput.focus();
+});
+document.getElementById('ava-close').addEventListener('click', function () { panel.classList.remove('open'); });
+
+function addMsg(text, who) {
+  const m = document.createElement('div');
+  m.className = 'msg ' + who;
+  m.textContent = text;
+  avaBody.appendChild(m);
+  avaBody.scrollTop = avaBody.scrollHeight;
+  avaBody.setAttribute('data-fresh', 'no');
+  return m;
+}
+
+async function sendToAva(text) {
+  addMsg(text, 'user');
+  avaInput.value = '';
+  const typing = addMsg('…', 'bot');
+  if (!AVA_WEBHOOK_URL) {
+    // Fallback until webhook is connected
+    const fb = { en:"Thanks! I'm not connected to the live brain yet — meanwhile, email hellohyventa@gmail.com or start your free trial from the Pricing section.",
+                 es:"¡Gracias! Aún no estoy conectada al cerebro en vivo — mientras tanto, escribe a hellohyventa@gmail.com o inicia tu prueba gratis en Precios.",
+                 uk:"Дякую! Я ще не підключена до живого мозку — а поки напишіть на hellohyventa@gmail.com або почніть безкоштовний період у розділі Тарифи." };
+    setTimeout(function(){ typing.textContent = fb[LANG]; }, 500);
+    return;
+  }
+  try {
+    const res = await fetch(AVA_WEBHOOK_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ chatInput: text, sessionId: sessionId, lang: LANG })
+    });
+    const data = await res.json();
+    typing.textContent = data.output || data.reply || data.text || JSON.stringify(data);
+  } catch (e) {
+    typing.textContent = { en:"Connection issue — please try again or email hellohyventa@gmail.com.",
+                           es:"Problema de conexión — inténtalo de nuevo o escribe a hellohyventa@gmail.com.",
+                           uk:"Проблема зʼєднання — спробуйте ще раз або напишіть на hellohyventa@gmail.com." }[LANG];
+  }
+}
+avaSend.addEventListener('click', function () { const t=avaInput.value.trim(); if(t) sendToAva(t); });
+avaInput.addEventListener('keydown', function (e) { if (e.key==='Enter'){ const t=avaInput.value.trim(); if(t) sendToAva(t); } });
+
+/* ============ Init ============ */
+document.getElementById('year').textContent = new Date().getFullYear();
+applyLang(LANG);
+go(0);
+</script>
+<!-- HYVENTA-ENHANCEMENTS:START -->
+<script id="hv-enhance-js">
+/* ===== Hyventa enhancements: Ava greeter, cookie bar, voice, Paddle ===== */
 (function(){
-  function ready(fn){ if(document.readyState!==(String.fromCharCode(108)+String.fromCharCode(111)+String.fromCharCode(97)+String.fromCharCode(100)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(103))) fn(); else document.addEventListener(String.fromCharCode(68)+String.fromCharCode(79)+String.fromCharCode(77)+String.fromCharCode(67)+String.fromCharCode(111)+String.fromCharCode(110)+String.fromCharCode(116)+String.fromCharCode(101)+String.fromCharCode(110)+String.fromCharCode(116)+String.fromCharCode(76)+String.fromCharCode(111)+String.fromCharCode(97)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(100), fn); }
-  ready(function(){ setTimeout(boot, 300); });
-  function boot(){ try{ init(); }catch(e){} }
-  function currentLang(){ try{ if(typeof LANG!==(String.fromCharCode(117)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(102)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(100))) return LANG; }catch(e){} return String.fromCharCode(101)+String.fromCharCode(110); }
-  function agentsList(){ try{ if(typeof agents!==(String.fromCharCode(117)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(102)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(100))) return agents; }catch(e){} return null; }
-  function chipsFor(a){ try{ var L=currentLang(); var arr=(a.chips&&(a.chips[L]||a.chips.en))||[]; return arr; }catch(e){ return []; } }
-  function injectChips(){
-    var stage=document.getElementById(String.fromCharCode(115)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(103)+String.fromCharCode(101));
-    var list=agentsList();
-    if(!stage||!list) return;
-    var cards=stage.querySelectorAll(String.fromCharCode(46)+String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(100));
-    for(var i=0;i<cards.length;i++){
-      var el=cards[i]; var a=list[i]; if(!a) continue;
-      var box=el.querySelector(String.fromCharCode(46)+String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(100)+String.fromCharCode(45)+String.fromCharCode(99)+String.fromCharCode(104)+String.fromCharCode(105)+String.fromCharCode(112)+String.fromCharCode(115));
-      if(!box){ box=document.createElement(String.fromCharCode(100)+String.fromCharCode(105)+String.fromCharCode(118)); box.className=String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(100)+String.fromCharCode(45)+String.fromCharCode(99)+String.fromCharCode(104)+String.fromCharCode(105)+String.fromCharCode(112)+String.fromCharCode(115); el.appendChild(box); }
-      var arr=chipsFor(a); var html=[];
-      for(var j=0;j<arr.length;j++){ html.push(String.fromCharCode(60)+String.fromCharCode(115)+String.fromCharCode(112)+String.fromCharCode(97)+String.fromCharCode(110)+String.fromCharCode(32)+String.fromCharCode(99)+String.fromCharCode(108)+String.fromCharCode(97)+String.fromCharCode(115)+String.fromCharCode(115)+String.fromCharCode(61)+String.fromCharCode(99)+String.fromCharCode(99)+String.fromCharCode(62)+arr[j]+String.fromCharCode(60)+String.fromCharCode(47)+String.fromCharCode(115)+String.fromCharCode(112)+String.fromCharCode(97)+String.fromCharCode(110)+String.fromCharCode(62)); }
-      box.innerHTML=html.join(String.fromCharCode(32));
+  "use strict";
+
+  // ---- Paddle config (fill after approval) ----
+  window.HYVENTA_PADDLE = {
+    token: "PADDLE_CLIENT_TOKEN",   // e.g. "live_xxxxxxxx" — replace after Paddle approval
+    prices: {                        // Paddle Price IDs (pri_...) per plan
+      start:    "PRICE_START",
+      business: "PRICE_BUSINESS",
+      pro:      "PRICE_PRO"
+    }
+  };
+
+  var T = {
+    en: { tip:"Hi! I'm Ava 👋", ck:"We use cookies to run this site and improve your experience. See our",
+          ckl:"Cookie Policy", acc:"Accept", dec:"Decline", mic:"Voice input", soon:"Checkout opens after we finish onboarding. Contact us to start your free trial." },
+    es: { tip:"¡Hola! Soy Ava 👋", ck:"Usamos cookies para el funcionamiento del sitio y mejorar tu experiencia. Consulta nuestra",
+          ckl:"Política de Cookies", acc:"Aceptar", dec:"Rechazar", mic:"Entrada de voz", soon:"El pago se abrirá cuando terminemos el onboarding. Contáctanos para tu prueba gratis." },
+    uk: { tip:"Привіт! Я Ava 👋", ck:"Ми використовуємо cookie для роботи сайту та покращення досвіду. Див. нашу",
+          ckl:"Політику Cookie", acc:"Прийняти", dec:"Відхилити", mic:"Голосовий ввід", soon:"Оплата відкриється після завершення онбордингу. Напишіть нам, щоб почати безкоштовний період." }
+  };
+  function lang(){ var l=(document.documentElement.lang||localStorage.getItem("hv_lang")||"en").slice(0,2); return T[l]?l:"en"; }
+  function t(k){ return T[lang()][k]; }
+
+  function el(html){ var d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    var avaInput = document.getElementById("ava-input");
+
+    // ---- Ava standing greeter ----
+    if(!document.getElementById("ava-greeter")){
+      var g = el('<div id="ava-greeter" role="button" tabindex="0" aria-label="Chat with Ava"><span class="bubble-tip" id="ava-tip"></span><img src="images/ava.png" alt="Ava — AI Guide"></div>');
+      document.body.appendChild(g);
+      var tip=g.querySelector("#ava-tip"); if(tip) tip.textContent=t("tip");
+      function openAva(){
+        var bubble=document.getElementById("ava-bubble")||document.querySelector(".ava-bubble,[data-ava-open]");
+        if(bubble){ bubble.click(); } 
+        var panel=document.getElementById("ava-panel"); if(panel) panel.classList.add("open");
+        var inp=document.getElementById("ava-input"); if(inp) inp.focus();
+      }
+      g.addEventListener("click", openAva);
+      g.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" ") openAva(); });
+    }
+
+    // ---- Ava face in chat header ----
+    var head = document.querySelector("#ava-panel .ava-head, #ava-panel header, .ava-header");
+    if(head && !head.querySelector(".ava-head-face")){
+      var face=el('<img class="ava-head-face" src="images/ava.png" alt="Ava">');
+      head.insertBefore(face, head.firstChild);
+    }
+
+    // ---- Voice input (Web Speech API) ----
+    var SR = window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(SR && avaInput){
+      var sendBtn=document.getElementById("ava-send");
+      var mic=el('<button id="ava-mic" type="button" title="'+t("mic")+'" aria-label="'+t("mic")+'">🎤</button>');
+      if(sendBtn && sendBtn.parentNode){ sendBtn.parentNode.insertBefore(mic, sendBtn); }
+      else if(avaInput.parentNode){ avaInput.parentNode.appendChild(mic); }
+      var rec=new SR(); rec.interimResults=false; rec.maxAlternatives=1; var listening=false;
+      var langMap={en:"en-US",es:"es-ES",uk:"uk-UA"};
+      mic.addEventListener("click", function(){
+        if(listening){ rec.stop(); return; }
+        rec.lang=langMap[lang()]||"en-US";
+        try{ rec.start(); }catch(e){}
+      });
+      rec.onstart=function(){ listening=true; mic.classList.add("rec"); };
+      rec.onend=function(){ listening=false; mic.classList.remove("rec"); };
+      rec.onerror=function(){ listening=false; mic.classList.remove("rec"); };
+      rec.onresult=function(e){
+        var txt=e.results[0][0].transcript;
+        avaInput.value=(avaInput.value?avaInput.value+" ":"")+txt;
+        avaInput.focus();
+      };
+    }
+
+    // ---- Cookie bar ----
+    if(!localStorage.getItem("hv_cookie") && !document.getElementById("cookie-bar")){
+      var bar=el('<div id="cookie-bar" role="dialog" aria-live="polite"><p><span id="ck-text"></span> <a href="/cookie" id="ck-link"></a>.</p><div class="ck-actions"><button class="ck-accept" id="ck-accept"></button><button class="ck-decline" id="ck-decline"></button></div></div>');
+      document.body.appendChild(bar);
+      bar.querySelector("#ck-text").textContent=t("ck");
+      bar.querySelector("#ck-link").textContent=t("ckl");
+      bar.querySelector("#ck-accept").textContent=t("acc");
+      bar.querySelector("#ck-decline").textContent=t("dec");
+      requestAnimationFrame(function(){ bar.classList.add("show"); });
+      function decide(v){ localStorage.setItem("hv_cookie",v); bar.classList.remove("show"); setTimeout(function(){bar.remove();},300); }
+      bar.querySelector("#ck-accept").addEventListener("click",function(){decide("accepted");});
+      bar.querySelector("#ck-decline").addEventListener("click",function(){decide("declined");});
+    }
+
+    // ---- Paddle checkout placeholders ----
+    var plans=[["start",["start","99"]],["business",["business","249"]],["pro",["pro","499"]]];
+    var pricing=document.getElementById("pricing");
+    if(pricing){
+      var cards=pricing.querySelectorAll(".plan, .tier, .price-card, [data-plan]");
+      pricing.querySelectorAll("a,button").forEach(function(btn){
+        if(btn.dataset.plan) return;
+        var card=btn.closest(".plan,.tier,.price-card,[data-plan]");
+        var key=card&&card.getAttribute("data-plan");
+        if(!key){ var txt=(card?card.textContent:"").toLowerCase();
+          if(txt.indexOf("business")>-1||txt.indexOf("249")>-1)key="business";
+          else if(txt.indexOf("pro")>-1||txt.indexOf("499")>-1)key="pro";
+          else if(txt.indexOf("start")>-1||txt.indexOf("99")>-1)key="start"; }
+        if(key && window.HYVENTA_PADDLE.prices[key]){
+          btn.setAttribute("data-plan",key);
+          btn.addEventListener("click",function(e){
+            var cfg=window.HYVENTA_PADDLE, pid=cfg.prices[key];
+            if(cfg.token.indexOf("PADDLE")===0 || String(pid).indexOf("PRICE")===0){
+              e.preventDefault(); alert(t("soon")); return;
+            }
+            if(window.Paddle){ e.preventDefault(); window.Paddle.Checkout.open({items:[{priceId:pid,quantity:1}]}); }
+          });
+        }
+      });
+    }
+  });
+})();
+/* To go live with Paddle after approval:
+   1) Add to <head>:  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"><\/script>
+      then: Paddle.Environment.set("production"); Paddle.Initialize({token:"live_xxx"});
+   2) Replace token + PRICE_START/PRICE_BUSINESS/PRICE_PRO above with real values. */
+
+</script>
+<!-- HYVENTA-ENHANCEMENTS:END -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- HYVENTA-V2:START -->
+<script id="hv-v2-js">
+
+(function(){
+  "use strict";
+
+  var BORIS_URL = "https://achalex.app.n8n.cloud/webhook/boris";
+
+  var L = {
+    en:{ slogan:"Upgrade your business. Give it superpowers.",
+      view_profile:"View profile",
+      calc_h:"Cost calculator", calc_sub:"Estimate your monthly cost in seconds.",
+      calc_emp:"How many AI employees?", calc_bill:"Billing", calc_month:"Monthly", calc_year:"Yearly (2 months free)",
+      calc_addons:"Extra skills", calc_plan:"Recommended plan", calc_total:"Estimated total",
+      calc_cta:"Start free trial", per_mo:"/mo", per_yr:"/yr", lets_talk:"Let's talk",
+      calc_note:"Final price confirmed before you pay. Ask Ava for a tailored quote.",
+      profile_examples:"Work examples", profile_how:"How it works", profile_hire:"Hire", profile_ask:"Ask Ava", profile_close:"Close",
+      boris_status:"AI Business Analyst · online", boris_ph:"Ask about growth, market, analysis…",
+      boris_note:"Boris is an AI assistant. He may connect you to a human.",
+      boris_hi:"Hi, I'm Boris, your AI business analyst. Tell me about your company and I'll suggest growth ideas and the right AI employees.",
+      boris_err:"Connection issue — please try again or email hellohyventa@gmail.com." },
+    es:{ slogan:"Mejora tu negocio. Dale superpoderes.",
+      view_profile:"Ver perfil",
+      calc_h:"Calculadora de costes", calc_sub:"Estima tu coste mensual en segundos.",
+      calc_emp:"¿Cuántos empleados IA?", calc_bill:"Facturación", calc_month:"Mensual", calc_year:"Anual (2 meses gratis)",
+      calc_addons:"Habilidades extra", calc_plan:"Plan recomendado", calc_total:"Total estimado",
+      calc_cta:"Prueba gratis", per_mo:"/mes", per_yr:"/año", lets_talk:"Hablemos",
+      calc_note:"Precio final confirmado antes de pagar. Pídele a Ava un presupuesto a medida.",
+      profile_examples:"Ejemplos de trabajo", profile_how:"Cómo funciona", profile_hire:"Contratar", profile_ask:"Pregunta a Ava", profile_close:"Cerrar",
+      boris_status:"Analista de Negocios IA · en línea", boris_ph:"Pregunta sobre crecimiento, mercado, análisis…",
+      boris_note:"Boris es un asistente IA. Puede conectarte con un humano.",
+      boris_hi:"Hola, soy Boris, tu analista de negocios IA. Cuéntame sobre tu empresa y te daré ideas de crecimiento.",
+      boris_err:"Problema de conexión — inténtalo de nuevo o escribe a hellohyventa@gmail.com." },
+    uk:{ slogan:"Прокачайте свій бізнес. Дайте йому суперсили.",
+      view_profile:"Переглянути профіль",
+      calc_h:"Калькулятор вартості", calc_sub:"Оцініть щомісячну вартість за секунди.",
+      calc_emp:"Скільки AI-співробітників?", calc_bill:"Оплата", calc_month:"Щомісяця", calc_year:"Щороку (2 місяці безкоштовно)",
+      calc_addons:"Додаткові навички", calc_plan:"Рекомендований тариф", calc_total:"Орієнтовна сума",
+      calc_cta:"Почати безкоштовно", per_mo:"/міс", per_yr:"/рік", lets_talk:"Обговорімо",
+      calc_note:"Остаточна ціна підтверджується перед оплатою. Запитайте Аву про індивідуальну пропозицію.",
+      profile_examples:"Приклади роботи", profile_how:"Як це працює", profile_hire:"Найняти", profile_ask:"Запитати Аву", profile_close:"Закрити",
+      boris_status:"AI-бізнес-аналітик · онлайн", boris_ph:"Запитайте про зростання, ринок, аналіз…",
+      boris_note:"Борис — AI-асистент. За потреби зʼєднає вас із людиною.",
+      boris_hi:"Привіт, я Борис, ваш AI-бізнес-аналітик. Розкажіть про вашу компанію — і я запропоную ідеї зростання та відповідних AI-співробітників.",
+      boris_err:"Проблема зʼєднання — спробуйте ще раз або напишіть на hellohyventa@gmail.com." }
+  };
+
+  function lang(){ var l=(document.documentElement.lang||localStorage.getItem("hv_lang")||"en").slice(0,2); return L[l]?l:"en"; }
+  function t(k){ var d=L[lang()]; return (d&&d[k]!==undefined)?d[k]:L.en[k]; }
+  function el(h){ var d=document.createElement("div"); d.innerHTML=h.trim(); return d.firstChild; }
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  /* ---- Character profiles (article + examples + how) ---- */
+  var P = {
+    sarah:{ role:{en:"AI Sales Manager",es:"Gerente de Ventas IA",uk:"AI-менеджер продажів"},
+      article:{en:"Sarah works your inbound leads around the clock. She greets every visitor, asks the right qualifying questions, scores buying intent and hands the hottest leads straight to your team — so no opportunity ever goes cold.",
+        uk:"Сара опрацьовує вхідні ліди цілодобово. Вона вітає кожного відвідувача, ставить правильні кваліфікаційні запитання, оцінює намір купити й передає найгарячіші ліди вашій команді — жодна можливість не втрачається."},
+      examples:{en:["Qualified 40 website leads overnight and flagged 6 as hot","Booked a product demo directly from a chat conversation","Pushed a new lead with full context into the CRM"],
+        uk:["За ніч кваліфікувала 40 лідів із сайту й позначила 6 як гарячі","Записала на демо прямо з чату","Додала новий лід із повним контекстом у CRM"]},
+      how:{en:["Chats with each visitor and asks qualifying questions","Scores intent and saves the lead to your CRM","Notifies a human the moment a lead is hot"],
+        uk:["Спілкується з відвідувачем і ставить кваліфікаційні запитання","Оцінює намір і зберігає лід у CRM","Сповіщає людину, щойно лід став гарячим"]} },
+
+    emma:{ role:{en:"AI Receptionist",es:"Recepcionista IA",uk:"AI-рецепціоніст"},
+      article:{en:"Emma is the receptionist who never misses a call or a booking. She greets visitors, answers common questions, schedules consultations and logs every contact automatically — day or night.",
+        uk:"Емма — рецепціоніст, який ніколи не пропустить дзвінок чи запис. Вона вітає відвідувачів, відповідає на типові запитання, планує консультації й автоматично фіксує кожен контакт — удень і вночі."},
+      examples:{en:["Booked 3 consultations while the office was closed","Answered pricing and opening-hours questions instantly","Logged every new contact with source and intent"],
+        uk:["Записала 3 консультації, поки офіс був зачинений","Миттєво відповіла на питання про ціни та години роботи","Зафіксувала кожен новий контакт із джерелом і наміром"]},
+      how:{en:["Greets visitors and answers FAQs","Books consultations into your calendar","Logs each contact automatically"],
+        uk:["Вітає відвідувачів і відповідає на часті питання","Записує консультації у ваш календар","Автоматично фіксує кожен контакт"]} },
+
+    olivia:{ role:{en:"AI Appointment Setter",es:"Agendadora IA",uk:"AI-планувальник зустрічей"},
+      article:{en:"Olivia turns website curiosity into meetings on your calendar. She qualifies each visitor, captures their preferred time slot and confirms the booking — filling your pipeline while you focus on closing.",
+        uk:"Олівія перетворює цікавість на сайті на зустрічі у вашому календарі. Вона кваліфікує кожного відвідувача, фіксує зручний час і підтверджує бронювання — наповнює вашу воронку, поки ви закриваєте угоди."},
+      examples:{en:["Turned a casual visitor into a booked sales call","Captured preferred time zones and slots automatically","Reminded a lead and reduced no-shows"],
+        uk:["Перетворила випадкового відвідувача на заброньований дзвінок","Автоматично зафіксувала часові пояси й слоти","Нагадала ліду й зменшила неявки"]},
+      how:{en:["Qualifies the visitor's interest","Captures a preferred meeting slot","Confirms and books the meeting"],
+        uk:["Кваліфікує інтерес відвідувача","Фіксує зручний час зустрічі","Підтверджує й бронює зустріч"]} },
+
+    alex:{ role:{en:"AI Support Agent",es:"Agente de Soporte IA",uk:"AI-агент підтримки"},
+      article:{en:"Alex handles support so your team only touches what matters. He triages incoming tickets, drafts accurate replies from your knowledge base and auto-escalates urgent cases to a human.",
+        uk:"Алекс бере на себе підтримку, щоб команда займалася лише важливим. Він сортує звернення, готує точні відповіді з бази знань і автоматично ескалює термінові випадки людині."},
+      examples:{en:["Resolved a password-reset request end to end","Drafted a refund reply for an agent to approve","Escalated an outage report to the on-call team"],
+        uk:["Повністю вирішив запит на скидання пароля","Підготував відповідь щодо повернення для підтвердження агентом","Ескалював звіт про збій черговій команді"]},
+      how:{en:["Triages every incoming ticket","Drafts a reply from your knowledge base","Escalates urgent cases to a human"],
+        uk:["Сортує кожне вхідне звернення","Готує відповідь із бази знань","Ескалює термінові випадки людині"]} },
+
+    max:{ role:{en:"AI Knowledge Assistant",es:"Asistente de Conocimiento IA",uk:"AI-асистент знань"},
+      article:{en:"Max is your knowledge base that talks back. He answers strictly from your company's documents, remembers facts per user and never makes things up — perfect for content-heavy businesses.",
+        uk:"Макс — це ваша база знань, яка відповідає. Він відповідає лише з документів компанії, памʼятає факти по кожному користувачу й нічого не вигадує — ідеально для контентомісткого бізнесу."},
+      examples:{en:["Answered a policy question with an exact source","Remembered a customer's plan across chats","Declined to answer outside the knowledge base"],
+        uk:["Відповів на питання про політику з точним джерелом","Запамʼятав тариф клієнта між чатами","Відмовився відповідати поза базою знань"]},
+      how:{en:["Reads only your approved documents","Remembers facts for each user","Answers with grounded, sourced replies"],
+        uk:["Читає лише ваші затверджені документи","Памʼятає факти для кожного користувача","Відповідає обґрунтовано, з джерелами"]} },
+
+    daniel:{ role:{en:"AI Recruiter",es:"Reclutador IA",uk:"AI-рекрутер"},
+      article:{en:"Daniel screens every applicant in seconds and shortlists the best. He scores each candidate against your criteria and routes them to shortlist, review or rejected — so hiring never bottlenecks.",
+        uk:"Даніель оцінює кожного кандидата за секунди й формує шорт-лист найкращих. Він оцінює кандидатів за вашими критеріями та маршрутизує в шорт-лист, розгляд або відмову — найм не гальмує."},
+      examples:{en:["Screened 120 applicants and shortlisted 9","Scored a candidate against the role's must-haves","Sent a polite rejection with feedback"],
+        uk:["Оцінив 120 заявок і сформував шорт-лист із 9","Оцінив кандидата за ключовими вимогами ролі","Надіслав ввічливу відмову зі зворотним звʼязком"]},
+      how:{en:["Reads each application","Scores fit against your criteria","Routes to shortlist / review / rejected"],
+        uk:["Читає кожну заявку","Оцінює відповідність вашим критеріям","Маршрутизує в шорт-лист / розгляд / відмову"]} },
+
+    boris:{ role:{en:"AI Business Analyst",es:"Analista de Negocios IA",uk:"AI-бізнес-аналітик"},
+      article:{en:"Boris delivers on-demand business analysis and market research. He researches a company or website, runs live web search and produces a clear analysis report with growth recommendations. Chat with him in the bottom-left corner.",
+        uk:"Борис надає бізнес-аналіз і дослідження ринку на вимогу. Він досліджує компанію чи сайт, виконує живий веб-пошук і формує зрозумілий аналітичний звіт із рекомендаціями для зростання. Спілкуйтеся з ним у лівому нижньому куті."},
+      examples:{en:["Analyzed a competitor's site and summarized the gaps","Suggested 3 growth ideas with matching AI employees","Produced a short market snapshot for a niche"],
+        uk:["Проаналізував сайт конкурента й підсумував прогалини","Запропонував 3 ідеї зростання з відповідними AI-співробітниками","Підготував короткий огляд ринку для ніші"]},
+      how:{en:["Researches your company or site","Runs live web search for context","Delivers an analysis with recommendations"],
+        uk:["Досліджує вашу компанію чи сайт","Виконує живий веб-пошук для контексту","Надає аналіз із рекомендаціями"]} },
+
+    sophia:{ role:{en:"AI Marketing Manager",es:"Gerente de Marketing IA",uk:"AI-маркетолог"},
+      article:{en:"Sophia fills your content calendar every morning. She generates a daily batch of on-brand content ideas and drops them straight into your calendar, so marketing never runs dry.",
+        uk:"Софія заповнює ваш контент-календар щоранку. Вона генерує щоденну порцію ідей у стилі бренду й одразу додає їх у календар, тож маркетинг ніколи не простоює."},
+      examples:{en:["Generated a week of post ideas overnight","Filled the content calendar with themed campaigns","Adapted ideas to a seasonal promotion"],
+        uk:["За ніч згенерувала ідеї постів на тиждень","Заповнила контент-календар тематичними кампаніями","Адаптувала ідеї під сезонну акцію"]},
+      how:{en:["Generates on-brand content ideas daily","Organizes them into a content calendar","Keeps the pipeline full automatically"],
+        uk:["Щодня генерує ідеї контенту в стилі бренду","Організовує їх у контент-календар","Автоматично тримає воронку повною"]} },
+
+    leo:{ role:{en:"AI Designer",es:"Diseñador IA",uk:"AI-дизайнер"},
+      article:{en:"Leo is an in-house designer that never runs out of ideas. He generates vector and stock graphics through a full production pipeline — ready-to-use visuals on demand.",
+        uk:"Лео — штатний дизайнер, у якого ніколи не закінчуються ідеї. Він генерує векторну та стокову графіку через повний виробничий конвеєр — готові візуали на вимогу."},
+      examples:{en:["Produced a set of social media graphics","Generated vector icons for a landing page","Created stock-ready illustrations for a campaign"],
+        uk:["Створив набір графіки для соцмереж","Згенерував векторні іконки для лендингу","Створив стокові ілюстрації для кампанії"]},
+      how:{en:["Takes your brief or theme","Runs a full generation pipeline","Delivers ready-to-use graphics"],
+        uk:["Бере ваш бриф або тему","Запускає повний конвеєр генерації","Надає готову до використання графіку"]} },
+
+    vera:{ role:{en:"AI Video Producer",es:"Productora de Video IA",uk:"AI-відеопродюсер"},
+      article:{en:"Vera takes you from prompt to finished video. She produces stock videos and mini-series end to end — ideal for content studios and ad teams.",
+        uk:"Віра веде вас від промпту до готового відео. Вона створює стокові відео та міні-серіали від і до — ідеально для контент-студій і рекламних команд."},
+      examples:{en:["Produced a 30-second promo from a prompt","Generated a mini-series of product clips","Rendered stock footage for an ad campaign"],
+        uk:["Створила 30-секундне промо з промпту","Згенерувала міні-серіал роликів про продукт","Відрендерила стокові кадри для реклами"]},
+      how:{en:["Takes your prompt or script","Produces the video end to end","Delivers finished, ready-to-post clips"],
+        uk:["Бере ваш промпт або сценарій","Створює відео від і до","Надає готові до публікації ролики"]} },
+
+    rooney:{ role:{en:"AI Composer",es:"Compositor IA",uk:"AI-композитор"},
+      article:{en:"Rooney writes original soundtracks on demand. He generates royalty-free music from a brief or mood — perfect for media, ads and games.",
+        uk:"Руні пише оригінальні саундтреки на вимогу. Він генерує музику без роялті за брифом чи настроєм — ідеально для медіа, реклами та ігор."},
+      examples:{en:["Composed a background track for a promo","Generated three mood variations for an ad","Produced a loop for a game level"],
+        uk:["Створив фонову доріжку для промо","Згенерував три варіації настрою для реклами","Створив луп для ігрового рівня"]},
+      how:{en:["Takes a brief or mood","Generates original music","Delivers royalty-free tracks"],
+        uk:["Бере бриф або настрій","Генерує оригінальну музику","Надає треки без роялті"]} },
+
+    nina:{ role:{en:"AI Translator",es:"Traductora IA",uk:"AI-перекладач"},
+      article:{en:"Nina lets you speak to anyone, in any language, instantly. She translates messages and content in real time — so international business feels effortless.",
+        uk:"Ніна дає змогу спілкуватися з будь-ким, будь-якою мовою, миттєво. Вона перекладає повідомлення та контент у реальному часі — міжнародний бізнес стає легким."},
+      examples:{en:["Translated a live chat between two languages","Localized a product description into 5 languages","Kept a Telegram thread bilingual in real time"],
+        uk:["Переклала живий чат між двома мовами","Локалізувала опис продукту 5 мовами","Тримала гілку в Telegram двомовною в реальному часі"]},
+      how:{en:["Detects the source language","Translates in real time","Keeps conversations flowing across languages"],
+        uk:["Визначає мову оригіналу","Перекладає в реальному часі","Тримає розмову плавною між мовами"]} }
+  };
+
+  function pget(file,key){ var o=P[file]; if(!o||!o[key]) return null; var lg=lang(); return o[key][lg]||o[key].en||null; }
+  function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+
+  var hvBill = "month";
+
+  function calc(){
+    var empEl=document.getElementById("hv-emp"), addEl=document.getElementById("hv-addons");
+    if(!empEl) return;
+    var n=+empEl.value, a=+addEl.value, yearly=(hvBill==="year");
+    document.getElementById("hv-emp-val").textContent=n;
+    document.getElementById("hv-addons-val").textContent=a;
+    var plan, base;
+    if(n<=1){plan="Start";base=99;}
+    else if(n<=3){plan="Business";base=249;}
+    else if(n<=6){plan="Pro";base=499;}
+    else{plan="Custom";base=0;}
+    document.getElementById("hv-plan").textContent = (plan==="Custom") ? t("lets_talk") : plan;
+    var per = yearly ? t("per_yr") : t("per_mo");
+    var totalEl=document.getElementById("hv-total");
+    if(plan==="Custom"){
+      var est=n*79 + a*49; var val=yearly?est*10:est;
+      totalEl.innerHTML="~$"+val.toLocaleString()+"<span>"+per+"</span>";
+    } else {
+      var monthly=base + a*49; var val2=yearly?monthly*10:monthly;
+      totalEl.innerHTML="$"+val2.toLocaleString()+"<span>"+per+"</span>";
     }
   }
-  function hoverRotate(){
-    var carousel=document.querySelector(String.fromCharCode(46)+String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(108));
-    if(!carousel||carousel.getAttribute(String.fromCharCode(100)+String.fromCharCode(97)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(53))) return;
-    carousel.setAttribute(String.fromCharCode(100)+String.fromCharCode(97)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(53), String.fromCharCode(49));
-    var timer=null;
-    function step(){ try{ if(typeof next!==(String.fromCharCode(117)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(102)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(100))){ next(); } }catch(e){} }
-    carousel.addEventListener(String.fromCharCode(109)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(101)+String.fromCharCode(110)+String.fromCharCode(116)+String.fromCharCode(101)+String.fromCharCode(114), function(){ if(timer) return; timer=setInterval(step,1600); });
-    carousel.addEventListener(String.fromCharCode(109)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(108)+String.fromCharCode(101)+String.fromCharCode(97)+String.fromCharCode(118)+String.fromCharCode(101), function(){ if(timer){ clearInterval(timer); timer=null; } });
-    var stage=document.getElementById(String.fromCharCode(115)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(103)+String.fromCharCode(101));
-    if(stage){ var cs=stage.querySelectorAll(String.fromCharCode(46)+String.fromCharCode(99)+String.fromCharCode(97)+String.fromCharCode(114)+String.fromCharCode(100)); for(var i=0;i<cs.length;i++){ (function(idx){ cs[idx].addEventListener(String.fromCharCode(109)+String.fromCharCode(111)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(101)+String.fromCharCode(101)+String.fromCharCode(110)+String.fromCharCode(116)+String.fromCharCode(101)+String.fromCharCode(114), function(){ try{ if(typeof go!==(String.fromCharCode(117)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(101)+String.fromCharCode(102)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(100))){ go(idx); } }catch(e){} }); })(i); } }
+
+  function refreshLang(){
+    var s=document.getElementById("hv-slogan"); if(s) s.textContent=t("slogan");
+    var map={"hvc-h":"calc_h","hvc-sub":"calc_sub","hvc-l-emp":"calc_emp","hvc-l-bill":"calc_bill",
+      "hvc-b-month":"calc_month","hvc-b-year":"calc_year","hvc-l-addons":"calc_addons",
+      "hvc-l-plan":"calc_plan","hvc-l-total":"calc_total","hvc-note":"calc_note"};
+    Object.keys(map).forEach(function(id){ var e=document.getElementById(id); if(e) e.textContent=t(map[id]); });
+    var cta=document.getElementById("hv-cta"); if(cta) cta.textContent=t("calc_cta");
+    var pb=document.querySelector(".hv-profile-btn"); if(pb) pb.textContent=t("view_profile");
+    var bs=document.getElementById("boris-status"); if(bs) bs.textContent=t("boris_status");
+    var bi=document.getElementById("boris-input"); if(bi) bi.setAttribute("placeholder",t("boris_ph"));
+    var bn=document.getElementById("boris-note"); if(bn) bn.textContent=t("boris_note");
+    calc();
   }
-  function removeAvaTip(){ var tip=document.getElementById(String.fromCharCode(97)+String.fromCharCode(118)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(116)+String.fromCharCode(105)+String.fromCharCode(112)); if(tip&&tip.parentNode){ tip.parentNode.removeChild(tip); } }
-  function borisStanding(){
-    var bb=document.getElementById(String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(117)+String.fromCharCode(98)+String.fromCharCode(98)+String.fromCharCode(108)+String.fromCharCode(101));
-    if(!bb||bb.getAttribute(String.fromCharCode(100)+String.fromCharCode(97)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(53))) return;
-    bb.setAttribute(String.fromCharCode(100)+String.fromCharCode(97)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(45)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(53), String.fromCharCode(49));
-    bb.classList.add(String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(115)+String.fromCharCode(116)+String.fromCharCode(97)+String.fromCharCode(110)+String.fromCharCode(100)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(103));
-    if(!bb.querySelector(String.fromCharCode(46)+String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(97)+String.fromCharCode(115)+String.fromCharCode(101))){ var base=document.createElement(String.fromCharCode(115)+String.fromCharCode(112)+String.fromCharCode(97)+String.fromCharCode(110)); base.className=String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(97)+String.fromCharCode(115)+String.fromCharCode(101); bb.appendChild(base); }
-    if(!document.getElementById(String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(108)+String.fromCharCode(97)+String.fromCharCode(98)+String.fromCharCode(101)+String.fromCharCode(108))){ var lbl=document.createElement(String.fromCharCode(115)+String.fromCharCode(112)+String.fromCharCode(97)+String.fromCharCode(110)); lbl.id=String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(108)+String.fromCharCode(97)+String.fromCharCode(98)+String.fromCharCode(101)+String.fromCharCode(108); lbl.className=String.fromCharCode(104)+String.fromCharCode(118)+String.fromCharCode(45)+String.fromCharCode(98)+String.fromCharCode(111)+String.fromCharCode(114)+String.fromCharCode(105)+String.fromCharCode(115)+String.fromCharCode(45)+String.fromCharCode(108)+String.fromCharCode(97)+String.fromCharCode(98)+String.fromCharCode(101)+String.fromCharCode(108); lbl.textContent=String.fromCharCode(66)+String.fromCharCode(117)+String.fromCharCode(115)+String.fromCharCode(105)+String.fromCharCode(110)+String.fromCharCode(101)+String.fromCharCode(115)+String.fromCharCode(115)+String.fromCharCode(32)+String.fromCharCode(65)+String.fromCharCode(110)+String.fromCharCode(97)+String.fromCharCode(108)+String.fromCharCode(121)+String.fromCharCode(115)+String.fromCharCode(116); bb.appendChild(lbl); }
-  }
-  function init(){
-    hoverRotate();
-    injectChips();
-    removeAvaTip();
-    borisStanding();
-    var last=currentLang();
-    setInterval(function(){ var L=currentLang(); if(L!==last){ last=L; injectChips(); } removeAvaTip(); }, 600);
-  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+
+    /* ---- A. Side slogan ---- */
+    var hs=document.querySelector('[data-i18n="hero_sub"]');
+    if(hs && !document.getElementById("hv-slogan")){
+      var sl=el('<p id="hv-slogan"></p>'); sl.textContent=t("slogan");
+      hs.parentNode.insertBefore(sl, hs.nextSibling);
+      // Team collage of 12 portraits under the slogan
+      var files=["sarah","emma","olivia","alex","max","daniel","boris","sophia","leo","vera","rooney","nina"];
+      var col=el('<div id="hv-collage" aria-label="Hyventa AI team"></div>');
+      files.forEach(function(f){
+        var fig=document.createElement("figure");
+        fig.innerHTML='<img src="images/'+f+'.png" alt="'+f+'" loading="lazy" onerror="this.parentNode.style.display=\'none\'"><figcaption>'+f.charAt(0).toUpperCase()+f.slice(1)+'</figcaption>';
+        fig.querySelector("img").addEventListener("click", function(){ if(typeof openProfile==="function") openProfile(f); });
+        col.appendChild(fig);
+      });
+      sl.parentNode.insertBefore(col, sl.nextSibling);
+    }
+
+    /* ---- B. Cost calculator (before #pricing) ---- */
+    var pricing=document.getElementById("pricing");
+    if(pricing && !document.getElementById("hv-calc")){
+      var sec=el('<section id="hv-calc"><div class="wrap">'+
+        '<div class="sec-head"><h2 id="hvc-h"></h2><p id="hvc-sub"></p></div>'+
+        '<div class="hvc-grid">'+
+          '<div class="hvc-controls">'+
+            '<label id="hvc-l-emp"></label>'+
+            '<input type="range" id="hv-emp" min="1" max="12" value="1">'+
+            '<div class="hvc-val"><span id="hv-emp-val">1</span></div>'+
+            '<label id="hvc-l-bill"></label>'+
+            '<div class="hvc-seg"><button type="button" data-bill="month" id="hvc-b-month" class="active"></button><button type="button" data-bill="year" id="hvc-b-year"></button></div>'+
+            '<label id="hvc-l-addons"></label>'+
+            '<input type="range" id="hv-addons" min="0" max="5" value="0">'+
+            '<div class="hvc-val"><span id="hv-addons-val">0</span></div>'+
+          '</div>'+
+          '<div class="hvc-result">'+
+            '<div class="hvc-plan-label" id="hvc-l-plan"></div>'+
+            '<div class="hvc-plan" id="hv-plan">Start</div>'+
+            '<div class="hvc-total-label" id="hvc-l-total"></div>'+
+            '<div class="hvc-total" id="hv-total"></div>'+
+            '<a href="#contact" class="hvc-cta" id="hv-cta"></a>'+
+            '<p class="hvc-note" id="hvc-note"></p>'+
+          '</div>'+
+        '</div></div></section>');
+      pricing.parentNode.insertBefore(sec, pricing);
+      document.getElementById("hv-emp").addEventListener("input", calc);
+      document.getElementById("hv-addons").addEventListener("input", calc);
+      document.getElementById("hvc-b-month").addEventListener("click", function(){ hvBill="month"; this.classList.add("active"); document.getElementById("hvc-b-year").classList.remove("active"); calc(); });
+      document.getElementById("hvc-b-year").addEventListener("click", function(){ hvBill="year"; this.classList.add("active"); document.getElementById("hvc-b-month").classList.remove("active"); calc(); });
+    }
+
+    /* ---- C. Clickable character profiles ---- */
+    window.openProfile = function openProfile(file){
+      if(!P[file]) return;
+      var activeName=document.querySelector(".card.active .name-plate h3");
+      var name = activeName ? activeName.textContent : cap(file);
+      var role = (P[file].role && (P[file].role[lang()]||P[file].role.en)) || "";
+      var article=pget(file,"article")||"";
+      var examples=pget(file,"examples")||[];
+      var how=pget(file,"how")||[];
+      var exHtml=examples.map(function(x){return "<li>"+esc(x)+"</li>";}).join("");
+      var howHtml=how.map(function(x){return "<li>"+esc(x)+"</li>";}).join("");
+      var ov=el('<div id="hv-modal" role="dialog" aria-modal="true"><div class="hv-modal-card">'+
+        '<button class="hv-modal-close" aria-label="'+esc(t("profile_close"))+'">×</button>'+
+        '<div class="hv-modal-hero"><img src="images/'+file+'.png" alt="'+esc(name)+'" onerror="this.style.display=\'none\'">'+
+          '<div><h3>'+esc(name)+'</h3><div class="hv-modal-role">'+esc(role)+'</div></div></div>'+
+        '<div class="hv-modal-body">'+
+          '<p class="hv-modal-article">'+esc(article)+'</p>'+
+          '<h4>'+esc(t("profile_examples"))+'</h4><ul class="hv-modal-ex">'+exHtml+'</ul>'+
+          '<h4>'+esc(t("profile_how"))+'</h4><ol class="hv-modal-how">'+howHtml+'</ol>'+
+          '<div class="hv-modal-cta"><a href="#contact" class="hvc-cta hv-hire">'+esc(t("profile_hire"))+' '+esc(name)+'</a>'+
+          '<button type="button" class="hv-ask">'+esc(t("profile_ask"))+'</button></div>'+
+        '</div></div></div>');
+      document.body.appendChild(ov);
+      document.body.style.overflow="hidden";
+      function close(){ ov.remove(); document.body.style.overflow=""; }
+      ov.addEventListener("click", function(e){ if(e.target===ov) close(); });
+      ov.querySelector(".hv-modal-close").addEventListener("click", close);
+      ov.querySelector(".hv-hire").addEventListener("click", close);
+      ov.querySelector(".hv-ask").addEventListener("click", function(){ close(); var b=document.getElementById("ava-bubble"); if(b) b.click(); });
+      document.addEventListener("keydown", function esckey(e){ if(e.key==="Escape"){ close(); document.removeEventListener("keydown",esckey);} });
+      requestAnimationFrame(function(){ ov.classList.add("show"); });
+    }
+
+    // "View profile" button appended into carousel detail, re-added on re-render
+    var detail=document.getElementById("detail");
+    function addProfileBtn(){
+      if(!detail || detail.querySelector(".hv-profile-btn")) return;
+      var b=el('<button type="button" class="hv-profile-btn"></button>'); b.textContent=t("view_profile");
+      b.addEventListener("click", function(){
+        var img=document.querySelector(".card.active img[src*='images/']");
+        if(!img) return; var m=img.getAttribute("src").match(/images\/([^\/.]+)\.png/);
+        if(m) openProfile(m[1]);
+      });
+      detail.appendChild(b);
+    }
+    if(detail){
+      addProfileBtn();
+      try{ new MutationObserver(addProfileBtn).observe(detail,{childList:true}); }catch(e){}
+    }
+    // Clicking the centered card also opens its profile
+    document.addEventListener("click", function(e){
+      var card=e.target.closest ? e.target.closest(".card") : null;
+      if(!card || !card.classList.contains("active")) return;
+      var img=card.querySelector("img[src*='images/']"); if(!img) return;
+      var m=img.getAttribute("src").match(/images\/([^\/.]+)\.png/);
+      if(m && P[m[1]]) openProfile(m[1]);
+    });
+
+    /* ---- D. Boris widget (bottom-left) ---- */
+    if(!document.getElementById("boris-bubble")){
+      var bb=el('<button id="boris-bubble" aria-label="Chat with Boris"><img src="images/boris.png" alt="Boris" onerror="this.parentNode.textContent=\'📊\'"></button>');
+      var bp=el('<div id="boris-panel">'+
+        '<div class="boris-head"><div class="bav"><img src="images/boris.png" alt="Boris" onerror="this.parentNode.textContent=\'B\'"></div><div class="who"><b>Boris</b><span id="boris-status"></span></div><button class="bclose" id="boris-close">×</button></div>'+
+        '<div class="boris-body" id="boris-body"></div>'+
+        '<div class="boris-foot"><input id="boris-input" type="text"><button id="boris-send">➤</button></div>'+
+        '<p class="boris-note" id="boris-note"></p></div>');
+      document.body.appendChild(bb); document.body.appendChild(bp);
+      var bsession="web-boris-"+Math.random().toString(36).slice(2)+Date.now();
+      var bbody=document.getElementById("boris-body");
+      var binput=document.getElementById("boris-input");
+      var greeted=false;
+      function badd(text,who){ var m=document.createElement("div"); m.className="msg "+who; m.textContent=text; bbody.appendChild(m); bbody.scrollTop=bbody.scrollHeight; return m; }
+      function openBoris(){ bp.classList.add("open"); if(!greeted){ badd(t("boris_hi"),"bot"); greeted=true; } binput.focus(); }
+      bb.addEventListener("click", function(){ bp.classList.contains("open") ? bp.classList.remove("open") : openBoris(); });
+      document.getElementById("boris-close").addEventListener("click", function(){ bp.classList.remove("open"); });
+      function bsend(){
+        var text=binput.value.trim(); if(!text) return;
+        badd(text,"user"); binput.value="";
+        var ty=badd("…","bot");
+        fetch(BORIS_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chatInput:text,sessionId:bsession,lang:lang()})})
+          .then(function(r){ return r.json(); })
+          .then(function(d){ ty.textContent=d.output||d.reply||d.text||JSON.stringify(d); })
+          .catch(function(){ ty.textContent=t("boris_err"); });
+      }
+      document.getElementById("boris-send").addEventListener("click", bsend);
+      binput.addEventListener("keydown", function(e){ if(e.key==="Enter") bsend(); });
+    }
+
+    /* ---- language sync ---- */
+    document.querySelectorAll(".lang button").forEach(function(b){ b.addEventListener("click", function(){ setTimeout(refreshLang,0); }); });
+    refreshLang();
+  });
+})();
+
+</script>
+<!-- HYVENTA-V2:END -->
+<!-- HYVENTA-V3:START -->
+<script id="hv-v3-js">
+window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simple","m":49,"a":490,"pm":"pri_01m2fpxte5fp8jnfdq3k1e5xvv","pa":"pri_01m2fpxtegqsgv78ccdmgsk3d8","cta":"trial","usage":"Up to 500 conversations/mo, fair-use LLM"},"nina":{"name":"Nina","role":"AI Translator","cls":"A-Simple","m":49,"a":490,"pm":"pri_01m2fpxtevqyx4xmgv1hn3f1hc","pa":"pri_01m2fpxts46r6vxpy4qq16pwyz","cta":"trial","usage":"Up to 2000 messages/mo, fair-use LLM"},"sarah":{"name":"Sarah","role":"AI Sales Manager","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtf91y8y9vqqdxneedg1","pa":"pri_01m2fpxtf91y8y9vqqe3aredbr","cta":"trial","usage":"Up to 800 lead conversations/mo, CRM sync, fair-use LLM"},"olivia":{"name":"Olivia","role":"AI Appointment Setter","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtfe146j9cpvkdmte32q","pa":"pri_01m2fpxtg7a75bp1wyf2dtjx7q","cta":"trial","usage":"Up to 800 conversations/mo, calendar sync, fair-use LLM"},"alex":{"name":"Alex","role":"AI Support Agent","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtg3m5ep5r9st4xp2tz8","pa":"pri_01m2fpxtg1aag391xkr6d5322h","cta":"trial","usage":"Up to 1000 tickets/mo, fair-use LLM"},"sophia":{"name":"Sophia","role":"AI Marketing Manager","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtgq4nbhn1eqj3yb9ch8","pa":"pri_01m2fpxtg6st1vg0b2swt7bp4p","cta":"trial","usage":"Daily content batches, fair-use LLM"},"max":{"name":"Max","role":"AI Knowledge Assistant","cls":"C-Advanced","m":199,"a":1990,"pm":"pri_01m2fpxtgtet23ztn39xwbedax","pa":"pri_01m2fpxtgmhr6n5ksej4vzzk6a","cta":"trial","usage":"Up to 1500 queries/mo, KB embeddings, memory, fair-use LLM"},"daniel":{"name":"Daniel","role":"AI Recruiter","cls":"C-Advanced","m":199,"a":1990,"pm":"pri_01m2fpxtj8cqbgc9msheq8gncy","pa":"pri_01m2fpxtj0376kk1fwkxrz3nhn","cta":"trial","usage":"Up to 1000 applicant screens/mo, ATS webhook, fair-use LLM"},"boris":{"name":"Boris","role":"AI Business Analyst","cls":"C-Advanced","m":249,"a":2490,"pm":"pri_01m2fpxthrxec9cesmh8t9f1qb","pa":"pri_01m2fpxth36yv2g8cnfq37vayy","cta":"trial","usage":"Up to 200 analysis reports/mo, web search included, fair-use LLM"},"leo":{"name":"Leo","role":"AI Designer","cls":"D-Custom","m":null,"a":null,"pm":"","pa":"","cta":"contact","usage":"Custom per engagement"},"vera":{"name":"Vera","role":"AI Video Producer","cls":"D-Custom","m":null,"a":null,"pm":"","pa":"","cta":"contact","usage":"Custom per engagement"},"rooney":{"name":"Rooney","role":"AI Composer","cls":"D-Custom","m":null,"a":null,"pm":"","pa":"","cta":"contact","usage":"Custom per engagement"},"tier-starter":{"name":"Hyventa Starter","role":"Bundle - 1 AI employee","cls":"bundle","m":99,"a":990,"pm":"pri_01m2fpxtnp2m188er2wfj7ng5c","pa":"pri_01m2fpxtdh70esckrnp9a7epev","cta":"trial","usage":""},"tier-business":{"name":"Hyventa Business","role":"Bundle - most popular","cls":"bundle","m":249,"a":2490,"pm":"pri_01m2fpxte4qs8pvdzczbnpw50c","pa":"pri_01m2fpxtdxpxgt31yh7vrk5hrk","cta":"trial","usage":""},"tier-pro":{"name":"Hyventa Pro","role":"Bundle - full AI department","cls":"bundle","m":499,"a":4990,"pm":"pri_01m2fpxtdxekjcmeq25kbbdjex","pa":"pri_01m2fpxte7t32qxh1tfprnxnm2","cta":"trial","usage":""}};
+(function(){
+  function track(ev,params){ try{ if(window.gtag){ gtag('event',ev,params||{}); } }catch(e){} try{ if(window.fbq){ fbq('trackCustom',ev,params||{}); } }catch(e){} }
+  window.hvTrack=track;
+  var hvBill3='month';
+  function num(id){ var e=document.getElementById(id); return e?(+e.value):0; }
+  function setTxt(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
+  function mk(tag,cls,txt){ var e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
+  document.addEventListener('DOMContentLoaded', function(){
+    var pricing=document.getElementById('pricing');
+    var calc=document.getElementById('hv-calc');
+    var anchor=calc||pricing;
+    var hs=document.querySelector('[data-i18n=hero_sub]')||document.querySelector('.hero p');
+    if(hs && !document.getElementById('hv-hero-sub2')){
+      var p=mk('p','hv-hero-sub2','Specialized AI employees that handle real business tasks 24/7 — from sales and customer support to research, operations and marketing.'); p.id='hv-hero-sub2';
+      hs.parentNode.insertBefore(p, hs.nextSibling);
+      var row=mk('div','hv-hero-cta',null);
+      var a1=mk('a','hv-btn-primary','Start free for 7 days'); a1.setAttribute('href','#hv-calc'); a1.addEventListener('click',function(){ track('trial_click',{location:'hero'}); });
+      var a2=mk('a','hv-btn-secondary','Meet the AI team'); a2.setAttribute('href','#team');
+      row.appendChild(a1); row.appendChild(a2); p.parentNode.insertBefore(row, p.nextSibling);
+    }
+    if(anchor && !document.getElementById('hv-demo')){
+      var d=mk('section',null,null); d.id='hv-demo'; d.className='hv-sec';
+      d.appendChild(mk('h2',null,'See your AI employee at work'));
+      d.appendChild(mk('p','sub','A real lead lifecycle, handled end to end.'));
+      var flow=mk('div','hv-flow',null); var steps=['Lead arrives','AI analyzes the request','AI qualifies the lead','AI responds instantly','CRM updated','Follow-up scheduled'];
+      for(var i=0;i<steps.length;i++){ var st=mk('div','hv-step',null); st.appendChild(mk('div','n',String(i+1))); st.appendChild(document.createTextNode(steps[i])); flow.appendChild(st); }
+      d.appendChild(flow); anchor.parentNode.insertBefore(d, anchor);
+    }
+    if(anchor && !document.getElementById('hv-roi')){
+      var r=mk('section',null,null); r.id='hv-roi'; r.className='hv-sec';
+      r.appendChild(mk('h2',null,'How much time could your AI employee save?'));
+      r.appendChild(mk('p','sub','Estimates only — your results depend on your workflow.'));
+      var grid=mk('div','hv-roi-grid',null); var ctrl=mk('div','hv-roi-controls',null);
+      function slider(id,label,min,max,val,unit){ var lab=mk('label',null,null); lab.appendChild(document.createTextNode(label+': ')); var sp=mk('span',null,String(val)); sp.id=id+'-v'; lab.appendChild(sp); if(unit) lab.appendChild(document.createTextNode(unit)); ctrl.appendChild(lab); var inp=document.createElement('input'); inp.type='range'; inp.id=id; inp.min=String(min); inp.max=String(max); inp.value=String(val); ctrl.appendChild(inp); }
+      slider('hv-roi-emp','Employees involved',1,50,2,''); slider('hv-roi-hrs','Hours/week on repetitive tasks',1,40,10,''); slider('hv-roi-cost','Hourly cost ($)',5,150,25,''); slider('hv-roi-auto','Automation',10,90,70,'%');
+      var out=mk('div','hv-roi-out',null);
+      function orow(label,id,init){ var rw=mk('div','row',null); rw.appendChild(document.createTextNode(label)); var b=mk('b',null,init); b.id=id; rw.appendChild(b); out.appendChild(rw); }
+      orow('Time saved / month','hv-roi-saved','0 h'); orow('Labor value saved','hv-roi-labor','$0'); orow('Est. Hyventa cost','hv-roi-hyv','$249');
+      var net=mk('div','hv-roi-net',null); net.appendChild(document.createTextNode('Net: ')); var ns=mk('span',null,'$0'); ns.id='hv-roi-net'; net.appendChild(ns); net.appendChild(document.createTextNode('/mo')); out.appendChild(net);
+      grid.appendChild(ctrl); grid.appendChild(out); r.appendChild(grid); anchor.parentNode.insertBefore(r, anchor);
+      function roi(){ setTxt('hv-roi-emp-v',num('hv-roi-emp')); setTxt('hv-roi-hrs-v',num('hv-roi-hrs')); setTxt('hv-roi-cost-v',num('hv-roi-cost')); setTxt('hv-roi-auto-v',num('hv-roi-auto')); var mh=num('hv-roi-emp')*num('hv-roi-hrs')*4.33; var saved=mh*(num('hv-roi-auto')/100); var labor=saved*num('hv-roi-cost'); var netv=labor-249; setTxt('hv-roi-saved',Math.round(saved)+' h'); setTxt('hv-roi-labor','$'+Math.round(labor).toLocaleString()); setTxt('hv-roi-net','$'+Math.round(netv).toLocaleString()); }
+      ['hv-roi-emp','hv-roi-hrs','hv-roi-cost','hv-roi-auto'].forEach(function(id){ var e=document.getElementById(id); if(e) e.addEventListener('input',roi); }); roi();
+    }
+    if(anchor && !document.getElementById('hv-trust')){
+      var ts=mk('section',null,null); ts.id='hv-trust'; ts.className='hv-sec';
+      ts.appendChild(mk('h2',null,'Built to be trusted'));
+      ts.appendChild(mk('p','sub','Transparent, controllable, and connected to your stack.'));
+      var tgrid=mk('div','hv-trust-grid',null); var tc=[['AI, not a black box','Every employee always identifies itself as an AI.'],['Human handoff','A person can take over whenever a case needs it.'],['Context memory','Agents keep relevant conversation and business context.'],['Works with your tools','Email, chat, CRM, calendar, sheets and more.'],['Always on','Automation runs 24/7 without downtime.'],['Honest security','Business-grade AI providers; your data is not used for training.']];
+      for(var j=0;j<tc.length;j++){ var cd=mk('div','hv-trust-card',null); cd.appendChild(mk('b',null,tc[j][0])); cd.appendChild(document.createTextNode(tc[j][1])); tgrid.appendChild(cd); }
+      ts.appendChild(tgrid); anchor.parentNode.insertBefore(ts, anchor);
+    }
+    if(pricing && !document.getElementById('hv-faq2')){
+      var f=mk('section',null,null); f.id='hv-faq2'; f.className='hv-sec';
+      f.appendChild(mk('h2',null,'Questions and answers'));
+      var qa=[['Is this a chatbot?','No. Hyventa AI employees perform defined business tasks and interact with connected tools.'],['Do I need n8n?','No. Hyventa handles the underlying automation for you.'],['Do I need an API key?','In most cases no — usage is included. Some advanced setups may connect your own tools.'],['Is AI usage included?','Yes, within the plan fair-use allowance.'],['What happens if I use more?','Additional usage may be available depending on the product.'],['Can a human take over?','Yes, where human handoff is supported.'],['Can I cancel?','Yes, anytime.'],['Is there a free trial?','Yes, 7 days for eligible plans.'],['Can you set it up for me?','Yes. Optional implementation is available.']];
+      for(var k=0;k<qa.length;k++){ var det=mk('details',null,null); det.appendChild(mk('summary',null,qa[k][0])); det.appendChild(mk('p',null,qa[k][1])); f.appendChild(det); }
+      if(pricing.nextSibling) pricing.parentNode.insertBefore(f, pricing.nextSibling); else pricing.parentNode.appendChild(f);
+    }
+    if(pricing && !document.getElementById('hv-bill-toggle')){
+      var tgl=mk('div','hv-bill-toggle',null); tgl.id='hv-bill-toggle';
+      var bm=mk('button','active','Monthly'); bm.type='button'; var by=mk('button',null,'Annual · Save 2 months (~17%)'); by.type='button';
+      tgl.appendChild(bm); tgl.appendChild(by); pricing.insertBefore(tgl, pricing.firstChild);
+      var note=mk('p','hv-slot-note','Bundle plans cover eligible AI employees by complexity (slot-based), not any six agents.'); pricing.insertBefore(note, tgl.nextSibling);
+      bm.addEventListener('click',function(){ hvBill3='month'; bm.classList.add('active'); by.classList.remove('active'); });
+      by.addEventListener('click',function(){ hvBill3='year'; by.classList.add('active'); bm.classList.remove('active'); });
+      function hvOpenCheckout(pid,slug){ var tries=0; (function go(){ if(window.Paddle && Paddle.Checkout){ track('checkout_started',{plan:slug,price_id:pid}); Paddle.Checkout.open({items:[{priceId:pid,quantity:1}]}); } else if(tries++<40){ setTimeout(go,125); } })(); }
+      function hvBindTierCtas(){ var cards=pricing.querySelectorAll('.prices .price'); var tiers=['tier-starter','tier-business','tier-pro']; for(var c=0;c<cards.length && c<tiers.length;c++){ (function(card,slug){ var elm=card.querySelector('a.choose')||card.querySelector('a[href]'); if(!elm||elm.getAttribute('data-hv-bound')==='1') return; elm.setAttribute('data-hv-bound','1'); elm.addEventListener('click',function(ev){ ev.preventDefault(); track('trial_click',{plan:slug}); var pr=(window.HV_PRICING||{})[slug]||{}; var pid=(hvBill3==='year')?pr.pa:pr.pm; if(pid){ hvOpenCheckout(pid,slug); } }); })(cards[c],tiers[c]); } }
+      hvBindTierCtas();
+      try{ new MutationObserver(hvBindTierCtas).observe(pricing,{childList:true,subtree:true}); }catch(e){}
+    }
+    function badgeFor(cls){ if(!cls) return 'Advanced'; if(cls.indexOf('A')===0) return 'Simple'; if(cls.indexOf('C')===0) return 'Premium'; if(cls.indexOf('D')===0) return 'Custom'; return 'Advanced'; }
+    function enrich(ov){ var img=ov.querySelector('.hv-modal-hero img'); if(!img) return; var mm=(img.getAttribute('src')||'').match(/images\/([^\/.]+)\.png/); if(!mm) return; var slug=mm[1]; var pr=(window.HV_PRICING||{})[slug]; track('agent_page_view',{agent:slug}); if(!pr) return; var body=ov.querySelector('.hv-modal-body'); if(!body||body.querySelector('.hv-modal-price')) return; var box=mk('div','hv-modal-price',null); box.appendChild(mk('span','hv-badge',badgeFor(pr.cls))); if(pr.cta==='contact' || !pr.m){ box.appendChild(mk('div','hv-price-line','Custom quote')); var la=mk('a','hvc-cta','Contact sales'); la.setAttribute('href','#contact'); box.appendChild(la); } else { var pl=mk('div','hv-price-line',null); pl.appendChild(document.createTextNode('$'+pr.m)); var s1=mk('span',null,'/mo'); pl.appendChild(s1); pl.appendChild(document.createTextNode(' · $'+pr.a)); var s2=mk('span',null,'/yr'); pl.appendChild(s2); box.appendChild(pl); box.appendChild(mk('div','hv-usage',pr.usage||'')); var bb=mk('button','hvc-cta','Start 7-day free trial'); bb.type='button'; bb.addEventListener('click',function(){ track('trial_click',{agent:slug}); var pid=pr.pm; if(pid&&window.Paddle){ track('checkout_started',{agent:slug,price_id:pid}); Paddle.Checkout.open({items:[{priceId:pid,quantity:1}]}); } else { location.hash='#contact'; } }); box.appendChild(bb); } var cta=body.querySelector('.hv-modal-cta'); if(cta) body.insertBefore(box,cta); else body.appendChild(box); }
+    try{ var mo=new MutationObserver(function(muts){ muts.forEach(function(m){ for(var i=0;i<m.addedNodes.length;i++){ var n=m.addedNodes[i]; if(n && n.id==='hv-modal') enrich(n); } }); }); mo.observe(document.body,{childList:true}); }catch(e){}
+    try{ if(pricing){ var io=new IntersectionObserver(function(en){ en.forEach(function(x){ if(x.isIntersecting){ track('pricing_view',{}); io.disconnect(); } }); }); io.observe(pricing); } }catch(e){}
+  });
 })();
 </script>
-<!-- HYVENTA-V5:END -->
+<!-- HYVENTA-V3:END -->
+<!-- HYVENTA-V4:START -->
+<script id="hv-v4-js">
+(function(){
+  'use strict';
+  function ready(fn){ if(document.readyState!=='loading'){ fn(); } else { document.addEventListener('DOMContentLoaded', fn); } }
+  function q(s,r){ return (r||document).querySelector(s); }
+  function el(tag,cls){ var e=document.createElement(tag); if(cls) e.className=cls; return e; }
+
+  ready(function(){
+    var navCta = q('.nav .cta-btn') || q('header .cta-btn');
+    if(navCta && navCta.parentNode){ navCta.parentNode.removeChild(navCta); }
+
+    var hero = q('section.hero') || q('.hero');
+    if(!hero) return;
+
+    ['hv-slogan','hv-collage','hv-hero-sub2','hv-hero-cta'].forEach(function(id){
+      var n=document.getElementById(id); if(n && n.parentNode) n.parentNode.removeChild(n);
+    });
+    var dupRows=document.querySelectorAll('.hv-hero-cta');
+    for(var d=0; d<dupRows.length; d++){ if(dupRows[d] && dupRows[d].parentNode) dupRows[d].parentNode.removeChild(dupRows[d]); }
+
+    if(!hero.getAttribute('data-hv-v4')){
+      hero.setAttribute('data-hv-v4','1');
+      hero.classList.add('hv-hero-v4');
+
+      var left = el('div','hv-hero-left'); left.id='hv-hero-left';
+      var kids = [];
+      for(var i=0;i<hero.childNodes.length;i++){ kids.push(hero.childNodes[i]); }
+      kids.forEach(function(k){ left.appendChild(k); });
+
+      var actions = q('.hero-actions', left);
+      if(actions){
+        var btns = actions.querySelectorAll('a');
+        if(btns[0]){ btns[0].removeAttribute('data-i18n'); btns[0].textContent='Start free for 7 days'; btns[0].setAttribute('href','#pricing'); }
+        if(btns[1]){ btns[1].removeAttribute('data-i18n'); btns[1].textContent='Meet the AI team'; btns[1].setAttribute('href','#team'); }
+      }
+
+      var visual = el('div','hv-hero-visual'); visual.id='hv-hero-visual';
+      visual.setAttribute('aria-hidden','true');
+      visual.appendChild(el('div','hv-hero-glow'));
+      visual.appendChild(el('div','hv-hero-grid'));
+      visual.appendChild(el('div','hv-hero-orbit hv-o1'));
+      visual.appendChild(el('div','hv-hero-orbit hv-o2'));
+      visual.appendChild(el('div','hv-hero-orbit hv-o3'));
+      visual.appendChild(el('div','hv-hero-planet'));
+
+      var parts = el('div','hv-hero-particles');
+      var coords = [[12,22,0],[78,14,0.8],[64,70,1.4],[28,78,2.1],[88,52,2.7],[44,38,3.3]];
+      coords.forEach(function(c){
+        var s=el('i',null);
+        s.style.setProperty('--x', c[0]+'%');
+        s.style.setProperty('--y', c[1]+'%');
+        s.style.setProperty('--d', c[2]+'s');
+        parts.appendChild(s);
+      });
+      visual.appendChild(parts);
+
+      var img=el('img','hv-hero-img');
+      img.src='images/hero-ai.png';
+      img.alt='';
+      img.loading='lazy';
+      img.onerror=function(){ this.style.display='none'; if(this.parentNode) this.parentNode.classList.add('hv-noimg'); };
+      visual.appendChild(img);
+
+      hero.appendChild(left);
+      hero.appendChild(visual);
+    }
+
+    var h1 = q('.hero h1[data-i18n=hero_h1]') || q('.hero h1');
+    function wrapH1(){
+      if(!h1) return;
+      if(h1.querySelector('.hv-grad')) return;
+      var txt=(h1.textContent||'').trim();
+      var idx=txt.indexOf('. ');
+      if(idx===-1) return;
+      var first=txt.slice(0, idx+1);
+      var rest=txt.slice(idx+2);
+      if(!rest) return;
+      h1.textContent='';
+      h1.appendChild(document.createTextNode(first+' '));
+      var sp=el('span','hv-grad'); sp.textContent=rest;
+      h1.appendChild(sp);
+    }
+    wrapH1();
+    if(h1 && window.MutationObserver){
+      var mo=new MutationObserver(function(){ wrapH1(); });
+      mo.observe(h1,{ childList:true, characterData:true, subtree:true });
+    }
+  });
+})();
+</script>
+<!-- HYVENTA-V4:END -->
+</body>
+</html>
