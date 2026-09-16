@@ -2411,5 +2411,16 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
 }
 </style>
 <!-- HYVENTA-V13B-ACTIVECARD:END -->
+<!-- HYVENTA-V13C-BADGE:START -->
+<style id="hv-v13c-badge-css">
+/* ===== V13C: single tier badge on the ACTIVE card — CSS-only, additive =====
+   The active two-column card shows the tier twice: once as the legacy portrait
+   .tier badge (top-right of the photo) and once as .hv-ai-badge in the info
+   panel. Keep only the info-panel badge; hide the portrait badge on the ACTIVE
+   card only. Non-active/side cards keep their portrait badge unchanged.
+   No layout, dimensions, carousel, hover, arrows/dots or modal changes. */
+#team .card.active .portrait .tier { display: none !important; }
+</style>
+<!-- HYVENTA-V13C-BADGE:END -->
 </body>
 </html>
