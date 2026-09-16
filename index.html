@@ -2240,5 +2240,16 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
   #hv-faq2 { display: none !important; }
 </style>
 <!-- HYVENTA-V11-FIXES:END -->
+<!-- HYVENTA-V12-HEROIMG:START -->
+<style id="hv-v12-heroimg-css">
+/* Real PNG AI Core replaces the CSS orb. Hide .hv-hero-planet whenever the
+   PNG is present; keep it only as a fallback when the image fails (hv-noimg).
+   Glow, grid, orbits and particles stay as secondary depth layers. */
+.hv-hero-visual .hv-hero-planet{display:none}
+.hv-hero-visual.hv-noimg .hv-hero-planet{display:block}
+.hv-hero-img{max-height:560px}
+@media(max-width:860px){.hv-hero-img{max-height:340px}}
+</style>
+<!-- HYVENTA-V12-HEROIMG:END -->
 </body>
 </html>
