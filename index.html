@@ -840,6 +840,7 @@ const FAQ = {
 /* ============ State + render ============ */
 let LANG = (navigator.language || "en").slice(0,2);
 if (!I18N[LANG]) LANG = "en";
+const HIRE = { en: "Hire", es: "Contratar", uk: "Найняти" };
 
 const stage  = document.getElementById('stage');
 const dotsEl = document.getElementById('dots');
@@ -857,7 +858,8 @@ const cards = agents.map(function (a, i) {
            'onerror="this.style.display=\'none\'">' +
       '<span class="tier ' + a.tier + '">' + a.tier + '</span>' +
       '<div class="name-plate"><h3>' + a.name + '</h3><div class="role" data-role="'+i+'"></div></div>' +
-    '</div>';
+    '</div>' +
+    '<div class="hv-active-info"></div>';
   el.addEventListener('click', function () { go(i); });
   stage.appendChild(el);
   return el;
@@ -878,7 +880,7 @@ function renderCarousel() {
     if (off >  n / 2) off -= n;
     if (off < -n / 2) off += n;
     const abs = Math.abs(off);
-    const x = off * 210;
+    const x = off === 0 ? 0 : (off * 260 + Math.sign(off) * 210);
     const scale = Math.max(0.55, 1 - abs * 0.16);
     const rot = off === 0 ? 0 : (off < 0 ? 32 : -32);
     const depth = -abs * 220;
@@ -889,6 +891,21 @@ function renderCarousel() {
     el.style.pointerEvents = abs > 3 ? 'none' : 'auto';
     el.classList.toggle('active', off === 0);
     el.querySelector('[data-role]').textContent = agents[i].role[LANG];
+    if (off === 0) {
+      var _a = agents[i];
+      var _info = el.querySelector('.hv-active-info');
+      if (_info) {
+        var _ch = _a.chips[LANG].map(function (c) { return '<li>' + c + '</li>'; }).join('');
+        _info.innerHTML =
+          '<span class="hv-ai-badge ' + _a.tier + '">' + _a.tier + '</span>' +
+          '<h3 class="hv-ai-name">' + _a.name + '</h3>' +
+          '<div class="hv-ai-role">' + _a.role[LANG] + '</div>' +
+          '<p class="hv-ai-blurb">' + _a.blurb[LANG] + '</p>' +
+          '<p class="hv-ai-desc">' + _a.desc[LANG] + '</p>' +
+          '<ul class="hv-ai-benefits">' + _ch + '</ul>' +
+          '<a class="hv-ai-cta" href="#contact">' + HIRE[LANG] + ' ' + _a.name + '</a>';
+      }
+    }
   });
   dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
   const a = agents[current];
@@ -2251,5 +2268,148 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
 @media(max-width:860px){.hv-hero-img{max-height:340px}}
 </style>
 <!-- HYVENTA-V12-HEROIMG:END -->
+<!-- HYVENTA-V13-TEAM:START -->
+<style id="hv-v13-team-css">
+/* ===== V13: Team card visual hierarchy — CSS-only, additive =====
+   Strengthens existing V6 layers only. No carousel JS, hover-zone, arrows/dots
+   logic, transform/matrix3d geometry, card widths, opacity system, or HTML touched. */
+
+/* 1. ACTIVE CARD — richer selected state: crisp accent ring + layered blue glow.
+   Premium, not neon: bright 1px ring, soft halo ring, medium glow, wide ambient. */
+.card.active{
+  border-color:var(--accent);
+  box-shadow:
+    0 34px 90px rgba(0,0,0,.66),
+    0 0 0 1px rgba(108,140,255,.90),
+    0 0 0 4px rgba(108,140,255,.16),
+    0 0 60px rgba(108,140,255,.42),
+    0 0 120px rgba(108,140,255,.20);
+}
+
+/* 2. SIDE CARDS — recede a touch more (brightness/saturation only; opacity &
+   matrix3d untouched). Name plate scrim keeps name/role readable. */
+.card:not(.active){ filter:saturate(.75) brightness(.72); }
+.card:not(.active){ border-color:rgba(38,48,77,.75); }
+
+/* 3. AMBIENT GLOW — same #team::before element, alphas raised ~40% (.16->.22 etc). */
+#team::before{
+  background:
+    radial-gradient(ellipse 46% 50% at 50% 42%, rgba(108,140,255,.22), transparent 70%),
+    radial-gradient(ellipse 34% 40% at 22% 60%, rgba(155,108,255,.17), transparent 72%),
+    radial-gradient(ellipse 34% 40% at 78% 60%, rgba(80,180,255,.14), transparent 72%);
+}
+
+/* 4. PORTRAIT SHEEN — strengthen existing .portrait::after (kept static for safety). */
+.portrait::after{
+  background:linear-gradient(180deg, rgba(150,180,255,.13), transparent 28%);
+}
+.card.active .portrait::after{
+  background:linear-gradient(180deg, rgba(170,200,255,.24), transparent 34%);
+}
+
+/* 5. TYPOGRAPHY — active name contrast only (no size/layout change). */
+.card.active .name-plate h3{
+  text-shadow:0 2px 14px rgba(0,0,0,.55), 0 0 22px rgba(108,140,255,.22);
+}
+
+/* 6. ARROWS — slightly stronger shadow for balance (size/position unchanged). */
+#team .nav-arrow{
+  box-shadow:0 10px 26px rgba(0,0,0,.45), 0 0 0 1px rgba(108,140,255,.12);
+}
+
+/* 8. REDUCED MOTION — no new persistent animation is introduced; guard kept
+   so any transition on these layers is neutralised under reduce. */
+@media (prefers-reduced-motion: reduce){
+  .card, .card.active, .portrait::after{ transition:none; animation:none; }
+}
+</style>
+<!-- HYVENTA-V13-TEAM:END -->
+<!-- HYVENTA-V13B-ACTIVECARD:START -->
+<style id="hv-v13b-activecard-css">
+/* ===== V13B: Active Team card structural redesign — portrait LEFT / info RIGHT.
+   Variant B (approved): active card DOM/width + neighbour X-offset touched only.
+   Side cards, perspective, matrix3d, arrows, dots, hover, selection untouched. ===== */
+
+/* Smooth the width/margin change when a card becomes (in)active */
+#team .card{
+  transition: transform .55s cubic-bezier(.22,.61,.36,1), opacity .55s ease, filter .55s ease, width .45s ease, margin .45s ease, box-shadow .45s ease;
+}
+
+/* Info panel is hidden on non-active (compact preview) cards */
+#team .card .hv-active-info{ display:none; }
+
+/* ---------- ACTIVE CARD: two-column premium profile ---------- */
+#team .card.active{
+  width:640px; margin-left:-320px;          /* stays centered (half of 640) */
+  flex-direction:row; align-items:stretch; text-align:left;
+  background:linear-gradient(155deg, rgba(22,28,50,.97), rgba(10,14,26,.99));
+  border-color:rgba(120,142,255,.55);
+  box-shadow:
+    0 34px 90px rgba(0,0,0,.66),
+    0 0 0 1px rgba(108,140,255,.85),
+    0 0 60px rgba(108,140,255,.34),
+    0 0 120px rgba(108,140,255,.16);
+}
+
+/* Portrait becomes the left column (~44%); name-plate no longer overlays photo */
+#team .card.active .portrait{
+  flex:0 0 44%; width:44%; height:auto;
+  border-right:1px solid rgba(255,255,255,.07);
+  background:radial-gradient(120% 80% at 50% 20%, rgba(90,120,255,.18), transparent 60%), linear-gradient(135deg, #1c2540, #0a0e1a);
+}
+#team .card.active .name-plate{ display:none; }
+
+/* Right-hand information panel */
+#team .card.active .hv-active-info{
+  display:flex; flex-direction:column; gap:9px;
+  flex:1 1 56%; min-width:0; padding:30px 28px 26px; overflow:hidden;
+}
+#team .hv-ai-badge{
+  align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:.5px;
+  text-transform:uppercase; padding:5px 11px; border-radius:8px; color:#0a0e1a;
+}
+#team .hv-ai-badge.START{ background:var(--start); color:#0a0e1a; }
+#team .hv-ai-badge.BUSINESS{ background:var(--business); color:#fff; }
+#team .hv-ai-badge.PRO{ background:var(--pro); color:#fff; }
+#team .hv-ai-badge.CUSTOM{ background:var(--custom); color:#0a0e1a; }
+#team .hv-ai-name{ font-size:34px; font-weight:800; line-height:1.05; margin:2px 0 0; }
+#team .hv-ai-role{ font-size:15px; color:var(--accent); font-weight:600; }
+#team .hv-ai-blurb{ font-size:15px; font-style:italic; color:#eef2ff; margin:4px 0 0; }
+#team .hv-ai-desc{ font-size:14px; line-height:1.5; color:var(--muted); margin:0; }
+#team .hv-ai-benefits{ list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; gap:7px; }
+#team .hv-ai-benefits li{ position:relative; padding-left:24px; font-size:13.5px; color:#cdd6f4; line-height:1.35; }
+#team .hv-ai-benefits li::before{ content:"✓"; position:absolute; left:0; top:0; color:var(--accent); font-weight:800; }
+#team .hv-ai-cta{
+  margin-top:auto; align-self:flex-start; display:inline-block;
+  padding:12px 26px; border-radius:12px; font-weight:700; font-size:15px;
+  color:#fff; text-decoration:none;
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow:0 10px 30px rgba(70,90,230,.40); transition:transform .2s ease, box-shadow .2s ease;
+}
+#team .hv-ai-cta:hover{ transform:translateY(-2px); box-shadow:0 14px 40px rgba(70,90,230,.55); }
+
+/* ---------- MOBILE: portrait on top / info below, within viewport ---------- */
+@media (max-width:760px){
+  #team .card.active{
+    width:340px; margin-left:-170px;         /* back to base width, centered */
+    flex-direction:column;
+  }
+  #team .card.active .portrait{
+    flex:0 0 232px; width:100%; height:232px;
+    border-right:none; border-bottom:1px solid rgba(255,255,255,.07);
+  }
+  #team .card.active .hv-active-info{ flex:1 1 auto; padding:16px 18px 18px; gap:7px; overflow:auto; }
+  #team .hv-ai-name{ font-size:25px; }
+  #team .hv-ai-blurb{ display:none; }        /* save vertical space on mobile */
+  #team .hv-ai-desc{ font-size:13px; }
+  #team .hv-ai-benefits li{ font-size:12.5px; }
+  #team .hv-ai-cta{ padding:10px 20px; font-size:14px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  #team .card, #team .hv-ai-cta{ transition:none; }
+}
+</style>
+<!-- HYVENTA-V13B-ACTIVECARD:END -->
 </body>
 </html>
