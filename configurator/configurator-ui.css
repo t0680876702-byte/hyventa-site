@@ -1,0 +1,226 @@
+/**
+ * HYVENTA CONFIGURATOR — INTEGRATED STYLES
+ * Dark, cinematic, glass. Self-contained. No external libraries.
+ * Every rule is scoped under #configurator .cfg-app so it can NEVER leak into
+ * the rest of the production page. No full-page/body background: the section
+ * sits inside the existing page and inherits the site's section background.
+ */
+
+#configurator .cfg-app {
+  --bg: #070b16;
+  --bg2: #0b1120;
+  --panel: rgba(18, 24, 42, 0.66);
+  --panel-brd: rgba(120, 150, 220, 0.16);
+  --ink: #e8eefc;
+  --muted: #93a1c4;
+  --cyan: #22d3ee;
+  --blue: #4f7cff;
+  --violet: #a855f7;
+  --accent: linear-gradient(135deg, #22d3ee 0%, #4f7cff 55%, #a855f7 100%);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  background: transparent;
+  box-sizing: border-box;
+}
+#configurator .cfg-app *,
+#configurator .cfg-app *::before,
+#configurator .cfg-app *::after { box-sizing: border-box; }
+
+#configurator .cfg-wrap { max-width: 980px; margin: 0 auto; }
+
+#configurator .cfg-hero { text-align: center; margin-bottom: 34px; }
+#configurator .cfg-hero .cfg-kicker {
+  display: inline-block; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--cyan); border: 1px solid var(--panel-brd); border-radius: 999px;
+  padding: 6px 14px; margin-bottom: 18px; background: rgba(34, 211, 238, 0.06);
+}
+#configurator .cfg-hero h1 {
+  font-size: clamp(26px, 3.4vw, 40px); line-height: 1.08; margin: 0 0 12px;
+  background: var(--accent); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+#configurator .cfg-hero p { color: var(--muted); font-size: 16px; margin: 0 auto; max-width: 620px; }
+
+#configurator .cfg-step {
+  background: var(--panel); border: 1px solid var(--panel-brd); border-radius: 18px;
+  padding: 24px 24px 26px; margin-bottom: 18px; backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px); box-shadow: var(--shadow);
+}
+#configurator .cfg-step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 9px; font-weight: 700; font-size: 14px;
+  color: #05101f; background: var(--accent); margin-right: 10px;
+}
+#configurator .cfg-step h2 { display: flex; align-items: center; font-size: 18px; margin: 0 0 4px; color: var(--ink); }
+#configurator .cfg-step .cfg-hint { color: var(--muted); font-size: 13px; margin: 2px 0 16px 40px; }
+
+#configurator .cfg-field { margin: 0 0 4px; }
+#configurator .cfg-input, #configurator .cfg-select {
+  width: 100%; box-sizing: border-box; background: rgba(6, 11, 22, 0.6);
+  border: 1px solid var(--panel-brd); border-radius: 12px; color: var(--ink);
+  padding: 13px 15px; font-size: 15px; outline: none; transition: border-color .15s, box-shadow .15s;
+}
+#configurator .cfg-input::placeholder { color: #5f6d8f; }
+#configurator .cfg-input:focus, #configurator .cfg-select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.18); }
+#configurator .cfg-select:disabled { opacity: 0.4; }
+
+#configurator .cfg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+
+#configurator .cfg-chip { position: relative; }
+#configurator .cfg-chip input { position: absolute; opacity: 0; pointer-events: none; }
+#configurator .cfg-chip label {
+  display: block; cursor: pointer; user-select: none;
+  background: rgba(6, 11, 22, 0.5); border: 1px solid var(--panel-brd);
+  border-radius: 12px; padding: 12px 14px; font-size: 14px; color: var(--ink);
+  transition: border-color .15s, background .15s, transform .05s;
+}
+#configurator .cfg-chip label:hover { border-color: rgba(120, 150, 220, 0.4); }
+#configurator .cfg-chip input:checked + label {
+  border-color: var(--cyan);
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(79, 124, 255, 0.14));
+  box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.4);
+}
+#configurator .cfg-chip input:focus-visible + label { box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.3); }
+
+#configurator .cfg-seg { display: inline-flex; gap: 8px; flex-wrap: wrap; }
+#configurator .cfg-seg .cfg-chip label { min-width: 92px; text-align: center; }
+
+#configurator .cfg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+#configurator .cfg-row .cfg-sub { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+
+#configurator .cfg-toggle { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
+#configurator .cfg-toggle input { width: 18px; height: 18px; accent-color: var(--cyan); }
+#configurator .cfg-toggle label { font-size: 14px; }
+
+#configurator .cfg-actions { text-align: center; margin-top: 26px; }
+#configurator .cfg-submit {
+  border: none; cursor: pointer; color: #05101f; font-weight: 700; font-size: 16px;
+  padding: 15px 40px; border-radius: 14px; background: var(--accent);
+  box-shadow: 0 14px 34px rgba(79, 124, 255, 0.36); transition: transform .08s, box-shadow .15s;
+}
+#configurator .cfg-submit:hover { transform: translateY(-1px); box-shadow: 0 18px 42px rgba(79, 124, 255, 0.46); }
+#configurator .cfg-submit:active { transform: translateY(0); }
+
+/* ---------- result ---------- */
+#configurator #cfg-output { margin-top: 26px; }
+#configurator .cfg-result {
+  background: var(--panel); border: 1px solid var(--panel-brd); border-radius: 18px;
+  padding: 26px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
+}
+#configurator .cfg-block { margin-bottom: 22px; }
+#configurator .cfg-block-title, #configurator .cfg-line-title {
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+}
+#configurator .cfg-agents { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+#configurator .cfg-agent {
+  background: rgba(6, 11, 22, 0.5); border: 1px solid var(--panel-brd); border-radius: 14px; padding: 14px 16px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+#configurator .cfg-agent-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+#configurator .cfg-agent-name { font-size: 18px; font-weight: 700; }
+#configurator .cfg-agent-role { font-size: 12px; color: var(--cyan); }
+#configurator .cfg-agent-blurb { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.5; }
+#configurator .cfg-agent-portrait {
+  width: 56px; height: 56px; border-radius: 12px; object-fit: cover; flex: none;
+  border: 1px solid var(--panel-brd); background: rgba(6, 11, 22, 0.6);
+}
+#configurator .cfg-agent-body { min-width: 0; }
+
+#configurator .cfg-bundle {
+  margin-top: 12px; font-size: 13px; color: #bfe9c9;
+  background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.28);
+  border-radius: 10px; padding: 10px 12px;
+}
+
+#configurator .cfg-prices { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 22px; }
+#configurator .cfg-price {
+  background: rgba(6, 11, 22, 0.5); border: 1px solid var(--panel-brd);
+  border-radius: 14px; padding: 18px; text-align: center;
+}
+#configurator .cfg-price-label { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+#configurator .cfg-price-val {
+  font-size: clamp(24px, 4vw, 34px); font-weight: 800; margin: 6px 0 2px;
+  background: var(--accent); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+#configurator .cfg-price-note { font-size: 12px; color: var(--muted); }
+
+#configurator .cfg-line-group {
+  border-top: 1px solid var(--panel-brd); padding-top: 16px; margin-bottom: 18px;
+}
+#configurator .cfg-usage { list-style: none; margin: 0; padding: 0; }
+#configurator .cfg-usage li {
+  display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+  padding: 8px 0; border-bottom: 1px dashed rgba(120, 150, 220, 0.12); font-size: 14px;
+}
+#configurator .cfg-usage li:last-child { border-bottom: none; }
+#configurator .cfg-num { color: var(--ink); font-variant-numeric: tabular-nums; font-size: 13px; }
+#configurator .cfg-muted { color: var(--muted); font-size: 12px; }
+
+#configurator .cfg-cta {
+  display: inline-block; margin-top: 8px; text-decoration: none; color: #05101f; font-weight: 700;
+  padding: 13px 30px; border-radius: 13px; background: var(--accent);
+  box-shadow: 0 14px 34px rgba(79, 124, 255, 0.36);
+}
+#configurator .cfg-cta:hover { filter: brightness(1.05); }
+#configurator .cfg-disclaimer { color: #6b789b; font-size: 11px; margin: 16px 0 0; line-height: 1.5; }
+
+#configurator .cfg-custom .cfg-badge {
+  display: inline-block; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--violet); border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 999px;
+  padding: 5px 12px; margin-bottom: 14px; background: rgba(168, 85, 247, 0.08);
+}
+#configurator .cfg-custom h3, #configurator .cfg-empty h3 { font-size: 22px; margin: 0 0 8px; }
+#configurator .cfg-custom p, #configurator .cfg-empty p { color: var(--muted); margin: 0 0 14px; }
+
+/* ---------- secondary link: "See standard plans" -> #pricing ---------- */
+#configurator .cfg-secondary { text-align: center; margin-top: 18px; }
+#configurator .cfg-secondary-link {
+  display: inline-block; font-size: 14px; font-weight: 600; text-decoration: none;
+  color: var(--muted); border-bottom: 1px solid rgba(120, 150, 220, 0.35);
+  padding-bottom: 2px; transition: color .15s, border-color .15s;
+}
+#configurator .cfg-secondary-link:hover { color: var(--ink); border-color: var(--cyan); }
+
+/* ---------- step 2 live match hint (visual only) ---------- */
+#configurator .cfg-match-hint {
+  margin-top: 14px; font-size: 13px; color: var(--ink); line-height: 1.5;
+  background: rgba(34, 211, 238, 0.08); border: 1px solid rgba(34, 211, 238, 0.28);
+  border-radius: 10px; padding: 10px 12px;
+}
+#configurator .cfg-match-hint .cfg-match-kicker { color: var(--muted); margin-right: 6px; }
+#configurator .cfg-match-hint strong { color: var(--cyan); }
+
+/* ---------- step 5 progressive disclosure ---------- */
+#configurator .cfg-disclose {
+  border: 1px solid var(--panel-brd); border-radius: 12px;
+  background: rgba(6, 11, 22, 0.4); margin-bottom: 12px; overflow: hidden;
+}
+#configurator .cfg-disclose > summary {
+  cursor: pointer; list-style: none; padding: 14px 16px; font-size: 15px; font-weight: 600;
+  display: flex; align-items: center; justify-content: space-between; color: var(--ink);
+}
+#configurator .cfg-disclose > summary::-webkit-details-marker { display: none; }
+#configurator .cfg-disclose > summary::after { content: "+"; font-size: 20px; line-height: 1; color: var(--cyan); font-weight: 700; }
+#configurator .cfg-disclose[open] > summary::after { content: "\2013"; }
+#configurator .cfg-disclose[open] > summary { border-bottom: 1px solid var(--panel-brd); }
+#configurator .cfg-disclose-body { padding: 16px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 640px) {
+  #configurator .cfg-step { padding: 18px 16px 20px; }
+  #configurator .cfg-grid { grid-template-columns: 1fr 1fr; }
+  #configurator .cfg-row, #configurator .cfg-prices { grid-template-columns: 1fr; }
+  #configurator .cfg-step .cfg-hint { margin-left: 0; }
+  #configurator .cfg-submit { width: 100%; }
+}
+@media (max-width: 380px) {
+  #configurator .cfg-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #configurator .cfg-app *,
+  #configurator .cfg-app *::before,
+  #configurator .cfg-app *::after { transition: none !important; scroll-behavior: auto !important; }
+}

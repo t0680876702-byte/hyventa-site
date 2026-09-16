@@ -17,6 +17,7 @@
 <meta name="twitter:description" content="A department of specialized AI workers your company can hire in minutes. 24/7, any language, human handoff built in." />
 <meta name="twitter:image" content="https://hyventa.net/images/sarah.png" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="stylesheet" href="configurator/configurator-ui.css" /><!-- HYVENTA-CONFIGURATOR-CSS -->
 <link rel="apple-touch-icon" href="/images/ava.png" />
 <style>
   :root {
@@ -529,6 +530,151 @@
   <p class="hint" data-i18n="team_hint">Use ‹ › , the dots, arrow keys, or swipe — click any side card to bring it to the center.</p>
 </section>
 
+<!-- HYVENTA-CONFIGURATOR:START -->
+<section id="configurator">
+  <div class="cfg-app">
+    <div class="cfg-wrap">
+      <header class="cfg-hero">
+        <span class="cfg-kicker" data-cfg-i18n="kicker">Configure your team</span>
+        <h1 data-cfg-i18n="title">Build your AI team</h1>
+        <p data-cfg-i18n="intro">Answer a few quick questions and we'll recommend the right AI employee(s) with a transparent estimate.</p>
+      </header>
+
+      <form id="cfg-form">
+        <!-- STEP 1 — BUSINESS -->
+        <section class="cfg-step">
+          <h2><span class="cfg-step-num">1</span> <span data-cfg-i18n="s1_h">What does your business do?</span></h2>
+          <div class="cfg-field">
+            <input class="cfg-input" id="cfg-business" type="text" data-cfg-i18n-ph="s1_ph" placeholder="Passenger transportation in Europe" autocomplete="off" />
+          </div>
+        </section>
+
+        <!-- STEP 2 — WHAT DO YOU NEED -->
+        <section class="cfg-step">
+          <h2><span class="cfg-step-num">2</span> <span data-cfg-i18n="s2_h">What do you need?</span></h2>
+          <p class="cfg-hint" data-cfg-i18n="s2_hint">Tell us what you want your AI employee to do. Pick everything that applies.</p>
+          <div class="cfg-grid">
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-sales" value="sales" /><label for="i-sales" data-cfg-i18n="in_sales">Sales</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-support" value="support" /><label for="i-support" data-cfg-i18n="in_support">Customer support</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-booking" value="booking" /><label for="i-booking" data-cfg-i18n="in_booking">Booking / reservations</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-lead" value="lead_qualification" /><label for="i-lead" data-cfg-i18n="in_lead">Lead qualification</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-recruit" value="recruiting" /><label for="i-recruit" data-cfg-i18n="in_recruit">Recruiting</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-marketing" value="marketing" /><label for="i-marketing" data-cfg-i18n="in_marketing">Marketing</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-translation" value="translation" /><label for="i-translation" data-cfg-i18n="in_translation">Translation</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-knowledge" value="knowledge" /><label for="i-knowledge" data-cfg-i18n="in_knowledge">Knowledge / FAQ</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-analysis" value="analysis" /><label for="i-analysis" data-cfg-i18n="in_analysis">Business analysis</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-image" value="image" /><label for="i-image" data-cfg-i18n="in_image">Images / design</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-audio" value="audio" /><label for="i-audio" data-cfg-i18n="in_audio">Audio</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-video" value="video" /><label for="i-video" data-cfg-i18n="in_video">Video</label></div>
+          </div>
+          <div class="cfg-match-hint" id="cfg-match-hint" hidden></div>
+        </section>
+
+        <!-- STEP 3 — CHANNELS -->
+        <section class="cfg-step">
+          <h2><span class="cfg-step-num">3</span> <span data-cfg-i18n="s3_h">Where should it work?</span></h2>
+          <p class="cfg-hint" data-cfg-i18n="s3_hint">Additional channels may affect the monthly price.</p>
+          <div class="cfg-grid">
+            <div class="cfg-chip"><input type="checkbox" name="channel" id="c-webchat" value="web_chat" /><label for="c-webchat" data-cfg-i18n="ch_webchat">Website / Web chat</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="channel" id="c-webform" value="web_form" /><label for="c-webform" data-cfg-i18n="ch_webform">Website form</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="channel" id="c-telegram" value="telegram" /><label for="c-telegram" data-cfg-i18n="ch_telegram">Telegram</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="channel" id="c-webhook" value="webhook" /><label for="c-webhook" data-cfg-i18n="ch_webhook">Connect another system</label></div>
+            <div class="cfg-chip"><input type="checkbox" name="channel" id="c-internal" value="internal" /><label for="c-internal" data-cfg-i18n="ch_internal">For your team</label></div>
+          </div>
+        </section>
+
+        <!-- STEP 4 — USAGE -->
+        <section class="cfg-step">
+          <h2><span class="cfg-step-num">4</span> <span data-cfg-i18n="s4_h">How much do you expect to use it?</span></h2>
+          <p class="cfg-hint" data-cfg-i18n="s4_hint">A rough level is enough — you can fine-tune later.</p>
+          <div class="cfg-seg">
+            <div class="cfg-chip"><input type="radio" name="usage" id="u-low" value="low" /><label for="u-low" data-cfg-i18n="u_low">Low</label></div>
+            <div class="cfg-chip"><input type="radio" name="usage" id="u-normal" value="normal" checked /><label for="u-normal" data-cfg-i18n="u_normal">Normal</label></div>
+            <div class="cfg-chip"><input type="radio" name="usage" id="u-high" value="high" /><label for="u-high" data-cfg-i18n="u_high">High</label></div>
+            <div class="cfg-chip"><input type="radio" name="usage" id="u-exact" value="exact" /><label for="u-exact" data-cfg-i18n="u_exact">Enter exact volume</label></div>
+          </div>
+          <div class="cfg-field cfg-exact-field" id="cfg-exact-field" hidden style="margin-top:14px;max-width:340px">
+            <p class="cfg-sub" data-cfg-i18n="s4_exact_hint" style="font-size:12px;color:var(--muted);margin:0 0 6px">Use an exact number if you know your expected monthly volume.</p>
+            <input class="cfg-input" id="cfg-usage-number" type="number" min="0" step="10" data-cfg-i18n-ph="s4_exact_ph" placeholder="e.g. 1500" />
+          </div>
+        </section>
+
+        <!-- STEP 5 — OPTIONAL REQUIREMENTS -->
+        <section class="cfg-step">
+          <h2><span class="cfg-step-num">5</span> <span data-cfg-i18n="s5_h">Anything else?</span></h2>
+          <p class="cfg-hint" data-cfg-i18n="s5_hint">All optional — open a section only if it applies to you.</p>
+
+          <details class="cfg-disclose">
+            <summary data-cfg-i18n="s5_d1">Knowledge &amp; integrations</summary>
+            <div class="cfg-disclose-body">
+              <div class="cfg-toggle">
+                <input type="checkbox" id="cfg-kb" />
+                <label for="cfg-kb" data-cfg-i18n="s5_kb">Answer from our knowledge base</label>
+              </div>
+              <div class="cfg-field" style="max-width:280px;margin:0 0 16px 28px">
+                <select class="cfg-select" id="cfg-kb-size">
+                  <option value="small" data-cfg-i18n="s5_kb_small">Small knowledge base</option>
+                  <option value="large" data-cfg-i18n="s5_kb_large">Large knowledge base</option>
+                </select>
+              </div>
+
+              <p class="cfg-sub" data-cfg-i18n="s5_int" style="font-size:12px;color:var(--muted);margin:6px 0 8px">Integrations</p>
+              <div class="cfg-grid" style="margin-bottom:12px">
+                <div class="cfg-chip"><input type="checkbox" name="integration" id="int-crm" value="crm" /><label for="int-crm" data-cfg-i18n="int_crm">CRM</label></div>
+                <div class="cfg-chip"><input type="checkbox" name="integration" id="int-calendar" value="calendar" /><label for="int-calendar" data-cfg-i18n="int_calendar">Calendar</label></div>
+                <div class="cfg-chip"><input type="checkbox" name="integration" id="int-ats" value="ats" /><label for="int-ats" data-cfg-i18n="int_ats">Recruiting system (ATS)</label></div>
+                <div class="cfg-chip"><input type="checkbox" name="integration" id="int-api" value="api" /><label for="int-api" data-cfg-i18n="int_api">Connect another system</label></div>
+              </div>
+              <div class="cfg-field" style="max-width:340px;margin-bottom:4px">
+                <input class="cfg-input" id="cfg-other-integration" type="text" data-cfg-i18n-ph="s5_other_ph" placeholder="Other integration (e.g. our ERP)" autocomplete="off" />
+              </div>
+            </div>
+          </details>
+
+          <details class="cfg-disclose">
+            <summary data-cfg-i18n="s5_d2">Media &amp; support</summary>
+            <div class="cfg-disclose-body">
+              <p class="cfg-sub" data-cfg-i18n="s5_media" style="font-size:12px;color:var(--muted);margin:6px 0 8px">Media</p>
+              <div class="cfg-grid" style="margin-bottom:12px">
+                <div class="cfg-chip"><input type="checkbox" name="media" id="m-image" value="image" /><label for="m-image" data-cfg-i18n="m_image">Images</label></div>
+                <div class="cfg-chip"><input type="checkbox" name="media" id="m-audio" value="audio" /><label for="m-audio" data-cfg-i18n="m_audio">Audio</label></div>
+                <div class="cfg-chip"><input type="checkbox" name="media" id="m-video" value="video" /><label for="m-video" data-cfg-i18n="m_video">Video</label></div>
+              </div>
+
+              <div class="cfg-toggle">
+                <input type="checkbox" id="cfg-languages" />
+                <label for="cfg-languages" data-cfg-i18n="s5_trans">Translation / multiple languages</label>
+              </div>
+
+              <div class="cfg-field" style="max-width:280px;margin-top:12px">
+                <p class="cfg-sub" data-cfg-i18n="s5_support" style="font-size:12px;color:var(--muted);margin:0 0 6px">Support level</p>
+                <select class="cfg-select" id="cfg-support">
+                  <option value="standard" data-cfg-i18n="sup_standard">Standard</option>
+                  <option value="priority" data-cfg-i18n="sup_priority">Priority</option>
+                  <option value="managed" data-cfg-i18n="sup_managed">Managed</option>
+                  <option value="enterprise" data-cfg-i18n="sup_enterprise">Enterprise / SLA</option>
+                </select>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <div class="cfg-actions">
+          <button class="cfg-submit" type="submit" data-cfg-i18n="submit">See my estimate</button>
+        </div>
+      </form>
+
+      <!-- STEP 6 — RESULT -->
+      <div id="cfg-output" aria-live="polite"></div>
+
+      <div class="cfg-secondary">
+        <a class="cfg-secondary-link" href="#pricing" data-cfg-i18n="see_plans">See standard plans</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- HYVENTA-CONFIGURATOR:END -->
+
 <!-- ================= HOW IT WORKS ================= -->
 <section id="how" style="background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="wrap">
@@ -976,6 +1122,7 @@ function applyLang(lang) {
   if(typeof localizeDemo==='function') localizeDemo(lang);
   if(typeof localizeTrust==='function') localizeTrust(lang);
   if(typeof localizeRoi==='function') localizeRoi(lang);
+  if(typeof window.localizeConfigurator==='function') window.localizeConfigurator(lang);
   // reset Ava greeting if empty
   const body = document.getElementById('ava-body');
   if (body && body.getAttribute('data-fresh') !== 'no') {
@@ -2508,5 +2655,7 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
 @media (prefers-reduced-motion: reduce){ #team .hv-more-cta{ transition:none; } }
 </style>
 <!-- HYVENTA-V15-MOREABOUT:END -->
+<!-- HYVENTA-CONFIGURATOR-MODULE -->
+<script type="module" src="configurator/configurator-ui.mjs"></script>
 </body>
 </html>

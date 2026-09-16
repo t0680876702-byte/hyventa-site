@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hyventa — Configurator (prototype)</title>
+  <link rel="stylesheet" href="./configurator-ui.css" />
+</head>
+<body class="cfg-app">
+  <div class="cfg-wrap">
+    <header class="cfg-hero">
+      <span class="cfg-kicker">Prototype</span>
+      <h1>Build your AI team</h1>
+      <p>Answer a few quick questions and we'll recommend the right AI employee(s) with a transparent estimate.</p>
+    </header>
+
+    <form id="cfg-form">
+
+      <!-- STEP 1 — BUSINESS -->
+      <section class="cfg-step">
+        <h2><span class="cfg-step-num">1</span> What does your business do?</h2>
+        <div class="cfg-field">
+          <input class="cfg-input" id="cfg-business" type="text"
+                 placeholder="Passenger transportation in Europe" autocomplete="off" />
+        </div>
+      </section>
+
+      <!-- STEP 2 — WHAT DO YOU NEED -->
+      <section class="cfg-step">
+        <h2><span class="cfg-step-num">2</span> What do you need?</h2>
+        <p class="cfg-hint">Tell us what you want your AI employee to do. Pick everything that applies.</p>
+        <div class="cfg-grid">
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-sales" value="sales" /><label for="i-sales">Sales</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-support" value="support" /><label for="i-support">Customer support</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-booking" value="booking" /><label for="i-booking">Booking / reservations</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-lead" value="lead_qualification" /><label for="i-lead">Lead qualification</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-recruit" value="recruiting" /><label for="i-recruit">Recruiting</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-marketing" value="marketing" /><label for="i-marketing">Marketing</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-translation" value="translation" /><label for="i-translation">Translation</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-knowledge" value="knowledge" /><label for="i-knowledge">Knowledge / FAQ</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-analysis" value="analysis" /><label for="i-analysis">Business analysis</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-image" value="image" /><label for="i-image">Images / design</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-audio" value="audio" /><label for="i-audio">Audio</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="intent" id="i-video" value="video" /><label for="i-video">Video</label></div>
+        </div>
+        <div class="cfg-match-hint" id="cfg-match-hint" hidden></div>
+      </section>
+
+      <!-- STEP 3 — CHANNELS -->
+      <section class="cfg-step">
+        <h2><span class="cfg-step-num">3</span> Where should it work?</h2>
+        <p class="cfg-hint">Additional channels may affect the monthly price.</p>
+        <div class="cfg-grid">
+          <div class="cfg-chip"><input type="checkbox" name="channel" id="c-webchat" value="web_chat" /><label for="c-webchat">Website / Web chat</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="channel" id="c-webform" value="web_form" /><label for="c-webform">Website form</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="channel" id="c-telegram" value="telegram" /><label for="c-telegram">Telegram</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="channel" id="c-webhook" value="webhook" /><label for="c-webhook">Connect another system</label></div>
+          <div class="cfg-chip"><input type="checkbox" name="channel" id="c-internal" value="internal" /><label for="c-internal">For your team</label></div>
+        </div>
+      </section>
+
+      <!-- STEP 4 — USAGE -->
+      <section class="cfg-step">
+        <h2><span class="cfg-step-num">4</span> How much do you expect to use it?</h2>
+        <p class="cfg-hint">A rough level is enough — you can fine-tune later.</p>
+        <div class="cfg-seg">
+          <div class="cfg-chip"><input type="radio" name="usage" id="u-low" value="low" /><label for="u-low">Low</label></div>
+          <div class="cfg-chip"><input type="radio" name="usage" id="u-normal" value="normal" checked /><label for="u-normal">Normal</label></div>
+          <div class="cfg-chip"><input type="radio" name="usage" id="u-high" value="high" /><label for="u-high">High</label></div>
+          <div class="cfg-chip"><input type="radio" name="usage" id="u-exact" value="exact" /><label for="u-exact">Enter exact volume</label></div>
+        </div>
+        <div class="cfg-field cfg-exact-field" id="cfg-exact-field" hidden style="margin-top:14px;max-width:340px">
+          <p class="cfg-sub" style="font-size:12px;color:var(--muted);margin:0 0 6px">Use an exact number if you know your expected monthly volume.</p>
+          <input class="cfg-input" id="cfg-usage-number" type="number" min="0" step="10" placeholder="e.g. 1500" />
+        </div>
+      </section>
+
+      <!-- STEP 5 — OPTIONAL REQUIREMENTS -->
+      <section class="cfg-step">
+        <h2><span class="cfg-step-num">5</span> Anything else?</h2>
+        <p class="cfg-hint">All optional — open a section only if it applies to you.</p>
+
+        <details class="cfg-disclose">
+          <summary>Knowledge &amp; integrations</summary>
+          <div class="cfg-disclose-body">
+            <div class="cfg-toggle">
+              <input type="checkbox" id="cfg-kb" />
+              <label for="cfg-kb">Answer from our knowledge base</label>
+            </div>
+            <div class="cfg-field" style="max-width:280px;margin:0 0 16px 28px">
+              <select class="cfg-select" id="cfg-kb-size">
+                <option value="small">Small knowledge base</option>
+                <option value="large">Large knowledge base</option>
+              </select>
+            </div>
+
+            <p class="cfg-sub" style="font-size:12px;color:var(--muted);margin:6px 0 8px">Integrations</p>
+            <div class="cfg-grid" style="margin-bottom:12px">
+              <div class="cfg-chip"><input type="checkbox" name="integration" id="int-crm" value="crm" /><label for="int-crm">CRM</label></div>
+              <div class="cfg-chip"><input type="checkbox" name="integration" id="int-calendar" value="calendar" /><label for="int-calendar">Calendar</label></div>
+              <div class="cfg-chip"><input type="checkbox" name="integration" id="int-ats" value="ats" /><label for="int-ats">Recruiting system (ATS)</label></div>
+              <div class="cfg-chip"><input type="checkbox" name="integration" id="int-api" value="api" /><label for="int-api">Connect another system</label></div>
+            </div>
+            <div class="cfg-field" style="max-width:340px;margin-bottom:4px">
+              <input class="cfg-input" id="cfg-other-integration" type="text" placeholder="Other integration (e.g. our ERP)" autocomplete="off" />
+            </div>
+          </div>
+        </details>
+
+        <details class="cfg-disclose">
+          <summary>Media &amp; support</summary>
+          <div class="cfg-disclose-body">
+            <p class="cfg-sub" style="font-size:12px;color:var(--muted);margin:6px 0 8px">Media</p>
+            <div class="cfg-grid" style="margin-bottom:12px">
+              <div class="cfg-chip"><input type="checkbox" name="media" id="m-image" value="image" /><label for="m-image">Images</label></div>
+              <div class="cfg-chip"><input type="checkbox" name="media" id="m-audio" value="audio" /><label for="m-audio">Audio</label></div>
+              <div class="cfg-chip"><input type="checkbox" name="media" id="m-video" value="video" /><label for="m-video">Video</label></div>
+            </div>
+
+            <div class="cfg-toggle">
+              <input type="checkbox" id="cfg-languages" />
+              <label for="cfg-languages">Translation / multiple languages</label>
+            </div>
+
+            <div class="cfg-field" style="max-width:280px;margin-top:12px">
+              <p class="cfg-sub" style="font-size:12px;color:var(--muted);margin:0 0 6px">Support level</p>
+              <select class="cfg-select" id="cfg-support">
+                <option value="standard">Standard</option>
+                <option value="priority">Priority</option>
+                <option value="managed">Managed</option>
+                <option value="enterprise">Enterprise / SLA</option>
+              </select>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <div class="cfg-actions">
+        <button class="cfg-submit" type="submit">See my estimate</button>
+      </div>
+    </form>
+
+    <!-- STEP 6 — RESULT -->
+    <div id="cfg-output" aria-live="polite"></div>
+
+  </div>
+
+  <script type="module" src="./configurator-ui.mjs"></script>
+</body>
+</html>
