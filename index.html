@@ -2420,6 +2420,13 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
    card only. Non-active/side cards keep their portrait badge unchanged.
    No layout, dimensions, carousel, hover, arrows/dots or modal changes. */
 #team .card.active .portrait .tier { display: none !important; }
+
+/* V13D: the injected .card-chips overlay (position:absolute, bottom of card) is
+   the intended portrait chip strip on side/preview cards. On the ACTIVE two-column
+   card it lands under the info panel / Hire button and duplicates the ✓ benefits
+   list. Hide it on the ACTIVE card only — side cards keep their chips. CSS-only;
+   the .card-chips DOM/data stays intact (injectChips + any modal logic untouched). */
+#team .card.active .card-chips { display: none !important; }
 </style>
 <!-- HYVENTA-V13C-BADGE:END -->
 </body>
