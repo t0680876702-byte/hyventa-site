@@ -499,8 +499,8 @@
   <h1 data-i18n="hero_h1">Hire an AI employee. Put it to work.</h1>
   <p class="sub" data-i18n="hero_sub">A department of specialized AI workers your company can onboard in minutes — no salary, no downtime, instant scale.</p>
   <div class="hero-actions">
-    <a href="#pricing" class="btn-primary" data-i18n="hero_cta1">Start 7-day free trial</a>
-    <a href="#team" class="btn-ghost" data-i18n="hero_cta2">Meet the team</a>
+    <a href="#pricing" class="btn-primary" data-i18n="hero_cta1">Start free for 7 days</a>
+    <a href="#team" class="btn-ghost" data-i18n="hero_cta2">Meet the AI team</a>
   </div>
   <div class="points">
     <span class="point" data-i18n="p1">🤖 Always states it's an AI</span>
@@ -516,7 +516,7 @@
   <div class="wrap">
     <div class="sec-head">
       <h2 data-i18n="team_h">Meet your AI team</h2>
-      <p data-i18n="team_sub">Twelve specialists, each trained for one job. Hire one, or the whole department.</p>
+      <p data-i18n="team_sub">Meet our growing team of AI specialists — sales, support, reception, recruiting and more.</p>
     </div>
   </div>
   <div class="carousel"><div class="stage" id="stage"></div></div>
@@ -555,7 +555,7 @@
     <div class="prices">
       <div class="price">
         <h3>Start</h3>
-        <div class="amount">$99<small>/mo</small></div>
+        <div class="amount">$99<small data-i18n="per_mo">/mo</small></div>
         <p class="plan-desc" data-i18n="pl_start_d">For a solo business getting its first AI hire.</p>
         <ul>
           <li data-i18n="pl_start_1">1 AI employee of your choice</li>
@@ -567,7 +567,7 @@
       <div class="price featured">
         <span class="badge-pop" data-i18n="pl_popular">Most popular</span>
         <h3>Business</h3>
-        <div class="amount">$249<small>/mo</small></div>
+        <div class="amount">$249<small data-i18n="per_mo">/mo</small></div>
         <p class="plan-desc" data-i18n="pl_biz_d">For growing teams that need a few roles covered.</p>
         <ul>
           <li data-i18n="pl_biz_1">Up to 3 AI employees</li>
@@ -578,7 +578,7 @@
       </div>
       <div class="price">
         <h3>Pro</h3>
-        <div class="amount">$499<small>/mo</small></div>
+        <div class="amount">$499<small data-i18n="per_mo">/mo</small></div>
         <p class="plan-desc" data-i18n="pl_pro_d">For companies running a full AI department.</p>
         <ul>
           <li data-i18n="pl_pro_1">Up to 6 AI employees</li>
@@ -684,9 +684,10 @@ const I18N = {
     nav_team:"The Team", nav_how:"How it works", nav_pricing:"Pricing", nav_faq:"FAQ", nav_contact:"Contact", nav_cta:"Start free",
     hero_eyebrow:"AI Employees", hero_h1:"Hire an AI employee. Put it to work.",
     hero_sub:"A department of specialized AI workers your company can onboard in minutes — no salary, no downtime, instant scale.",
-    hero_cta1:"Start 7-day free trial", hero_cta2:"Meet the team",
+    hero_cta1:"Start free for 7 days", hero_cta2:"Meet the AI team",
     p1:"🤖 Always states it's an AI", p2:"🧠 Remembers context", p3:"🙋 Human handoff built in", p4:"🌍 Any language", p5:"⚡ Works 24/7",
-    team_h:"Meet your AI team", team_sub:"Twelve specialists, each trained for one job. Hire one, or the whole department.",
+    team_h:"Meet your AI team", team_sub:"Meet our growing team of AI specialists — sales, support, reception, recruiting and more.",
+    bill_month:"Monthly", bill_year:"Annual · Save 2 months (~17%)", slot_note:"Bundle plans cover eligible AI employees by complexity (slot-based), not any six agents.", per_mo:"/mo", per_year:"/year",
     team_hint:"Use ‹ › , the dots, arrow keys, or swipe — click any side card to bring it to the center.",
     how_h:"How it works", how_sub:"From \"hello\" to a working AI employee in one day.",
     how1_h:"Pick your employee", how1_p:"Choose from our growing team of AI specialists — sales, support, reception, recruiting and more.",
@@ -712,7 +713,8 @@ const I18N = {
     hero_sub:"Un departamento de trabajadores IA especializados que tu empresa puede incorporar en minutos: sin salario, sin pausas, escala al instante.",
     hero_cta1:"Prueba gratis de 7 días", hero_cta2:"Conoce al equipo",
     p1:"🤖 Siempre indica que es IA", p2:"🧠 Recuerda el contexto", p3:"🙋 Traspaso a humano integrado", p4:"🌍 Cualquier idioma", p5:"⚡ Trabaja 24/7",
-    team_h:"Conoce a tu equipo IA", team_sub:"Doce especialistas, cada uno entrenado para una tarea. Contrata uno o todo el departamento.",
+    team_h:"Conoce a tu equipo IA", team_sub:"Conoce a nuestro creciente equipo de especialistas IA: ventas, soporte, recepción, reclutamiento y más.",
+    bill_month:"Mensual", bill_year:"Anual · Ahorra 2 meses (~17%)", slot_note:"Los planes combinados cubren empleados de IA elegibles según su complejidad (por slots), no seis agentes cualesquiera.", per_mo:"/mes", per_year:"/año",
     team_hint:"Usa ‹ › , los puntos, las flechas o desliza — toca una tarjeta lateral para centrarla.",
     how_h:"Cómo funciona", how_sub:"De \"hola\" a un empleado IA funcionando en un día.",
     how1_h:"Elige tu empleado", how1_p:"Elige entre nuestro creciente equipo de especialistas IA: ventas, soporte, recepción, reclutamiento y más.",
@@ -738,7 +740,8 @@ const I18N = {
     hero_sub:"Відділ спеціалізованих AI-працівників, яких ваша компанія підключає за хвилини — без зарплати, без простоїв, миттєве масштабування.",
     hero_cta1:"7 днів безкоштовно", hero_cta2:"Знайомство з командою",
     p1:"🤖 Завжди каже, що він AI", p2:"🧠 Памʼятає контекст", p3:"🙋 Передача людині вбудована", p4:"🌍 Будь-яка мова", p5:"⚡ Працює 24/7",
-    team_h:"Ваша AI-команда", team_sub:"Дванадцять спеціалістів, кожен навчений для своєї задачі. Найміть одного або весь відділ.",
+    team_h:"Ваша AI-команда", team_sub:"Познайомтеся з нашою командою AI-спеціалістів, що зростає — продажі, підтримка, рецепція, рекрутинг та інші.",
+    bill_month:"Щомісяця", bill_year:"Щорічно · Заощаджуйте 2 місяці (~17%)", slot_note:"Пакетні плани охоплюють відповідних AI-співробітників за складністю (за слотами), а не будь-яких шістьох агентів.", per_mo:"/міс.", per_year:"/рік",
     team_hint:"Використовуйте ‹ › , крапки, стрілки або свайп — торкніться бічної картки, щоб вивести її в центр.",
     how_h:"Як це працює", how_sub:"Від \"привіт\" до готового AI-співробітника за один день.",
     how1_h:"Оберіть співробітника", how1_p:"Обирайте з нашої команди AI-спеціалістів, що зростає — продажі, підтримка, рецепція, рекрутинг та інші.",
@@ -1141,6 +1144,7 @@ go(0);
       function decide(v){ localStorage.setItem("hv_cookie",v); bar.classList.remove("show"); setTimeout(function(){bar.remove();},300); }
       bar.querySelector("#ck-accept").addEventListener("click",function(){decide("accepted");});
       bar.querySelector("#ck-decline").addEventListener("click",function(){decide("declined");});
+      document.querySelectorAll(".lang button").forEach(function(b){ b.addEventListener("click", function(){ setTimeout(function(){ var cb=document.getElementById("cookie-bar"); if(!cb) return; var x; if(x=cb.querySelector("#ck-text")) x.textContent=t("ck"); if(x=cb.querySelector("#ck-link")) x.textContent=t("ckl"); if(x=cb.querySelector("#ck-accept")) x.textContent=t("acc"); if(x=cb.querySelector("#ck-decline")) x.textContent=t("dec"); },0); }); });
     }
 
     // ---- Paddle checkout placeholders ----
@@ -1422,6 +1426,7 @@ go(0);
     var cta=document.getElementById("hv-cta"); if(cta) cta.textContent=t("calc_cta");
     var pb=document.querySelector(".hv-profile-btn"); if(pb){ var pn=(document.querySelector(".card.active .name-plate h3")||{}).textContent||""; pb.textContent=t("profile_hire")+(pn?" "+pn:""); }
     var bs=document.getElementById("boris-status"); if(bs) bs.textContent=t("boris_status");
+    var blab=document.getElementById("hv-boris-label"); if(blab){ var _bm={en:"Business Analyst",es:"Analista de negocios",uk:"Бізнес-аналітик"}; blab.textContent=_bm[lang()]||"Business Analyst"; }
     var bi=document.getElementById("boris-input"); if(bi) bi.setAttribute("placeholder",t("boris_ph"));
     var bn=document.getElementById("boris-note"); if(bn) bn.textContent=t("boris_note");
     calc();
@@ -1560,38 +1565,12 @@ go(0);
     });
 
     /* ---- D. Boris widget (bottom-left) ---- */
-    if(!document.getElementById("boris-bubble")){
-      var bb=el('<button id="boris-bubble" aria-label="Chat with Boris"><img src="images/boris.png" alt="Boris" onerror="this.parentNode.textContent=\'📊\'"></button>');
-      var bp=el('<div id="boris-panel">'+
-        '<div class="boris-head"><div class="bav"><img src="images/boris.png" alt="Boris" onerror="this.parentNode.textContent=\'B\'"></div><div class="who"><b>Boris</b><span id="boris-status"></span></div><button class="bclose" id="boris-close">×</button></div>'+
-        '<div class="boris-body" id="boris-body"></div>'+
-        '<div class="boris-foot"><input id="boris-input" type="text"><button id="boris-send">➤</button></div>'+
-        '<p class="boris-note" id="boris-note"></p></div>');
-      document.body.appendChild(bb); document.body.appendChild(bp);
-      var bsession="web-boris-"+Math.random().toString(36).slice(2)+Date.now();
-      var bbody=document.getElementById("boris-body");
-      var binput=document.getElementById("boris-input");
-      var greeted=false;
-      function badd(text,who){ var m=document.createElement("div"); m.className="msg "+who; m.textContent=text; bbody.appendChild(m); bbody.scrollTop=bbody.scrollHeight; return m; }
-      function openBoris(){ bp.classList.add("open"); if(!greeted){ badd(t("boris_hi"),"bot"); greeted=true; } binput.focus(); }
-      bb.addEventListener("click", function(){ bp.classList.contains("open") ? bp.classList.remove("open") : openBoris(); });
-      document.getElementById("boris-close").addEventListener("click", function(){ bp.classList.remove("open"); });
-      function bsend(){
-        var text=binput.value.trim(); if(!text) return;
-        badd(text,"user"); binput.value="";
-        var ty=badd("…","bot");
-        fetch(BORIS_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chatInput:text,sessionId:bsession,lang:lang()})})
-          .then(function(r){ return r.json(); })
-          .then(function(d){ ty.textContent=d.output||d.reply||d.text||JSON.stringify(d); })
-          .catch(function(){ ty.textContent=t("boris_err"); });
-      }
-      document.getElementById("boris-send").addEventListener("click", bsend);
-      binput.addEventListener("keydown", function(e){ if(e.key==="Enter") bsend(); });
-    }
+    /* HYVENTA: floating Boris chat widget (#boris-bubble/#boris-panel) removed per request. Boris remains in the Team carousel, profile modal and pricing data. */
 
     /* ---- language sync ---- */
     document.querySelectorAll(".lang button").forEach(function(b){ b.addEventListener("click", function(){ setTimeout(refreshLang,0); }); });
     refreshLang();
+    setTimeout(refreshLang, 800);
   });
 })();
 
@@ -1599,7 +1578,7 @@ go(0);
 <!-- HYVENTA-V2:END -->
 <!-- HYVENTA-V3:START -->
 <script id="hv-v3-js">
-window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simple","m":49,"a":490,"pm":"pri_01m2fpxte5fp8jnfdq3k1e5xvv","pa":"pri_01m2fpxtegqsgv78ccdmgsk3d8","cta":"trial","usage":"Up to 500 conversations/mo, fair-use LLM"},"nina":{"name":"Nina","role":"AI Translator","cls":"A-Simple","m":49,"a":490,"pm":"pri_01m2fpxtevqyx4xmgv1hn3f1hc","pa":"pri_01m2fpxts46r6vxpy4qq16pwyz","cta":"trial","usage":"Up to 2000 messages/mo, fair-use LLM"},"sarah":{"name":"Sarah","role":"AI Sales Manager","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtf91y8y9vqqdxneedg1","pa":"pri_01m2fpxtf91y8y9vqqe3aredbr","cta":"trial","usage":"Up to 800 lead conversations/mo, CRM sync, fair-use LLM"},"olivia":{"name":"Olivia","role":"AI Appointment Setter","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtfe146j9cpvkdmte32q","pa":"pri_01m2fpxtg7a75bp1wyf2dtjx7q","cta":"trial","usage":"Up to 800 conversations/mo, calendar sync, fair-use LLM"},"alex":{"name":"Alex","role":"AI Support Agent","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtg3m5ep5r9st4xp2tz8","pa":"pri_01m2fpxtg1aag391xkr6d5322h","cta":"trial","usage":"Up to 1000 tickets/mo, fair-use LLM"},"sophia":{"name":"Sophia","role":"AI Marketing Manager","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtgq4nbhn1eqj3yb9ch8","pa":"pri_01m2fpxtg6st1vg0b2swt7bp4p","cta":"trial","usage":"Daily content batches, fair-use LLM"},"max":{"name":"Max","role":"AI Knowledge Assistant","cls":"C-Advanced","m":199,"a":1990,"pm":"pri_01m2fpxtgtet23ztn39xwbedax","pa":"pri_01m2fpxtgmhr6n5ksej4vzzk6a","cta":"trial","usage":"Up to 1500 queries/mo, KB embeddings, memory, fair-use LLM"},"daniel":{"name":"Daniel","role":"AI Recruiter","cls":"C-Advanced","m":199,"a":1990,"pm":"pri_01m2fpxtj8cqbgc9msheq8gncy","pa":"pri_01m2fpxtj0376kk1fwkxrz3nhn","cta":"trial","usage":"Up to 1000 applicant screens/mo, ATS webhook, fair-use LLM"},"boris":{"name":"Boris","role":"AI Business Analyst","cls":"C-Advanced","m":249,"a":2490,"pm":"pri_01m2fpxthrxec9cesmh8t9f1qb","pa":"pri_01m2fpxth36yv2g8cnfq37vayy","cta":"trial","usage":"Up to 200 analysis reports/mo, web search included, fair-use LLM"},"leo":{"name":"Leo","role":"AI Designer","cls":"D-Custom","m":null,"a":null,"pm":"","pa":"","cta":"contact","usage":"Custom per engagement"},"vera":{"name":"Vera","role":"AI Video Producer","cls":"D-Custom","m":null,"a":null,"pm":"","pa":"","cta":"contact","usage":"Custom per engagement"},"rooney":{"name":"Rooney","role":"AI Composer","cls":"D-Custom","m":null,"a":null,"pm":"","pa":"","cta":"contact","usage":"Custom per engagement"},"tier-starter":{"name":"Hyventa Starter","role":"Bundle - 1 AI employee","cls":"bundle","m":99,"a":990,"pm":"pri_01m2fpxtnp2m188er2wfj7ng5c","pa":"pri_01m2fpxtdh70esckrnp9a7epev","cta":"trial","usage":""},"tier-business":{"name":"Hyventa Business","role":"Bundle - most popular","cls":"bundle","m":249,"a":2490,"pm":"pri_01m2fpxte4qs8pvdzczbnpw50c","pa":"pri_01m2fpxtdxpxgt31yh7vrk5hrk","cta":"trial","usage":""},"tier-pro":{"name":"Hyventa Pro","role":"Bundle - full AI department","cls":"bundle","m":499,"a":4990,"pm":"pri_01m2fpxtdxekjcmeq25kbbdjex","pa":"pri_01m2fpxte7t32qxh1tfprnxnm2","cta":"trial","usage":""}};
+window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Business","m":99,"a":990,"pm":"","pa":"","cta":"trial","usage":"On-model product visuals, fair-use image generation"},"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simple","m":49,"a":490,"pm":"pri_01m2fpxte5fp8jnfdq3k1e5xvv","pa":"pri_01m2fpxtegqsgv78ccdmgsk3d8","cta":"trial","usage":"Up to 500 conversations/mo, fair-use LLM"},"nina":{"name":"Nina","role":"AI Translator","cls":"A-Simple","m":49,"a":490,"pm":"pri_01m2fpxtevqyx4xmgv1hn3f1hc","pa":"pri_01m2fpxts46r6vxpy4qq16pwyz","cta":"trial","usage":"Up to 2000 messages/mo, fair-use LLM"},"sarah":{"name":"Sarah","role":"AI Sales Manager","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtf91y8y9vqqdxneedg1","pa":"pri_01m2fpxtf91y8y9vqqe3aredbr","cta":"trial","usage":"Up to 800 lead conversations/mo, CRM sync, fair-use LLM"},"olivia":{"name":"Olivia","role":"AI Appointment Setter","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtfe146j9cpvkdmte32q","pa":"pri_01m2fpxtg7a75bp1wyf2dtjx7q","cta":"trial","usage":"Up to 800 conversations/mo, calendar sync, fair-use LLM"},"alex":{"name":"Alex","role":"AI Support Agent","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtg3m5ep5r9st4xp2tz8","pa":"pri_01m2fpxtg1aag391xkr6d5322h","cta":"trial","usage":"Up to 1000 tickets/mo, fair-use LLM"},"sophia":{"name":"Sophia","role":"AI Marketing Manager","cls":"B-Business","m":99,"a":990,"pm":"pri_01m2fpxtgq4nbhn1eqj3yb9ch8","pa":"pri_01m2fpxtg6st1vg0b2swt7bp4p","cta":"trial","usage":"Daily content batches, fair-use LLM"},"max":{"name":"Max","role":"AI Knowledge Assistant","cls":"C-Advanced","m":199,"a":1990,"pm":"pri_01m2fpxtgtet23ztn39xwbedax","pa":"pri_01m2fpxtgmhr6n5ksej4vzzk6a","cta":"trial","usage":"Up to 1500 queries/mo, KB embeddings, memory, fair-use LLM"},"daniel":{"name":"Daniel","role":"AI Recruiter","cls":"C-Advanced","m":199,"a":1990,"pm":"pri_01m2fpxtj8cqbgc9msheq8gncy","pa":"pri_01m2fpxtj0376kk1fwkxrz3nhn","cta":"trial","usage":"Up to 1000 applicant screens/mo, ATS webhook, fair-use LLM"},"boris":{"name":"Boris","role":"AI Business Analyst","cls":"C-Advanced","m":249,"a":2490,"pm":"pri_01m2fpxthrxec9cesmh8t9f1qb","pa":"pri_01m2fpxth36yv2g8cnfq37vayy","cta":"trial","usage":"Up to 200 analysis reports/mo, web search included, fair-use LLM"},"leo":{"name":"Leo","role":"AI Designer","cls":"D-Custom","m":null,"a":null,"pm":"","pa":"","cta":"contact","usage":"Custom per engagement"},"vera":{"name":"Vera","role":"AI Video Producer","cls":"D-Custom","m":null,"a":null,"pm":"","pa":"","cta":"contact","usage":"Custom per engagement"},"rooney":{"name":"Rooney","role":"AI Composer","cls":"D-Custom","m":null,"a":null,"pm":"","pa":"","cta":"contact","usage":"Custom per engagement"},"tier-starter":{"name":"Hyventa Starter","role":"Bundle - 1 AI employee","cls":"bundle","m":99,"a":990,"pm":"pri_01m2fpxtnp2m188er2wfj7ng5c","pa":"pri_01m2fpxtdh70esckrnp9a7epev","cta":"trial","usage":""},"tier-business":{"name":"Hyventa Business","role":"Bundle - most popular","cls":"bundle","m":249,"a":2490,"pm":"pri_01m2fpxte4qs8pvdzczbnpw50c","pa":"pri_01m2fpxtdxpxgt31yh7vrk5hrk","cta":"trial","usage":""},"tier-pro":{"name":"Hyventa Pro","role":"Bundle - full AI department","cls":"bundle","m":499,"a":4990,"pm":"pri_01m2fpxtdxekjcmeq25kbbdjex","pa":"pri_01m2fpxte7t32qxh1tfprnxnm2","cta":"trial","usage":""}};
 (function(){
   function track(ev,params){ try{ if(window.gtag){ gtag('event',ev,params||{}); } }catch(e){} try{ if(window.fbq){ fbq('trackCustom',ev,params||{}); } }catch(e){} }
   window.hvTrack=track;
@@ -1701,15 +1680,19 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
       if(pricing.nextSibling) pricing.parentNode.insertBefore(f, pricing.nextSibling); else pricing.parentNode.appendChild(f);
     }
     if(pricing && !document.getElementById('hv-bill-toggle')){
+      var _il=(typeof I18N!=='undefined' && I18N[document.documentElement.lang]) ? I18N[document.documentElement.lang] : ((typeof I18N!=='undefined') ? I18N.en : {});
       var tgl=mk('div','hv-bill-toggle',null); tgl.id='hv-bill-toggle';
-      var bm=mk('button','active','Monthly'); bm.type='button'; var by=mk('button',null,'Annual · Save 2 months (~17%)'); by.type='button';
+      var bm=mk('button','active',_il.bill_month||'Monthly'); bm.type='button'; bm.setAttribute('data-i18n','bill_month'); var by=mk('button',null,_il.bill_year||'Annual · Save 2 months (~17%)'); by.type='button'; by.setAttribute('data-i18n','bill_year');
       tgl.appendChild(bm); tgl.appendChild(by); pricing.insertBefore(tgl, pricing.firstChild);
-      var note=mk('p','hv-slot-note','Bundle plans cover eligible AI employees by complexity (slot-based), not any six agents.'); pricing.insertBefore(note, tgl.nextSibling);
-      bm.addEventListener('click',function(){ hvBill3='month'; bm.classList.add('active'); by.classList.remove('active'); });
-      by.addEventListener('click',function(){ hvBill3='year'; by.classList.add('active'); bm.classList.remove('active'); });
+      var note=mk('p','hv-slot-note',_il.slot_note||'Bundle plans cover eligible AI employees by complexity (slot-based), not any six agents.'); note.setAttribute('data-i18n','slot_note'); pricing.insertBefore(note, tgl.nextSibling);
+      if(typeof applyLang==='function'){ try{ applyLang(document.documentElement.lang||'en'); }catch(e){} }
+      function hvUpdatePriceDisplay(){ var yr=(hvBill3==='year'); var perKey=yr?'per_year':'per_mo'; var _lg=document.documentElement.lang||'en'; var _d=(typeof I18N!=='undefined' && I18N[_lg]) ? I18N[_lg] : ((typeof I18N!=='undefined')?I18N.en:{}); var perTxt=_d[perKey]||(yr?'/year':'/mo'); var cards=pricing.querySelectorAll('.prices .price'); var tiers=['tier-starter','tier-business','tier-pro']; for(var c=0;c<cards.length && c<tiers.length;c++){ var pr=(window.HV_PRICING||{})[tiers[c]]||{}; var amt=cards[c].querySelector('.amount'); if(!amt||pr.m==null) continue; var val=yr?pr.a:pr.m; amt.innerHTML=''; amt.appendChild(document.createTextNode('$'+Number(val).toLocaleString('en-US'))); var sm=document.createElement('small'); sm.setAttribute('data-i18n',perKey); sm.textContent=perTxt; amt.appendChild(sm); } }
+      bm.addEventListener('click',function(){ hvBill3='month'; bm.classList.add('active'); by.classList.remove('active'); hvUpdatePriceDisplay(); });
+      by.addEventListener('click',function(){ hvBill3='year'; by.classList.add('active'); bm.classList.remove('active'); hvUpdatePriceDisplay(); });
       function hvOpenCheckout(pid,slug){ var tries=0; (function go(){ if(window.Paddle && Paddle.Checkout){ track('checkout_started',{plan:slug,price_id:pid}); Paddle.Checkout.open({items:[{priceId:pid,quantity:1}]}); } else if(tries++<40){ setTimeout(go,125); } })(); }
       function hvBindTierCtas(){ var cards=pricing.querySelectorAll('.prices .price'); var tiers=['tier-starter','tier-business','tier-pro']; for(var c=0;c<cards.length && c<tiers.length;c++){ (function(card,slug){ var elm=card.querySelector('a.choose')||card.querySelector('a[href]'); if(!elm||elm.getAttribute('data-hv-bound')==='1') return; elm.setAttribute('data-hv-bound','1'); elm.addEventListener('click',function(ev){ ev.preventDefault(); track('trial_click',{plan:slug}); var pr=(window.HV_PRICING||{})[slug]||{}; var pid=(hvBill3==='year')?pr.pa:pr.pm; if(pid){ hvOpenCheckout(pid,slug); } }); })(cards[c],tiers[c]); } }
       hvBindTierCtas();
+      hvUpdatePriceDisplay();
       try{ new MutationObserver(hvBindTierCtas).observe(pricing,{childList:true,subtree:true}); }catch(e){}
     }
     function badgeFor(cls){ if(!cls) return 'Advanced'; if(cls.indexOf('A')===0) return 'Simple'; if(cls.indexOf('C')===0) return 'Premium'; if(cls.indexOf('D')===0) return 'Custom'; return 'Advanced'; }
@@ -1753,8 +1736,8 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
       var actions = q('.hero-actions', left);
       if(actions){
         var btns = actions.querySelectorAll('a');
-        if(btns[0]){ btns[0].removeAttribute('data-i18n'); btns[0].textContent='Start free for 7 days'; btns[0].setAttribute('href','#pricing'); }
-        if(btns[1]){ btns[1].removeAttribute('data-i18n'); btns[1].textContent='Meet the AI team'; btns[1].setAttribute('href','#team'); }
+        if(btns[0]){ btns[0].setAttribute('href','#pricing'); }
+        if(btns[1]){ btns[1].setAttribute('href','#team'); }
       }
 
       var visual = el('div','hv-hero-visual'); visual.id='hv-hero-visual';
