@@ -2217,5 +2217,28 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
 }
 </style>
 <!-- HYVENTA-V10-DETAIL:END -->
+<!-- HYVENTA-V11-FIXES:START -->
+<style id="hv-v11-fixes-css">
+  /* Problem 1: remove the duplicated horizontal active-employee profile block
+     under the carousel. Carousel, employee data and the Hire/profile modal
+     (openProfile) are untouched — only this redundant echo is hidden. */
+  #team #detail { display: none !important; }
+
+  /* Problem 2: stop side carousel cards' name/role text ghosting onto the
+     neighbouring cards. The translucent name-plate scrim let the card behind
+     show through; making non-active cards' plates opaque keeps each card's
+     text on its own solid panel. Carousel geometry / transforms / z-index /
+     nav are NOT changed. */
+  .card:not(.active) .portrait .name-plate {
+    background: linear-gradient(to top, rgba(10,14,26,.99) 42%, rgba(10,14,26,.86) 72%, rgba(10,14,26,.35) 100%) !important;
+  }
+  .card .portrait { overflow: hidden; }
+
+  /* Problem 3: hide the duplicated FAQ (JS-injected English-only "Questions
+     and answers"). The localized static FAQ (#faq / #faqList, EN/ES/UK) is
+     kept as the single source of truth. */
+  #hv-faq2 { display: none !important; }
+</style>
+<!-- HYVENTA-V11-FIXES:END -->
 </body>
 </html>
