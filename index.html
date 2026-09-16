@@ -971,6 +971,8 @@ function applyLang(lang) {
   renderCarousel();
   renderFAQ();
   if(typeof localizeDemo==='function') localizeDemo(lang);
+  if(typeof localizeTrust==='function') localizeTrust(lang);
+  if(typeof localizeRoi==='function') localizeRoi(lang);
   // reset Ava greeting if empty
   const body = document.getElementById('ava-body');
   if (body && body.getAttribute('data-fresh') !== 'no') {
@@ -1613,6 +1615,33 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
     var st = sec.querySelectorAll('.hv-flow .hv-step');
     for(var i=0;i<st.length && i<d.steps.length;i++){ var tn=st[i].lastChild; if(tn && tn.nodeType===3){ tn.nodeValue=d.steps[i]; } else { st[i].appendChild(document.createTextNode(d.steps[i])); } }
   };
+  var TRUST = {
+    en:{ title:'Built to be trusted', subtitle:'Transparent, controllable, and connected to your stack.', cards:[['AI, not a black box','Every employee always identifies itself as an AI.'],['Human handoff','A person can take over whenever a case needs it.'],['Context memory','Agents keep relevant conversation and business context.'],['Works with your tools','Email, chat, CRM, calendar, sheets and more.'],['Always on','Automation runs 24/7 without downtime.'],['Honest security','Business-grade AI providers; your data is not used for training.']] },
+    es:{ title:'Diseñado para generar confianza', subtitle:'Transparente, controlable y conectado a tus herramientas.', cards:[['IA, no una caja negra','Cada empleado siempre se identifica como IA.'],['Transferencia a un humano','Una persona puede tomar el control cuando un caso lo requiere.'],['Memoria de contexto','Los agentes conservan el contexto relevante de la conversación y del negocio.'],['Funciona con tus herramientas','Correo, chat, CRM, calendario, hojas de cálculo y más.'],['Siempre activo','La automatización funciona 24/7 sin interrupciones.'],['Seguridad honesta','Proveedores de IA de nivel empresarial; tus datos no se usan para entrenamiento.']] },
+    uk:{ title:'Створено, щоб довіряти', subtitle:'Прозоро, контрольовано та інтегровано з вашими інструментами.', cards:[['AI, а не чорна скринька','Кожен співробітник завжди повідомляє, що він AI.'],['Передавання людині','Людина може підключитися будь-коли, коли цього потребує ситуація.'],['Пам’ять контексту','Агенти зберігають релевантний контекст розмови та бізнесу.'],['Працює з вашими інструментами','Пошта, чат, CRM, календар, таблиці та інше.'],['Завжди на зв’язку','Автоматизація працює 24/7 без простоїв.'],['Чесна безпека','AI-провайдери бізнес-рівня; ваші дані не використовуються для навчання.']] }
+  };
+  window.localizeTrust = function(lang){
+    var d = TRUST[lang] || TRUST.en; var sec = document.getElementById('hv-trust'); if(!sec||!d) return;
+    var h = sec.querySelector('h2'); if(h) h.textContent = d.title;
+    var sub = sec.querySelector('.sub'); if(sub) sub.textContent = d.subtitle;
+    var cards = sec.querySelectorAll('.hv-trust-grid .hv-trust-card');
+    for(var i=0;i<cards.length && i<d.cards.length;i++){ var b=cards[i].querySelector('b'); if(b) b.textContent=d.cards[i][0]; var tn=cards[i].lastChild; if(tn && tn.nodeType===3){ tn.nodeValue=d.cards[i][1]; } }
+  };
+  var ROI = {
+    en:{ title:'How much time could your AI employee save?', subtitle:'Estimates only — your results depend on your workflow.', employees:'Employees involved:', hours:'Hours/week on repetitive tasks:', cost:'Hourly cost ($):', automation:'Automation:', timeSaved:'Time saved / month', labor:'Labor value saved', hyventa:'Est. Hyventa cost (Business plan)', net:'Net:', perMonth:'/mo' },
+    es:{ title:'¿Cuánto tiempo podría ahorrar tu empleado de IA?', subtitle:'Solo estimaciones: los resultados dependen de tu flujo de trabajo.', employees:'Empleados involucrados:', hours:'Horas/semana en tareas repetitivas:', cost:'Coste por hora ($):', automation:'Automatización:', timeSaved:'Tiempo ahorrado / mes', labor:'Valor laboral ahorrado', hyventa:'Coste estimado de Hyventa (plan Business)', net:'Neto:', perMonth:'/mes' },
+    uk:{ title:'Скільки часу може заощадити ваш AI-співробітник?', subtitle:'Лише оцінка — результат залежить від вашого робочого процесу.', employees:'Задіяні співробітники:', hours:'Годин/тиждень на повторювані завдання:', cost:'Вартість години ($):', automation:'Автоматизація:', timeSaved:'Заощаджено часу / місяць', labor:'Заощаджена вартість праці', hyventa:'Орієнтовна вартість Hyventa (план Business)', net:'Чистий результат:', perMonth:'/міс.' }
+  };
+  window.localizeRoi = function(lang){
+    var d = ROI[lang] || ROI.en; var sec = document.getElementById('hv-roi'); if(!sec||!d) return;
+    var h = sec.querySelector('h2'); if(h) h.textContent = d.title;
+    var sub = sec.querySelector('.sub'); if(sub) sub.textContent = d.subtitle;
+    var labs = sec.querySelectorAll('.hv-roi-controls label'); var lk=[d.employees,d.hours,d.cost,d.automation];
+    for(var i=0;i<labs.length && i<lk.length;i++){ if(labs[i].firstChild && labs[i].firstChild.nodeType===3){ labs[i].firstChild.nodeValue = lk[i]+' '; } }
+    var rows = sec.querySelectorAll('.hv-roi-out .row'); var rk=[d.timeSaved,d.labor,d.hyventa];
+    for(var j=0;j<rows.length && j<rk.length;j++){ if(rows[j].firstChild && rows[j].firstChild.nodeType===3){ rows[j].firstChild.nodeValue = rk[j]; } }
+    var net = sec.querySelector('.hv-roi-net'); if(net){ if(net.firstChild && net.firstChild.nodeType===3){ net.firstChild.nodeValue = d.net+' '; } if(net.lastChild && net.lastChild.nodeType===3){ net.lastChild.nodeValue = d.perMonth; } }
+  };
   var hvBill3='month';
   function num(id){ var e=document.getElementById(id); return e?(+e.value):0; }
   function setTxt(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
@@ -1653,6 +1682,7 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
       grid.appendChild(ctrl); grid.appendChild(out); r.appendChild(grid); anchor.parentNode.insertBefore(r, anchor);
       function roi(){ setTxt('hv-roi-emp-v',num('hv-roi-emp')); setTxt('hv-roi-hrs-v',num('hv-roi-hrs')); setTxt('hv-roi-cost-v',num('hv-roi-cost')); setTxt('hv-roi-auto-v',num('hv-roi-auto')); var mh=num('hv-roi-emp')*num('hv-roi-hrs')*4.33; var saved=mh*(num('hv-roi-auto')/100); var labor=saved*num('hv-roi-cost'); var netv=labor-249; setTxt('hv-roi-saved',Math.round(saved)+' h'); setTxt('hv-roi-labor','$'+Math.round(labor).toLocaleString()); setTxt('hv-roi-net','$'+Math.round(netv).toLocaleString()); }
       ['hv-roi-emp','hv-roi-hrs','hv-roi-cost','hv-roi-auto'].forEach(function(id){ var e=document.getElementById(id); if(e) e.addEventListener('input',roi); }); roi();
+      if(typeof window.localizeRoi==='function') window.localizeRoi((typeof LANG!=='undefined')?LANG:'en');
     }
     if(anchor && !document.getElementById('hv-trust')){
       var ts=mk('section',null,null); ts.id='hv-trust'; ts.className='hv-sec';
@@ -1661,6 +1691,7 @@ window.HV_PRICING={"emma":{"name":"Emma","role":"AI Receptionist","cls":"A-Simpl
       var tgrid=mk('div','hv-trust-grid',null); var tc=[['AI, not a black box','Every employee always identifies itself as an AI.'],['Human handoff','A person can take over whenever a case needs it.'],['Context memory','Agents keep relevant conversation and business context.'],['Works with your tools','Email, chat, CRM, calendar, sheets and more.'],['Always on','Automation runs 24/7 without downtime.'],['Honest security','Business-grade AI providers; your data is not used for training.']];
       for(var j=0;j<tc.length;j++){ var cd=mk('div','hv-trust-card',null); cd.appendChild(mk('b',null,tc[j][0])); cd.appendChild(document.createTextNode(tc[j][1])); tgrid.appendChild(cd); }
       ts.appendChild(tgrid); anchor.parentNode.insertBefore(ts, anchor);
+      if(typeof window.localizeTrust==='function') window.localizeTrust((typeof LANG!=='undefined')?LANG:'en');
     }
     if(pricing && !document.getElementById('hv-faq2')){
       var f=mk('section',null,null); f.id='hv-faq2'; f.className='hv-sec';
