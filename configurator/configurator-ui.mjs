@@ -368,6 +368,7 @@ export function renderResult(estimate) {
         <h3>${esc(t('empty_h'))}</h3>
         <p>${esc(t('empty_p'))}</p>
         <a class="cfg-cta" href="#contact">${esc(t('cta'))}</a>
+        <button type="button" class="cfg-cta cfg-req-cta">${esc(t('req_cta'))}</button>
       </div>`;
   }
 
@@ -638,8 +639,8 @@ function openRequestModal() {
   if (typeof document === 'undefined') return;
   if (document.getElementById('cfg-req-modal')) return;
   const est = lastEstimate;
-  if (!est || !est.recommended_agents || !est.recommended_agents.length) return;
-  const top = est.recommended_agents[0];
+  if (!est) return;
+  const top = (est.recommended_agents && est.recommended_agents[0]) || null;
   const host = document.getElementById('configurator') || document.body;
 
   const overlay = document.createElement('div');
@@ -649,7 +650,7 @@ function openRequestModal() {
     <div class="cfg-req-card" role="dialog" aria-modal="true" aria-labelledby="cfg-req-title">
       <button type="button" class="cfg-req-close" aria-label="${esc(t('req_close'))}">&times;</button>
       <h3 id="cfg-req-title">${esc(t('req_title'))}</h3>
-      <p class="cfg-req-sub">${esc(t('req_for'))} <strong>${esc(top.name)}</strong> — ${esc(agentRole(top))}</p>
+      ${top ? `<p class="cfg-req-sub">${esc(t('req_for'))} <strong>${esc(top.name)}</strong> — ${esc(agentRole(top))}</p>` : ''}
       <form class="cfg-req-form" novalidate>
         <label class="cfg-req-label">${esc(t('req_name'))}
           <input type="text" name="name" class="cfg-req-input" autocomplete="name" required />
