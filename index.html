@@ -506,7 +506,6 @@
     <div class="dots" id="dots"></div>
     <div class="nav-arrow" id="next" aria-label="Next">›</div>
   </div>
-  <p class="hint" data-i18n="team_hint">Use ‹ › , the dots, arrow keys, or swipe — click any side card to bring it to the center.</p>
 </section>
 
 <!-- HYVENTA-CONFIGURATOR:START -->
@@ -813,8 +812,7 @@ const I18N = {
     hero_cta1:"Configure your AI employee", hero_cta2:"Meet the AI team",
     p1:"🤖 Always states it's an AI", p2:"🧠 Remembers context", p3:"🙋 Human handoff built in", p4:"🌍 Any language", p5:"⚡ Works 24/7",
     team_h:"Meet your AI team", team_sub:"Meet our growing team of AI specialists — sales, support, reception, recruiting and more.",
-    bill_month:"Monthly", bill_year:"Annual · Save 2 months (~17%)", slot_note:"Bundle plans cover eligible AI employees by complexity (slot-based), not any six agents.", per_mo:"/mo", per_year:"/year",
-    team_hint:"Use ‹ › , the dots, arrow keys, or swipe — click any side card to bring it to the center.",
+    bill_month:"Monthly", bill_year:"Annual · Save 2 months (~17%)", per_mo:"/mo", per_year:"/year",
     how_h:"How it works", how_sub:"From your first conversation to a working AI employee — without the technical work.",
     how1_h:"Pick your employee", how1_p:"Choose from our growing team of AI specialists — sales, support, reception, recruiting and more.",
     how2_h:"We set it up", how2_p:"We connect the right channels and adapt it to your business. No coding for you.",
@@ -841,8 +839,7 @@ const I18N = {
     hero_cta1:"Configura tu empleado de IA", hero_cta2:"Conoce al equipo",
     p1:"🤖 Siempre indica que es IA", p2:"🧠 Recuerda el contexto", p3:"🙋 Traspaso a humano integrado", p4:"🌍 Cualquier idioma", p5:"⚡ Trabaja 24/7",
     team_h:"Conoce a tu equipo IA", team_sub:"Conoce a nuestro creciente equipo de especialistas IA: ventas, soporte, recepción, reclutamiento y más.",
-    bill_month:"Mensual", bill_year:"Anual · Ahorra 2 meses (~17%)", slot_note:"Los planes combinados cubren empleados de IA elegibles según su complejidad (por slots), no seis agentes cualesquiera.", per_mo:"/mes", per_year:"/año",
-    team_hint:"Usa ‹ › , los puntos, las flechas o desliza — toca una tarjeta lateral para centrarla.",
+    bill_month:"Mensual", bill_year:"Anual · Ahorra 2 meses (~17%)", per_mo:"/mes", per_year:"/año",
     how_h:"Cómo funciona", how_sub:"Desde la primera conversación hasta un empleado de IA listo para trabajar, sin que tengas que encargarte de la parte técnica.",
     how1_h:"Elige tu empleado", how1_p:"Elige entre nuestro creciente equipo de especialistas IA: ventas, soporte, recepción, reclutamiento y más.",
     how2_h:"Lo configuramos", how2_p:"Conectamos los canales necesarios y adaptamos el empleado a tu negocio. No necesitas programar.",
@@ -869,8 +866,7 @@ const I18N = {
     hero_cta1:"Налаштувати AI-співробітника", hero_cta2:"Знайомство з командою",
     p1:"🤖 Завжди каже, що він AI", p2:"🧠 Памʼятає контекст", p3:"🙋 Передача людині вбудована", p4:"🌍 Будь-яка мова", p5:"⚡ Працює 24/7",
     team_h:"Ваша AI-команда", team_sub:"Познайомтеся з нашою командою AI-спеціалістів, що зростає — продажі, підтримка, рецепція, рекрутинг та інші.",
-    bill_month:"Щомісяця", bill_year:"Щорічно · Заощаджуйте 2 місяці (~17%)", slot_note:"Пакетні плани охоплюють відповідних AI-співробітників за складністю (за слотами), а не будь-яких шістьох агентів.", per_mo:"/міс.", per_year:"/рік",
-    team_hint:"Використовуйте ‹ › , крапки, стрілки або свайп — торкніться бічної картки, щоб вивести її в центр.",
+    bill_month:"Щомісяця", bill_year:"Щорічно · Заощаджуйте 2 місяці (~17%)", per_mo:"/міс.", per_year:"/рік",
     how_h:"Як це працює", how_sub:"Від першої розмови до готового AI-співробітника — без технічної роботи з вашого боку.",
     how1_h:"Оберіть співробітника", how1_p:"Обирайте з нашої команди AI-спеціалістів, що зростає — продажі, підтримка, рецепція, рекрутинг та інші.",
     how2_h:"Ми налаштовуємо", how2_p:"Ми підключаємо потрібні канали та адаптуємо AI-співробітника до вашого бізнесу. Вам не потрібно програмувати.",
@@ -978,6 +974,8 @@ let LANG = (navigator.language || "en").slice(0,2);
 if (!I18N[LANG]) LANG = "en";
 const HIRE = { en: "Hire", es: "Contratar", uk: "Найняти" };
 const MORE = { en: "More about", es: "Más sobre", uk: "Детальніше про" };
+const TIER_LABEL = { en: { s: "STANDARD", a: "ADVANCED" }, es: { s: "ESTÁNDAR", a: "AVANZADO" }, uk: { s: "СТАНДАРТ", a: "РОЗШИРЕНИЙ" } };
+function tierText(t) { var m = TIER_LABEL[LANG] || TIER_LABEL.en; return t === "CUSTOM" ? m.a : m.s; }
 
 const stage  = document.getElementById('stage');
 const dotsEl = document.getElementById('dots');
@@ -993,7 +991,7 @@ const cards = agents.map(function (a, i) {
       '<img src="images/' + a.file + '.png" alt="' + a.name + '" loading="lazy" ' +
            'onload="this.previousElementSibling.style.display=\'none\'" ' +
            'onerror="this.style.display=\'none\'">' +
-      '<span class="tier ' + a.tier + '">' + a.tier + '</span>' +
+      '<span class="tier ' + a.tier + '">' + tierText(a.tier) + '</span>' +
       '<div class="name-plate"><h3>' + a.name + '</h3><div class="role" data-role="'+i+'"></div></div>' +
     '</div>' +
     '<div class="hv-active-info"></div>';
@@ -1028,13 +1026,14 @@ function renderCarousel() {
     el.style.pointerEvents = abs > 3 ? 'none' : 'auto';
     el.classList.toggle('active', off === 0);
     el.querySelector('[data-role]').textContent = agents[i].role[LANG];
+    var _tb = el.querySelector('.portrait .tier'); if (_tb) { _tb.textContent = tierText(agents[i].tier); }
     if (off === 0) {
       var _a = agents[i];
       var _info = el.querySelector('.hv-active-info');
       if (_info) {
         var _ch = _a.chips[LANG].map(function (c) { return '<li>' + c + '</li>'; }).join('');
         _info.innerHTML =
-          '<span class="hv-ai-badge ' + _a.tier + '">' + _a.tier + '</span>' +
+          '<span class="hv-ai-badge ' + _a.tier + '">' + tierText(_a.tier) + '</span>' +
           '<h3 class="hv-ai-name">' + _a.name + '</h3>' +
           '<div class="hv-ai-role">' + _a.role[LANG] + '</div>' +
           '<p class="hv-ai-blurb">' + _a.blurb[LANG] + '</p>' +
@@ -1702,7 +1701,6 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
       var tgl=mk('div','hv-bill-toggle',null); tgl.id='hv-bill-toggle';
       var bm=mk('button','active',_il.bill_month||'Monthly'); bm.type='button'; bm.setAttribute('data-i18n','bill_month'); var by=mk('button',null,_il.bill_year||'Annual · Save 2 months (~17%)'); by.type='button'; by.setAttribute('data-i18n','bill_year');
       tgl.appendChild(bm); tgl.appendChild(by); pricing.insertBefore(tgl, pricing.firstChild);
-      var note=mk('p','hv-slot-note',_il.slot_note||'Bundle plans cover eligible AI employees by complexity (slot-based), not any six agents.'); note.setAttribute('data-i18n','slot_note'); pricing.insertBefore(note, tgl.nextSibling);
       if(typeof applyLang==='function'){ try{ applyLang(document.documentElement.lang||'en'); }catch(e){} }
       function hvUpdatePriceDisplay(){ var yr=(hvBill3==='year'); var perKey=yr?'per_year':'per_mo'; var _lg=document.documentElement.lang||'en'; var _d=(typeof I18N!=='undefined' && I18N[_lg]) ? I18N[_lg] : ((typeof I18N!=='undefined')?I18N.en:{}); var perTxt=_d[perKey]||(yr?'/year':'/mo'); var cards=pricing.querySelectorAll('.prices .price'); var tiers=['tier-starter','tier-business','tier-pro']; for(var c=0;c<cards.length && c<tiers.length;c++){ var pr=(window.HV_PRICING||{})[tiers[c]]||{}; var amt=cards[c].querySelector('.amount'); if(!amt||pr.m==null) continue; var val=yr?pr.a:pr.m; amt.innerHTML=''; amt.appendChild(document.createTextNode('$'+Number(val).toLocaleString('en-US'))); var sm=document.createElement('small'); sm.setAttribute('data-i18n',perKey); sm.textContent=perTxt; amt.appendChild(sm); } }
       bm.addEventListener('click',function(){ hvBill3='month'; bm.classList.add('active'); by.classList.remove('active'); hvUpdatePriceDisplay(); });
