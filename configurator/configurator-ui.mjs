@@ -13,6 +13,18 @@
 
 import { buildEstimate, matchAgents } from './engine.mjs';
 
+// ---------- Agent-creation request (STEP 17B) ----------
+// n8n webhook that receives a configured-agent creation request, builds a TXT
+// brief and emails it to the Hyventa owner. CONFIGURATION VALUE — points at the
+// live "Agent Creation Request" webhook workflow. Update here if the path changes.
+const AGENT_REQUEST_WEBHOOK_URL = 'https://achalex.app.n8n.cloud/webhook/agent-creation-request';
+
+// English labels for the owner-facing brief (the operator reads one language;
+// the visitor still sees fully localized UI). No pricing is computed here.
+const REQ_TASK_LABEL_EN = { sales: 'Sales', support: 'Customer support', booking: 'Booking / reservations', lead_qualification: 'Lead qualification', recruiting: 'Recruiting', marketing: 'Marketing', translation: 'Translation', knowledge: 'Knowledge / FAQ', analysis: 'Business analysis', image: 'Images / design', audio: 'Audio', video: 'Video' };
+const REQ_CHANNEL_LABEL_EN = { web_chat: 'Website / Web chat', web_form: 'Website form', telegram: 'Telegram', webhook: 'Connect another system', internal: 'For your team' };
+const REQ_INTEGRATION_LABEL_EN = { crm: 'CRM', calendar: 'Calendar', ats: 'Recruiting system (ATS)', api: 'Connect another system' };
+
 // ---------- i18n bridge (presentation only, engine stays language-neutral) ----------
 // All customer-facing configurator text lives here in the UI layer. The engine
 // and pricing-config remain language-neutral; nothing here changes pricing.
@@ -133,8 +145,59 @@ export const CFG_I18N = {
   },
 };
 
+// ---------- Agent-creation request strings (merged into CFG_I18N) ----------
+const REQ_I18N = {
+  en: {
+    req_cta: 'Request Agent Creation',
+    req_title: 'Request Agent Creation',
+    req_for: 'For',
+    req_name: 'Name',
+    req_email: 'Email',
+    req_note: 'Additional note (optional)',
+    req_submit: 'Request Agent Creation',
+    req_sending: 'Sending\u2026',
+    req_close: 'Close',
+    req_success: "Your agent creation request has been sent.\nWe'll review your configuration and contact you to confirm the details.",
+    req_err_name: 'Please enter your name.',
+    req_err_email: 'Please enter a valid email address.',
+    req_err_generic: "We couldn't send your request. Please try again in a moment or contact us directly.",
+  },
+  es: {
+    req_cta: 'Solicitar creaci\u00f3n del agente',
+    req_title: 'Solicitar creaci\u00f3n del agente',
+    req_for: 'Para',
+    req_name: 'Nombre',
+    req_email: 'Correo electr\u00f3nico',
+    req_note: 'Nota adicional (opcional)',
+    req_submit: 'Solicitar creaci\u00f3n del agente',
+    req_sending: 'Enviando\u2026',
+    req_close: 'Cerrar',
+    req_success: 'Tu solicitud de creaci\u00f3n del agente ha sido enviada.\nRevisaremos tu configuraci\u00f3n y nos pondremos en contacto contigo para confirmar los detalles.',
+    req_err_name: 'Introduce tu nombre.',
+    req_err_email: 'Introduce un correo electr\u00f3nico v\u00e1lido.',
+    req_err_generic: 'No pudimos enviar tu solicitud. Int\u00e9ntalo de nuevo en un momento o cont\u00e1ctanos directamente.',
+  },
+  uk: {
+    req_cta: '\u0417\u0430\u044f\u0432\u043a\u0430 \u043d\u0430 \u0441\u0442\u0432\u043e\u0440\u0435\u043d\u043d\u044f \u0430\u0433\u0435\u043d\u0442\u0430',
+    req_title: '\u0417\u0430\u044f\u0432\u043a\u0430 \u043d\u0430 \u0441\u0442\u0432\u043e\u0440\u0435\u043d\u043d\u044f \u0430\u0433\u0435\u043d\u0442\u0430',
+    req_for: '\u0414\u043b\u044f',
+    req_name: "\u0406\u043c'\u044f",
+    req_email: 'Email',
+    req_note: '\u0414\u043e\u0434\u0430\u0442\u043a\u043e\u0432\u0430 \u043f\u0440\u0438\u043c\u0456\u0442\u043a\u0430 (\u043d\u0435\u043e\u0431\u043e\u0432\u02bf\u044f\u0437\u043a\u043e\u0432\u043e)',
+    req_submit: '\u041d\u0430\u0434\u0456\u0441\u043b\u0430\u0442\u0438 \u0437\u0430\u044f\u0432\u043a\u0443 \u043d\u0430 \u0441\u0442\u0432\u043e\u0440\u0435\u043d\u043d\u044f \u0430\u0433\u0435\u043d\u0442\u0430',
+    req_sending: '\u041d\u0430\u0434\u0441\u0438\u043b\u0430\u043d\u043d\u044f\u2026',
+    req_close: '\u0417\u0430\u043a\u0440\u0438\u0442\u0438',
+    req_success: '\u0412\u0430\u0448\u0443 \u0437\u0430\u044f\u0432\u043a\u0443 \u043d\u0430 \u0441\u0442\u0432\u043e\u0440\u0435\u043d\u043d\u044f \u0430\u0433\u0435\u043d\u0442\u0430 \u043d\u0430\u0434\u0456\u0441\u043b\u0430\u043d\u043e.\n\u041c\u0438 \u043f\u0435\u0440\u0435\u0433\u043b\u044f\u043d\u0435\u043c\u043e \u0432\u0430\u0448\u0443 \u043a\u043e\u043d\u0444\u0456\u0433\u0443\u0440\u0430\u0446\u0456\u044e \u0442\u0430 \u0437\u0432\u02bf\u044f\u0436\u0435\u043c\u043e\u0441\u044f \u0437 \u0432\u0430\u043c\u0438 \u0434\u043b\u044f \u0443\u0442\u043e\u0447\u043d\u0435\u043d\u043d\u044f \u0434\u0435\u0442\u0430\u043b\u0435\u0439.',
+    req_err_name: "\u0412\u0432\u0435\u0434\u0456\u0442\u044c \u0432\u0430\u0448\u0435 \u0456\u043c'\u044f.",
+    req_err_email: '\u0412\u0432\u0435\u0434\u0456\u0442\u044c \u043a\u043e\u0440\u0435\u043a\u0442\u043d\u0443 \u0430\u0434\u0440\u0435\u0441\u0443 email.',
+    req_err_generic: '\u041d\u0435 \u0432\u0434\u0430\u043b\u043e\u0441\u044f \u043d\u0430\u0434\u0456\u0441\u043b\u0430\u0442\u0438 \u0437\u0430\u044f\u0432\u043a\u0443. \u0421\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0449\u0435 \u0440\u0430\u0437 \u0430\u0431\u043e \u0437\u0432\u02bf\u044f\u0436\u0456\u0442\u044c\u0441\u044f \u0437 \u043d\u0430\u043c\u0438 \u043d\u0430\u043f\u0440\u044f\u043c\u0443.',
+  },
+};
+for (const _l of Object.keys(REQ_I18N)) { if (CFG_I18N[_l]) Object.assign(CFG_I18N[_l], REQ_I18N[_l]); }
+
 let CUR = 'en';
 let lastEstimate = null;
+let lastSel = null;
 const t = (k) => (CFG_I18N[CUR] && CFG_I18N[CUR][k] != null ? CFG_I18N[CUR][k] : (CFG_I18N.en[k] != null ? CFG_I18N.en[k] : k));
 function resolveLang(l) { return CFG_I18N[l] ? l : 'en'; }
 
@@ -317,7 +380,10 @@ export function renderResult(estimate) {
         <h3>${esc(t('custom_h'))}</h3>
         <p>${esc(t('custom_p'))}</p>
         ${names ? `<p class="cfg-muted">${esc(t('custom_team'))} ${names}</p>` : ''}
-        <a class="cfg-cta" href="#contact">${esc(t('cta'))}</a>
+        <div class="cfg-cta-row">
+          <button type="button" class="cfg-cta cfg-req-cta">${esc(t('req_cta'))}</button>
+          <a class="cfg-cta cfg-cta-secondary" href="#contact">${esc(t('cta'))}</a>
+        </div>
         <p class="cfg-disclaimer">${esc(t('disclaimer'))}</p>
       </div>`;
   }
@@ -395,7 +461,10 @@ export function renderResult(estimate) {
       ${usageBlock}
       ${creditsBlock}
 
-      <a class="cfg-cta" href="#contact">${esc(t('cta'))}</a>
+      <div class="cfg-cta-row">
+        <button type="button" class="cfg-cta cfg-req-cta">${esc(t('req_cta'))}</button>
+        <a class="cfg-cta cfg-cta-secondary" href="#contact">${esc(t('cta'))}</a>
+      </div>
       <p class="cfg-disclaimer">${esc(t('disclaimer'))}</p>
     </div>`;
 }
@@ -438,6 +507,7 @@ export function runEstimate(root, out) {
   const input = buildInput(sel);
   const estimate = buildEstimate(input);
   lastEstimate = estimate;
+  lastSel = sel;
   out.innerHTML = renderResult(estimate);
   out.scrollIntoView({ behavior: 'smooth', block: 'start' });
   return { input, estimate };
@@ -506,6 +576,151 @@ function updateMatchHint(root) {
   box.hidden = false;
 }
 
+// ---------- agent-creation request: payload + modal (STEP 17B) ----------
+
+/**
+ * Assemble the request payload from the LAST estimate + selections. Pricing is
+ * read straight from the engine's estimate — never recalculated on the client.
+ */
+export function buildRequestPayload(name, email, note) {
+  const est = lastEstimate || {};
+  const sel = lastSel || {};
+  const agents = est.recommended_agents || [];
+  const top = agents[0] || null;
+  const roleEn = top ? (AGENT_ROLE.en[top.id] || top.role || '') : '';
+
+  const intents = [...(sel.intents || [])];
+  if (sel.translation && !intents.includes('translation')) intents.push('translation');
+  const tasks = intents.map((v) => REQ_TASK_LABEL_EN[v] || v);
+  const channels = (sel.channels || []).map((v) => REQ_CHANNEL_LABEL_EN[v] || v);
+  const integrations = (sel.integrations || []).map((v) => REQ_INTEGRATION_LABEL_EN[v] || v);
+  if (sel.otherIntegration && sel.otherIntegration.trim()) integrations.push(sel.otherIntegration.trim());
+
+  let kb = '';
+  if (sel.kb && sel.kb.present) kb = sel.kb.size === 'large' ? 'Large knowledge base' : 'Small knowledge base';
+
+  let usage;
+  if (Number.isFinite(sel.usageNumber) && sel.usageNumber > 0) usage = 'Exact: ' + Math.round(sel.usageNumber) + '/mo';
+  else usage = ({ low: 'Low', normal: 'Normal', high: 'High' }[sel.usageLevel] || 'Normal');
+
+  const setup = est.setup_range || { low: 0, high: 0 };
+  const monthly = est.monthly_range || { low: 0, high: 0 };
+
+  return {
+    name, email, note,
+    language: CUR,
+    agent: top ? top.name : '',
+    role: roleEn,
+    agents: agents.map((a) => a.name),
+    is_custom: !!est.is_custom,
+    business: sel.business || '',
+    tasks, channels, integrations,
+    knowledge_base: kb,
+    usage,
+    setup_low: Math.round(setup.low) || 0,
+    setup_high: Math.round(setup.high) || 0,
+    monthly_low: Math.round(monthly.low) || 0,
+    monthly_high: Math.round(monthly.high) || 0,
+    source: 'configurator',
+    submitted_at: new Date().toISOString(),
+  };
+}
+
+function closeRequestModal() {
+  const el = document.getElementById('cfg-req-modal');
+  if (el) el.remove();
+  document.removeEventListener('keydown', onReqKeydown);
+}
+function onReqKeydown(e) { if (e.key === 'Escape') closeRequestModal(); }
+
+/** Open the compact "Request Agent Creation" modal for the current estimate. */
+function openRequestModal() {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById('cfg-req-modal')) return;
+  const est = lastEstimate;
+  if (!est || !est.recommended_agents || !est.recommended_agents.length) return;
+  const top = est.recommended_agents[0];
+  const host = document.getElementById('configurator') || document.body;
+
+  const overlay = document.createElement('div');
+  overlay.id = 'cfg-req-modal';
+  overlay.className = 'cfg-req-overlay';
+  overlay.innerHTML = `
+    <div class="cfg-req-card" role="dialog" aria-modal="true" aria-labelledby="cfg-req-title">
+      <button type="button" class="cfg-req-close" aria-label="${esc(t('req_close'))}">&times;</button>
+      <h3 id="cfg-req-title">${esc(t('req_title'))}</h3>
+      <p class="cfg-req-sub">${esc(t('req_for'))} <strong>${esc(top.name)}</strong> — ${esc(agentRole(top))}</p>
+      <form class="cfg-req-form" novalidate>
+        <label class="cfg-req-label">${esc(t('req_name'))}
+          <input type="text" name="name" class="cfg-req-input" autocomplete="name" required />
+        </label>
+        <label class="cfg-req-label">${esc(t('req_email'))}
+          <input type="email" name="email" class="cfg-req-input" autocomplete="email" required />
+        </label>
+        <label class="cfg-req-label">${esc(t('req_note'))}
+          <textarea name="note" class="cfg-req-input cfg-req-textarea" rows="3"></textarea>
+        </label>
+        <div class="cfg-req-error" role="alert" hidden></div>
+        <button type="submit" class="cfg-cta cfg-req-submit">${esc(t('req_submit'))}</button>
+      </form>
+      <div class="cfg-req-success" hidden>
+        <div class="cfg-req-check">✓</div>
+        <p class="cfg-req-success-text"></p>
+        <button type="button" class="cfg-cta cfg-req-done">${esc(t('req_close'))}</button>
+      </div>
+    </div>`;
+  host.appendChild(overlay);
+  document.addEventListener('keydown', onReqKeydown);
+
+  const card = overlay.querySelector('.cfg-req-card');
+  const form = overlay.querySelector('.cfg-req-form');
+  const errBox = overlay.querySelector('.cfg-req-error');
+  const submitBtn = overlay.querySelector('.cfg-req-submit');
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeRequestModal(); });
+  overlay.querySelector('.cfg-req-close').addEventListener('click', closeRequestModal);
+  overlay.querySelector('.cfg-req-done').addEventListener('click', closeRequestModal);
+  const firstInput = form.querySelector('input[name="name"]');
+  if (firstInput) setTimeout(() => firstInput.focus(), 30);
+
+  const showErr = (msg) => { errBox.textContent = msg; errBox.hidden = false; };
+  let sending = false;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (sending) return;
+    const name = (form.name.value || '').trim();
+    const email = (form.email.value || '').trim();
+    const note = (form.note.value || '').trim();
+    errBox.hidden = true; errBox.textContent = '';
+    if (!name) { showErr(t('req_err_name')); form.name.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr(t('req_err_email')); form.email.focus(); return; }
+
+    sending = true;
+    submitBtn.disabled = true;
+    const orig = submitBtn.textContent;
+    submitBtn.textContent = t('req_sending');
+    try {
+      const payload = buildRequestPayload(name, email, note);
+      const res = await fetch(AGENT_REQUEST_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      form.hidden = true;
+      const succ = overlay.querySelector('.cfg-req-success');
+      succ.querySelector('.cfg-req-success-text').textContent = t('req_success');
+      succ.hidden = false;
+    } catch (err) {
+      // Never surface technical/webhook errors to the visitor.
+      showErr(t('req_err_generic'));
+      sending = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = orig;
+    }
+  });
+}
+
 export function init() {
   if (typeof document === 'undefined') return;
   const form = document.getElementById('cfg-form');
@@ -541,6 +756,8 @@ export function init() {
 
   // CTA -> preselect recommended agent, then let the #contact anchor scroll.
   out.addEventListener('click', (e) => {
+    const reqBtn = e.target && e.target.closest ? e.target.closest('.cfg-req-cta') : null;
+    if (reqBtn) { e.preventDefault(); openRequestModal(); return; }
     const cta = e.target && e.target.closest ? e.target.closest('a.cfg-cta') : null;
     if (cta) preselectContactAgent();
   });
