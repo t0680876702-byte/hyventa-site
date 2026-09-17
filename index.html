@@ -500,7 +500,7 @@
   <h1 data-i18n="hero_h1">Hire an AI employee. Put it to work.</h1>
   <p class="sub" data-i18n="hero_sub">A team of specialized AI employees, configured for your business and ready to handle real work.</p>
   <div class="hero-actions">
-    <a href="#pricing" class="btn-primary" data-i18n="hero_cta1">Configure your AI employee</a>
+    <a href="#configurator" class="btn-primary" data-i18n="hero_cta1">Configure your AI employee</a>
     <a href="#team" class="btn-ghost" data-i18n="hero_cta2">Meet the AI team</a>
   </div>
   <div class="points">
@@ -704,7 +704,7 @@
         <div class="amount">$99<small data-i18n="per_mo">/mo</small></div>
         <p class="plan-desc" data-i18n="pl_start_d">For a solo business getting its first AI hire.</p>
         <ul>
-          <li data-i18n="pl_start_1">1 AI employee of your choice</li>
+          <li data-i18n="pl_start_1">1 AI employee</li>
           <li data-i18n="pl_start_2">Ongoing AI employee service</li>
           <li data-i18n="pl_start_3">Email &amp; chat support</li>
         </ul>
@@ -841,7 +841,7 @@ const I18N = {
     how3_h:"Review & launch", how3_p:"We configure and test your AI employee, then launch it for you — ready to handle real work.",
     how4_h:"Scale up", how4_p:"Add more employees or skills anytime. It grows with your company.",
     price_h:"Simple pricing", price_sub:"Simple monthly plans. Setup is tailored to your business and confirmed before launch. Cancel anytime.",
-    pl_start_d:"For a solo business getting its first AI hire.", pl_start_1:"1 AI employee of your choice", pl_start_2:"Ongoing AI employee service", pl_start_3:"Email & chat support",
+    pl_start_d:"For a solo business getting its first AI hire.", pl_start_1:"1 AI employee", pl_start_2:"Ongoing AI employee service", pl_start_3:"Email & chat support",
     pl_popular:"Most popular", pl_biz_d:"For growing teams that need a few roles covered.", pl_biz_1:"Up to 3 AI employees", pl_biz_2:"Priority handling", pl_biz_3:"Ongoing support included",
     pl_pro_d:"For companies running a full AI department.", pl_pro_1:"Up to 6 AI employees", pl_pro_2:"Add-on skills included", pl_pro_3:"Priority support",
     pl_custom_price:"Let's talk", pl_custom_d:"The full AI team plus custom integrations.", pl_custom_1:"All AI employees", pl_custom_2:"Custom integrations", pl_custom_3:"Private deployment option",
@@ -868,7 +868,7 @@ const I18N = {
     how3_h:"Revisamos y lanzamos", how3_p:"Configuramos y probamos tu empleado de IA y después lo ponemos en marcha para que pueda encargarse del trabajo real.",
     how4_h:"Crece", how4_p:"Añade más empleados o habilidades cuando quieras. Crece con tu empresa.",
     price_h:"Precios simples", price_sub:"Planes mensuales sencillos. La configuración se adapta a tu negocio y se confirma antes del lanzamiento. Cancela cuando quieras.",
-    pl_start_d:"Para un negocio en solitario con su primera IA.", pl_start_1:"1 empleado IA a elegir", pl_start_2:"Servicio continuo de empleado de IA", pl_start_3:"Soporte por email y chat",
+    pl_start_d:"Para un negocio en solitario con su primera IA.", pl_start_1:"1 empleado de IA", pl_start_2:"Servicio continuo de empleado de IA", pl_start_3:"Soporte por email y chat",
     pl_popular:"Más popular", pl_biz_d:"Para equipos en crecimiento que necesitan varios roles.", pl_biz_1:"Hasta 3 empleados IA", pl_biz_2:"Atención prioritaria", pl_biz_3:"Soporte continuo incluido",
     pl_pro_d:"Para empresas con un departamento IA completo.", pl_pro_1:"Hasta 6 empleados IA", pl_pro_2:"Habilidades extra incluidas", pl_pro_3:"Soporte prioritario",
     pl_custom_price:"Hablemos", pl_custom_d:"El equipo IA completo más integraciones a medida.", pl_custom_1:"Todos los empleados IA", pl_custom_2:"Integraciones a medida", pl_custom_3:"Opción de despliegue privado",
@@ -895,7 +895,7 @@ const I18N = {
     how3_h:"Перевірка та запуск", how3_p:"Ми налаштуємо й протестуємо вашого AI-співробітника, а потім запустимо його для виконання реальної роботи.",
     how4_h:"Масштабуйте", how4_p:"Додавайте співробітників чи навички будь-коли. Росте разом з вашою компанією.",
     price_h:"Прості тарифи", price_sub:"Прості щомісячні тарифи. Налаштування адаптується до вашого бізнесу та узгоджується перед запуском. Скасовуйте в будь-який момент.",
-    pl_start_d:"Для соло-бізнесу з першим AI-наймом.", pl_start_1:"1 AI-співробітник на вибір", pl_start_2:"Постійне обслуговування AI-співробітника", pl_start_3:"Підтримка e-mail і чат",
+    pl_start_d:"Для соло-бізнесу з першим AI-наймом.", pl_start_1:"1 AI-співробітник", pl_start_2:"Постійне обслуговування AI-співробітника", pl_start_3:"Підтримка e-mail і чат",
     pl_popular:"Найпопулярніший", pl_biz_d:"Для команд, що ростуть і потребують кількох ролей.", pl_biz_1:"До 3 AI-співробітників", pl_biz_2:"Пріоритетне обслуговування", pl_biz_3:"Постійна підтримка включена",
     pl_pro_d:"Для компаній з повним AI-відділом.", pl_pro_1:"До 6 AI-співробітників", pl_pro_2:"Додаткові навички включені", pl_pro_3:"Пріоритетна підтримка",
     pl_custom_price:"Обговорімо", pl_custom_d:"Повна AI-команда плюс інтеграції під вас.", pl_custom_1:"Усі AI-співробітники", pl_custom_2:"Інтеграції під вас", pl_custom_3:"Приватне розгортання",
@@ -1883,7 +1883,7 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
       var actions = q('.hero-actions', left);
       if(actions){
         var btns = actions.querySelectorAll('a');
-        if(btns[0]){ btns[0].setAttribute('href','#pricing'); }
+        if(btns[0]){ btns[0].setAttribute('href','#configurator'); }
         if(btns[1]){ btns[1].setAttribute('href','#team'); }
       }
 
