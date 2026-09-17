@@ -724,6 +724,7 @@
         <a href="#contact" class="choose" data-i18n="pl_contact">Contact us</a>
       </div>
     </div>
+    <p class="plan-note" data-i18n="price_relation">These are standard managed-service packages. Individualized configurations may have a different monthly estimate — the configurator calculates it for you.</p>
     <p class="plan-note" data-i18n="price_note">💡 Not sure which plan? Ask Ava in the corner — she'll recommend the right fit.</p>
   </div>
 </section>
@@ -826,6 +827,7 @@ const I18N = {
     pl_custom_price:"Let's talk", pl_custom_d:"Advanced AI employees and configurations that need an individualized solution.", pl_custom_1:"Advanced AI employees & complex requirements", pl_custom_2:"Custom integrations & enterprise/SLA", pl_custom_3:"Private deployment & other individualized setups",
     pl_choose:"Get started", pl_contact:"Contact us",
     price_note:"💡 Not sure which plan? Ask Ava in the corner — she'll recommend the right fit.",
+    price_relation:"These are standard managed-service packages. Individualized configurations may have a different monthly estimate — the configurator calculates it for you.",
     faq_h:"Frequently asked questions",
     contact_h:"Talk to us", contact_sub:"Tell us what you need or ask anything. We'll recommend the right setup and reply in your language.", contact_agent:"Which AI employee are you interested in?", c_email:"Email",
     f_privacy:"Privacy Policy", f_terms:"Terms of Service", f_refund:"Refund Policy", f_cookie:"Cookie Policy", f_contact:"Contact", f_rights:"All rights reserved.",
@@ -853,6 +855,7 @@ const I18N = {
     pl_custom_price:"Hablemos", pl_custom_d:"Empleados de IA avanzados y configuraciones que requieren una solución individualizada.", pl_custom_1:"Empleados de IA avanzados y requisitos complejos", pl_custom_2:"Integraciones a medida y enterprise/SLA", pl_custom_3:"Despliegue privado y otras configuraciones individuales",
     pl_choose:"Empezar", pl_contact:"Contáctanos",
     price_note:"💡 ¿No sabes qué plan? Pregúntale a Ava en la esquina — te recomendará el ideal.",
+    price_relation:"Estos son paquetes estándar de servicio gestionado. Las configuraciones individualizadas pueden tener una estimación mensual diferente — el configurador la calcula por ti.",
     faq_h:"Preguntas frecuentes",
     contact_h:"Habla con nosotros", contact_sub:"Cuéntanos qué necesitas o haznos cualquier pregunta. Te recomendaremos la configuración adecuada y responderemos en tu idioma.", contact_agent:"¿Qué empleado de IA te interesa?", c_email:"Correo",
     f_privacy:"Política de privacidad", f_terms:"Términos del servicio", f_refund:"Política de reembolso", f_cookie:"Política de cookies", f_contact:"Contacto", f_rights:"Todos los derechos reservados.",
@@ -880,6 +883,7 @@ const I18N = {
     pl_custom_price:"Обговорімо", pl_custom_d:"Просунуті AI-співробітники та конфігурації, що потребують індивідуального рішення.", pl_custom_1:"Просунуті AI-співробітники та складні вимоги", pl_custom_2:"Інтеграції під вас та enterprise/SLA", pl_custom_3:"Приватне розгортання та інші індивідуальні налаштування",
     pl_choose:"Почати", pl_contact:"Звʼязатися",
     price_note:"💡 Не впевнені щодо тарифу? Запитайте Аву в кутку — вона підкаже.",
+    price_relation:"Це стандартні пакети керованого сервісу. Індивідуальні конфігурації можуть мати іншу щомісячну оцінку — її розраховує конфігуратор.",
     faq_h:"Часті запитання",
     contact_h:"Напишіть нам", contact_sub:"Розкажіть, що вам потрібно, або поставте запитання. Ми порекомендуємо оптимальне налаштування та відповімо вашою мовою.", contact_agent:"Який AI-співробітник вас цікавить?", c_email:"Пошта",
     f_privacy:"Політика конфіденційності", f_terms:"Умови користування", f_refund:"Політика повернення", f_cookie:"Політика файлів cookie", f_contact:"Контакти", f_rights:"Усі права захищені.",
@@ -1620,9 +1624,9 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
     for(var i=0;i<cards.length && i<d.cards.length;i++){ var b=cards[i].querySelector('b'); if(b) b.textContent=d.cards[i][0]; var tn=cards[i].lastChild; if(tn && tn.nodeType===3){ tn.nodeValue=d.cards[i][1]; } }
   };
   var ROI = {
-    en:{ title:'How much time could your AI employee save?', subtitle:'Estimates only — your results depend on your workflow.', employees:'Employees involved:', hours:'Hours/week on repetitive tasks:', cost:'Hourly cost ($):', automation:'Automation:', timeSaved:'Time saved / month', labor:'Labor value saved', hyventa:'Illustrative Hyventa cost', net:'Net:', perMonth:'/mo', subtitle2:'Illustrative only — actual investment depends on your business configuration.', cta:'Get your individualized estimate' },
-    es:{ title:'¿Cuánto tiempo podría ahorrar tu empleado de IA?', subtitle:'Solo estimaciones: los resultados dependen de tu flujo de trabajo.', employees:'Empleados involucrados:', hours:'Horas/semana en tareas repetitivas:', cost:'Coste por hora ($):', automation:'Automatización:', timeSaved:'Tiempo ahorrado / mes', labor:'Valor laboral ahorrado', hyventa:'Coste ilustrativo de Hyventa', net:'Neto:', perMonth:'/mes', cta:'Obtén tu estimación individualizada' },
-    uk:{ title:'Скільки часу може заощадити ваш AI-співробітник?', subtitle:'Лише оцінка — результат залежить від вашого робочого процесу.', employees:'Задіяні співробітники:', hours:'Годин/тиждень на повторювані завдання:', cost:'Вартість години ($):', automation:'Автоматизація:', timeSaved:'Заощаджено часу / місяць', labor:'Заощаджена вартість праці', hyventa:'Орієнтовна вартість Hyventa', net:'Чистий результат:', perMonth:'/міс.', cta:'Отримати індивідуальну оцінку' }
+    en:{ title:'How much time could your AI employee save?', subtitle:'Estimates only — your results depend on your workflow.', employees:'Employees involved:', hours:'Hours/week on repetitive tasks:', cost:'Hourly cost ($):', automation:'Automation:', timeSaved:'Time saved / month', labor:'Labor value saved', hyventa:'Illustrative Hyventa cost', net:'Net:', perMonth:'/mo', subtitle2:'Illustrative only — actual investment depends on your business configuration.', note:'The $249 shown is an illustrative example, not a fixed Hyventa price. Your actual price depends on your configuration — get your individualized estimate in the configurator.', cta:'Get your individualized estimate' },
+    es:{ title:'¿Cuánto tiempo podría ahorrar tu empleado de IA?', subtitle:'Solo estimaciones: los resultados dependen de tu flujo de trabajo.', employees:'Empleados involucrados:', hours:'Horas/semana en tareas repetitivas:', cost:'Coste por hora ($):', automation:'Automatización:', timeSaved:'Tiempo ahorrado / mes', labor:'Valor laboral ahorrado', hyventa:'Coste ilustrativo de Hyventa', net:'Neto:', perMonth:'/mes', note:'Los $249 mostrados son un ejemplo ilustrativo, no un precio fijo de Hyventa. Tu precio real depende de tu configuración — obtén tu estimación individualizada en el configurador.', cta:'Obtén tu estimación individualizada' },
+    uk:{ title:'Скільки часу може заощадити ваш AI-співробітник?', subtitle:'Лише оцінка — результат залежить від вашого робочого процесу.', employees:'Задіяні співробітники:', hours:'Годин/тиждень на повторювані завдання:', cost:'Вартість години ($):', automation:'Автоматизація:', timeSaved:'Заощаджено часу / місяць', labor:'Заощаджена вартість праці', hyventa:'Орієнтовна вартість Hyventa', net:'Чистий результат:', perMonth:'/міс.', note:'Показані $249 — це ілюстративний приклад, а не фіксована ціна Hyventa. Ваша реальна ціна залежить від конфігурації — отримайте індивідуальну оцінку в конфігураторі.', cta:'Отримати індивідуальну оцінку' }
   };
   window.localizeRoi = function(lang){
     var d = ROI[lang] || ROI.en; var sec = document.getElementById('hv-roi'); if(!sec||!d) return;
@@ -1633,6 +1637,7 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
     var rows = sec.querySelectorAll('.hv-roi-out .row'); var rk=[d.timeSaved,d.labor,d.hyventa];
     for(var j=0;j<rows.length && j<rk.length;j++){ if(rows[j].firstChild && rows[j].firstChild.nodeType===3){ rows[j].firstChild.nodeValue = rk[j]; } }
     var net = sec.querySelector('.hv-roi-net'); if(net){ if(net.firstChild && net.firstChild.nodeType===3){ net.firstChild.nodeValue = d.net+' '; } if(net.lastChild && net.lastChild.nodeType===3){ net.lastChild.nodeValue = d.perMonth; } }
+    var rn = sec.querySelector('#hv-roi-note'); if(rn && d.note) rn.textContent = d.note;
     var rcta = sec.querySelector('#hv-roi-cta'); if(rcta && d.cta) rcta.textContent = d.cta;
   };
   var hvBill3='month';
@@ -1671,7 +1676,7 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
       function orow(label,id,init){ var rw=mk('div','row',null); rw.appendChild(document.createTextNode(label)); var b=mk('b',null,init); b.id=id; rw.appendChild(b); out.appendChild(rw); }
       orow('Time saved / month','hv-roi-saved','0 h'); orow('Labor value saved','hv-roi-labor','$0'); orow('Illustrative Hyventa cost','hv-roi-hyv','$249');
       var net=mk('div','hv-roi-net',null); net.appendChild(document.createTextNode('Net: ')); var ns=mk('span',null,'$0'); ns.id='hv-roi-net'; net.appendChild(ns); net.appendChild(document.createTextNode('/mo')); out.appendChild(net);
-      grid.appendChild(ctrl); grid.appendChild(out); r.appendChild(grid); var rcta=mk('a','hvc-cta','Get your individualized estimate'); rcta.id='hv-roi-cta'; rcta.setAttribute('href','#configurator'); rcta.style.cssText='display:inline-block;margin-top:16px'; r.appendChild(rcta); anchor.parentNode.insertBefore(r, anchor);
+      grid.appendChild(ctrl); grid.appendChild(out); r.appendChild(grid); var rnote=mk('p','hv-slot-note','The $249 shown is an illustrative example, not a fixed Hyventa price. Your actual price depends on your configuration.'); rnote.id='hv-roi-note'; rnote.style.cssText='margin-top:14px'; r.appendChild(rnote); var rcta=mk('a','hvc-cta','Get your individualized estimate'); rcta.id='hv-roi-cta'; rcta.setAttribute('href','#configurator'); rcta.style.cssText='display:inline-block;margin-top:16px'; r.appendChild(rcta); anchor.parentNode.insertBefore(r, anchor);
       function roi(){ setTxt('hv-roi-emp-v',num('hv-roi-emp')); setTxt('hv-roi-hrs-v',num('hv-roi-hrs')); setTxt('hv-roi-cost-v',num('hv-roi-cost')); setTxt('hv-roi-auto-v',num('hv-roi-auto')); var mh=num('hv-roi-emp')*num('hv-roi-hrs')*4.33; var saved=mh*(num('hv-roi-auto')/100); var labor=saved*num('hv-roi-cost'); var netv=labor-249; setTxt('hv-roi-saved',Math.round(saved)+' h'); setTxt('hv-roi-labor','$'+Math.round(labor).toLocaleString()); setTxt('hv-roi-net','$'+Math.round(netv).toLocaleString()); }
       ['hv-roi-emp','hv-roi-hrs','hv-roi-cost','hv-roi-auto'].forEach(function(id){ var e=document.getElementById(id); if(e) e.addEventListener('input',roi); }); roi();
       if(typeof window.localizeRoi==='function') window.localizeRoi((typeof LANG!=='undefined')?LANG:'en');
