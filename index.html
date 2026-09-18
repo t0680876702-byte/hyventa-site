@@ -405,9 +405,6 @@
 .hv-trust-card b{color:#fff;display:block;margin-bottom:6px}
 .hv-faq2 details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;margin-bottom:10px;color:#cfd0da}
 .hv-faq2 summary{color:#fff;cursor:pointer;font-weight:600}
-.hv-bill-toggle{display:flex;gap:8px;justify-content:center;margin:0 auto 12px;max-width:440px}
-.hv-bill-toggle button{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:transparent;color:#cfd0da;font-weight:600;cursor:pointer;font-size:13px}
-.hv-bill-toggle button.active{background:linear-gradient(135deg,#6d5efc,#9b6bff);color:#fff;border-color:transparent}
 .hv-slot-note{text-align:center;color:#9aa0ae;font-size:12px;margin:0 0 20px}
 .hv-modal-price{margin-top:18px;padding:16px;border-radius:14px;background:rgba(109,94,252,.1);border:1px solid rgba(109,94,252,.3)}
 .hv-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#b9a8ff;margin-bottom:8px}
@@ -471,7 +468,7 @@
         <button data-lang="es">ES</button>
         <button data-lang="uk">UK</button>
       </div>
-      <a href="#pricing" class="cta-btn" data-i18n="nav_cta">Get started</a>
+      <a href="#configurator" class="cta-btn" data-i18n="nav_cta">Get started</a>
     </nav>
   </div>
 </header>
@@ -679,57 +676,14 @@
   <div class="wrap">
     <div class="sec-head">
       <h2 data-i18n="price_h">Simple pricing</h2>
-      <p data-i18n="price_sub">Simple monthly plans. Setup is tailored to your business and confirmed before launch — your one-time setup estimate is shown in the configurator. Cancel anytime.</p>
     </div>
-    <div class="prices">
-      <div class="price">
-        <h3>Start</h3>
-        <div class="amount">$99<small data-i18n="per_mo">/mo</small></div>
-        <p class="plan-desc" data-i18n="pl_start_d">For a solo business getting its first AI hire.</p>
-        <ul>
-          <li data-i18n="pl_start_1">1 standard AI employee</li>
-          <li data-i18n="pl_start_2">Ongoing AI employee service</li>
-          <li data-i18n="pl_start_3">Email &amp; chat support</li>
-        </ul>
-        <a href="#contact" class="choose" data-i18n="pl_choose">Get started</a>
-      </div>
-      <div class="price featured">
-        <span class="badge-pop" data-i18n="pl_popular">Most popular</span>
-        <h3>Business</h3>
-        <div class="amount">$249<small data-i18n="per_mo">/mo</small></div>
-        <p class="plan-desc" data-i18n="pl_biz_d">For growing teams that need a few roles covered.</p>
-        <ul>
-          <li data-i18n="pl_biz_1">Up to 3 standard AI employees</li>
-          <li data-i18n="pl_biz_2">Priority handling</li>
-          <li data-i18n="pl_biz_3">Ongoing support included</li>
-        </ul>
-        <a href="#contact" class="choose" data-i18n="pl_choose">Get started</a>
-      </div>
-      <div class="price">
-        <h3>Pro</h3>
-        <div class="amount">$499<small data-i18n="per_mo">/mo</small></div>
-        <p class="plan-desc" data-i18n="pl_pro_d">For companies running a full AI department.</p>
-        <ul>
-          <li data-i18n="pl_pro_1">Up to 6 standard AI employees</li>
-          <li data-i18n="pl_pro_2">Add-on skills included</li>
-          <li data-i18n="pl_pro_3">Priority support</li>
-        </ul>
-        <a href="#contact" class="choose" data-i18n="pl_choose">Get started</a>
-      </div>
-      <div class="price">
-        <h3>Custom</h3>
-        <div class="amount" data-i18n="pl_custom_price">Let's talk</div>
-        <p class="plan-desc" data-i18n="pl_custom_d">Advanced AI employees and configurations that need an individualized solution.</p>
-        <ul>
-          <li data-i18n="pl_custom_1">Advanced AI employees &amp; complex requirements</li>
-          <li data-i18n="pl_custom_2">Custom integrations &amp; enterprise/SLA</li>
-          <li data-i18n="pl_custom_3">Private deployment &amp; other individualized setups</li>
-        </ul>
-        <a href="#contact" class="choose" data-i18n="pl_contact">Contact us</a>
-      </div>
+    <div class="hv-price-ref">
+      <p class="hv-price-from" data-i18n="price_from_label">Standard AI employee solutions start from</p>
+      <div class="hv-price-anchor"><span class="hv-price-amt">$99</span><span class="hv-price-per" data-i18n="price_per">/month</span></div>
+      <p class="hv-price-support" data-i18n="price_support">Every AI employee is configured for your business. Your exact monthly service and one-time setup are calculated in the configurator and confirmed with Hyventa before payment.</p>
+      <p class="hv-price-adv" data-i18n="price_advanced">Advanced or usage-intensive configurations may have a higher monthly price.</p>
+      <a href="#configurator" class="hv-price-cta" data-i18n="price_cfg_cta">Configure your AI employee</a>
     </div>
-    <p class="plan-note" data-i18n="price_relation">These are standard managed-service packages. Individualized configurations may have a different monthly estimate — the configurator calculates it for you.</p>
-    <p class="plan-note" data-i18n="price_note">💡 Not sure which plan? Ask Ava in the corner — she'll recommend the right fit.</p>
   </div>
 </section>
 
@@ -825,6 +779,7 @@ const I18N = {
     how3_h:"Review & launch", how3_p:"We configure and test your AI employee, then launch it for you — ready to handle real work.",
     how4_h:"Scale up", how4_p:"Add more employees or skills anytime. It grows with your company.",
     price_h:"Simple pricing", price_sub:"Simple monthly plans. Setup is tailored to your business and confirmed before launch — your one-time setup estimate is shown in the configurator. Cancel anytime.",
+    price_from_label:"Standard AI employee solutions start from", price_per:"/month", price_support:"Every AI employee is configured for your business. Your exact monthly service and one-time setup are calculated in the configurator and confirmed with Hyventa before payment.", price_advanced:"Advanced or usage-intensive configurations may have a higher monthly price.", price_cfg_cta:"Configure your AI employee",
     pl_start_d:"For a solo business getting its first AI hire.", pl_start_1:"1 standard AI employee", pl_start_2:"Ongoing AI employee service", pl_start_3:"Email & chat support",
     pl_popular:"Most popular", pl_biz_d:"For growing teams that need a few roles covered.", pl_biz_1:"Up to 3 standard AI employees", pl_biz_2:"Priority handling", pl_biz_3:"Ongoing support included",
     pl_pro_d:"For companies running a full AI department.", pl_pro_1:"Up to 6 standard AI employees", pl_pro_2:"Add-on skills included", pl_pro_3:"Priority support",
@@ -852,6 +807,7 @@ const I18N = {
     how3_h:"Revisamos y lanzamos", how3_p:"Configuramos y probamos tu empleado de IA y después lo ponemos en marcha para que pueda encargarse del trabajo real.",
     how4_h:"Crece", how4_p:"Añade más empleados o habilidades cuando quieras. Crece con tu empresa.",
     price_h:"Precios simples", price_sub:"Planes mensuales sencillos. La configuración se adapta a tu negocio y se confirma antes del lanzamiento — tu estimación única de configuración se muestra en el configurador. Cancela cuando quieras.",
+    price_from_label:"Las soluciones estándar de empleados de IA comienzan desde", price_per:"/mes", price_support:"Cada empleado de IA se configura para tu negocio. Tu servicio mensual exacto y la configuración inicial única se calculan en el configurador y se confirman con Hyventa antes del pago.", price_advanced:"Las configuraciones avanzadas o de uso intensivo pueden tener un precio mensual más alto.", price_cfg_cta:"Configura tu empleado de IA",
     pl_start_d:"Para un negocio en solitario con su primera IA.", pl_start_1:"1 empleado de IA estándar", pl_start_2:"Servicio continuo de empleado de IA", pl_start_3:"Soporte por email y chat",
     pl_popular:"Más popular", pl_biz_d:"Para equipos en crecimiento que necesitan varios roles.", pl_biz_1:"Hasta 3 empleados de IA estándar", pl_biz_2:"Atención prioritaria", pl_biz_3:"Soporte continuo incluido",
     pl_pro_d:"Para empresas con un departamento IA completo.", pl_pro_1:"Hasta 6 empleados de IA estándar", pl_pro_2:"Habilidades extra incluidas", pl_pro_3:"Soporte prioritario",
@@ -879,6 +835,7 @@ const I18N = {
     how3_h:"Перевірка та запуск", how3_p:"Ми налаштуємо й протестуємо вашого AI-співробітника, а потім запустимо його для виконання реальної роботи.",
     how4_h:"Масштабуйте", how4_p:"Додавайте співробітників чи навички будь-коли. Росте разом з вашою компанією.",
     price_h:"Прості тарифи", price_sub:"Прості щомісячні тарифи. Налаштування адаптується до вашого бізнесу та узгоджується перед запуском — ваша разова оцінка налаштування показана в конфігураторі. Скасовуйте в будь-який момент.",
+    price_from_label:"Стандартні рішення AI-співробітників починаються від", price_per:"/міс.", price_support:"Кожен AI-співробітник налаштовується під ваш бізнес. Точна щомісячна вартість послуги та одноразового налаштування розраховується в конфігураторі та підтверджується Hyventa перед оплатою.", price_advanced:"Розширені конфігурації або конфігурації з інтенсивним використанням можуть мати вищу щомісячну вартість.", price_cfg_cta:"Налаштувати AI-співробітника",
     pl_start_d:"Для соло-бізнесу з першим AI-наймом.", pl_start_1:"1 стандартний AI-співробітник", pl_start_2:"Постійне обслуговування AI-співробітника", pl_start_3:"Підтримка e-mail і чат",
     pl_popular:"Найпопулярніший", pl_biz_d:"Для команд, що ростуть і потребують кількох ролей.", pl_biz_1:"До 3 стандартних AI-співробітників", pl_biz_2:"Пріоритетне обслуговування", pl_biz_3:"Постійна підтримка включена",
     pl_pro_d:"Для компаній з повним AI-відділом.", pl_pro_1:"До 6 стандартних AI-співробітників", pl_pro_2:"Додаткові навички включені", pl_pro_3:"Пріоритетна підтримка",
@@ -1721,21 +1678,9 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
       for(var k=0;k<qa.length;k++){ var det=mk('details',null,null); det.appendChild(mk('summary',null,qa[k][0])); det.appendChild(mk('p',null,qa[k][1])); f.appendChild(det); }
       if(pricing.nextSibling) pricing.parentNode.insertBefore(f, pricing.nextSibling); else pricing.parentNode.appendChild(f);
     }
-    if(pricing && !document.getElementById('hv-bill-toggle')){
-      var _il=(typeof I18N!=='undefined' && I18N[document.documentElement.lang]) ? I18N[document.documentElement.lang] : ((typeof I18N!=='undefined') ? I18N.en : {});
-      var tgl=mk('div','hv-bill-toggle',null); tgl.id='hv-bill-toggle';
-      var bm=mk('button','active',_il.bill_month||'Monthly'); bm.type='button'; bm.setAttribute('data-i18n','bill_month'); var by=mk('button',null,_il.bill_year||'Annual · Save 2 months (~17%)'); by.type='button'; by.setAttribute('data-i18n','bill_year');
-      tgl.appendChild(bm); tgl.appendChild(by); pricing.insertBefore(tgl, pricing.firstChild);
-      if(typeof applyLang==='function'){ try{ applyLang(document.documentElement.lang||'en'); }catch(e){} }
-      function hvUpdatePriceDisplay(){ var yr=(hvBill3==='year'); var perKey=yr?'per_year':'per_mo'; var _lg=document.documentElement.lang||'en'; var _d=(typeof I18N!=='undefined' && I18N[_lg]) ? I18N[_lg] : ((typeof I18N!=='undefined')?I18N.en:{}); var perTxt=_d[perKey]||(yr?'/year':'/mo'); var cards=pricing.querySelectorAll('.prices .price'); var tiers=['tier-starter','tier-business','tier-pro']; for(var c=0;c<cards.length && c<tiers.length;c++){ var pr=(window.HV_PRICING||{})[tiers[c]]||{}; var amt=cards[c].querySelector('.amount'); if(!amt||pr.m==null) continue; var val=yr?pr.a:pr.m; amt.innerHTML=''; amt.appendChild(document.createTextNode('$'+Number(val).toLocaleString('en-US'))); var sm=document.createElement('small'); sm.setAttribute('data-i18n',perKey); sm.textContent=perTxt; amt.appendChild(sm); } }
-      bm.addEventListener('click',function(){ hvBill3='month'; bm.classList.add('active'); by.classList.remove('active'); hvUpdatePriceDisplay(); });
-      by.addEventListener('click',function(){ hvBill3='year'; by.classList.add('active'); bm.classList.remove('active'); hvUpdatePriceDisplay(); });
-      function hvOpenCheckout(pid,slug){ var tries=0; (function go(){ if(window.Paddle && Paddle.Checkout){ track('checkout_started',{plan:slug,price_id:pid}); Paddle.Checkout.open({items:[{priceId:pid,quantity:1}]}); } else if(tries++<40){ setTimeout(go,125); } })(); }
-      function hvBindTierCtas(){ var cards=pricing.querySelectorAll('.prices .price'); var tiers=['tier-starter','tier-business','tier-pro']; for(var c=0;c<cards.length && c<tiers.length;c++){ (function(card,slug){ var elm=card.querySelector('a.choose')||card.querySelector('a[href]'); if(!elm||elm.getAttribute('data-hv-bound')==='1') return; elm.setAttribute('data-hv-bound','1'); elm.setAttribute('href','#configurator'); elm.addEventListener('click',function(ev){ track('plan_cta_click',{plan:slug}); }); })(cards[c],tiers[c]); } }
-      hvBindTierCtas();
-      hvUpdatePriceDisplay();
-      try{ new MutationObserver(hvBindTierCtas).observe(pricing,{childList:true,subtree:true}); }catch(e){}
-    }
+    /* HYVENTA-V17: public pricing cards + monthly/annual toggle removed; hvOpenCheckout retained (Paddle catalog infra, dormant). */
+    function hvOpenCheckout(pid,slug){ var tries=0; (function go(){ if(window.Paddle && Paddle.Checkout){ track('checkout_started',{plan:slug,price_id:pid}); Paddle.Checkout.open({items:[{priceId:pid,quantity:1}]}); } else if(tries++<40){ setTimeout(go,125); } })(); }
+    window.hvOpenCheckout=hvOpenCheckout;
     function badgeFor(cls){ if(!cls) return 'Advanced'; if(cls.indexOf('A')===0) return 'Simple'; if(cls.indexOf('C')===0) return 'Premium'; if(cls.indexOf('D')===0) return 'Custom'; return 'Advanced'; }
     function enrich(ov){ var img=ov.querySelector('.hv-modal-hero img'); if(!img) return; var mm=(img.getAttribute('src')||'').match(/images\/([^\/.]+)\.png/); if(!mm) return; var slug=mm[1]; var pr=(window.HV_PRICING||{})[slug]; track('agent_page_view',{agent:slug}); if(!pr) return; var body=ov.querySelector('.hv-modal-body'); if(!body||body.querySelector('.hv-modal-price')) return; var box=mk('div','hv-modal-price',null); box.appendChild(mk('span','hv-badge',badgeFor(pr.cls))); if(pr.usage){ box.appendChild(mk('div','hv-usage',pr.usage)); } box.appendChild(mk('div','hv-price-line','Available through Hyventa plans')); var cta=body.querySelector('.hv-modal-cta'); if(cta) body.insertBefore(box,cta); else body.appendChild(box); }
     try{ var mo=new MutationObserver(function(muts){ muts.forEach(function(m){ for(var i=0;i<m.addedNodes.length;i++){ var n=m.addedNodes[i]; if(n && n.id==='hv-modal') enrich(n); } }); }); mo.observe(document.body,{childList:true}); }catch(e){}
@@ -2597,5 +2542,19 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
 }
 </style>
 <!-- HYVENTA-V16-MOBILETEAM:END -->
+<!-- HYVENTA-V17-PRICING:START -->
+<style id="hv-v17-pricing-css">
+#pricing .hv-price-ref{max-width:640px;margin:0 auto;text-align:center;background:linear-gradient(180deg,rgba(20,26,44,.55),rgba(12,16,28,.55));border:1px solid rgba(108,140,255,.22);border-radius:20px;padding:40px 30px;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+#pricing .hv-price-from{color:var(--muted);font-size:15px;margin:0 0 6px}
+#pricing .hv-price-anchor{display:flex;align-items:baseline;justify-content:center;gap:4px;margin:0 0 18px;line-height:1}
+#pricing .hv-price-amt{font-size:64px;font-weight:800;letter-spacing:-2px;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+#pricing .hv-price-per{font-size:20px;font-weight:600;color:var(--muted)}
+#pricing .hv-price-support{color:var(--text);font-size:15px;line-height:1.6;max-width:520px;margin:0 auto 12px}
+#pricing .hv-price-adv{color:var(--muted);font-size:13px;line-height:1.5;max-width:520px;margin:0 auto 24px}
+#pricing .hv-price-cta{display:inline-block;text-decoration:none;font-weight:700;font-size:16px;padding:14px 30px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;transition:.2s}
+#pricing .hv-price-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(108,140,255,.35)}
+@media(max-width:560px){#pricing .hv-price-ref{padding:30px 20px}#pricing .hv-price-amt{font-size:52px}}
+</style>
+<!-- HYVENTA-V17-PRICING:END -->
 </body>
 </html>
