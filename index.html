@@ -237,6 +237,11 @@
   .ava-foot input:focus { border-color: var(--accent); }
   .ava-foot button { width: 44px; height: 44px; border-radius: 50%; border: none; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-size: 18px; cursor: pointer; flex-shrink: 0; }
   .ava-note { font-size: 11px; color: var(--muted); text-align: center; padding: 0 12px 10px; }
+  /* Ava configurator quick-action CTA */
+  .ava-quick { padding: 10px 12px 4px; display: flex; }
+  .ava-quick button { width: 100%; min-height: 44px; border: none; border-radius: 12px; padding: 11px 14px; font-size: 13.5px; font-weight: 600; cursor: pointer; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 6px 18px rgba(108,140,255,.35); transition: transform .15s ease, box-shadow .15s ease; }
+  .ava-quick button:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(108,140,255,.45); }
+  .msg.bot a.ava-cfg-link { color: var(--accent); font-weight: 600; text-decoration: underline; cursor: pointer; }
 
   /* ---------- Responsive ---------- */
   @media (max-width: 900px) {
@@ -795,6 +800,7 @@
     <button class="close" id="ava-close">×</button>
   </div>
   <div class="ava-body" id="ava-body"></div>
+  <div class="ava-quick" id="ava-quick"><button type="button" id="ava-cfg-cta" data-i18n="ava_cfg_cta">Configure your AI employee</button></div>
   <div class="ava-foot">
     <input id="ava-input" type="text" data-i18n-ph="ava_ph" placeholder="Ask about plans, agents, setup…" />
     <button id="ava-send">➤</button>
@@ -829,7 +835,7 @@ const I18N = {
     faq_h:"Frequently asked questions",
     contact_h:"Talk to us", contact_sub:"Tell us what you need or ask anything. We'll recommend the right setup and reply in your language.", contact_agent:"Which AI employee are you interested in?", c_email:"Email",
     f_privacy:"Privacy Policy", f_terms:"Terms of Service", f_refund:"Refund Policy", f_cookie:"Cookie Policy", f_contact:"Contact", f_rights:"All rights reserved.",
-    ava_status:"AI Guide · online", ava_ph:"Ask about plans, agents, setup…", ava_note:"Ava is an AI assistant. She may connect you to a human when needed.",
+    ava_status:"AI Guide · online", ava_ph:"Ask about plans, agents, setup…", ava_note:"Ava is an AI assistant. She may connect you to a human when needed.", ava_cfg_cta:"Configure your AI employee",
     ava_hi:"Hi! I'm Ava, your AI guide at Hyventa 👋 I can help you pick the right AI employee, explain the plans, or get you set up. What are you looking for?"
   },
   es: {
@@ -856,7 +862,7 @@ const I18N = {
     faq_h:"Preguntas frecuentes",
     contact_h:"Habla con nosotros", contact_sub:"Cuéntanos qué necesitas o haznos cualquier pregunta. Te recomendaremos la configuración adecuada y responderemos en tu idioma.", contact_agent:"¿Qué empleado de IA te interesa?", c_email:"Correo",
     f_privacy:"Política de privacidad", f_terms:"Términos del servicio", f_refund:"Política de reembolso", f_cookie:"Política de cookies", f_contact:"Contacto", f_rights:"Todos los derechos reservados.",
-    ava_status:"Guía IA · en línea", ava_ph:"Pregunta por planes, agentes, configuración…", ava_note:"Ava es una asistente IA. Puede conectarte con un humano cuando sea necesario.",
+    ava_status:"Guía IA · en línea", ava_ph:"Pregunta por planes, agentes, configuración…", ava_note:"Ava es una asistente IA. Puede conectarte con un humano cuando sea necesario.", ava_cfg_cta:"Configura tu empleado de IA",
     ava_hi:"¡Hola! Soy Ava, tu guía IA en Hyventa 👋 Puedo ayudarte a elegir el empleado IA adecuado, explicarte los planes o ponerte en marcha. ¿Qué buscas?"
   },
   uk: {
@@ -883,7 +889,7 @@ const I18N = {
     faq_h:"Часті запитання",
     contact_h:"Напишіть нам", contact_sub:"Розкажіть, що вам потрібно, або поставте запитання. Ми порекомендуємо оптимальне налаштування та відповімо вашою мовою.", contact_agent:"Який AI-співробітник вас цікавить?", c_email:"Пошта",
     f_privacy:"Політика конфіденційності", f_terms:"Умови користування", f_refund:"Політика повернення", f_cookie:"Політика файлів cookie", f_contact:"Контакти", f_rights:"Усі права захищені.",
-    ava_status:"AI-гід · онлайн", ava_ph:"Запитайте про тарифи, агентів, налаштування…", ava_note:"Ава — це AI-асистент. За потреби вона зʼєднає вас із людиною.",
+    ava_status:"AI-гід · онлайн", ava_ph:"Запитайте про тарифи, агентів, налаштування…", ava_note:"Ава — це AI-асистент. За потреби вона зʼєднає вас із людиною.", ava_cfg_cta:"Налаштувати AI-співробітника",
     ava_hi:"Привіт! Я Ава, ваш AI-гід у Hyventa 👋 Допоможу обрати потрібного AI-співробітника, поясню тарифи або допоможу почати. Що вас цікавить?"
   }
 };
@@ -1150,6 +1156,22 @@ function addMsg(text, who) {
   return m;
 }
 
+// Real, non-LLM-dependent navigation to the Configurator
+function goConfigurator() {
+  panel.classList.remove('open');
+  const el = document.getElementById('configurator');
+  if (el && el.scrollIntoView) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  else { location.hash = '#configurator'; }
+}
+function avaEsc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+// Where Ava mentions the Configurator in text, render it as a clickable link (safe, escaped)
+function avaLinkifyCfg(text) {
+  const safe = avaEsc(text);
+  const rx = /(#configurator|Configurador|Configurator|\u041a\u043e\u043d\u0444\u0456\u0433\u0443\u0440\u0430\u0442\u043e\u0440)/gi;
+  return safe.replace(rx, function (m) { return '<a href="#configurator" class="ava-cfg-link">' + m + '</a>'; });
+}
+function setBotText(el, text) { el.innerHTML = avaLinkifyCfg(text); }
+
 async function sendToAva(text) {
   addMsg(text, 'user');
   avaInput.value = '';
@@ -1159,7 +1181,7 @@ async function sendToAva(text) {
     const fb = { en:"Thanks! I'm not connected to the live brain yet — meanwhile, email hellohyventa@gmail.com or get started from the Pricing section.",
                  es:"¡Gracias! Aún no estoy conectada al cerebro en vivo — mientras tanto, escribe a hellohyventa@gmail.com o empieza desde la sección de Precios.",
                  uk:"Дякую! Я ще не підключена до живого мозку — а поки напишіть на hellohyventa@gmail.com або почніть у розділі Тарифи." };
-    setTimeout(function(){ typing.textContent = fb[LANG]; }, 500);
+    setTimeout(function(){ setBotText(typing, fb[LANG]); }, 500);
     return;
   }
   try {
@@ -1168,7 +1190,7 @@ async function sendToAva(text) {
       body: JSON.stringify({ chatInput: text, sessionId: sessionId, lang: LANG })
     });
     const data = await res.json();
-    typing.textContent = data.output || data.reply || data.text || JSON.stringify(data);
+    setBotText(typing, data.output || data.reply || data.text || JSON.stringify(data));
   } catch (e) {
     typing.textContent = { en:"Connection issue — please try again or email hellohyventa@gmail.com.",
                            es:"Problema de conexión — inténtalo de nuevo o escribe a hellohyventa@gmail.com.",
@@ -1177,6 +1199,9 @@ async function sendToAva(text) {
 }
 avaSend.addEventListener('click', function () { const t=avaInput.value.trim(); if(t) sendToAva(t); });
 avaInput.addEventListener('keydown', function (e) { if (e.key==='Enter'){ const t=avaInput.value.trim(); if(t) sendToAva(t); } });
+// Persistent Configurator quick-action + inline configurator links
+document.getElementById('ava-cfg-cta').addEventListener('click', goConfigurator);
+avaBody.addEventListener('click', function (e) { const a = e.target.closest && e.target.closest('a.ava-cfg-link'); if (a) { e.preventDefault(); goConfigurator(); } });
 
 /* ============ Init ============ */
 document.getElementById('year').textContent = new Date().getFullYear();
