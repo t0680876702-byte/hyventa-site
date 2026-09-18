@@ -988,7 +988,7 @@ const cards = agents.map(function (a, i) {
   el.innerHTML =
     '<div class="portrait">' +
       '<div class="fallback">' + a.name.charAt(0) + '</div>' +
-      '<img src="images/' + a.file + '.png" alt="' + a.name + '" loading="lazy" ' +
+      '<img src="images/' + a.file + '.png" srcset="images/' + a.file + '.webp" alt="' + a.name + '" loading="lazy" ' +
            'onload="this.previousElementSibling.style.display=\'none\'" ' +
            'onerror="this.style.display=\'none\'">' +
       '<span class="tier ' + a.tier + '">' + tierText(a.tier) + '</span>' +
@@ -1208,7 +1208,7 @@ go(0);
 
     // ---- Ava standing greeter ----
     if(!document.getElementById("ava-greeter")){
-      var g = el('<div id="ava-greeter" role="button" tabindex="0" aria-label="Chat with Ava"><span class="bubble-tip" id="ava-tip"></span><img src="images/ava.png" alt="Ava — AI Guide"></div>');
+      var g = el('<div id="ava-greeter" role="button" tabindex="0" aria-label="Chat with Ava"><span class="bubble-tip" id="ava-tip"></span><img src="images/ava.png" srcset="images/ava.webp" alt="Ava — AI Guide"></div>');
       document.body.appendChild(g);
       var tip=g.querySelector("#ava-tip"); if(tip) tip.textContent=t("tip");
       function openAva(){
@@ -1224,7 +1224,7 @@ go(0);
     // ---- Ava face in chat header ----
     var head = document.querySelector("#ava-panel .ava-head, #ava-panel header, .ava-header");
     if(head && !head.querySelector(".ava-head-face")){
-      var face=el('<img class="ava-head-face" src="images/ava.png" alt="Ava">');
+      var face=el('<img class="ava-head-face" src="images/ava.png" srcset="images/ava.webp" alt="Ava">');
       head.insertBefore(face, head.firstChild);
     }
 
@@ -1493,7 +1493,7 @@ go(0);
       var col=el('<div id="hv-collage" aria-label="Hyventa AI team"></div>');
       files.forEach(function(f){
         var fig=document.createElement("figure");
-        fig.innerHTML='<img src="images/'+f+'.png" alt="'+f+'" loading="lazy" onerror="this.parentNode.style.display=\'none\'"><figcaption>'+f.charAt(0).toUpperCase()+f.slice(1)+'</figcaption>';
+        fig.innerHTML='<img src="images/'+f+'.png" srcset="images/'+f+'.webp" alt="'+f+'" loading="lazy" onerror="this.parentNode.style.display=\'none\'"><figcaption>'+f.charAt(0).toUpperCase()+f.slice(1)+'</figcaption>';
         fig.querySelector("img").addEventListener("click", function(){ if(typeof openProfile==="function") openProfile(f); });
         col.appendChild(fig);
       });
@@ -1512,7 +1512,7 @@ go(0);
       var howHtml=how.map(function(x){return "<li>"+esc(x)+"</li>";}).join("");
       var ov=el('<div id="hv-modal" role="dialog" aria-modal="true"><div class="hv-modal-card">'+
         '<button class="hv-modal-close" aria-label="'+esc(t("profile_close"))+'">×</button>'+
-        '<div class="hv-modal-hero"><img src="images/'+file+'.png" alt="'+esc(name)+'" onerror="this.style.display=\'none\'">'+
+        '<div class="hv-modal-hero"><img src="images/'+file+'.png" srcset="images/'+file+'.webp" alt="'+esc(name)+'" onerror="this.style.display=\'none\'">'+
           '<div><h3>'+esc(name)+'</h3><div class="hv-modal-role">'+esc(role)+'</div></div></div>'+
         '<div class="hv-modal-body">'+
           '<p class="hv-modal-article">'+esc(article)+'</p>'+
@@ -1553,7 +1553,7 @@ go(0);
       var role=pget(file,"role")||"";
       var how=pget(file,"how")||[], needs=pget(file,"needs")||[], ex=pget(file,"examples")||[];
       var html='<div class="hv-prof">'+
-        '<div class="hv-prof-media"><img src="images/'+file+'.png" alt="'+esc(name)+'" onerror="this.style.display=\'none\'"></div>'+
+        '<div class="hv-prof-media"><img src="images/'+file+'.png" srcset="images/'+file+'.webp" alt="'+esc(name)+'" onerror="this.style.display=\'none\'"></div>'+
         '<div class="hv-prof-body">'+
           '<h3 class="hv-prof-name">'+esc(name)+'</h3>'+
           '<div class="hv-prof-role">'+esc(role)+'</div>'+
@@ -1778,6 +1778,7 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
 
       var img=el('img','hv-hero-img');
       img.src='images/hero-ai.png';
+      img.srcset='images/hero-ai.webp';
       img.alt='';
       img.loading='lazy';
       img.onerror=function(){ this.style.display='none'; if(this.parentNode) this.parentNode.classList.add('hv-noimg'); };
