@@ -2564,5 +2564,38 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
 }
 /* HYVENTA-V13-COOKIE:END */
 </style>
+<!-- HYVENTA-V16-MOBILETEAM:START -->
+<style id="hv-v16-mobileteam-css">
+/* ===== STEP 22C: Mobile Team compression (CSS-only, additive, mobile-only) =====
+   Reduces the Team section's vertical footprint on phones (<=560px) by shrinking
+   the carousel/card height, portrait height, section padding and gaps, and by
+   hiding the redundant benefits checklist on the active card. Keeps: large face,
+   name, role, STANDARD/ADVANCED badge, Hire/More CTA, carousel/swipe behaviour.
+   Desktop/tablet (>560px) is untouched. Horizontal card width is unchanged, so
+   no new horizontal overflow / 3D geometry change. */
+@media (max-width:560px){
+  /* tighter section chrome */
+  #team{ padding:44px 0; }
+  #team .sec-head{ margin-bottom:24px; }
+
+  /* shorter carousel + cards (width kept at 280 => geometry unchanged) */
+  #team .carousel{ height:472px; }
+  #team .card{ height:392px; margin-top:-196px; }
+  #team .card.active{ margin-top:-196px; }   /* keep active centered at new height */
+
+  /* keep a large recognizable face while trimming overall height */
+  #team .card.active .portrait{ flex:0 0 208px; height:208px; }
+
+  /* trim redundant vertical space in the active info panel */
+  #team .card.active .hv-active-info{ padding:14px 16px 16px; gap:6px; }
+  #team .hv-ai-benefits{ display:none; }     /* redundant with role + desc on mobile */
+  #team .hv-ai-desc{ font-size:12.5px; line-height:1.45; }
+
+  /* tighter controls under the carousel */
+  #team .controls{ margin-top:12px; }
+  #team .hint{ margin-top:10px; }
+}
+</style>
+<!-- HYVENTA-V16-MOBILETEAM:END -->
 </body>
 </html>
