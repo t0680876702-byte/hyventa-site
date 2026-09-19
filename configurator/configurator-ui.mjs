@@ -195,6 +195,56 @@ const REQ_I18N = {
 };
 for (const _l of Object.keys(REQ_I18N)) { if (CFG_I18N[_l]) Object.assign(CFG_I18N[_l], REQ_I18N[_l]); }
 
+// ---------- client-preparation strings ("What we need from you", STEP 22G v2) ----------
+// Shown in the CONFIGURATOR flow only (after the estimate/recommendation, before
+// "Request Agent Creation"). Describes what the client must PROVIDE to Hyventa.
+// No technical/implementation details are ever exposed to the visitor.
+const PREP_I18N = {
+  en: {
+    prep_h: 'What we need from you',
+    prep_sub: 'Before we start building your AI employee, please prepare the information and access needed for your selected setup.',
+    prep_business_t: 'Business information',
+    prep_business: 'Standard questions, answers and business rules — an Excel file, your existing database, or any text document works.',
+    prep_access_t: 'Access',
+    prep_calendar: 'Access to your calendar',
+    prep_crm: 'Access to your CRM',
+    prep_ats: 'Access to your recruiting system',
+    prep_system: 'Access to the selected system',
+    prep_none: "Nothing to prepare in advance \u2014 just send your request and we'll set everything up together.",
+    prep_ack: 'I understand that I will need to provide the required information and access before implementation.',
+    prep_ack_err: 'Please confirm you can provide the required information and access before we start.',
+  },
+  es: {
+    prep_h: 'Qu\u00e9 necesitamos de ti',
+    prep_sub: 'Antes de empezar a crear tu empleado de IA, prepara la informaci\u00f3n y los accesos necesarios para la configuraci\u00f3n seleccionada.',
+    prep_business_t: 'Informaci\u00f3n del negocio',
+    prep_business: 'Preguntas, respuestas y reglas de negocio habituales: sirve un archivo Excel, tu base de datos existente o cualquier documento de texto.',
+    prep_access_t: 'Accesos',
+    prep_calendar: 'Acceso a tu calendario',
+    prep_crm: 'Acceso a tu CRM',
+    prep_ats: 'Acceso a tu sistema de reclutamiento',
+    prep_system: 'Acceso al sistema seleccionado',
+    prep_none: 'No hay nada que preparar de antemano: solo env\u00eda tu solicitud y lo configuramos todo juntos.',
+    prep_ack: 'Entiendo que tendr\u00e9 que proporcionar la informaci\u00f3n y los accesos necesarios antes de la implementaci\u00f3n.',
+    prep_ack_err: 'Confirma que puedes proporcionar la informaci\u00f3n y los accesos necesarios antes de empezar.',
+  },
+  uk: {
+    prep_h: '\u0429\u043e \u043d\u0430\u043c \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0432\u0456\u0434 \u0432\u0430\u0441',
+    prep_sub: '\u041f\u0435\u0440\u0448 \u043d\u0456\u0436 \u043c\u0438 \u043f\u043e\u0447\u043d\u0435\u043c\u043e \u0441\u0442\u0432\u043e\u0440\u044e\u0432\u0430\u0442\u0438 \u0432\u0430\u0448\u043e\u0433\u043e AI-\u0441\u043f\u0456\u0432\u0440\u043e\u0431\u0456\u0442\u043d\u0438\u043a\u0430, \u043f\u0456\u0434\u0433\u043e\u0442\u0443\u0439\u0442\u0435 \u0456\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u044e \u0442\u0430 \u0434\u043e\u0441\u0442\u0443\u043f\u0438, \u043d\u0435\u043e\u0431\u0445\u0456\u0434\u043d\u0456 \u0434\u043b\u044f \u043e\u0431\u0440\u0430\u043d\u043e\u0457 \u043a\u043e\u043d\u0444\u0456\u0433\u0443\u0440\u0430\u0446\u0456\u0457.',
+    prep_business_t: '\u0406\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u044f \u043f\u0440\u043e \u0431\u0456\u0437\u043d\u0435\u0441',
+    prep_business: '\u0421\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u0456 \u0437\u0430\u043f\u0438\u0442\u0430\u043d\u043d\u044f, \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0456 \u0442\u0430 \u043f\u0440\u0430\u0432\u0438\u043b\u0430 \u0440\u043e\u0431\u043e\u0442\u0438 \u2014 \u043f\u0456\u0434\u0456\u0439\u0434\u0435 \u0444\u0430\u0439\u043b Excel, \u0432\u0430\u0448\u0430 \u043d\u0430\u044f\u0432\u043d\u0430 \u0431\u0430\u0437\u0430 \u0434\u0430\u043d\u0438\u0445 \u0430\u0431\u043e \u0431\u0443\u0434\u044c-\u044f\u043a\u0438\u0439 \u0442\u0435\u043a\u0441\u0442\u043e\u0432\u0438\u0439 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442.',
+    prep_access_t: '\u0414\u043e\u0441\u0442\u0443\u043f\u0438',
+    prep_calendar: '\u0414\u043e\u0441\u0442\u0443\u043f \u0434\u043e \u0432\u0430\u0448\u043e\u0433\u043e \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u044f',
+    prep_crm: '\u0414\u043e\u0441\u0442\u0443\u043f \u0434\u043e \u0432\u0430\u0448\u043e\u0433\u043e CRM',
+    prep_ats: '\u0414\u043e\u0441\u0442\u0443\u043f \u0434\u043e \u0432\u0430\u0448\u043e\u0457 \u0441\u0438\u0441\u0442\u0435\u043c\u0438 \u0440\u0435\u043a\u0440\u0443\u0442\u0438\u043d\u0433\u0443',
+    prep_system: '\u0414\u043e\u0441\u0442\u0443\u043f \u0434\u043e \u043e\u0431\u0440\u0430\u043d\u043e\u0457 \u0441\u0438\u0441\u0442\u0435\u043c\u0438',
+    prep_none: '\u041d\u0456\u0447\u043e\u0433\u043e \u0433\u043e\u0442\u0443\u0432\u0430\u0442\u0438 \u0437\u0430\u0437\u0434\u0430\u043b\u0435\u0433\u0456\u0434\u044c \u043d\u0435 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u2014 \u043f\u0440\u043e\u0441\u0442\u043e \u043d\u0430\u0434\u0456\u0448\u043b\u0456\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443, \u0456 \u043c\u0438 \u0432\u0441\u0435 \u043d\u0430\u043b\u0430\u0448\u0442\u0443\u0454\u043c\u043e \u0440\u0430\u0437\u043e\u043c.',
+    prep_ack: '\u042f \u0440\u043e\u0437\u0443\u043c\u0456\u044e, \u0449\u043e \u043f\u0435\u0440\u0435\u0434 \u043f\u043e\u0447\u0430\u0442\u043a\u043e\u043c \u0432\u043f\u0440\u043e\u0432\u0430\u0434\u0436\u0435\u043d\u043d\u044f \u043c\u0435\u043d\u0456 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0431\u0443\u0434\u0435 \u043d\u0430\u0434\u0430\u0442\u0438 \u043d\u0435\u043e\u0431\u0445\u0456\u0434\u043d\u0443 \u0456\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u044e \u0442\u0430 \u0434\u043e\u0441\u0442\u0443\u043f\u0438.',
+    prep_ack_err: '\u041f\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u044c\u0442\u0435, \u0431\u0443\u0434\u044c \u043b\u0430\u0441\u043a\u0430, \u0449\u043e \u0437\u043c\u043e\u0436\u0435\u0442\u0435 \u043d\u0430\u0434\u0430\u0442\u0438 \u043d\u0435\u043e\u0431\u0445\u0456\u0434\u043d\u0443 \u0456\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u044e \u0442\u0430 \u0434\u043e\u0441\u0442\u0443\u043f\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u043e\u0447\u0430\u0442\u043a\u043e\u043c.',
+  },
+};
+for (const _l of Object.keys(PREP_I18N)) { if (CFG_I18N[_l]) Object.assign(CFG_I18N[_l], PREP_I18N[_l]); }
+
 let CUR = 'en';
 let lastEstimate = null;
 let lastSel = null;
@@ -361,14 +411,118 @@ function esc(s) {
 }
 
 /** Build the customer-facing result HTML for an estimate. No internals leaked. */
+// ---------- client-preparation block ("What we need from you") ----------
+// Which recommended employees need business knowledge and/or a calendar. Grounded
+// in the AGENTS data (customer-facing Q&A / qualification / support / FAQ agents
+// need business rules; reception + appointment setting use a calendar). Access
+// requirements are otherwise driven by the integrations the user explicitly chose.
+const AGENT_PREP = {
+  sarah: { business: true, access: [] },
+  emma: { business: true, access: ['calendar'] },
+  olivia: { business: true, access: ['calendar'] },
+  alex: { business: true, access: [] },
+  max: { business: true, access: [] },
+};
+
+/** Derive the customer-facing preparation checklist from the estimate + selections. */
+export function buildPrep(estimate) {
+  const sel = lastSel || {};
+  const agents = (estimate && estimate.recommended_agents) || [];
+  let business = false;
+  const access = new Set();
+  for (const a of agents) {
+    const p = AGENT_PREP[a.id];
+    if (!p) continue;
+    if (p.business) business = true;
+    (p.access || []).forEach((k) => access.add(k));
+  }
+  // explicitly selected integrations / systems (never invented)
+  const integrations = sel.integrations || [];
+  if (integrations.includes('calendar')) access.add('calendar');
+  if (integrations.includes('crm')) access.add('crm');
+  if (integrations.includes('ats')) access.add('ats');
+  if (integrations.includes('api')) access.add('system');
+  if (sel.otherIntegration && sel.otherIntegration.trim()) access.add('system');
+  if ((sel.channels || []).includes('webhook')) access.add('system');
+  const order = ['calendar', 'crm', 'ats', 'system'];
+  return { business, access: order.filter((k) => access.has(k)) };
+}
+
+const PREP_ACCESS_KEY = { calendar: 'prep_calendar', crm: 'prep_crm', ats: 'prep_ats', system: 'prep_system' };
+
+/** Render the "What we need from you" block. Combined & de-duplicated checklist. */
+export function renderPrep(estimate) {
+  const prep = buildPrep(estimate);
+  let groups = '';
+  if (prep.business) {
+    groups += `
+      <div class="cfg-prep-group">
+        <div class="cfg-prep-group-title">${esc(t('prep_business_t'))}</div>
+        <ul class="cfg-prep-list"><li>${esc(t('prep_business'))}</li></ul>
+      </div>`;
+  }
+  if (prep.access.length) {
+    const items = prep.access.map((k) => `<li>${esc(t(PREP_ACCESS_KEY[k]))}</li>`).join('');
+    groups += `
+      <div class="cfg-prep-group">
+        <div class="cfg-prep-group-title">${esc(t('prep_access_t'))}</div>
+        <ul class="cfg-prep-list">${items}</ul>
+      </div>`;
+  }
+  if (!groups) groups = `<p class="cfg-prep-none">${esc(t('prep_none'))}</p>`;
+  return `
+    <div class="cfg-prep">
+      <div class="cfg-prep-head">
+        <h4 class="cfg-prep-h">${esc(t('prep_h'))}</h4>
+        <p class="cfg-prep-sub">${esc(t('prep_sub'))}</p>
+      </div>
+      <div class="cfg-prep-groups">${groups}</div>
+      <label class="cfg-prep-ack">
+        <input type="checkbox" class="cfg-prep-ack-input" />
+        <span>${esc(t('prep_ack'))}</span>
+      </label>
+      <p class="cfg-prep-ack-err" role="alert" hidden>${esc(t('prep_ack_err'))}</p>
+    </div>`;
+}
+
+/** Inject the scoped styles for the preparation block once (keeps deploy atomic). */
+function ensurePrepStyles() {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById('cfg-prep-styles')) return;
+  const css = `
+.cfg-prep{margin:22px 0 4px;padding:20px;border:1px solid rgba(120,140,200,.22);border-radius:16px;background:linear-gradient(180deg,rgba(20,26,44,.55),rgba(14,18,32,.35));}
+.cfg-prep-h{margin:0 0 6px;font-size:16px;font-weight:800;letter-spacing:.2px;}
+.cfg-prep-sub{margin:0 0 14px;font-size:13.5px;line-height:1.5;opacity:.82;}
+.cfg-prep-groups{display:flex;flex-wrap:wrap;gap:14px 26px;}
+.cfg-prep-group{flex:1 1 240px;min-width:220px;}
+.cfg-prep-group-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;opacity:.7;margin:0 0 8px;}
+.cfg-prep-list{list-style:none;margin:0;padding:0;}
+.cfg-prep-list li{position:relative;padding:0 0 0 24px;margin:0 0 8px;font-size:13.5px;line-height:1.5;}
+.cfg-prep-list li:last-child{margin-bottom:0;}
+.cfg-prep-list li::before{content:"\\2713";position:absolute;left:0;top:0;color:#6d8cff;font-weight:800;}
+.cfg-prep-none{margin:0;font-size:13.5px;line-height:1.5;opacity:.82;}
+.cfg-prep-ack{display:flex;align-items:flex-start;gap:10px;margin:16px 0 0;font-size:13px;line-height:1.45;cursor:pointer;}
+.cfg-prep-ack input{margin-top:2px;width:16px;height:16px;flex:0 0 auto;accent-color:#6d8cff;cursor:pointer;}
+.cfg-prep-ack-err{margin:8px 0 0;color:#ff8f8f;font-size:12.5px;}
+@media (max-width:560px){.cfg-prep{padding:16px}.cfg-prep-groups{gap:12px}.cfg-prep-group{flex-basis:100%;min-width:0}}
+`;
+  const s = document.createElement('style');
+  s.id = 'cfg-prep-styles';
+  s.textContent = css;
+  document.head.appendChild(s);
+}
+
 export function renderResult(estimate) {
   if (!estimate.recommended_agents || estimate.recommended_agents.length === 0) {
     return `
       <div class="cfg-result cfg-empty">
         <h3>${esc(t('empty_h'))}</h3>
         <p>${esc(t('empty_p'))}</p>
-        <a class="cfg-cta" href="#contact">${esc(t('cta'))}</a>
-        <button type="button" class="cfg-cta cfg-req-cta">${esc(t('req_cta'))}</button>
+        ${renderPrep(estimate)}
+        <div class="cfg-cta-row">
+          <button type="button" class="cfg-cta cfg-req-cta">${esc(t('req_cta'))}</button>
+          <a class="cfg-cta cfg-cta-secondary" href="#contact">${esc(t('cta'))}</a>
+        </div>
       </div>`;
   }
 
@@ -381,6 +535,7 @@ export function renderResult(estimate) {
         <h3>${esc(t('custom_h'))}</h3>
         <p>${esc(t('custom_p'))}</p>
         ${names ? `<p class="cfg-muted">${esc(t('custom_team'))} ${names}</p>` : ''}
+        ${renderPrep(estimate)}
         <div class="cfg-cta-row">
           <button type="button" class="cfg-cta cfg-req-cta">${esc(t('req_cta'))}</button>
           <a class="cfg-cta cfg-cta-secondary" href="#contact">${esc(t('cta'))}</a>
@@ -461,6 +616,8 @@ export function renderResult(estimate) {
 
       ${usageBlock}
       ${creditsBlock}
+
+      ${renderPrep(estimate)}
 
       <div class="cfg-cta-row">
         <button type="button" class="cfg-cta cfg-req-cta">${esc(t('req_cta'))}</button>
@@ -727,6 +884,7 @@ export function init() {
   const form = document.getElementById('cfg-form');
   const out = document.getElementById('cfg-output');
   if (!form || !out) return;
+  ensurePrepStyles();
 
   // enable KB size only when KB toggled
   const kb = document.getElementById('cfg-kb');
@@ -758,9 +916,29 @@ export function init() {
   // CTA -> preselect recommended agent, then let the #contact anchor scroll.
   out.addEventListener('click', (e) => {
     const reqBtn = e.target && e.target.closest ? e.target.closest('.cfg-req-cta') : null;
-    if (reqBtn) { e.preventDefault(); openRequestModal(); return; }
+    if (reqBtn) {
+      e.preventDefault();
+      // Require the acknowledgement only at submission time (viewing the estimate stays open).
+      const ack = out.querySelector('.cfg-prep-ack-input');
+      if (ack && !ack.checked) {
+        const err = out.querySelector('.cfg-prep-ack-err');
+        if (err) err.hidden = false;
+        const prep = out.querySelector('.cfg-prep');
+        if (prep && prep.scrollIntoView) prep.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        try { ack.focus(); } catch (_e) {}
+        return;
+      }
+      openRequestModal();
+      return;
+    }
     const cta = e.target && e.target.closest ? e.target.closest('a.cfg-cta') : null;
     if (cta) preselectContactAgent();
+  });
+
+  // Clear the acknowledgement error as soon as the visitor ticks the box.
+  out.addEventListener('change', (e) => {
+    const ack = e.target && e.target.closest ? e.target.closest('.cfg-prep-ack-input') : null;
+    if (ack && ack.checked) { const err = out.querySelector('.cfg-prep-ack-err'); if (err) err.hidden = true; }
   });
 
   // initial localization (site applyLang runs before this deferred module loads)
