@@ -857,7 +857,7 @@ const agents = [
  { file:"stella", name:"Stella", role:{en:"AI Stylist",es:"Estilista IA",uk:"AI-стиліст"}, tier:"BUSINESS", blurb:{en:"“Shows any outfit worn on a model — front and back.”",es:"“Muestra cualquier look puesto en una modelo — de frente y de espaldas.”",uk:"“Показує будь-який образ на моделі — спереду та ззаду.”"}, desc:{en:"Clients send a garment photo; Stella returns it worn on a model from two angles.",es:"Los clientes envían una foto de la prenda; Stella la devuelve puesta en una modelo desde dos ángulos.",uk:"Клієнти надсилають фото одягу; Stella повертає його на моделі з двох ракурсів."}, chips:{en:["📝 Web form","E-commerce · Fashion · Retail"],es:["📝 Formulario web","E-commerce · Moda · Retail"],uk:["📝 Веб-форма","E-commerce · Мода · Ритейл"]} },
   { file:"sarah",  name:"Sarah",  role:{en:"AI Sales Manager",es:"Gerente de Ventas IA",uk:"AI-менеджер продажів"}, tier:"BUSINESS",
     blurb:{en:"\"Your always-on sales rep. Qualifies every lead, never sleeps.\"",es:"\"Tu comercial siempre activo. Califica cada lead, nunca duerme.\"",uk:"\"Ваш продавець без вихідних. Кваліфікує кожен лід, ніколи не спить.\""},
-    desc:{en:"Chats with inbound leads, qualifies them, scores intent, saves to CRM, and hands hot leads to a human.",es:"Chatea con leads entrantes, los califica, puntúa la intención, guarda en el CRM y pasa los leads calientes a un humano.",uk:"Спілкується з вхідними лідами, кваліфікує їх, оцінює намір, зберігає в CRM і передає гарячі ліди людині."},
+    desc:{en:"Works with inbound customers 24/7 — answers questions, qualifies, saves to CRM, and hands the order to your team.",es:"Atiende a clientes entrantes 24/7: responde preguntas, califica, guarda en el CRM y entrega el pedido a tu equipo.",uk:"Працює з вхідними клієнтами 24/7 — відповідає на запитання, кваліфікує, зберігає в CRM і передає замовлення команді."},
     chips:{en:["💬 Web chat","Real estate · Education · Clinics"],es:["💬 Chat web","Inmobiliaria · Educación · Clínicas"],uk:["💬 Веб-чат","Нерухомість · Освіта · Клініки"]} },
   { file:"emma",   name:"Emma",   role:{en:"AI Receptionist",es:"Recepcionista IA",uk:"AI-рецепціоніст"}, tier:"START",
     blurb:{en:"\"The receptionist who never misses a call or a booking.\"",es:"\"La recepcionista que nunca pierde una llamada ni una reserva.\"",uk:"\"Рецепціоніст, який ніколи не пропустить дзвінок чи запис.\""},
@@ -1332,34 +1332,46 @@ go(0);
       needs:{en:["A clear photo of the garment or product"],
         uk:["Чітке фото одягу або товару"]} },
     sarah:{ role:{en:"AI Sales Manager",es:"Gerente de Ventas IA",uk:"AI-менеджер продажів"},
-      article:{en:"Sarah works your inbound leads around the clock. She greets every visitor, asks the right qualifying questions, scores buying intent and hands the hottest leads straight to your team — so no opportunity ever goes cold.",
-        uk:"Сара опрацьовує вхідні ліди цілодобово. Вона вітає кожного відвідувача, ставить правильні кваліфікаційні запитання, оцінює намір купити й передає найгарячіші ліди вашій команді — жодна можливість не втрачається."},
-      examples:{en:["Qualified 40 website leads overnight and flagged 6 as hot","Booked a product demo directly from a chat conversation","Pushed a new lead with full context into the CRM"],
-        uk:["За ніч кваліфікувала 40 лідів із сайту й позначила 6 як гарячі","Записала на демо прямо з чату","Додала новий лід із повним контекстом у CRM","За ніч опрацювала 40 клієнтів із сайту і 20 клієнтів в Instagram, та відправила реквізити для оплати","Відповіла на питання ціни 60 клієтам, з них 20 зробили замовлення і отримали реквізити для оплати.","Додала нових клієтів із повним контекстом у CRM"]},
-      how:{en:["Chats with each visitor and asks qualifying questions","Scores intent and saves the lead to your CRM","Notifies a human the moment a lead is hot"],
-        uk:["Косультує клієнтів по стадартним питанням","Спілкується з клієнтом і, якщо треба, ставить кваліфікаційні запитання","Зберігає клієнта у CRM","Нагадує людині про намір купити."]},
-      needs:{en:["Your qualifying criteria (what makes a lead a good fit)","Where to send hot leads (team email or contact)","Optional: product or offer details for context"],
-        uk:["Ваші критерії кваліфікації (який лід вам підходить)","Куди надсилати гарячі ліди (email або контакт команди)","Опційно: інформація про продукт чи пропозицію","Excel, ваша робоча база (або інший текстовий формат ваших стандатних запитань), звідки Сара навчиться вашим вимогам щодо роботи з клієтами."]} },
+      article:{en:"Sarah works with your inbound customers around the clock. She welcomes every visitor, answers common questions, asks the right qualifying questions when they are needed, and passes the finished result — the order — straight to your team, so no sales opportunity is ever lost.",
+        es:"Sarah atiende a tus clientes entrantes las 24 horas. Da la bienvenida a cada visitante, responde las preguntas habituales, hace las preguntas de calificación cuando conviene y entrega el resultado final —el pedido— directamente a tu equipo, para que no se pierda ninguna oportunidad de venta.",
+        uk:"Сара працює з вашими вхідними клієнтами цілодобово. Вона вітає кожного відвідувача, відповідає на типові запитання, за потреби ставить правильні кваліфікаційні запитання та передає готовий результат — замовлення — безпосередньо вашій команді, тож жодна можливість продажу не втрачається."},
+      examples:{en:["Overnight, handled 40 website customers and 20 Instagram customers and sent them payment details","Answered pricing questions from 60 customers — 20 placed an order and received payment details","Added new customers to the CRM with full context"],
+        es:["De la noche a la mañana atendió a 40 clientes de la web y 20 de Instagram y les envió los datos de pago","Respondió preguntas de precios de 60 clientes: 20 hicieron un pedido y recibieron los datos de pago","Añadió nuevos clientes al CRM con todo el contexto"],
+        uk:["За ніч опрацювала 40 клієнтів із сайту та 20 клієнтів в Instagram і надіслала їм реквізити для оплати","Відповіла на запитання про ціни 60 клієнтам — 20 із них зробили замовлення й отримали реквізити для оплати","Додала нових клієнтів до CRM з повним контекстом"]},
+      how:{en:["Advises customers on common questions","Talks with the customer and asks qualifying questions when needed","Saves the customer to your CRM","Follows up with people who intend to buy"],
+        es:["Asesora a los clientes en las preguntas habituales","Conversa con el cliente y hace preguntas de calificación cuando es necesario","Guarda al cliente en tu CRM","Da seguimiento a quienes tienen intención de comprar"],
+        uk:["Консультує клієнтів зі стандартних запитань","Спілкується з клієнтом і за потреби ставить кваліфікаційні запитання","Зберігає клієнта у вашому CRM","Нагадує людям, які мають намір купити"]},
+      needs:{en:["Excel, an existing working database, or another text-based source with your standard questions and process rules, so Sarah can learn how your business handles customers"],
+        es:["Excel, una base de datos de trabajo existente u otra fuente en formato de texto con tus preguntas habituales y reglas de proceso, para que Sarah aprenda cómo tu empresa atiende a los clientes"],
+        uk:["Excel, ваша наявна робоча база (або інше джерело в текстовому форматі) зі стандартними запитаннями та правилами роботи, щоб Сара навчилася, як ваш бізнес працює з клієнтами"]} },
 
     emma:{ role:{en:"AI Receptionist",es:"Recepcionista IA",uk:"AI-рецепціоніст"},
       article:{en:"Emma is the receptionist who never misses a call or a booking. She greets visitors, answers common questions, schedules consultations and logs every contact automatically — day or night.",
+        es:"Emma es la recepcionista que nunca pierde una llamada ni una reserva. Da la bienvenida a los visitantes, responde las preguntas habituales, agenda consultas y registra cada contacto automáticamente, de día y de noche.",
         uk:"Емма — рецепціоніст, який ніколи не пропустить дзвінок чи запис. Вона вітає відвідувачів, відповідає на типові запитання, планує консультації й автоматично фіксує кожен контакт — удень і вночі."},
-      examples:{en:["Booked 3 consultations while the office was closed","Answered pricing and opening-hours questions instantly","Logged every new contact with source and intent"],
-        uk:["Записала 3 консультації, поки офіс був зачинений","Миттєво відповіла на питання про ціни та години роботи","Зафіксувала кожен новий контакт із джерелом і наміром","Нагадала всім завтрашнім клієнтам для місце і час відвідуваня"]},
-      how:{en:["Greets visitors and answers FAQs","Books consultations into your calendar","Logs each contact automatically"],
-        uk:["Вітає відвідувачів і відповідає на часті питання","Записує консультації у ваш календар","Автоматично фіксує кожен контакт"]},
-      needs:{en:["Answers to your common questions (hours, services, pricing)","What can be booked and your availability","Optional: departments or people to route to"],
-        uk:["Відповіді на типові запитання (години, послуги, ціни)","Що можна забронювати та ваша доступність","Опційно: відділи або люди для маршрутизації","Excel, ваша робоча база (або інший текстовий формат ваших стандатних запитань), звідки Сара навчиться вашим вимогам щодо роботи з клієтами.","Доступ до вашого календаря."]} },
+      examples:{en:["Booked 3 consultations while the office was closed","Answered pricing and opening-hours questions instantly","Logged every new contact in your calendar with source and intent","Reminded every customer of the time and place of tomorrow's visit"],
+        es:["Agendó 3 consultas mientras la oficina estaba cerrada","Respondió al instante preguntas sobre precios y horarios","Registró cada nuevo contacto en tu calendario con origen e intención","Recordó a cada cliente la hora y el lugar de la visita del día siguiente"],
+        uk:["Записала 3 консультації, поки офіс був зачинений","Миттєво відповіла на запитання про ціни та години роботи","Зафіксувала кожен новий контакт у вашому календарі з джерелом і наміром","Нагадала кожному клієнту час і місце завтрашнього візиту"]},
+      how:{en:["Greets visitors and answers common questions","Books consultations into the customer's calendar","Logs every contact automatically"],
+        es:["Da la bienvenida a los visitantes y responde preguntas habituales","Agenda consultas en el calendario del cliente","Registra cada contacto automáticamente"],
+        uk:["Вітає відвідувачів і відповідає на типові запитання","Записує консультації в календар клієнта","Автоматично фіксує кожен контакт"]},
+      needs:{en:["Excel, an existing working database, or another text-based source with your standard questions and business rules, so Emma can learn how your business serves customers","Access to your calendar"],
+        es:["Excel, una base de datos de trabajo existente u otra fuente en formato de texto con tus preguntas habituales y reglas de negocio, para que Emma aprenda cómo tu empresa atiende a los clientes","Acceso a tu calendario"],
+        uk:["Excel, ваша наявна робоча база (або інше джерело в текстовому форматі) зі стандартними запитаннями та правилами роботи, щоб Емма навчилася, як ваш бізнес обслуговує клієнтів","Доступ до вашого календаря"]} },
 
     olivia:{ role:{en:"AI Appointment Setter",es:"Agendadora IA",uk:"AI-планувальник зустрічей"},
-      article:{en:"Olivia turns website curiosity into meetings on your calendar. She qualifies each visitor, captures their preferred time slot and confirms the booking — filling your pipeline while you focus on closing.",
-        uk:"Олівія перетворює цікавість на сайті на зустрічі у вашому календарі. Вона кваліфікує кожного відвідувача, фіксує зручний час і підтверджує бронювання — наповнює вашу воронку, поки ви закриваєте угоди."},
-      examples:{en:["Turned a casual visitor into a booked sales call","Captured preferred time zones and slots automatically","Reminded a lead and reduced no-shows"],
-        uk:["Перетворила випадкового відвідувача на заброньований дзвінок","Автоматично зафіксувала часові пояси й слоти","Нагадала ліду й зменшила неявки"]},
-      how:{en:["Qualifies the visitor's interest","Captures a preferred meeting slot","Confirms and books the meeting"],
+      article:{en:"Olivia turns website interest into meetings on your calendar. She qualifies each visitor, captures a suitable time and confirms the booking — filling your sales pipeline while your team focuses on closing deals.",
+        es:"Olivia convierte el interés de la web en reuniones en tu calendario. Califica a cada visitante, reserva un horario adecuado y confirma la cita, llenando tu pipeline de ventas mientras tu equipo se centra en cerrar tratos.",
+        uk:"Олівія перетворює інтерес на сайті на зустрічі у вашому календарі. Вона кваліфікує кожного відвідувача, фіксує зручний час і підтверджує бронювання — наповнює вашу воронку продажів, поки команда закриває угоди."},
+      examples:{en:["Turned a casual website visitor into a booked call","Handled time zones and available slots automatically","Reminded the lead and helped reduce no-shows"],
+        es:["Convirtió a un visitante casual de la web en una llamada agendada","Gestionó husos horarios y horarios disponibles automáticamente","Recordó al lead y ayudó a reducir las ausencias"],
+        uk:["Перетворила випадкового відвідувача сайту на заброньований дзвінок","Автоматично врахувала часові пояси та доступні слоти","Нагадала ліду й допомогла зменшити неявки"]},
+      how:{en:["Qualifies the visitor's interest","Captures a suitable meeting time","Confirms and books the meeting"],
+        es:["Califica el interés del visitante","Reserva un horario de reunión adecuado","Confirma y agenda la reunión"],
         uk:["Кваліфікує інтерес відвідувача","Фіксує зручний час зустрічі","Підтверджує й бронює зустріч"]},
-      needs:{en:["What qualifies a visitor for a meeting","Meeting types and your availability","Where to send booked meetings (calendar or contact)"],
-        uk:["Хто з відвідувачів підходить для зустрічі","Типи зустрічей і ваша доступність","Куди надсилати заброньовані зустрічі (календар або контакт)","Excel, ваша робоча база (або інший текстовий формат ваших стандатних запитань), звідки Сара навчиться вашим вимогам щодо роботи з клієтами.","Доступ до вашого календаря."]} },
+      needs:{en:["Excel, an existing working database, or another text-based source with your standard questions and business rules","Access to your calendar"],
+        es:["Excel, una base de datos de trabajo existente u otra fuente en formato de texto con tus preguntas habituales y reglas de negocio","Acceso a tu calendario"],
+        uk:["Excel, ваша наявна робоча база (або інше джерело в текстовому форматі) зі стандартними запитаннями та правилами роботи","Доступ до вашого календаря"]} },
 
     alex:{ role:{en:"AI Support Agent",es:"Agente de Soporte IA",uk:"AI-агент підтримки"},
       article:{en:"Alex handles support so your team only touches what matters. He triages incoming tickets, drafts accurate replies from your knowledge base and auto-escalates urgent cases to a human.",
@@ -1491,8 +1503,10 @@ go(0);
       var article=pget(file,"article")||"";
       var examples=pget(file,"examples")||[];
       var how=pget(file,"how")||[];
+      var needs=pget(file,"needs")||[];
       var exHtml=examples.map(function(x){return "<li>"+esc(x)+"</li>";}).join("");
       var howHtml=how.map(function(x){return "<li>"+esc(x)+"</li>";}).join("");
+      var needsHtml=needs.map(function(x){return "<li>"+esc(x)+"</li>";}).join("");
       var ov=el('<div id="hv-modal" role="dialog" aria-modal="true"><div class="hv-modal-card">'+
         '<button class="hv-modal-close" aria-label="'+esc(t("profile_close"))+'">×</button>'+
         '<div class="hv-modal-hero"><img src="images/'+file+'.png" srcset="images/'+file+'.webp" alt="'+esc(name)+'" onerror="this.style.display=\'none\'">'+
@@ -1501,6 +1515,7 @@ go(0);
           '<p class="hv-modal-article">'+esc(article)+'</p>'+
           '<h4>'+esc(t("profile_examples"))+'</h4><ul class="hv-modal-ex">'+exHtml+'</ul>'+
           '<h4>'+esc(t("profile_how"))+'</h4><ol class="hv-modal-how">'+howHtml+'</ol>'+
+          (needsHtml?'<h4>'+esc(t("prof_provide"))+'</h4><ul class="hv-modal-needs">'+needsHtml+'</ul>':'')+
           '<div class="hv-modal-cta"><a href="#configurator" class="hvc-cta hv-hire">'+esc(t("get_estimate"))+'</a>'+
           '<button type="button" class="hv-ask">'+esc(t("profile_ask"))+'</button></div>'+
         '</div></div></div>');
