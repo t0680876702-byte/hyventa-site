@@ -59,7 +59,7 @@ export const CFG_I18N = {
     bundle: 'Team bundle: {pct}% off the base plan for {n} AI employees.',
     cta: 'Talk to Hyventa',
     disclaimer: 'Estimates are indicative and depend on your final configuration and usage. Final pricing is confirmed with Hyventa.',
-    plan_relation: 'Estimated monthly price for your configuration. Public plans start at $99/month — your estimate can be higher or lower depending on the AI employee and setup you choose.',
+    plan_relation: 'Estimated monthly cost for your configuration. The final price depends on the selected AI employee and configuration and is confirmed before payment.',
     custom_badge: 'Custom configuration', custom_h: 'Your requirements need a custom configuration.',
     custom_p: "We'll review the setup and prepare a tailored quote.", custom_team: 'Likely part of your team:',
     empty_h: "Let's find the right fit", empty_p: "Tell us a bit more about what you need and we'll match an AI employee for you.",
@@ -97,7 +97,7 @@ export const CFG_I18N = {
     bundle: 'Paquete de equipo: {pct}% de descuento en el plan base para {n} empleados de IA.',
     cta: 'Habla con Hyventa',
     disclaimer: 'Las estimaciones son indicativas y dependen de tu configuraci\u00f3n y uso finales. El precio final se confirma con Hyventa.',
-    plan_relation: 'Precio mensual estimado para tu configuraci\u00f3n. Los planes p\u00fablicos parten de $99/mes: tu estimaci\u00f3n puede ser mayor o menor seg\u00fan el empleado de IA y la configuraci\u00f3n que elijas.',
+    plan_relation: 'Coste mensual estimado para tu configuraci\u00f3n. El precio final depende del empleado de IA seleccionado y de la configuraci\u00f3n, y se confirma antes del pago.',
     custom_badge: 'Configuraci\u00f3n personalizada', custom_h: 'Tus requisitos necesitan una configuraci\u00f3n personalizada.',
     custom_p: 'Revisaremos la configuraci\u00f3n y prepararemos un presupuesto a medida.', custom_team: 'Probablemente parte de tu equipo:',
     empty_h: 'Encontremos la opci\u00f3n adecuada', empty_p: 'Cu\u00e9ntanos un poco m\u00e1s sobre lo que necesitas y te asignaremos un empleado de IA.',
@@ -135,7 +135,7 @@ export const CFG_I18N = {
     bundle: '\u041a\u043e\u043c\u0430\u043d\u0434\u043d\u0438\u0439 \u043f\u0430\u043a\u0435\u0442: \u0437\u043d\u0438\u0436\u043a\u0430 {pct}% \u043d\u0430 \u0431\u0430\u0437\u043e\u0432\u0438\u0439 \u043f\u043b\u0430\u043d \u0434\u043b\u044f {n} AI-\u0441\u043f\u0456\u0432\u0440\u043e\u0431\u0456\u0442\u043d\u0438\u043a\u0456\u0432.',
     cta: '\u0417\u0432\u02bf\u044f\u0437\u0430\u0442\u0438\u0441\u044f \u0437 Hyventa',
     disclaimer: '\u041e\u0446\u0456\u043d\u043a\u0438 \u0454 \u043e\u0440\u0456\u0454\u043d\u0442\u043e\u0432\u043d\u0438\u043c\u0438 \u0442\u0430 \u0437\u0430\u043b\u0435\u0436\u0430\u0442\u044c \u0432\u0456\u0434 \u0432\u0430\u0448\u043e\u0457 \u0444\u0456\u043d\u0430\u043b\u044c\u043d\u043e\u0457 \u043a\u043e\u043d\u0444\u0456\u0433\u0443\u0440\u0430\u0446\u0456\u0457 \u0442\u0430 \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u0430\u043d\u043d\u044f. \u0424\u0456\u043d\u0430\u043b\u044c\u043d\u0430 \u0446\u0456\u043d\u0430 \u043f\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0436\u0443\u0454\u0442\u044c\u0441\u044f \u0437 Hyventa.',
-    plan_relation: '\u041e\u0440\u0456\u0454\u043d\u0442\u043e\u0432\u043d\u0430 \u0449\u043e\u043c\u0456\u0441\u044f\u0447\u043d\u0430 \u0432\u0430\u0440\u0442\u0456\u0441\u0442\u044c \u0434\u043b\u044f \u0432\u0430\u0448\u043e\u0457 \u043a\u043e\u043d\u0444\u0456\u0433\u0443\u0440\u0430\u0446\u0456\u0457. \u041f\u0443\u0431\u043b\u0456\u0447\u043d\u0456 \u0442\u0430\u0440\u0438\u0444\u0438 \u043f\u043e\u0447\u0438\u043d\u0430\u044e\u0442\u044c\u0441\u044f \u0432\u0456\u0434 $99/\u043c\u0456\u0441. \u2014 \u0432\u0430\u0448\u0430 \u043e\u0446\u0456\u043d\u043a\u0430 \u043c\u043e\u0436\u0435 \u0431\u0443\u0442\u0438 \u0431\u0456\u043b\u044c\u0448\u043e\u044e \u0430\u0431\u043e \u043c\u0435\u043d\u0448\u043e\u044e \u0437\u0430\u043b\u0435\u0436\u043d\u043e \u0432\u0456\u0434 \u043e\u0431\u0440\u0430\u043d\u043e\u0433\u043e AI-\u0441\u043f\u0456\u0432\u0440\u043e\u0431\u0456\u0442\u043d\u0438\u043a\u0430 \u0442\u0430 \u043d\u0430\u043b\u0430\u0448\u0442\u0443\u0432\u0430\u043d\u044c.',
+    plan_relation: '\u041e\u0440\u0456\u0454\u043d\u0442\u043e\u0432\u043d\u0430 \u0449\u043e\u043c\u0456\u0441\u044f\u0447\u043d\u0430 \u0432\u0430\u0440\u0442\u0456\u0441\u0442\u044c \u0434\u043b\u044f \u0432\u0430\u0448\u043e\u0457 \u043a\u043e\u043d\u0444\u0456\u0433\u0443\u0440\u0430\u0446\u0456\u0457. \u0422\u043e\u0447\u043d\u0430 \u0446\u0456\u043d\u0430 \u0437\u0430\u043b\u0435\u0436\u0438\u0442\u044c \u0432\u0456\u0434 \u043e\u0431\u0440\u0430\u043d\u043e\u0433\u043e AI-\u0441\u043f\u0456\u0432\u0440\u043e\u0431\u0456\u0442\u043d\u0438\u043a\u0430 \u0442\u0430 \u043d\u0430\u043b\u0430\u0448\u0442\u0443\u0432\u0430\u043d\u044c \u0456 \u0431\u0443\u0434\u0435 \u043f\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0436\u0435\u043d\u0430 \u043f\u0435\u0440\u0435\u0434 \u043e\u043f\u043b\u0430\u0442\u043e\u044e.',
     custom_badge: '\u0406\u043d\u0434\u0438\u0432\u0456\u0434\u0443\u0430\u043b\u044c\u043d\u0430 \u043a\u043e\u043d\u0444\u0456\u0433\u0443\u0440\u0430\u0446\u0456\u044f', custom_h: '\u0412\u0430\u0448\u0456 \u0432\u0438\u043c\u043e\u0433\u0438 \u043f\u043e\u0442\u0440\u0435\u0431\u0443\u044e\u0442\u044c \u0456\u043d\u0434\u0438\u0432\u0456\u0434\u0443\u0430\u043b\u044c\u043d\u043e\u0457 \u043a\u043e\u043d\u0444\u0456\u0433\u0443\u0440\u0430\u0446\u0456\u0457.',
     custom_p: '\u041c\u0438 \u0440\u043e\u0437\u0433\u043b\u044f\u043d\u0435\u043c\u043e \u043d\u0430\u043b\u0430\u0448\u0442\u0443\u0432\u0430\u043d\u043d\u044f \u0442\u0430 \u043f\u0456\u0434\u0433\u043e\u0442\u0443\u0454\u043c\u043e \u0456\u043d\u0434\u0438\u0432\u0456\u0434\u0443\u0430\u043b\u044c\u043d\u0443 \u043f\u0440\u043e\u043f\u043e\u0437\u0438\u0446\u0456\u044e.', custom_team: '\u0419\u043c\u043e\u0432\u0456\u0440\u043d\u043e, \u0447\u0430\u0441\u0442\u0438\u043d\u0430 \u0432\u0430\u0448\u043e\u0457 \u043a\u043e\u043c\u0430\u043d\u0434\u0438:',
     empty_h: '\u0417\u043d\u0430\u0439\u0434\u0456\u043c\u043e \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u0438\u0439 \u0432\u0430\u0440\u0456\u0430\u043d\u0442', empty_p: '\u0420\u043e\u0437\u043a\u0430\u0436\u0456\u0442\u044c \u0442\u0440\u043e\u0445\u0438 \u0431\u0456\u043b\u044c\u0448\u0435 \u043f\u0440\u043e \u0432\u0430\u0448\u0456 \u043f\u043e\u0442\u0440\u0435\u0431\u0438, \u0456 \u043c\u0438 \u043f\u0456\u0434\u0431\u0435\u0440\u0435\u043c\u043e AI-\u0441\u043f\u0456\u0432\u0440\u043e\u0431\u0456\u0442\u043d\u0438\u043a\u0430.',
@@ -402,7 +402,7 @@ export function buildInput(sel = {}) {
 // ---------- result rendering (pure -> HTML string) ----------
 
 const fmt = (n) => '$' + Math.round(n).toLocaleString('en-US');
-const rng = (r) => `${fmt(r.low)}–${fmt(r.high)}`;
+const rng = (r) => (Math.round(r.low) === Math.round(r.high) ? fmt(r.low) : `${fmt(r.low)}–${fmt(r.high)}`);
 
 function esc(s) {
   return String(s).replace(/[&<>"']/g, (c) => (
