@@ -204,7 +204,6 @@ const PREP_I18N = {
     prep_h: 'What we need from you',
     prep_sub: 'Before we start building your AI employee, please prepare the information and access needed for your selected setup.',
     prep_business_t: 'Business information',
-    prep_business: 'Standard questions, answers and business rules — an Excel file, your existing database, or any text document works.',
     prep_access_t: 'Access',
     prep_calendar: 'Access to your calendar',
     prep_crm: 'Access to your CRM',
@@ -218,7 +217,6 @@ const PREP_I18N = {
     prep_h: 'Qu\u00e9 necesitamos de ti',
     prep_sub: 'Antes de empezar a crear tu empleado de IA, prepara la informaci\u00f3n y los accesos necesarios para la configuraci\u00f3n seleccionada.',
     prep_business_t: 'Informaci\u00f3n del negocio',
-    prep_business: 'Preguntas, respuestas y reglas de negocio habituales: sirve un archivo Excel, tu base de datos existente o cualquier documento de texto.',
     prep_access_t: 'Accesos',
     prep_calendar: 'Acceso a tu calendario',
     prep_crm: 'Acceso a tu CRM',
@@ -232,7 +230,6 @@ const PREP_I18N = {
     prep_h: '\u0429\u043e \u043d\u0430\u043c \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0432\u0456\u0434 \u0432\u0430\u0441',
     prep_sub: '\u041f\u0435\u0440\u0448 \u043d\u0456\u0436 \u043c\u0438 \u043f\u043e\u0447\u043d\u0435\u043c\u043e \u0441\u0442\u0432\u043e\u0440\u044e\u0432\u0430\u0442\u0438 \u0432\u0430\u0448\u043e\u0433\u043e AI-\u0441\u043f\u0456\u0432\u0440\u043e\u0431\u0456\u0442\u043d\u0438\u043a\u0430, \u043f\u0456\u0434\u0433\u043e\u0442\u0443\u0439\u0442\u0435 \u0456\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u044e \u0442\u0430 \u0434\u043e\u0441\u0442\u0443\u043f\u0438, \u043d\u0435\u043e\u0431\u0445\u0456\u0434\u043d\u0456 \u0434\u043b\u044f \u043e\u0431\u0440\u0430\u043d\u043e\u0457 \u043a\u043e\u043d\u0444\u0456\u0433\u0443\u0440\u0430\u0446\u0456\u0457.',
     prep_business_t: '\u0406\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u044f \u043f\u0440\u043e \u0431\u0456\u0437\u043d\u0435\u0441',
-    prep_business: '\u0421\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u0456 \u0437\u0430\u043f\u0438\u0442\u0430\u043d\u043d\u044f, \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0456 \u0442\u0430 \u043f\u0440\u0430\u0432\u0438\u043b\u0430 \u0440\u043e\u0431\u043e\u0442\u0438 \u2014 \u043f\u0456\u0434\u0456\u0439\u0434\u0435 \u0444\u0430\u0439\u043b Excel, \u0432\u0430\u0448\u0430 \u043d\u0430\u044f\u0432\u043d\u0430 \u0431\u0430\u0437\u0430 \u0434\u0430\u043d\u0438\u0445 \u0430\u0431\u043e \u0431\u0443\u0434\u044c-\u044f\u043a\u0438\u0439 \u0442\u0435\u043a\u0441\u0442\u043e\u0432\u0438\u0439 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442.',
     prep_access_t: '\u0414\u043e\u0441\u0442\u0443\u043f\u0438',
     prep_calendar: '\u0414\u043e\u0441\u0442\u0443\u043f \u0434\u043e \u0432\u0430\u0448\u043e\u0433\u043e \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u044f',
     prep_crm: '\u0414\u043e\u0441\u0442\u0443\u043f \u0434\u043e \u0432\u0430\u0448\u043e\u0433\u043e CRM',
@@ -244,6 +241,280 @@ const PREP_I18N = {
   },
 };
 for (const _l of Object.keys(PREP_I18N)) { if (CFG_I18N[_l]) Object.assign(CFG_I18N[_l], PREP_I18N[_l]); }
+
+// ---------- per-employee client-preparation QUESTIONS (STEP 22J) ----------
+// Real, customer-facing "What to prepare" questions per AI employee, grounded in
+// each employee's actual role/configuration (see AGENT_BLURB / AGENTS data). These
+// describe BUSINESS information and operating rules the client should be able to
+// provide \u2014 never technical/implementation details, credentials, or unsupported
+// capabilities. Fully written in EN / ES / UK (no mechanical fallback). Questions
+// are combined & de-duplicated when several employees are recommended.
+const AGENT_PREP_Q = {
+  en: {
+    sarah: [
+      'What products or services does your business sell?',
+      'What are your prices and payment terms?',
+      'What questions do customers ask most often?',
+      'Which customers should be treated as qualified or high-intent?',
+      'What information should be collected before passing a lead to your team?',
+      'What should happen when a customer is ready to order?',
+    ],
+    emma: [
+      'What services do you offer?',
+      'What are your prices and opening hours?',
+      'What questions do visitors ask most often?',
+      'What types of appointments can customers book, and how long does each take?',
+      'What are your booking, cancellation and rescheduling rules?',
+      'What information should be recorded for each booking?',
+    ],
+    olivia: [
+      'What type of meetings or consultations should be booked?',
+      'Who should qualify for a meeting?',
+      'How long does each meeting take, and which days and times are available?',
+      'What information should be collected before booking?',
+      'What should happen after a meeting is booked?',
+      'What reminders or follow-up messages should attendees receive?',
+    ],
+    alex: [
+      'What products or services do customers contact you about?',
+      'What problems or questions come up most often?',
+      'What are your approved answers and policies for these cases?',
+      'Which situations should always be handed over to a person?',
+      'What information should be collected before escalating a request?',
+    ],
+    max: [
+      'What source materials should answers be based on (documents, guides, policies)?',
+      'What questions do people ask most often?',
+      'What are the approved answers to these questions?',
+      'Are there topics that should not be answered or should be redirected?',
+    ],
+    sophia: [
+      'What does your brand do, and who is your target audience?',
+      'What tone and style should your content follow?',
+      'What topics or themes should the content focus on?',
+      'Are there any subjects, words or claims to avoid?',
+    ],
+    daniel: [
+      'What roles are you hiring for?',
+      'What are the key requirements for each role?',
+      'What questions should be used to screen candidates?',
+      'What makes a candidate qualified or a strong fit?',
+      'When should an application be passed to your team?',
+    ],
+    nina: [
+      'Which languages do you need translations between?',
+      'What type of content will be translated (messages, documents, voice)?',
+      'Are there terms or names that must be translated a specific way?',
+      'What tone or style should translations follow (formal or casual)?',
+    ],
+    boris: [
+      'What business or topic should be analyzed?',
+      'What goal or question should the analysis answer?',
+      'What data or background information can you provide?',
+      'What should the final report include?',
+    ],
+    leo: [
+      'What should the illustrations show or promote?',
+      'What visual style or brand look should they follow?',
+      'Are there brand colors, references or assets to follow?',
+      'How and where will the images be used?',
+    ],
+    rooney: [
+      'What should the song be about, or do you already have lyrics?',
+      'What musical style or mood are you looking for?',
+      'How long should the track be?',
+      'How will the song be used?',
+    ],
+    vera: [
+      'What should the video be about or promote?',
+      'Who is the video for, and where will it be published?',
+      'What style, tone or message should it convey?',
+      'Are there brand assets or references to follow?',
+    ],
+    stella: [
+      'What garments or products should be shown?',
+      'Do you have clear photos of each item?',
+      'What look or presentation style do you want?',
+      'How and where will the renders be used?',
+    ],
+  },
+  es: {
+    sarah: [
+      '\u00bfQu\u00e9 productos o servicios vende tu negocio?',
+      '\u00bfCu\u00e1les son tus precios y condiciones de pago?',
+      '\u00bfQu\u00e9 preguntas hacen tus clientes con m\u00e1s frecuencia?',
+      '\u00bfQu\u00e9 clientes deben considerarse cualificados o con alta intenci\u00f3n?',
+      '\u00bfQu\u00e9 informaci\u00f3n debe recopilarse antes de pasar un lead a tu equipo?',
+      '\u00bfQu\u00e9 debe ocurrir cuando un cliente est\u00e1 listo para comprar?',
+    ],
+    emma: [
+      '\u00bfQu\u00e9 servicios ofreces?',
+      '\u00bfCu\u00e1les son tus precios y tu horario de atenci\u00f3n?',
+      '\u00bfQu\u00e9 preguntas hacen los visitantes con m\u00e1s frecuencia?',
+      '\u00bfQu\u00e9 tipos de citas pueden reservar los clientes y cu\u00e1nto dura cada una?',
+      '\u00bfCu\u00e1les son tus normas de reserva, cancelaci\u00f3n y cambio de cita?',
+      '\u00bfQu\u00e9 informaci\u00f3n debe registrarse en cada reserva?',
+    ],
+    olivia: [
+      '\u00bfQu\u00e9 tipo de reuniones o consultas deben agendarse?',
+      '\u00bfQui\u00e9n debe cumplir los requisitos para una reuni\u00f3n?',
+      '\u00bfCu\u00e1nto dura cada reuni\u00f3n y qu\u00e9 d\u00edas y horarios est\u00e1n disponibles?',
+      '\u00bfQu\u00e9 informaci\u00f3n debe recopilarse antes de agendar?',
+      '\u00bfQu\u00e9 debe ocurrir despu\u00e9s de agendar una reuni\u00f3n?',
+      '\u00bfQu\u00e9 recordatorios o mensajes de seguimiento deben recibir los asistentes?',
+    ],
+    alex: [
+      '\u00bfSobre qu\u00e9 productos o servicios te contactan los clientes?',
+      '\u00bfQu\u00e9 problemas o preguntas surgen con m\u00e1s frecuencia?',
+      '\u00bfCu\u00e1les son tus respuestas y pol\u00edticas aprobadas para estos casos?',
+      '\u00bfQu\u00e9 situaciones deben derivarse siempre a una persona?',
+      '\u00bfQu\u00e9 informaci\u00f3n debe recopilarse antes de escalar una solicitud?',
+    ],
+    max: [
+      '\u00bfEn qu\u00e9 materiales deben basarse las respuestas (documentos, gu\u00edas, pol\u00edticas)?',
+      '\u00bfQu\u00e9 preguntas hace la gente con m\u00e1s frecuencia?',
+      '\u00bfCu\u00e1les son las respuestas aprobadas a estas preguntas?',
+      '\u00bfHay temas que no deban responderse o que deban derivarse?',
+    ],
+    sophia: [
+      '\u00bfA qu\u00e9 se dedica tu marca y qui\u00e9n es tu p\u00fablico objetivo?',
+      '\u00bfQu\u00e9 tono y estilo debe seguir tu contenido?',
+      '\u00bfEn qu\u00e9 temas debe centrarse el contenido?',
+      '\u00bfHay asuntos, palabras o afirmaciones que se deban evitar?',
+    ],
+    daniel: [
+      '\u00bfPara qu\u00e9 puestos est\u00e1s contratando?',
+      '\u00bfCu\u00e1les son los requisitos clave de cada puesto?',
+      '\u00bfQu\u00e9 preguntas deben usarse para filtrar a los candidatos?',
+      '\u00bfQu\u00e9 hace que un candidato est\u00e9 cualificado o encaje bien?',
+      '\u00bfCu\u00e1ndo debe pasarse una candidatura a tu equipo?',
+    ],
+    nina: [
+      '\u00bfEntre qu\u00e9 idiomas necesitas traducciones?',
+      '\u00bfQu\u00e9 tipo de contenido se traducir\u00e1 (mensajes, documentos, voz)?',
+      '\u00bfHay t\u00e9rminos o nombres que deban traducirse de una forma concreta?',
+      '\u00bfQu\u00e9 tono o estilo deben seguir las traducciones (formal o informal)?',
+    ],
+    boris: [
+      '\u00bfQu\u00e9 negocio o tema debe analizarse?',
+      '\u00bfQu\u00e9 objetivo o pregunta debe responder el an\u00e1lisis?',
+      '\u00bfQu\u00e9 datos o informaci\u00f3n de contexto puedes proporcionar?',
+      '\u00bfQu\u00e9 debe incluir el informe final?',
+    ],
+    leo: [
+      '\u00bfQu\u00e9 deben mostrar o promocionar las ilustraciones?',
+      '\u00bfQu\u00e9 estilo visual o imagen de marca deben seguir?',
+      '\u00bfHay colores de marca, referencias o recursos que seguir?',
+      '\u00bfC\u00f3mo y d\u00f3nde se usar\u00e1n las im\u00e1genes?',
+    ],
+    rooney: [
+      '\u00bfDe qu\u00e9 debe tratar la canci\u00f3n o ya tienes la letra?',
+      '\u00bfQu\u00e9 estilo musical o ambiente buscas?',
+      '\u00bfCu\u00e1nto debe durar la pista?',
+      '\u00bfC\u00f3mo se usar\u00e1 la canci\u00f3n?',
+    ],
+    vera: [
+      '\u00bfDe qu\u00e9 debe tratar el v\u00eddeo o qu\u00e9 debe promocionar?',
+      '\u00bfPara qui\u00e9n es el v\u00eddeo y d\u00f3nde se publicar\u00e1?',
+      '\u00bfQu\u00e9 estilo, tono o mensaje debe transmitir?',
+      '\u00bfHay recursos de marca o referencias que seguir?',
+    ],
+    stella: [
+      '\u00bfQu\u00e9 prendas o productos deben mostrarse?',
+      '\u00bfTienes fotos n\u00edtidas de cada art\u00edculo?',
+      '\u00bfQu\u00e9 estilo o presentaci\u00f3n quieres?',
+      '\u00bfC\u00f3mo y d\u00f3nde se usar\u00e1n los renders?',
+    ],
+  },
+  uk: {
+    sarah: [
+      '\u042f\u043a\u0456 \u0442\u043e\u0432\u0430\u0440\u0438 \u0430\u0431\u043e \u043f\u043e\u0441\u043b\u0443\u0433\u0438 \u043f\u0440\u043e\u0434\u0430\u0454 \u0432\u0430\u0448 \u0431\u0456\u0437\u043d\u0435\u0441?',
+      '\u042f\u043a\u0456 \u0443 \u0432\u0430\u0441 \u0446\u0456\u043d\u0438 \u0442\u0430 \u0443\u043c\u043e\u0432\u0438 \u043e\u043f\u043b\u0430\u0442\u0438?',
+      '\u042f\u043a\u0456 \u0437\u0430\u043f\u0438\u0442\u0430\u043d\u043d\u044f \u043a\u043b\u0456\u0454\u043d\u0442\u0438 \u0441\u0442\u0430\u0432\u043b\u044f\u0442\u044c \u043d\u0430\u0439\u0447\u0430\u0441\u0442\u0456\u0448\u0435?',
+      '\u042f\u043a\u0438\u0445 \u043a\u043b\u0456\u0454\u043d\u0442\u0456\u0432 \u0432\u0432\u0430\u0436\u0430\u0442\u0438 \u043a\u0432\u0430\u043b\u0456\u0444\u0456\u043a\u043e\u0432\u0430\u043d\u0438\u043c\u0438 \u0430\u0431\u043e \u0437 \u0432\u0438\u0441\u043e\u043a\u0438\u043c \u043d\u0430\u043c\u0456\u0440\u043e\u043c?',
+      '\u042f\u043a\u0443 \u0456\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u044e \u0441\u043b\u0456\u0434 \u0437\u0456\u0431\u0440\u0430\u0442\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u0435\u0440\u0435\u0434\u0430\u0447\u0435\u044e \u043b\u0456\u0434\u0430 \u0432\u0430\u0448\u0456\u0439 \u043a\u043e\u043c\u0430\u043d\u0434\u0456?',
+      '\u0429\u043e \u043c\u0430\u0454 \u0432\u0456\u0434\u0431\u0443\u0432\u0430\u0442\u0438\u0441\u044f, \u043a\u043e\u043b\u0438 \u043a\u043b\u0456\u0454\u043d\u0442 \u0433\u043e\u0442\u043e\u0432\u0438\u0439 \u0437\u0440\u043e\u0431\u0438\u0442\u0438 \u0437\u0430\u043c\u043e\u0432\u043b\u0435\u043d\u043d\u044f?',
+    ],
+    emma: [
+      '\u042f\u043a\u0456 \u043f\u043e\u0441\u043b\u0443\u0433\u0438 \u0432\u0438 \u043f\u0440\u043e\u043f\u043e\u043d\u0443\u0454\u0442\u0435?',
+      '\u042f\u043a\u0456 \u0443 \u0432\u0430\u0441 \u0446\u0456\u043d\u0438 \u0442\u0430 \u0433\u043e\u0434\u0438\u043d\u0438 \u0440\u043e\u0431\u043e\u0442\u0438?',
+      '\u042f\u043a\u0456 \u0437\u0430\u043f\u0438\u0442\u0430\u043d\u043d\u044f \u0432\u0456\u0434\u0432\u0456\u0434\u0443\u0432\u0430\u0447\u0456 \u0441\u0442\u0430\u0432\u043b\u044f\u0442\u044c \u043d\u0430\u0439\u0447\u0430\u0441\u0442\u0456\u0448\u0435?',
+      '\u042f\u043a\u0456 \u0442\u0438\u043f\u0438 \u0437\u0430\u043f\u0438\u0441\u0456\u0432 \u043c\u043e\u0436\u0443\u0442\u044c \u0431\u0440\u043e\u043d\u044e\u0432\u0430\u0442\u0438 \u043a\u043b\u0456\u0454\u043d\u0442\u0438 \u0439 \u0441\u043a\u0456\u043b\u044c\u043a\u0438 \u0442\u0440\u0438\u0432\u0430\u0454 \u043a\u043e\u0436\u0435\u043d?',
+      '\u042f\u043a\u0456 \u0443 \u0432\u0430\u0441 \u043f\u0440\u0430\u0432\u0438\u043b\u0430 \u0431\u0440\u043e\u043d\u044e\u0432\u0430\u043d\u043d\u044f, \u0441\u043a\u0430\u0441\u0443\u0432\u0430\u043d\u043d\u044f \u0442\u0430 \u043f\u0435\u0440\u0435\u043d\u0435\u0441\u0435\u043d\u043d\u044f?',
+      '\u042f\u043a\u0443 \u0456\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u044e \u0441\u043b\u0456\u0434 \u0444\u0456\u043a\u0441\u0443\u0432\u0430\u0442\u0438 \u0434\u043b\u044f \u043a\u043e\u0436\u043d\u043e\u0433\u043e \u0431\u0440\u043e\u043d\u044e\u0432\u0430\u043d\u043d\u044f?',
+    ],
+    olivia: [
+      '\u042f\u043a\u0456 \u0437\u0443\u0441\u0442\u0440\u0456\u0447\u0456 \u0430\u0431\u043e \u043a\u043e\u043d\u0441\u0443\u043b\u044c\u0442\u0430\u0446\u0456\u0457 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u0431\u0440\u043e\u043d\u044e\u0432\u0430\u0442\u0438?',
+      '\u0425\u0442\u043e \u043c\u0430\u0454 \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0430\u0442\u0438 \u0432\u0438\u043c\u043e\u0433\u0430\u043c \u0434\u043b\u044f \u0437\u0443\u0441\u0442\u0440\u0456\u0447\u0456?',
+      '\u0421\u043a\u0456\u043b\u044c\u043a\u0438 \u0442\u0440\u0438\u0432\u0430\u0454 \u043a\u043e\u0436\u043d\u0430 \u0437\u0443\u0441\u0442\u0440\u0456\u0447 \u0456 \u044f\u043a\u0456 \u0434\u043d\u0456 \u0442\u0430 \u0433\u043e\u0434\u0438\u043d\u0438 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u0456?',
+      '\u042f\u043a\u0443 \u0456\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u044e \u0441\u043b\u0456\u0434 \u0437\u0456\u0431\u0440\u0430\u0442\u0438 \u043f\u0435\u0440\u0435\u0434 \u0431\u0440\u043e\u043d\u044e\u0432\u0430\u043d\u043d\u044f\u043c?',
+      '\u0429\u043e \u043c\u0430\u0454 \u0432\u0456\u0434\u0431\u0443\u0432\u0430\u0442\u0438\u0441\u044f \u043f\u0456\u0441\u043b\u044f \u0431\u0440\u043e\u043d\u044e\u0432\u0430\u043d\u043d\u044f \u0437\u0443\u0441\u0442\u0440\u0456\u0447\u0456?',
+      '\u042f\u043a\u0456 \u043d\u0430\u0433\u0430\u0434\u0443\u0432\u0430\u043d\u043d\u044f \u0430\u0431\u043e \u043f\u043e\u0432\u0456\u0434\u043e\u043c\u043b\u0435\u043d\u043d\u044f \u043c\u0430\u044e\u0442\u044c \u043e\u0442\u0440\u0438\u043c\u0443\u0432\u0430\u0442\u0438 \u0443\u0447\u0430\u0441\u043d\u0438\u043a\u0438?',
+    ],
+    alex: [
+      '\u0429\u043e\u0434\u043e \u044f\u043a\u0438\u0445 \u0442\u043e\u0432\u0430\u0440\u0456\u0432 \u0430\u0431\u043e \u043f\u043e\u0441\u043b\u0443\u0433 \u0437\u0432\u0435\u0440\u0442\u0430\u044e\u0442\u044c\u0441\u044f \u043a\u043b\u0456\u0454\u043d\u0442\u0438?',
+      '\u042f\u043a\u0456 \u043f\u0440\u043e\u0431\u043b\u0435\u043c\u0438 \u0447\u0438 \u0437\u0430\u043f\u0438\u0442\u0430\u043d\u043d\u044f \u0432\u0438\u043d\u0438\u043a\u0430\u044e\u0442\u044c \u043d\u0430\u0439\u0447\u0430\u0441\u0442\u0456\u0448\u0435?',
+      '\u042f\u043a\u0456 \u0443 \u0432\u0430\u0441 \u0437\u0430\u0442\u0432\u0435\u0440\u0434\u0436\u0435\u043d\u0456 \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0456 \u0442\u0430 \u043f\u0440\u0430\u0432\u0438\u043b\u0430 \u0434\u043b\u044f \u0446\u0438\u0445 \u0432\u0438\u043f\u0430\u0434\u043a\u0456\u0432?',
+      '\u042f\u043a\u0456 \u0441\u0438\u0442\u0443\u0430\u0446\u0456\u0457 \u0441\u043b\u0456\u0434 \u0437\u0430\u0432\u0436\u0434\u0438 \u043f\u0435\u0440\u0435\u0434\u0430\u0432\u0430\u0442\u0438 \u043b\u044e\u0434\u0438\u043d\u0456?',
+      '\u042f\u043a\u0443 \u0456\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u044e \u0441\u043b\u0456\u0434 \u0437\u0456\u0431\u0440\u0430\u0442\u0438 \u043f\u0435\u0440\u0435\u0434 \u0435\u0441\u043a\u0430\u043b\u0430\u0446\u0456\u0454\u044e \u0437\u0432\u0435\u0440\u043d\u0435\u043d\u043d\u044f?',
+    ],
+    max: [
+      '\u041d\u0430 \u044f\u043a\u0438\u0445 \u043c\u0430\u0442\u0435\u0440\u0456\u0430\u043b\u0430\u0445 \u043c\u0430\u044e\u0442\u044c \u0491\u0440\u0443\u043d\u0442\u0443\u0432\u0430\u0442\u0438\u0441\u044f \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0456 (\u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0438, \u0456\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0456\u0457, \u043f\u0440\u0430\u0432\u0438\u043b\u0430)?',
+      '\u042f\u043a\u0456 \u0437\u0430\u043f\u0438\u0442\u0430\u043d\u043d\u044f \u0441\u0442\u0430\u0432\u043b\u044f\u0442\u044c \u043d\u0430\u0439\u0447\u0430\u0441\u0442\u0456\u0448\u0435?',
+      '\u042f\u043a\u0456 \u0437\u0430\u0442\u0432\u0435\u0440\u0434\u0436\u0435\u043d\u0456 \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0456 \u043d\u0430 \u0446\u0456 \u0437\u0430\u043f\u0438\u0442\u0430\u043d\u043d\u044f?',
+      '\u0427\u0438 \u0454 \u0442\u0435\u043c\u0438, \u043d\u0430 \u044f\u043a\u0456 \u043d\u0435 \u0441\u043b\u0456\u0434 \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0434\u0430\u0442\u0438 \u0430\u0431\u043e \u044f\u043a\u0456 \u0442\u0440\u0435\u0431\u0430 \u043f\u0435\u0440\u0435\u043d\u0430\u043f\u0440\u0430\u0432\u043b\u044f\u0442\u0438?',
+    ],
+    sophia: [
+      '\u0427\u0438\u043c \u0437\u0430\u0439\u043c\u0430\u0454\u0442\u044c\u0441\u044f \u0432\u0430\u0448 \u0431\u0440\u0435\u043d\u0434 \u0456 \u0445\u0442\u043e \u0432\u0430\u0448\u0430 \u0446\u0456\u043b\u044c\u043e\u0432\u0430 \u0430\u0443\u0434\u0438\u0442\u043e\u0440\u0456\u044f?',
+      '\u042f\u043a\u043e\u0433\u043e \u0442\u043e\u043d\u0443 \u0442\u0430 \u0441\u0442\u0438\u043b\u044e \u043c\u0430\u0454 \u0434\u043e\u0442\u0440\u0438\u043c\u0443\u0432\u0430\u0442\u0438\u0441\u044f \u043a\u043e\u043d\u0442\u0435\u043d\u0442?',
+      '\u041d\u0430 \u044f\u043a\u0438\u0445 \u0442\u0435\u043c\u0430\u0445 \u043c\u0430\u0454 \u0437\u043e\u0441\u0435\u0440\u0435\u0434\u0436\u0443\u0432\u0430\u0442\u0438\u0441\u044f \u043a\u043e\u043d\u0442\u0435\u043d\u0442?',
+      '\u0427\u0438 \u0454 \u0442\u0435\u043c\u0438, \u0441\u043b\u043e\u0432\u0430 \u0430\u0431\u043e \u0442\u0432\u0435\u0440\u0434\u0436\u0435\u043d\u043d\u044f, \u044f\u043a\u0438\u0445 \u0441\u043b\u0456\u0434 \u0443\u043d\u0438\u043a\u0430\u0442\u0438?',
+    ],
+    daniel: [
+      '\u041d\u0430 \u044f\u043a\u0456 \u043f\u043e\u0441\u0430\u0434\u0438 \u0432\u0438 \u043d\u0430\u0439\u043c\u0430\u0454\u0442\u0435?',
+      '\u042f\u043a\u0456 \u043a\u043b\u044e\u0447\u043e\u0432\u0456 \u0432\u0438\u043c\u043e\u0433\u0438 \u0434\u043e \u043a\u043e\u0436\u043d\u043e\u0457 \u043f\u043e\u0441\u0430\u0434\u0438?',
+      '\u042f\u043a\u0456 \u0437\u0430\u043f\u0438\u0442\u0430\u043d\u043d\u044f \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438 \u0434\u043b\u044f \u0432\u0456\u0434\u0431\u043e\u0440\u0443 \u043a\u0430\u043d\u0434\u0438\u0434\u0430\u0442\u0456\u0432?',
+      '\u0429\u043e \u0440\u043e\u0431\u0438\u0442\u044c \u043a\u0430\u043d\u0434\u0438\u0434\u0430\u0442\u0430 \u043a\u0432\u0430\u043b\u0456\u0444\u0456\u043a\u043e\u0432\u0430\u043d\u0438\u043c \u0430\u0431\u043e \u0442\u0430\u043a\u0438\u043c, \u0449\u043e \u0434\u043e\u0431\u0440\u0435 \u043f\u0456\u0434\u0445\u043e\u0434\u0438\u0442\u044c?',
+      '\u041a\u043e\u043b\u0438 \u0437\u0430\u044f\u0432\u043a\u0443 \u0441\u043b\u0456\u0434 \u043f\u0435\u0440\u0435\u0434\u0430\u0432\u0430\u0442\u0438 \u0432\u0430\u0448\u0456\u0439 \u043a\u043e\u043c\u0430\u043d\u0434\u0456?',
+    ],
+    nina: [
+      '\u041c\u0456\u0436 \u044f\u043a\u0438\u043c\u0438 \u043c\u043e\u0432\u0430\u043c\u0438 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u0456 \u043f\u0435\u0440\u0435\u043a\u043b\u0430\u0434\u0438?',
+      '\u042f\u043a\u0438\u0439 \u0442\u0438\u043f \u043a\u043e\u043d\u0442\u0435\u043d\u0442\u0443 \u043f\u0435\u0440\u0435\u043a\u043b\u0430\u0434\u0430\u0442\u0438\u043c\u0435\u0442\u0435 (\u043f\u043e\u0432\u0456\u0434\u043e\u043c\u043b\u0435\u043d\u043d\u044f, \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0438, \u0433\u043e\u043b\u043e\u0441)?',
+      '\u0427\u0438 \u0454 \u0442\u0435\u0440\u043c\u0456\u043d\u0438 \u0430\u0431\u043e \u043d\u0430\u0437\u0432\u0438, \u044f\u043a\u0456 \u0442\u0440\u0435\u0431\u0430 \u043f\u0435\u0440\u0435\u043a\u043b\u0430\u0434\u0430\u0442\u0438 \u043f\u0435\u0432\u043d\u0438\u043c \u0447\u0438\u043d\u043e\u043c?',
+      '\u042f\u043a\u043e\u0433\u043e \u0442\u043e\u043d\u0443 \u0447\u0438 \u0441\u0442\u0438\u043b\u044e \u043c\u0430\u044e\u0442\u044c \u0434\u043e\u0442\u0440\u0438\u043c\u0443\u0432\u0430\u0442\u0438\u0441\u044f \u043f\u0435\u0440\u0435\u043a\u043b\u0430\u0434\u0438 (\u043e\u0444\u0456\u0446\u0456\u0439\u043d\u0438\u0439 \u0447\u0438 \u043d\u0435\u0444\u043e\u0440\u043c\u0430\u043b\u044c\u043d\u0438\u0439)?',
+    ],
+    boris: [
+      '\u042f\u043a\u0438\u0439 \u0431\u0456\u0437\u043d\u0435\u0441 \u0430\u0431\u043e \u0442\u0435\u043c\u0443 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043f\u0440\u043e\u0430\u043d\u0430\u043b\u0456\u0437\u0443\u0432\u0430\u0442\u0438?',
+      '\u041d\u0430 \u044f\u043a\u0443 \u043c\u0435\u0442\u0443 \u0447\u0438 \u0437\u0430\u043f\u0438\u0442\u0430\u043d\u043d\u044f \u043c\u0430\u0454 \u0432\u0456\u0434\u043f\u043e\u0432\u0456\u0441\u0442\u0438 \u0430\u043d\u0430\u043b\u0456\u0437?',
+      '\u042f\u043a\u0456 \u0434\u0430\u043d\u0456 \u0430\u0431\u043e \u0434\u043e\u0432\u0456\u0434\u043a\u043e\u0432\u0443 \u0456\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u044e \u0432\u0438 \u043c\u043e\u0436\u0435\u0442\u0435 \u043d\u0430\u0434\u0430\u0442\u0438?',
+      '\u0429\u043e \u043c\u0430\u0454 \u043c\u0456\u0441\u0442\u0438\u0442\u0438 \u043f\u0456\u0434\u0441\u0443\u043c\u043a\u043e\u0432\u0438\u0439 \u0437\u0432\u0456\u0442?',
+    ],
+    leo: [
+      '\u0429\u043e \u043c\u0430\u044e\u0442\u044c \u0437\u043e\u0431\u0440\u0430\u0436\u0443\u0432\u0430\u0442\u0438 \u0430\u0431\u043e \u0440\u0435\u043a\u043b\u0430\u043c\u0443\u0432\u0430\u0442\u0438 \u0456\u043b\u044e\u0441\u0442\u0440\u0430\u0446\u0456\u0457?',
+      '\u042f\u043a\u043e\u0433\u043e \u0432\u0456\u0437\u0443\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u0441\u0442\u0438\u043b\u044e \u0447\u0438 \u0432\u0438\u0433\u043b\u044f\u0434\u0443 \u0431\u0440\u0435\u043d\u0434\u0443 \u0432\u043e\u043d\u0438 \u043c\u0430\u044e\u0442\u044c \u0434\u043e\u0442\u0440\u0438\u043c\u0443\u0432\u0430\u0442\u0438\u0441\u044f?',
+      '\u0427\u0438 \u0454 \u0444\u0456\u0440\u043c\u043e\u0432\u0456 \u043a\u043e\u043b\u044c\u043e\u0440\u0438, \u0440\u0435\u0444\u0435\u0440\u0435\u043d\u0441\u0438 \u0430\u0431\u043e \u043c\u0430\u0442\u0435\u0440\u0456\u0430\u043b\u0438, \u044f\u043a\u0438\u0445 \u0441\u043b\u0456\u0434 \u0434\u043e\u0442\u0440\u0438\u043c\u0443\u0432\u0430\u0442\u0438\u0441\u044f?',
+      '\u042f\u043a \u0456 \u0434\u0435 \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438\u043c\u0443\u0442\u044c\u0441\u044f \u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u043d\u044f?',
+    ],
+    rooney: [
+      '\u041f\u0440\u043e \u0449\u043e \u043c\u0430\u0454 \u0431\u0443\u0442\u0438 \u043f\u0456\u0441\u043d\u044f, \u0447\u0438 \u0443 \u0432\u0430\u0441 \u0443\u0436\u0435 \u0454 \u0442\u0435\u043a\u0441\u0442?',
+      '\u042f\u043a\u0438\u0439 \u043c\u0443\u0437\u0438\u0447\u043d\u0438\u0439 \u0441\u0442\u0438\u043b\u044c \u0430\u0431\u043e \u043d\u0430\u0441\u0442\u0440\u0456\u0439 \u0432\u0438 \u0448\u0443\u043a\u0430\u0454\u0442\u0435?',
+      '\u042f\u043a\u043e\u044e \u043c\u0430\u0454 \u0431\u0443\u0442\u0438 \u0442\u0440\u0438\u0432\u0430\u043b\u0456\u0441\u0442\u044c \u0442\u0440\u0435\u043a\u0443?',
+      '\u042f\u043a \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438\u043c\u0435\u0442\u044c\u0441\u044f \u043f\u0456\u0441\u043d\u044f?',
+    ],
+    vera: [
+      '\u041f\u0440\u043e \u0449\u043e \u043c\u0430\u0454 \u0431\u0443\u0442\u0438 \u0432\u0456\u0434\u0435\u043e \u0430\u0431\u043e \u0449\u043e \u0432\u043e\u043d\u043e \u043c\u0430\u0454 \u0440\u0435\u043a\u043b\u0430\u043c\u0443\u0432\u0430\u0442\u0438?',
+      '\u0414\u043b\u044f \u043a\u043e\u0433\u043e \u0432\u0456\u0434\u0435\u043e \u0456 \u0434\u0435 \u0432\u043e\u043d\u043e \u0431\u0443\u0434\u0435 \u043e\u043f\u0443\u0431\u043b\u0456\u043a\u043e\u0432\u0430\u043d\u0435?',
+      '\u042f\u043a\u0438\u0439 \u0441\u0442\u0438\u043b\u044c, \u0442\u043e\u043d \u0430\u0431\u043e \u043c\u0435\u0441\u0435\u0434\u0436 \u0432\u043e\u043d\u043e \u043c\u0430\u0454 \u043f\u0435\u0440\u0435\u0434\u0430\u0432\u0430\u0442\u0438?',
+      '\u0427\u0438 \u0454 \u0444\u0456\u0440\u043c\u043e\u0432\u0456 \u043c\u0430\u0442\u0435\u0440\u0456\u0430\u043b\u0438 \u0430\u0431\u043e \u0440\u0435\u0444\u0435\u0440\u0435\u043d\u0441\u0438, \u044f\u043a\u0438\u0445 \u0441\u043b\u0456\u0434 \u0434\u043e\u0442\u0440\u0438\u043c\u0443\u0432\u0430\u0442\u0438\u0441\u044f?',
+    ],
+    stella: [
+      '\u042f\u043a\u0456 \u043f\u0440\u0435\u0434\u043c\u0435\u0442\u0438 \u043e\u0434\u044f\u0433\u0443 \u0430\u0431\u043e \u0442\u043e\u0432\u0430\u0440\u0438 \u043f\u043e\u0442\u0440\u0456\u0431\u043d\u043e \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0438?',
+      '\u0427\u0438 \u0454 \u0443 \u0432\u0430\u0441 \u0447\u0456\u0442\u043a\u0456 \u0444\u043e\u0442\u043e \u043a\u043e\u0436\u043d\u043e\u0433\u043e \u0432\u0438\u0440\u043e\u0431\u0443?',
+      '\u042f\u043a\u0438\u0439 \u043e\u0431\u0440\u0430\u0437 \u0430\u0431\u043e \u0441\u0442\u0438\u043b\u044c \u043f\u043e\u0434\u0430\u0447\u0456 \u0432\u0438 \u0445\u043e\u0447\u0435\u0442\u0435?',
+      '\u042f\u043a \u0456 \u0434\u0435 \u0432\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0432\u0430\u0442\u0438\u043c\u0443\u0442\u044c\u0441\u044f \u0440\u0435\u043d\u0434\u0435\u0440\u0438?',
+    ],
+  },
+};
 
 let CUR = 'en';
 let lastEstimate = null;
@@ -416,24 +687,52 @@ function esc(s) {
 // in the AGENTS data (customer-facing Q&A / qualification / support / FAQ agents
 // need business rules; reception + appointment setting use a calendar). Access
 // requirements are otherwise driven by the integrations the user explicitly chose.
+// Each recommended employee contributes real, role-grounded business questions
+// (AGENT_PREP_Q) plus any access that the role inherently needs (reception and
+// appointment setting always need a calendar). All other access comes from the
+// integrations the user explicitly selected \u2014 never invented.
 const AGENT_PREP = {
-  sarah: { business: true, access: [] },
-  emma: { business: true, access: ['calendar'] },
-  olivia: { business: true, access: ['calendar'] },
-  alex: { business: true, access: [] },
-  max: { business: true, access: [] },
+  sarah: { access: [] },
+  emma: { access: ['calendar'] },
+  olivia: { access: ['calendar'] },
+  alex: { access: [] },
+  max: { access: [] },
+  sophia: { access: [] },
+  daniel: { access: [] },
+  nina: { access: [] },
+  boris: { access: [] },
+  leo: { access: [] },
+  rooney: { access: [] },
+  vera: { access: [] },
+  stella: { access: [] },
 };
 
 /** Derive the customer-facing preparation checklist from the estimate + selections. */
 export function buildPrep(estimate) {
   const sel = lastSel || {};
   const agents = (estimate && estimate.recommended_agents) || [];
-  let business = false;
+  const qmap = AGENT_PREP_Q[CUR] || AGENT_PREP_Q.en;
+  const qfallback = AGENT_PREP_Q.en;
+
+  // Combine each recommended employee's questions, de-duplicating exact repeats
+  // (same localized text) while preserving order of first appearance.
+  const questions = [];
+  const seen = new Set();
+  for (const a of agents) {
+    if (!AGENT_PREP[a.id]) continue;
+    const list = (qmap && qmap[a.id]) || (qfallback && qfallback[a.id]) || [];
+    for (const q of list) {
+      const key = String(q).trim().toLowerCase();
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      questions.push(q);
+    }
+  }
+
   const access = new Set();
   for (const a of agents) {
     const p = AGENT_PREP[a.id];
     if (!p) continue;
-    if (p.business) business = true;
     (p.access || []).forEach((k) => access.add(k));
   }
   // explicitly selected integrations / systems (never invented)
@@ -445,7 +744,7 @@ export function buildPrep(estimate) {
   if (sel.otherIntegration && sel.otherIntegration.trim()) access.add('system');
   if ((sel.channels || []).includes('webhook')) access.add('system');
   const order = ['calendar', 'crm', 'ats', 'system'];
-  return { business, access: order.filter((k) => access.has(k)) };
+  return { questions, access: order.filter((k) => access.has(k)) };
 }
 
 const PREP_ACCESS_KEY = { calendar: 'prep_calendar', crm: 'prep_crm', ats: 'prep_ats', system: 'prep_system' };
@@ -454,11 +753,12 @@ const PREP_ACCESS_KEY = { calendar: 'prep_calendar', crm: 'prep_crm', ats: 'prep
 export function renderPrep(estimate) {
   const prep = buildPrep(estimate);
   let groups = '';
-  if (prep.business) {
+  if (prep.questions && prep.questions.length) {
+    const items = prep.questions.map((q) => `<li>${esc(q)}</li>`).join('');
     groups += `
-      <div class="cfg-prep-group">
+      <div class="cfg-prep-group cfg-prep-business">
         <div class="cfg-prep-group-title">${esc(t('prep_business_t'))}</div>
-        <ul class="cfg-prep-list"><li>${esc(t('prep_business'))}</li></ul>
+        <ul class="cfg-prep-list">${items}</ul>
       </div>`;
   }
   if (prep.access.length) {
@@ -495,6 +795,9 @@ function ensurePrepStyles() {
 .cfg-prep-sub{margin:0 0 14px;font-size:13.5px;line-height:1.5;opacity:.82;}
 .cfg-prep-groups{display:flex;flex-wrap:wrap;gap:14px 26px;}
 .cfg-prep-group{flex:1 1 240px;min-width:220px;}
+.cfg-prep-business{flex-basis:100%;}
+.cfg-prep-business .cfg-prep-list{columns:2;column-gap:26px;}
+.cfg-prep-business .cfg-prep-list li{break-inside:avoid;-webkit-column-break-inside:avoid;}
 .cfg-prep-group-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;opacity:.7;margin:0 0 8px;}
 .cfg-prep-list{list-style:none;margin:0;padding:0;}
 .cfg-prep-list li{position:relative;padding:0 0 0 24px;margin:0 0 8px;font-size:13.5px;line-height:1.5;}
@@ -504,7 +807,7 @@ function ensurePrepStyles() {
 .cfg-prep-ack{display:flex;align-items:flex-start;gap:10px;margin:16px 0 0;font-size:13px;line-height:1.45;cursor:pointer;}
 .cfg-prep-ack input{margin-top:2px;width:16px;height:16px;flex:0 0 auto;accent-color:#6d8cff;cursor:pointer;}
 .cfg-prep-ack-err{margin:8px 0 0;color:#ff8f8f;font-size:12.5px;}
-@media (max-width:560px){.cfg-prep{padding:16px}.cfg-prep-groups{gap:12px}.cfg-prep-group{flex-basis:100%;min-width:0}}
+@media (max-width:560px){.cfg-prep{padding:16px}.cfg-prep-groups{gap:12px}.cfg-prep-group{flex-basis:100%;min-width:0}.cfg-prep-business .cfg-prep-list{columns:1;}}
 `;
   const s = document.createElement('style');
   s.id = 'cfg-prep-styles';
