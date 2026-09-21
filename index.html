@@ -2589,5 +2589,15 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
 #configurator{ scroll-margin-top:78px; }
 </style>
 <!-- HYVENTA-V18-NAVCTA:END -->
+<!-- HYVENTA-UXFIX:START -->
+<style id="hv-uxfix-css">
+/* Kill the slight horizontal drag on mobile: a fixed decorative element leaves
+   overflow on <html> (which stays overflow-x:visible), so touch rubber-bands
+   sideways. overflow-x:clip is sticky-safe (does NOT create a scroll container,
+   unlike hidden), and overscroll-behavior-x:none stops the elastic pan. */
+html { overflow-x: clip; }
+html, body { overscroll-behavior-x: none; }
+</style>
+<!-- HYVENTA-UXFIX:END -->
 </body>
 </html>
