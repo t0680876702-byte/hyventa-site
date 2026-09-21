@@ -161,6 +161,7 @@ const REQ_I18N = {
     req_err_name: 'Please enter your name.',
     req_err_email: 'Please enter a valid email address.',
     req_err_generic: "We couldn't send your request. Please try again in a moment or contact us directly.",
+    req_fail: "Your request could not be submitted automatically. Please email us at hellohyventa@gmail.com and include your business details. Hyventa will review your request and confirm the final price before payment.",
   },
   es: {
     req_cta: 'Solicitar creaci\u00f3n del agente',
@@ -176,6 +177,7 @@ const REQ_I18N = {
     req_err_name: 'Introduce tu nombre.',
     req_err_email: 'Introduce un correo electr\u00f3nico v\u00e1lido.',
     req_err_generic: 'No pudimos enviar tu solicitud. Int\u00e9ntalo de nuevo en un momento o cont\u00e1ctanos directamente.',
+    req_fail: 'No pudimos enviar tu solicitud autom\u00e1ticamente. Escr\u00edbenos a hellohyventa@gmail.com e incluye los datos de tu negocio. Hyventa revisar\u00e1 tu solicitud y confirmar\u00e1 el precio final antes del pago.',
   },
   uk: {
     req_cta: '\u0417\u0430\u044f\u0432\u043a\u0430 \u043d\u0430 \u0441\u0442\u0432\u043e\u0440\u0435\u043d\u043d\u044f \u0430\u0433\u0435\u043d\u0442\u0430',
@@ -191,6 +193,7 @@ const REQ_I18N = {
     req_err_name: "\u0412\u0432\u0435\u0434\u0456\u0442\u044c \u0432\u0430\u0448\u0435 \u0456\u043c'\u044f.",
     req_err_email: '\u0412\u0432\u0435\u0434\u0456\u0442\u044c \u043a\u043e\u0440\u0435\u043a\u0442\u043d\u0443 \u0430\u0434\u0440\u0435\u0441\u0443 email.',
     req_err_generic: '\u041d\u0435 \u0432\u0434\u0430\u043b\u043e\u0441\u044f \u043d\u0430\u0434\u0456\u0441\u043b\u0430\u0442\u0438 \u0437\u0430\u044f\u0432\u043a\u0443. \u0421\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0449\u0435 \u0440\u0430\u0437 \u0430\u0431\u043e \u0437\u0432\u02bf\u044f\u0436\u0456\u0442\u044c\u0441\u044f \u0437 \u043d\u0430\u043c\u0438 \u043d\u0430\u043f\u0440\u044f\u043c\u0443.',
+    req_fail: '\u041d\u0435 \u0432\u0434\u0430\u043b\u043e\u0441\u044f \u043d\u0430\u0434\u0456\u0441\u043b\u0430\u0442\u0438 \u0432\u0430\u0448\u0443 \u0437\u0430\u044f\u0432\u043a\u0443 \u0430\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u043d\u043e. \u041d\u0430\u043f\u0438\u0448\u0456\u0442\u044c \u043d\u0430\u043c \u043d\u0430 hellohyventa@gmail.com \u0456 \u0432\u043a\u0430\u0436\u0456\u0442\u044c \u0434\u0430\u043d\u0456 \u0432\u0430\u0448\u043e\u0433\u043e \u0431\u0456\u0437\u043d\u0435\u0441\u0443. Hyventa \u043f\u0435\u0440\u0435\u0433\u043b\u044f\u043d\u0435 \u0432\u0430\u0448\u0443 \u0437\u0430\u044f\u0432\u043a\u0443 \u0442\u0430 \u043f\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044c \u043e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u0443 \u0446\u0456\u043d\u0443 \u043f\u0435\u0440\u0435\u0434 \u043e\u043f\u043b\u0430\u0442\u043e\u044e.',
   },
 };
 for (const _l of Object.keys(REQ_I18N)) { if (CFG_I18N[_l]) Object.assign(CFG_I18N[_l], REQ_I18N[_l]); }
@@ -1173,8 +1176,34 @@ function openRequestModal() {
       succ.querySelector('.cfg-req-success-text').textContent = t('req_success');
       succ.hidden = false;
     } catch (err) {
-      // Never surface technical/webhook errors to the visitor.
-      showErr(t('req_err_generic'));
+      // Graceful fallback: never surface technical errors. Keep the user's data
+      // on screen and offer a direct email path with their details pre-filled,
+      // so an n8n/webhook outage never loses a lead or blocks a sale.
+      const p = buildRequestPayload(name, email, note);
+      const bodyLines = [
+        'Name: ' + p.name,
+        'Email: ' + p.email,
+        p.business ? ('Business: ' + p.business) : '',
+        p.agent ? ('AI employee: ' + p.agent) : '',
+        (p.setup_low || p.setup_high) ? ('Setup estimate: $' + p.setup_low + '-$' + p.setup_high) : '',
+        (p.monthly_low || p.monthly_high) ? ('Monthly estimate: $' + p.monthly_low + '-$' + p.monthly_high) : '',
+        p.note ? ('Note: ' + p.note) : '',
+      ].filter(Boolean);
+      const href = 'mailto:hellohyventa@gmail.com?subject=' +
+        encodeURIComponent('Hyventa agent request') + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+      errBox.textContent = '';
+      const line = document.createElement('div');
+      line.textContent = t('req_fail');
+      const linkWrap = document.createElement('div');
+      linkWrap.style.marginTop = '8px';
+      const mail = document.createElement('a');
+      mail.href = href;
+      mail.textContent = 'hellohyventa@gmail.com';
+      mail.className = 'cfg-req-maillink';
+      linkWrap.appendChild(mail);
+      errBox.appendChild(line);
+      errBox.appendChild(linkWrap);
+      errBox.hidden = false;
       sending = false;
       submitBtn.disabled = false;
       submitBtn.textContent = orig;
