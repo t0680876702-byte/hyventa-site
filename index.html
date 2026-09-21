@@ -1034,6 +1034,8 @@ carousel.addEventListener('touchend',function(e){ if(sx===null)return; const dx=
 (function(){
   var sel = document.getElementById('hv-contact-agent');
   if(!sel) return;
+  var _phTxt=({en:'Select an AI employee',es:'Elige un empleado de IA',uk:'Оберіть AI-співробітника'}[(typeof LANG!=='undefined'?LANG:'en')]||'Select an AI employee');
+  var _ph=document.createElement('option'); _ph.value=''; _ph.textContent=_phTxt; _ph.disabled=true; _ph.selected=true; sel.appendChild(_ph);
   agents.forEach(function(a){ var o=document.createElement('option'); o.value=a.name; o.textContent=a.name; sel.appendChild(o); });
   function pick(name){ sel.value=name; sel.classList.add('hv-picked'); setTimeout(function(){ sel.classList.remove('hv-picked'); }, 1600); }
   document.addEventListener('click', function(e){
@@ -1594,9 +1596,9 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
     for(var i=0;i<st.length && i<d.steps.length;i++){ var tn=st[i].lastChild; if(tn && tn.nodeType===3){ tn.nodeValue=d.steps[i]; } else { st[i].appendChild(document.createTextNode(d.steps[i])); } }
   };
   var TRUST = {
-    en:{ title:'Built to be trusted', subtitle:'Transparent, controllable, and connected to your stack.', cards:[['AI, not a black box','Every employee always identifies itself as an AI.'],['Human handoff','A person can take over whenever a case needs it.'],['Context memory','Agents keep relevant conversation and business context.'],['Works with your tools','Email, chat, CRM, calendar, sheets and more.'],['Always on','Automation runs 24/7 without downtime.'],['Honest security','Business-grade AI providers; your data is not used for training.']] },
-    es:{ title:'Diseñado para generar confianza', subtitle:'Transparente, controlable y conectado a tus herramientas.', cards:[['IA, no una caja negra','Cada empleado siempre se identifica como IA.'],['Transferencia a un humano','Una persona puede tomar el control cuando un caso lo requiere.'],['Memoria de contexto','Los agentes conservan el contexto relevante de la conversación y del negocio.'],['Funciona con tus herramientas','Correo, chat, CRM, calendario, hojas de cálculo y más.'],['Siempre activo','La automatización funciona 24/7 sin interrupciones.'],['Seguridad honesta','Proveedores de IA de nivel empresarial; tus datos no se usan para entrenamiento.']] },
-    uk:{ title:'Створено, щоб довіряти', subtitle:'Прозоро, контрольовано та інтегровано з вашими інструментами.', cards:[['AI, а не чорна скринька','Кожен співробітник завжди повідомляє, що він AI.'],['Передавання людині','Людина може підключитися будь-коли, коли цього потребує ситуація.'],['Пам’ять контексту','Агенти зберігають релевантний контекст розмови та бізнесу.'],['Працює з вашими інструментами','Пошта, чат, CRM, календар, таблиці та інше.'],['Завжди на зв’язку','Автоматизація працює 24/7 без простоїв.'],['Чесна безпека','AI-провайдери бізнес-рівня; ваші дані не використовуються для навчання.']] }
+    en:{ title:'Built to be trusted', subtitle:'Transparent, controllable, and connected to your stack.', cards:[['AI, not a black box','Every employee always identifies itself as an AI.'],['Human handoff','A person can take over whenever a case needs it.'],['Context memory','Agents keep relevant conversation and business context.'],['Works with your tools','Email, chat, CRM, calendar, sheets and more.'],['Always on','Designed to run 24/7 (subject to service availability).'],['Honest security','Business-grade AI providers under strict data terms — see our Privacy Policy.']] },
+    es:{ title:'Diseñado para generar confianza', subtitle:'Transparente, controlable y conectado a tus herramientas.', cards:[['IA, no una caja negra','Cada empleado siempre se identifica como IA.'],['Transferencia a un humano','Una persona puede tomar el control cuando un caso lo requiere.'],['Memoria de contexto','Los agentes conservan el contexto relevante de la conversación y del negocio.'],['Funciona con tus herramientas','Correo, chat, CRM, calendario, hojas de cálculo y más.'],['Siempre activo','Diseñado para funcionar 24/7 (sujeto a disponibilidad del servicio).'],['Seguridad honesta','Proveedores de IA de nivel empresarial con términos estrictos de datos; consulta nuestra Política de Privacidad.']] },
+    uk:{ title:'Створено, щоб довіряти', subtitle:'Прозоро, контрольовано та інтегровано з вашими інструментами.', cards:[['AI, а не чорна скринька','Кожен співробітник завжди повідомляє, що він AI.'],['Передавання людині','Людина може підключитися будь-коли, коли цього потребує ситуація.'],['Пам’ять контексту','Агенти зберігають релевантний контекст розмови та бізнесу.'],['Працює з вашими інструментами','Пошта, чат, CRM, календар, таблиці та інше.'],['Завжди на зв’язку','Створено для роботи 24/7 (залежно від доступності сервісів).'],['Чесна безпека','AI-провайдери бізнес-рівня зі строгими умовами щодо даних; див. Політику конфіденційності.']] }
   };
   window.localizeTrust = function(lang){
     var d = TRUST[lang] || TRUST.en; var sec = document.getElementById('hv-trust'); if(!sec||!d) return;
@@ -1667,7 +1669,7 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
       var ts=mk('section',null,null); ts.id='hv-trust'; ts.className='hv-sec';
       ts.appendChild(mk('h2',null,'Built to be trusted'));
       ts.appendChild(mk('p','sub','Transparent, controllable, and connected to your stack.'));
-      var tgrid=mk('div','hv-trust-grid',null); var tc=[['AI, not a black box','Every employee always identifies itself as an AI.'],['Human handoff','A person can take over whenever a case needs it.'],['Context memory','Agents keep relevant conversation and business context.'],['Works with your tools','Email, chat, CRM, calendar, sheets and more.'],['Always on','Automation runs 24/7 without downtime.'],['Honest security','Business-grade AI providers; your data is not used for training.']];
+      var tgrid=mk('div','hv-trust-grid',null); var tc=[['AI, not a black box','Every employee always identifies itself as an AI.'],['Human handoff','A person can take over whenever a case needs it.'],['Context memory','Agents keep relevant conversation and business context.'],['Works with your tools','Email, chat, CRM, calendar, sheets and more.'],['Always on','Designed to run 24/7 (subject to service availability).'],['Honest security','Business-grade AI providers under strict data terms — see our Privacy Policy.']];
       for(var j=0;j<tc.length;j++){ var cd=mk('div','hv-trust-card',null); cd.appendChild(mk('b',null,tc[j][0])); cd.appendChild(document.createTextNode(tc[j][1])); tgrid.appendChild(cd); }
       ts.appendChild(tgrid); anchor.parentNode.insertBefore(ts, anchor);
       if(typeof window.localizeTrust==='function') window.localizeTrust((typeof LANG!=='undefined')?LANG:'en');
@@ -2597,6 +2599,11 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
    unlike hidden), and overscroll-behavior-x:none stops the elastic pan. */
 html { overflow-x: clip; }
 html, body { overscroll-behavior-x: none; }
+/* Bigger touch targets on mobile (safe controls only; carousel untouched). */
+@media (max-width:760px){
+  .lang button { padding:9px 13px; }
+  footer a { display:inline-block; padding:6px 4px; }
+}
 </style>
 <!-- HYVENTA-UXFIX:END -->
 </body>
