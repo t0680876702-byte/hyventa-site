@@ -1036,6 +1036,7 @@ carousel.addEventListener('touchend',function(e){ if(sx===null)return; const dx=
   if(!sel) return;
   var _phTxt=({en:'Select an AI employee',es:'Elige un empleado de IA',uk:'Оберіть AI-співробітника'}[(typeof LANG!=='undefined'?LANG:'en')]||'Select an AI employee');
   var _ph=document.createElement('option'); _ph.value=''; _ph.textContent=_phTxt; _ph.disabled=true; _ph.selected=true; sel.appendChild(_ph);
+  var _nsTxt=({en:'Not sure — help me choose',es:'No estoy seguro — ayúdame a elegir',uk:'Не впевнений — допоможіть обрати'}[(typeof LANG!=='undefined'?LANG:'en')]||'Not sure — help me choose'); var _ns=document.createElement('option'); _ns.value='unsure'; _ns.textContent=_nsTxt; sel.appendChild(_ns);
   agents.forEach(function(a){ var o=document.createElement('option'); o.value=a.name; o.textContent=a.name; sel.appendChild(o); });
   function pick(name){ sel.value=name; sel.classList.add('hv-picked'); setTimeout(function(){ sel.classList.remove('hv-picked'); }, 1600); }
   document.addEventListener('click', function(e){
