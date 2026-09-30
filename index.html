@@ -544,9 +544,9 @@
             <div class="cfg-chip"><input type="checkbox" name="intent" id="i-translation" value="translation" /><label for="i-translation" data-cfg-i18n="in_translation">Translation</label></div>
             <div class="cfg-chip"><input type="checkbox" name="intent" id="i-knowledge" value="knowledge" /><label for="i-knowledge" data-cfg-i18n="in_knowledge">Knowledge / FAQ</label></div>
             <div class="cfg-chip"><input type="checkbox" name="intent" id="i-analysis" value="analysis" /><label for="i-analysis" data-cfg-i18n="in_analysis">Business analysis</label></div>
-            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-image" value="image" /><label for="i-image" data-cfg-i18n="in_image">Images / design</label></div>
-            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-audio" value="audio" /><label for="i-audio" data-cfg-i18n="in_audio">Audio</label></div>
-            <div class="cfg-chip"><input type="checkbox" name="intent" id="i-video" value="video" /><label for="i-video" data-cfg-i18n="in_video">Video</label></div>
+            <div class="cfg-chip" hidden><input type="checkbox" name="intent" id="i-image" value="image" /><label for="i-image" data-cfg-i18n="in_image">Images / design</label></div>
+            <div class="cfg-chip" hidden><input type="checkbox" name="intent" id="i-audio" value="audio" /><label for="i-audio" data-cfg-i18n="in_audio">Audio</label></div>
+            <div class="cfg-chip" hidden><input type="checkbox" name="intent" id="i-video" value="video" /><label for="i-video" data-cfg-i18n="in_video">Video</label></div>
           </div>
           <div class="cfg-match-hint" id="cfg-match-hint" hidden></div>
         </section>
@@ -617,9 +617,9 @@
             <div class="cfg-disclose-body">
               <p class="cfg-sub" data-cfg-i18n="s5_media" style="font-size:12px;color:var(--muted);margin:6px 0 8px">Media</p>
               <div class="cfg-grid" style="margin-bottom:12px">
-                <div class="cfg-chip"><input type="checkbox" name="media" id="m-image" value="image" /><label for="m-image" data-cfg-i18n="m_image">Images</label></div>
-                <div class="cfg-chip"><input type="checkbox" name="media" id="m-audio" value="audio" /><label for="m-audio" data-cfg-i18n="m_audio">Audio</label></div>
-                <div class="cfg-chip"><input type="checkbox" name="media" id="m-video" value="video" /><label for="m-video" data-cfg-i18n="m_video">Video</label></div>
+                <div class="cfg-chip" hidden><input type="checkbox" name="media" id="m-image" value="image" /><label for="m-image" data-cfg-i18n="m_image">Images</label></div>
+                <div class="cfg-chip" hidden><input type="checkbox" name="media" id="m-audio" value="audio" /><label for="m-audio" data-cfg-i18n="m_audio">Audio</label></div>
+                <div class="cfg-chip" hidden><input type="checkbox" name="media" id="m-video" value="video" /><label for="m-video" data-cfg-i18n="m_video">Video</label></div>
               </div>
 
               <div class="cfg-toggle">
@@ -853,7 +853,7 @@ const I18N = {
 };
 
 /* ============ Agents data ============ */
-const agents = [
+const AGENTS_ALL = [
  { file:"stella", name:"Stella", role:{en:"AI Stylist",es:"Estilista IA",uk:"AI-стиліст"}, tier:"BUSINESS", blurb:{en:"“Shows any outfit worn on a model — front and back.”",es:"“Muestra cualquier look puesto en una modelo — de frente y de espaldas.”",uk:"“Показує будь-який образ на моделі — спереду та ззаду.”"}, desc:{en:"Clients send a garment photo; Stella returns it worn on a model from two angles.",es:"Los clientes envían una foto de la prenda; Stella la devuelve puesta en una modelo desde dos ángulos.",uk:"Клієнти надсилають фото одягу; Stella повертає його на моделі з двох ракурсів."}, chips:{en:["📝 Web form","E-commerce · Fashion · Retail"],es:["📝 Formulario web","E-commerce · Moda · Retail"],uk:["📝 Веб-форма","E-commerce · Мода · Ритейл"]} },
   { file:"sarah",  name:"Sarah",  role:{en:"AI Sales Manager",es:"Gerente de Ventas IA",uk:"AI-менеджер продажів"}, tier:"BUSINESS",
     blurb:{en:"\"Your always-on sales rep. Qualifies every lead, never sleeps.\"",es:"\"Tu comercial siempre activo. Califica cada lead, nunca duerme.\"",uk:"\"Ваш продавець без вихідних. Кваліфікує кожен лід, ніколи не спить.\""},
@@ -904,6 +904,12 @@ const agents = [
     desc:{en:"Translates messages and content between languages in real time.",es:"Traduce mensajes y contenido entre idiomas en tiempo real.",uk:"Перекладає повідомлення та контент між мовами в реальному часі."},
     chips:{en:["✈️ Telegram","International business"],es:["✈️ Telegram","Negocios internacionales"],uk:["✈️ Telegram","Міжнародний бізнес"]} },
 ];
+/* STEP 33: temporarily hide creative agents (Stella/Leo/Vera/Rooney) from the public
+   surface for MoR/payment-provider applications. Definitions above are preserved;
+   restore later by clearing this filter. Drives BOTH the team carousel and the
+   Contact dropdown, so hiding here covers EN/ES/UK at once. */
+const HV_HIDDEN_AGENTS = ['stella','leo','vera','rooney'];
+const agents = AGENTS_ALL.filter(function(a){ return HV_HIDDEN_AGENTS.indexOf(a.file) === -1; });
 
 /* ============ FAQ data ============ */
 const FAQ = {
