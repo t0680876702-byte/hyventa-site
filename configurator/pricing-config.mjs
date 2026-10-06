@@ -31,7 +31,7 @@ export const AGENTS = [
     required_skills: ['lead_qualification'],
     usage_metrics: [{ name: 'conversations', unit: 'conv', included: 500 }],
     expensive_operations: [],
-    setup_range: { low: 200, high: 500 },
+    setup_range: { low: 149, high: 349 },
     monthly_range: { low: 99, high: 149 },
     included_usage: { conversations: 500 },
     compatibility: { native_channels: ['web_chat'], native_media: [], requires: [] },
@@ -47,7 +47,7 @@ export const AGENTS = [
     required_skills: ['appointment_capture'],
     usage_metrics: [{ name: 'conversations', unit: 'conv', included: 500 }],
     expensive_operations: [],
-    setup_range: { low: 300, high: 700 },
+    setup_range: { low: 199, high: 449 },
     monthly_range: { low: 99, high: 199 },
     included_usage: { conversations: 500 },
     compatibility: { native_channels: ['web_chat'], native_media: [], requires: ['calendar?'] },
@@ -63,7 +63,7 @@ export const AGENTS = [
     required_skills: ['lead_qualification', 'lead_capture'],
     usage_metrics: [{ name: 'conversations', unit: 'conv', included: 500 }],
     expensive_operations: [],
-    setup_range: { low: 300, high: 800 },
+    setup_range: { low: 249, high: 549 },
     monthly_range: { low: 149, high: 299 },
     included_usage: { conversations: 500 },
     compatibility: { native_channels: ['web_chat'], native_media: [], requires: [] },
@@ -79,7 +79,7 @@ export const AGENTS = [
     required_skills: ['ticket_classification'],
     usage_metrics: [{ name: 'tickets', unit: 'ticket', included: 500 }],
     expensive_operations: [],
-    setup_range: { low: 300, high: 800 },
+    setup_range: { low: 249, high: 549 },
     monthly_range: { low: 149, high: 299 },
     included_usage: { tickets: 500 },
     compatibility: { native_channels: ['web_form'], native_media: [], requires: ['intake_channel'] },
@@ -95,8 +95,8 @@ export const AGENTS = [
     required_skills: ['content_idea_generation'],
     usage_metrics: [{ name: 'content_ideas', unit: 'idea', included: 90 }],
     expensive_operations: [],
-    setup_range: { low: 300, high: 700 },
-    monthly_range: { low: 99, high: 249 },
+    setup_range: { low: 199, high: 449 },
+    monthly_range: { low: 99, high: 199 },
     included_usage: { content_ideas: 90 },
     compatibility: { native_channels: ['internal'], native_media: [], requires: [] },
     intent_tags: ['marketing', 'content'],
@@ -111,8 +111,8 @@ export const AGENTS = [
     required_skills: ['application_screening'],
     usage_metrics: [{ name: 'applications', unit: 'app', included: 300 }],
     expensive_operations: [],
-    setup_range: { low: 500, high: 1200 },
-    monthly_range: { low: 249, high: 399 },
+    setup_range: { low: 349, high: 799 },
+    monthly_range: { low: 199, high: 349 },
     included_usage: { applications: 300 },
     compatibility: { native_channels: ['webhook'], native_media: [], requires: ['ats_or_webhook'] },
     intent_tags: ['recruiting', 'screening'],
@@ -130,8 +130,8 @@ export const AGENTS = [
       { name: 'voice_minutes', unit: 'min', included: 60 },
     ],
     expensive_operations: ['voice_minutes'],
-    setup_range: { low: 500, high: 1200 },
-    monthly_range: { low: 249, high: 399 },
+    setup_range: { low: 149, high: 349 },
+    monthly_range: { low: 99, high: 179 },
     included_usage: { messages: 1000, voice_minutes: 60 },
     compatibility: { native_channels: ['telegram'], native_media: ['voice'], requires: ['telegram'] },
     intent_tags: ['translation', 'voice'],
@@ -146,8 +146,8 @@ export const AGENTS = [
     required_skills: ['kb_search'],
     usage_metrics: [{ name: 'messages', unit: 'msg', included: 1000 }],
     expensive_operations: [],
-    setup_range: { low: 800, high: 2000 },
-    monthly_range: { low: 299, high: 599 },
+    setup_range: { low: 499, high: 1199 },
+    monthly_range: { low: 249, high: 449 },
     included_usage: { messages: 1000 },
     // Max CANNOT run without a populated KB -> forces KB setup line.
     compatibility: { native_channels: ['web_chat'], native_media: [], requires: ['knowledge_base'] },
@@ -166,8 +166,8 @@ export const AGENTS = [
       { name: 'web_searches', unit: 'search', included: 100 },
     ],
     expensive_operations: ['web_searches'],
-    setup_range: { low: 800, high: 1800 },
-    monthly_range: { low: 299, high: 599 },
+    setup_range: { low: 399, high: 999 },
+    monthly_range: { low: 249, high: 449 },
     included_usage: { reports: 40, web_searches: 100 },
     compatibility: { native_channels: ['telegram'], native_media: [], requires: ['telegram'] },
     intent_tags: ['analysis', 'research', 'business_analysis'],
@@ -249,15 +249,15 @@ export const PricingRates = {
 
   // Only these integration keys are "known". Anything else -> Custom.
   integration: {
-    crm: { setup: 300, monthly: 0 },
-    calendar: { setup: 200, monthly: 0 },
-    ats: { setup: 250, monthly: 0 },
-    api: { setup: 200, monthly: 0 }, // generic documented API/webhook
+    crm: { setup: 150, monthly: 0 },
+    calendar: { setup: 99, monthly: 0 },
+    ats: { setup: 150, monthly: 0 },
+    api: { setup: 150, monthly: 0 }, // generic documented API/webhook
   },
 
   knowledge_base: {
-    small: { setup: 200, monthly: 0 },
-    large: { setup: 500, monthly: 49 },
+    small: { setup: 99, monthly: 0 },
+    large: { setup: 300, monthly: 49 },
   },
 
   // Standard is $0 (already inside BASE.monthly). Only the DELTA is added.
@@ -294,7 +294,7 @@ export const PricingRates = {
 
   bundle_discounts: { 2: 0.10, 3: 0.15 }, // applied to BASE only
 
-  floors: { setup: 249, monthly: 49 },
+  floors: { setup: 149, monthly: 49 },
 
   // Beyond this multiple of included, config exceeds standard packages -> Custom.
   max_standard_usage_multiple: 20,

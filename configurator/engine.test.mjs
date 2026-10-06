@@ -68,7 +68,7 @@ function assert(cond, msg) {
   const input = { intent_tags: ['reception'], channels: ['web_chat'], integrations: ['calendar'], expected_usage: { by_metric: { conversations: 300 } } };
   const e = buildEstimate(input); show('2. Emma + calendar', input, e);
   assert(agents(e) === 'Emma', 'T2 agent Emma');
-  assert(e.breakdown.integrations.setup.low === 200, 'T2 calendar setup $200');
+  assert(e.breakdown.integrations.setup.low === 99, 'T2 calendar setup $99');
   assert(!e.is_custom, 'T2 not custom');
 })();
 
@@ -87,7 +87,7 @@ function assert(cond, msg) {
   const input = { intent_tags: ['knowledge'], channels: ['web_chat'], knowledge_base: { present: true, size: 'large' }, expected_usage: { by_metric: { messages: 1200 } } };
   const e = buildEstimate(input); show('4. Max + large KB', input, e);
   assert(agents(e) === 'Max', 'T4 agent Max');
-  assert(e.breakdown.knowledge_base.setup.low === 500, 'T4 KB large setup $500');
+  assert(e.breakdown.knowledge_base.setup.low === 300, 'T4 KB large setup $300');
   assert(e.breakdown.knowledge_base.monthly.low === 49, 'T4 KB large monthly $49');
   assert(!e.is_custom, 'T4 not custom');
 })();
@@ -207,12 +207,12 @@ function assert(cond, msg) {
 
 // 18. setup floor (synthetic estimate)
 (() => {
-  const est = applyFloor({ setup_range: { low: 100, high: 150 }, monthly_range: { low: 99, high: 120 } });
+  const est = applyFloor({ setup_range: { low: 100, high: 120 }, monthly_range: { low: 99, high: 120 } });
   console.log(`\n──────── 18. setup floor ────────`);
-  console.log(`INPUT           → setup {100,150}`);
+  console.log(`INPUT           → setup {100,120}`);
   console.log(`SETUP           → $${est.setup_range.low}–$${est.setup_range.high} [floor ${est.floor_applied.setup}]`);
-  assert(est.setup_range.low === 249, 'T18 setup floor $249');
-  assert(est.setup_range.high === 249, 'T18 high not below low');
+  assert(est.setup_range.low === 149, 'T18 setup floor $149');
+  assert(est.setup_range.high === 149, 'T18 high not below low');
 })();
 
 // 19. (A) Sarah + second (non-native) channel -> add-on, NOT Custom
