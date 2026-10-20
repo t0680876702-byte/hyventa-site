@@ -19,6 +19,9 @@ export const ORDINAL_CLASS = ['A', 'B', 'C', 'D'];
  * expensive_operations[]: metric names that FORCE metered billing
  * setup_range / monthly_range: the agent's OWN economics (the price source)
  * compatibility.native_channels / native_media: capabilities the agent ships with
+ * availability: the single availability rule. 'hidden' removes an agent from
+ *   matching and therefore from every estimate; absent means public. Hiding is a
+ *   data decision enforced in engine.matchAgents, never a UI-only trick.
  */
 export const AGENTS = [
   {
@@ -174,6 +177,7 @@ export const AGENTS = [
   },
   {
     id: 'leo', name: 'Leo', role: 'Designer',
+    availability: 'hidden', // STEP 35: excluded from matching/pricing (MoR prep)
     complexity_class: 'C',
     native_channels: ['web_form'],
     triggers: ['web_form'], channels: ['web_form'],
@@ -190,6 +194,7 @@ export const AGENTS = [
   },
   {
     id: 'rooney', name: 'Rooney', role: 'Composer',
+    availability: 'hidden', // STEP 35: excluded from matching/pricing (MoR prep)
     complexity_class: 'C',
     native_channels: ['web_form'],
     triggers: ['web_form'], channels: ['web_form'],
@@ -206,6 +211,7 @@ export const AGENTS = [
   },
   {
     id: 'vera', name: 'Vera', role: 'Video Producer',
+    availability: 'hidden', // STEP 35: excluded from matching/pricing (MoR prep)
     complexity_class: 'D',
     native_channels: ['web_form'],
     triggers: ['web_form'], channels: ['web_form'],
@@ -224,6 +230,7 @@ export const AGENTS = [
   },
   {
     id: 'stella', name: 'Stella', role: 'Stylist',
+    availability: 'hidden', // STEP 35: excluded from matching/pricing (MoR prep)
     complexity_class: 'C',
     native_channels: ['web_form'],
     triggers: ['web_form'], channels: ['web_form'],

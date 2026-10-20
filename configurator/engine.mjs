@@ -25,11 +25,39 @@ const zeroR = () => ({ low: 0, high: 0 });
 
 function agentById(id) { return AGENTS.find((a) => a.id === id); }
 
-/** Build intent -> agents index once. */
+/**
+ * THE availability rule. An agent takes part in matching and pricing only when it
+ * is not explicitly marked `availability: 'hidden'` in pricing-config.mjs.
+ * Enforced inside the engine (not in the form) so a hidden agent cannot enter an
+ * estimate even when its intent tag is supplied directly — including the case of
+ * a manually enabled hidden HTML checkbox or a direct call to buildEstimate().
+ */
+export const isAgentPublic = (a) => a.availability !== 'hidden';
+
+/** Build intent -> agents index once (public agents only). */
 const INTENT_INDEX = (() => {
   const idx = {};
-  for (const a of AGENTS) for (const t of a.intent_tags) (idx[t] ||= []).push(a.id);
+  for (const a of AGENTS) {
+    if (!isAgentPublic(a)) continue;
+    for (const t of a.intent_tags) (idx[t] ||= []).push(a.id);
+  }
   return idx;
+})();
+
+/**
+ * Media capabilities that at least one AVAILABLE agent can actually serve.
+ * Media options no public agent can deliver (image/audio/video while the creative
+ * agents are hidden) must not act as a complexity signal, otherwise a manually
+ * enabled hidden checkbox would shift a public agent's price.
+ */
+const AVAILABLE_MEDIA = (() => {
+  const caps = new Set();
+  for (const a of AGENTS) {
+    if (!isAgentPublic(a)) continue;
+    const native = (a.compatibility && a.compatibility.native_media) || [];
+    for (const m of native) caps.add(m);
+  }
+  return caps;
 })();
 
 // =====================================================================
@@ -46,8 +74,8 @@ export function matchAgents(input) {
     else capability_gap.push(tag);
   }
 
-  // Deterministic order = AGENTS order
-  const matched = AGENTS.filter((a) => matchedIds.has(a.id));
+  // Deterministic order = AGENTS order. Hidden agents are never returned.
+  const matched = AGENTS.filter((a) => isAgentPublic(a) && matchedIds.has(a.id));
   return { matched, capability_gap };
 }
 
@@ -59,7 +87,8 @@ export function matchAgents(input) {
 export function calculateComplexity(input, agents) {
   const channels = input.channels || [];
   const integrations = input.integrations || [];
-  const media = input.media || [];
+  // Count only media capabilities an available agent can serve (see AVAILABLE_MEDIA).
+  const media = (input.media || []).filter((m) => AVAILABLE_MEDIA.has(m));
   const kb = input.knowledge_base && input.knowledge_base.present ? 1 : 0;
 
   const extraChannels = Math.max(0, channels.length - 1);

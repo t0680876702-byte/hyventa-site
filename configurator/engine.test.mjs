@@ -2,8 +2,10 @@
  * HYVENTA CONFIGURATOR V1 — TEST SUITE (standalone, no UI)
  * Run: node hyventa-site/configurator/engine.test.mjs
  */
-import { buildEstimate, applyFloor } from './engine.mjs';
-import { PricingRates } from './pricing-config.mjs';
+import {
+  buildEstimate, applyFloor, matchAgents, calculateUsage, calculateMetered, isAgentPublic,
+} from './engine.mjs';
+import { AGENTS, PricingRates } from './pricing-config.mjs';
 import { readFileSync } from 'node:fs';
 
 let pass = 0, fail = 0;
@@ -101,32 +103,59 @@ function assert(cond, msg) {
   assert(!e.is_custom, 'T5 not custom');
 })();
 
-// 6. Leo + image generation
+// 6. Leo (HIDDEN) — an image request must never reach a hidden agent
 (() => {
   const input = { intent_tags: ['image'], channels: ['web_form'], media: ['image'], expected_usage: { by_metric: { images: 200 } } };
-  const e = buildEstimate(input); show('6. Leo + image generation', input, e);
-  assert(agents(e) === 'Leo', 'T6 agent Leo');
-  assert(e.extra_usage.some((u) => u.metric === 'images' && u.extra_units === 150), 'T6 overage 150 images');
-  assert(!e.is_custom, 'T6 not custom');
+  const e = buildEstimate(input); show('6. Leo hidden — image becomes Custom', input, e);
+  assert(e.recommended_agents.length === 0, 'T6 no public agent for image');
+  assert(!e.recommended_agents.some((a) => a.id === 'leo'), 'T6 Leo never recommended');
+  assert(e.is_custom, 'T6 image request is Custom');
+  assert(e.custom_reasons.some((r) => r.startsWith('capability_gap')), 'T6 reason capability_gap');
 })();
 
-// 7. Rooney + audio
+// 6b. Leo's overage math is preserved (unit level: hidden agent passed explicitly)
+(() => {
+  const leo = AGENTS.find((a) => a.id === 'leo');
+  assert(!!leo && !isAgentPublic(leo), 'T6b Leo exists in data and is hidden');
+  const input = { intent_tags: ['image'], channels: ['web_form'], media: ['image'], expected_usage: { by_metric: { images: 200 } } };
+  const usage = calculateUsage(input, [leo]);
+  const m = calculateMetered(input, [leo], usage);
+  console.log(`\n──────── 6b. Leo overage (unit) ────────`);
+  console.log(`EXTRA IMAGES    → ${usage.images.extra} @ $${PricingRates.usage_rates.images} = $${m.metered_monthly}`);
+  assert(usage.images.extra === 150, 'T6b overage 150 images');
+  assert(m.metered_monthly === 30, 'T6b 150 images x $0.20 = $30');
+})();
+
+// 7. Rooney (HIDDEN) — an audio request must never reach a hidden agent
 (() => {
   const input = { intent_tags: ['audio'], channels: ['web_form'], media: ['audio'], expected_usage: { by_metric: { audio_minutes: 30 } } };
-  const e = buildEstimate(input); show('7. Rooney + audio', input, e);
-  assert(agents(e) === 'Rooney', 'T7 agent Rooney');
-  assert(e.extra_usage.some((u) => u.metric === 'audio_minutes' && u.extra_units === 20), 'T7 overage 20 min');
-  assert(!e.is_custom, 'T7 not custom');
+  const e = buildEstimate(input); show('7. Rooney hidden — audio becomes Custom', input, e);
+  assert(e.recommended_agents.length === 0, 'T7 no public agent for audio');
+  assert(!e.recommended_agents.some((a) => a.id === 'rooney'), 'T7 Rooney never recommended');
+  assert(e.is_custom, 'T7 audio request is Custom');
 })();
 
-// 8. Vera + video credits
+// 7b. Rooney's overage math is preserved (unit level)
+(() => {
+  const rooney = AGENTS.find((a) => a.id === 'rooney');
+  assert(!!rooney && !isAgentPublic(rooney), 'T7b Rooney exists in data and is hidden');
+  const input = { intent_tags: ['audio'], channels: ['web_form'], media: ['audio'], expected_usage: { by_metric: { audio_minutes: 30 } } };
+  const usage = calculateUsage(input, [rooney]);
+  const m = calculateMetered(input, [rooney], usage);
+  console.log(`\n──────── 7b. Rooney overage (unit) ────────`);
+  console.log(`EXTRA AUDIO MIN → ${usage.audio_minutes.extra} @ $${PricingRates.usage_rates.audio_minutes} = $${m.metered_monthly}`);
+  assert(usage.audio_minutes.extra === 20, 'T7b overage 20 min');
+  assert(m.metered_monthly === 12, 'T7b 20 min x $0.60 = $12');
+})();
+
+// 8. Vera (HIDDEN) — a video request must never reach a hidden agent
 (() => {
   const input = { intent_tags: ['video'], channels: ['web_form'], media: ['video'], expected_usage: { by_metric: { video_credits: 400 } } };
-  const e = buildEstimate(input); show('8. Vera + video credits', input, e);
-  assert(agents(e) === 'Vera', 'T8 agent Vera');
-  assert(e.breakdown.credits.package_monthly === 150, 'T8 credit package $150');
-  assert(e.breakdown.credits.extra_credits === 250, 'T8 extra 250 credits (400-150)');
-  assert(!e.is_custom, 'T8 not custom (below top cap)');
+  const e = buildEstimate(input); show('8. Vera hidden — video becomes Custom', input, e);
+  assert(e.recommended_agents.length === 0, 'T8 no public agent for video');
+  assert(!e.recommended_agents.some((a) => a.id === 'vera'), 'T8 Vera never recommended');
+  assert(e.breakdown.credits.package_monthly === 0, 'T8 no credit package without Vera');
+  assert(e.is_custom, 'T8 video request is Custom');
 })();
 
 // 9. Emma + Sarah (bundle 2)
@@ -225,16 +254,22 @@ function assert(cond, msg) {
   assert(!e.custom_reasons.some((r) => r.toLowerCase().includes('channel')), 'A no channel-based custom reason');
 })();
 
-// 20. (D) Vera extra credits separate from monthly_range
+// 20. (D) Vera credits stay a SEPARATE line, never folded into flat metered usage
 (() => {
-  const low = buildEstimate({ intent_tags: ['video'], channels: ['web_form'], media: ['video'], expected_usage: { by_metric: { video_credits: 200 } } });
-  const high = buildEstimate({ intent_tags: ['video'], channels: ['web_form'], media: ['video'], expected_usage: { by_metric: { video_credits: 400 } } });
-  show('20. (D) Vera credits separation', { intent_tags: ['video'], media: ['video'], usage: { video_credits: 400 } }, high);
-  assert(high.breakdown.credits.package_monthly === 150, 'D package_monthly exists in breakdown.credits');
-  assert(high.breakdown.credits.extra_estimate && typeof high.breakdown.credits.extra_estimate.low === 'number', 'D breakdown.credits.extra_estimate is a stable structure');
-  assert(high.breakdown.credits.extra_estimate.low === high.breakdown.credits.extra_cost, 'D extra_estimate matches extra_cost');
-  assert(high.extra_usage.some((u) => u.metric === 'video_credits' && u.credit_based && u.extra_units === 250), 'D extra video credits are a separate metered line');
-  assert(low.monthly_range.low === high.monthly_range.low && low.monthly_range.high === high.monthly_range.high, 'D extra credits are NOT included in monthly_range');
+  const vera = AGENTS.find((a) => a.id === 'vera');
+  assert(!!vera && !isAgentPublic(vera), 'D Vera exists in data and is hidden');
+  const input = { intent_tags: ['video'], channels: ['web_form'], media: ['video'], expected_usage: { by_metric: { video_credits: 400 } } };
+  const usage = calculateUsage(input, [vera]);
+  const m = calculateMetered(input, [vera], usage);
+  console.log(`\n──────── 20. (D) Vera credits separation (unit) ────────`);
+  console.log(`PACKAGE         → $${m.credits.package_monthly}/mo (${m.credits.package_included} included)`);
+  console.log(`EXTRA CREDITS   → ${m.credits.extra_credits} = $${m.credits.extra_cost}`);
+  console.log(`FLAT METERED    → $${m.metered_monthly}`);
+  assert(m.credits.package_monthly === 150, 'D package_monthly $150');
+  assert(m.credits.extra_credits === 250, 'D extra 250 credits (400-150)');
+  assert(m.credits.extra_cost === 250, 'D extra credits priced at $1 each');
+  assert(m.metered_monthly === 0, 'D video credits are NOT flat metered usage');
+  assert(m.extra_usage.some((u) => u.metric === 'video_credits' && u.credit_based && u.extra_units === 250), 'D extra video credits are a separate metered line');
 })();
 
 // 21. (E) No commercial price literals embedded in engine.mjs
@@ -255,6 +290,90 @@ function assert(cond, msg) {
   console.log(`COMMERCIAL NUMS → [${commercial.join(', ')}]`);
   console.log(`LEAKED          → ${leaked.length ? leaked.join(', ') : 'none'}`);
   assert(leaked.length === 0, 'E no commercial price literals inside engine.mjs (leaked: ' + leaked.join(',') + ')');
+})();
+
+// 22. STEP 35 — a request built ONLY from hidden intents yields no agents at all
+(() => {
+  const input = { intent_tags: ['image', 'audio', 'video'], channels: ['web_form'], media: ['image', 'audio', 'video'] };
+  const e = buildEstimate(input); show('22. All hidden intents', input, e);
+  assert(e.recommended_agents.length === 0, 'T22 hidden-only request matches no agent');
+  assert(e.is_custom, 'T22 hidden-only request is Custom');
+  assert(e.custom_reasons.some((r) => r.startsWith('capability_gap')), 'T22 capability_gap reported');
+  assert(e.breakdown.credits.package_monthly === 0, 'T22 no credit package without a visible agent');
+  assert(e.breakdown.credits.extra_estimate && e.breakdown.credits.extra_estimate.low === 0 && e.breakdown.credits.extra_estimate.high === 0, 'T22 breakdown.credits.extra_estimate is a stable zero structure');
+})();
+
+// 23. Stella (HIDDEN) — the 'styling' intent never resolves to an agent
+(() => {
+  const input = { intent_tags: ['styling'], channels: ['web_form'], expected_usage: { by_metric: { renders: 100 } } };
+  const e = buildEstimate(input); show('23. Stella hidden — styling is Custom', input, e);
+  assert(e.recommended_agents.length === 0, 'T23 Stella never recommended');
+  assert(e.is_custom, 'T23 styling request is Custom');
+})();
+
+// 24. A hidden intent must not shift the price of a visible agent
+(() => {
+  const base = { intent_tags: ['booking'], channels: ['web_chat'], expected_usage: { by_metric: { conversations: 100 } } };
+  const withHidden = { intent_tags: ['booking', 'image'], channels: ['web_chat'], expected_usage: { by_metric: { conversations: 100 } } };
+  const a = buildEstimate(base);
+  const b = buildEstimate(withHidden);
+  console.log(`\n──────── 24. hidden intent must not shift a visible price ────────`);
+  console.log(`OLIVIA ONLY     → ${money(a.setup_range)} / ${money(a.monthly_range)}`);
+  console.log(`+ HIDDEN IMAGE  → ${money(b.setup_range)} / ${money(b.monthly_range)}`);
+  assert(agents(b) === 'Olivia', 'T24 hidden intent adds no agent');
+  assert(a.setup_range.low === b.setup_range.low && a.setup_range.high === b.setup_range.high, 'T24 setup unchanged by hidden intent');
+  assert(a.monthly_range.low === b.monthly_range.low && a.monthly_range.high === b.monthly_range.high, 'T24 monthly unchanged by hidden intent');
+  assert(b.is_custom, 'T24 uncovered hidden requirement is reported as Custom');
+})();
+
+// 25. Exhaustive sweep: no intent tag can ever surface a hidden agent
+(() => {
+  const hiddenIds = new Set(AGENTS.filter((a) => !isAgentPublic(a)).map((a) => a.id));
+  const allTags = new Set();
+  for (const a of AGENTS) for (const t of a.intent_tags) allTags.add(t);
+  const leaked = [];
+  for (const tag of allTags) {
+    const { matched } = matchAgents({ intent_tags: [tag] });
+    for (const a of matched) if (hiddenIds.has(a.id)) leaked.push(`${tag}->${a.id}`);
+  }
+  console.log(`\n──────── 25. exhaustive availability sweep ────────`);
+  console.log(`INTENT TAGS     → ${allTags.size}`);
+  console.log(`HIDDEN AGENTS   → ${[...hiddenIds].join(', ')}`);
+  console.log(`LEAKED          → ${leaked.length ? leaked.join(', ') : 'none'}`);
+  assert(hiddenIds.size === 4, 'T25 exactly 4 hidden agents');
+  assert(AGENTS.length === 13, 'T25 all 13 agent definitions preserved in data');
+  assert(leaked.length === 0, 'T25 no intent tag matches a hidden agent');
+})();
+
+// 26. STEP 35b — manually enabled hidden media options must not shift a visible price
+(() => {
+  const base = { intent_tags: ['sales'], channels: ['web_chat'], expected_usage: { by_metric: { conversations: 300 } } };
+  const tampered = { intent_tags: ['sales'], channels: ['web_chat'], media: ['image', 'audio', 'video'], expected_usage: { by_metric: { conversations: 300 } } };
+  const a = buildEstimate(base);
+  const b = buildEstimate(tampered);
+  console.log(`\n──────── 26. hidden media must not shift a visible price ────────`);
+  console.log(`SARAH ONLY      → ${money(a.setup_range)} / ${money(a.monthly_range)} (mod ${a.complexity_modifier})`);
+  console.log(`+ HIDDEN MEDIA  → ${money(b.setup_range)} / ${money(b.monthly_range)} (mod ${b.complexity_modifier})`);
+  assert(agents(b) === 'Sarah', 'T26 hidden media adds no agent');
+  assert(a.complexity_modifier === b.complexity_modifier, 'T26 modifier unchanged by hidden media');
+  assert(a.setup_range.low === b.setup_range.low && a.setup_range.high === b.setup_range.high, 'T26 setup unchanged by hidden media');
+  assert(a.monthly_range.low === b.monthly_range.low && a.monthly_range.high === b.monthly_range.high, 'T26 monthly unchanged by hidden media');
+  assert(!b.is_custom, 'T26 media alone does not make a visible scenario Custom');
+})();
+
+// 27. STEP 35b — hidden media combined with a hidden intent leaves the price untouched
+(() => {
+  const base = { intent_tags: ['booking'], channels: ['web_chat'], expected_usage: { by_metric: { conversations: 100 } } };
+  const tampered = { intent_tags: ['booking', 'video'], channels: ['web_chat'], media: ['video', 'audio'], expected_usage: { by_metric: { conversations: 100 } } };
+  const a = buildEstimate(base);
+  const b = buildEstimate(tampered);
+  console.log(`\n──────── 27. hidden intent + hidden media ────────`);
+  console.log(`OLIVIA ONLY     → ${money(a.setup_range)} / ${money(a.monthly_range)}`);
+  console.log(`+ HIDDEN BOTH   → ${money(b.setup_range)} / ${money(b.monthly_range)}`);
+  assert(agents(b) === 'Olivia', 'T27 Olivia remains the only matched agent');
+  assert(a.setup_range.low === b.setup_range.low && a.setup_range.high === b.setup_range.high, 'T27 setup unchanged by hidden media+intent');
+  assert(a.monthly_range.low === b.monthly_range.low && a.monthly_range.high === b.monthly_range.high, 'T27 monthly unchanged by hidden media+intent');
+  assert(b.is_custom, 'T27 uncovered requirement is still reported as Custom');
 })();
 
 // ============ SUMMARY ============
