@@ -11,11 +11,14 @@
 <meta property="og:title" content="Hyventa — Hire an AI employee. Put it to work." />
 <meta property="og:description" content="A team of specialized AI employees, configured for your business and ready to handle real work. 24/7, any language, human handoff built in." />
 <meta property="og:url" content="https://hyventa.net/" />
-<meta property="og:image" content="https://hyventa.net/images/sarah.png" />
+<meta property="og:image" content="https://hyventa.net/images/og-cover.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Hyventa — Hire an AI employee. Put it to work." />
 <meta name="twitter:description" content="A team of specialized AI employees, configured for your business and ready to handle real work. 24/7, any language, human handoff built in." />
-<meta name="twitter:image" content="https://hyventa.net/images/sarah.png" />
+<meta name="twitter:image" content="https://hyventa.net/images/og-cover.jpg" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="stylesheet" href="configurator/configurator-ui.css" /><!-- HYVENTA-CONFIGURATOR-CSS -->
 <link rel="apple-touch-icon" href="/images/ava.png" />
@@ -415,8 +418,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2HX1QP3CLW"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2HX1QP3CLW');</script>
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1121346313914632');fbq('track','PageView');</script>
-<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
-<script>try{if(window.Paddle){Paddle.Environment.set('sandbox');Paddle.Setup({token:'test_68329176c81d97756099317a58d'});}}catch(e){}</script>
+<!-- Paddle removed: checkout is not offered on the site (pricing is confirmed by Hyventa). -->
 <!-- HYVENTA-V3:END -->
 <!-- HYVENTA-V4:START -->
 <style id="hv-v4-css">
@@ -449,6 +451,59 @@
 @media(max-width:860px){.hv-hero-v4{grid-template-columns:1fr;text-align:center;padding:48px 0 32px}.hv-hero-v4 .hv-hero-left{text-align:center}.hv-hero-v4 h1{text-align:center}.hv-hero-v4 .sub{margin-left:auto;margin-right:auto}.hv-hero-v4 .hero-actions,.hv-hero-v4 .points{justify-content:center}.hv-hero-visual{min-height:340px}.hv-hero-img{max-height:320px}.hv-o3{width:380px;height:380px}.hv-o2{width:300px;height:300px}.hv-o1{width:220px;height:220px}.hv-hero-planet,.hv-hero-visual.hv-noimg .hv-hero-planet{width:180px;height:180px}}
 </style>
 <!-- HYVENTA-V4:END -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://hyventa.net/#org",
+      "name": "Hyventa",
+      "url": "https://hyventa.net/",
+      "description": "Hyventa provides specialized AI employees as a managed service: configured for a business, connected to its channels, and operated for it.",
+      "areaServed": { "@type": "Place", "name": "European Union" },
+      "email": "hello@hyventa.net",
+      "sameAs": ["https://t.me/hyventa_net"],
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "hello@hyventa.net",
+        "availableLanguage": ["en", "uk", "ru", "es"]
+      }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://hyventa.net/#website",
+      "url": "https://hyventa.net/",
+      "name": "Hyventa",
+      "publisher": { "@id": "https://hyventa.net/#org" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://hyventa.net/#service",
+      "name": "AI employee as a managed service",
+      "serviceType": "AI employee setup and operation",
+      "provider": { "@id": "https://hyventa.net/#org" },
+      "areaServed": { "@type": "Place", "name": "European Union" },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "99",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "99",
+          "priceCurrency": "USD",
+          "unitText": "MONTH",
+          "description": "Monthly service per AI employee, starting price. One-time setup is quoted separately and confirmed before payment."
+        },
+        "availability": "https://schema.org/InStock",
+        "url": "https://hyventa.net/#configurator"
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -517,7 +572,7 @@
     <div class="cfg-wrap">
       <header class="cfg-hero">
         <span class="cfg-kicker" data-cfg-i18n="kicker">Configure your team</span>
-        <h1 data-cfg-i18n="title">Build your AI team</h1>
+        <h2 data-cfg-i18n="title">Build your AI team</h2>
         <p data-cfg-i18n="intro">Answer a few quick questions and we'll recommend the right AI employee(s) with a transparent estimate.</p>
       </header>
 
@@ -1708,9 +1763,6 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
   function el(tag,cls){ var e=document.createElement(tag); if(cls) e.className=cls; return e; }
 
   ready(function(){
-    var navCta = q('.nav .cta-btn') || q('header .cta-btn');
-    if(navCta && navCta.parentNode){ navCta.parentNode.removeChild(navCta); }
-
     var hero = q('section.hero') || q('.hero');
     if(!hero) return;
 
@@ -1757,10 +1809,11 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
       visual.appendChild(parts);
 
       var img=el('img','hv-hero-img');
-      img.src='images/hero-ai.png';
-      img.srcset='images/hero-ai.webp';
+      img.src='images/hero-ai.webp';
       img.alt='';
-      img.loading='lazy';
+      img.loading='eager';
+      img.decoding='async';
+      img.setAttribute('fetchpriority','high');
       img.onerror=function(){ this.style.display='none'; if(this.parentNode) this.parentNode.classList.add('hv-noimg'); };
       visual.appendChild(img);
 
@@ -2582,7 +2635,9 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
 <style id="hv-v18-navcta-css">
 /* Mobile-only primary conversion CTA inside the burger menu. Desktop (>=701px) unaffected. */
 .hv-nav-cta{ display:none; }
+/* Desktop keeps the short "Get started" CTA in the header; on mobile only the wide one shows. */
 @media (max-width: 700px){
+  .nav .nav-links .cta-btn{ display:none; }
   .hv-nav-cta{
     display:inline-flex; align-items:center; justify-content:center;
     align-self:stretch; text-align:center;

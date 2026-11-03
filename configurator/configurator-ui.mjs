@@ -858,7 +858,7 @@ export function renderResult(estimate) {
 
   const teamCards = estimate.recommended_agents.map((a) => `
     <div class="cfg-agent">
-      <img class="cfg-agent-portrait" src="/images/${esc(a.id)}.png" alt="${esc(a.name)}" loading="lazy" onerror="this.style.display='none'" />
+      <img class="cfg-agent-portrait" src="/images/${esc(a.id)}.webp" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'" />
       <div class="cfg-agent-body">
         <div class="cfg-agent-head">
           <span class="cfg-agent-name">${esc(a.name)}</span>
