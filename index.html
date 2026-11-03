@@ -745,7 +745,7 @@
           <li data-i18n="pkg_500">500 conversations / month</li>
           <li data-i18n="pkg_fast">Live in 3-5 days</li>
         </ul>
-        <a href="#configurator" class="hv-pkg-cta" data-i18n="pkg_cta1">Choose Starter</a>
+        <button type="button" class="hv-pkg-cta" data-plan="starter" data-i18n="pkg_cta1">Choose Starter</button>
       </div>
 
       <div class="hv-pkg hv-pkg-featured">
@@ -760,7 +760,7 @@
           <li data-i18n="pkg_crm">CRM / calendar integration</li>
           <li data-i18n="pkg_tuning">Monthly tuning included</li>
         </ul>
-        <a href="#configurator" class="hv-pkg-cta" data-i18n="pkg_cta2">Choose Growth</a>
+        <button type="button" class="hv-pkg-cta" data-plan="growth" data-i18n="pkg_cta2">Choose Growth</button>
       </div>
 
       <div class="hv-pkg">
@@ -773,7 +773,7 @@
           <li data-i18n="pkg_5000">5,000 conversations / month</li>
           <li data-i18n="pkg_priority">Priority support</li>
         </ul>
-        <a href="#configurator" class="hv-pkg-cta" data-i18n="pkg_cta3">Choose Scale</a>
+        <button type="button" class="hv-pkg-cta" data-plan="scale" data-i18n="pkg_cta3">Choose Scale</button>
       </div>
     </div>
     <p class="hv-pkg-note">
@@ -2837,5 +2837,201 @@ html, body { overscroll-behavior-x: none; }
 }
 </style>
 <!-- HYVENTA-UXFIX:END -->
+
+<!-- ===== PLAN REQUEST MODAL ===== -->
+<div id="hv-pm" class="hv-pm" hidden>
+  <div class="hv-pm-box" role="dialog" aria-modal="true" aria-labelledby="hv-pm-title">
+    <button type="button" class="hv-pm-x" aria-label="Close">&times;</button>
+    <h3 id="hv-pm-title" class="hv-pm-title">Start with <span id="hv-pm-plan-name">Growth</span></h3>
+    <p class="hv-pm-sub" id="hv-pm-sub">Choose how you want to pay — we will send the invoice or the payment link.</p>
+
+    <form id="hv-pm-form" novalidate>
+      <input type="hidden" name="plan" id="hv-pm-plan" value="growth" />
+
+      <div class="hv-pm-type">
+        <label class="hv-pm-opt">
+          <input type="radio" name="client_type" value="business" checked />
+          <span><b id="hv-pm-biz-t">I am a company</b><em id="hv-pm-biz-d">Invoice, VAT reverse charge</em></span>
+        </label>
+        <label class="hv-pm-opt">
+          <input type="radio" name="client_type" value="individual" />
+          <span><b id="hv-pm-ind-t">I am a private person</b><em id="hv-pm-ind-d">Card payment, VAT included</em></span>
+        </label>
+      </div>
+
+      <label class="hv-pm-f"><span id="hv-pm-l-email">Email</span>
+        <input type="email" name="email" required autocomplete="email" placeholder="you@company.com" />
+      </label>
+      <label class="hv-pm-f"><span id="hv-pm-l-name">Your name</span>
+        <input type="text" name="name" autocomplete="name" />
+      </label>
+      <label class="hv-pm-f hv-pm-co"><span id="hv-pm-l-co">Company name / VAT ID</span>
+        <input type="text" name="company" autocomplete="organization" />
+      </label>
+      <label class="hv-pm-f"><span id="hv-pm-l-note">Anything we should know? (optional)</span>
+        <textarea name="note" rows="3"></textarea>
+      </label>
+
+      <button type="submit" class="hv-pm-send" id="hv-pm-send">Send request</button>
+      <p class="hv-pm-err" id="hv-pm-err" hidden></p>
+      <p class="hv-pm-small" id="hv-pm-small">No payment now. We reply within one business day.</p>
+    </form>
+
+    <div class="hv-pm-done" id="hv-pm-done" hidden>
+      <div class="hv-pm-ok">&#10003;</div>
+      <p id="hv-pm-done-text"></p>
+      <button type="button" class="hv-pm-close2">Close</button>
+    </div>
+  </div>
+</div>
+
+<style id="hv-pm-css">
+.hv-pm{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;
+  background:rgba(6,9,18,.72);backdrop-filter:blur(6px)}
+.hv-pm[hidden]{display:none}
+.hv-pm-box{position:relative;width:100%;max-width:520px;max-height:90vh;overflow:auto;
+  background:linear-gradient(180deg,#161d30,#0f1424);border:1px solid var(--border);border-radius:18px;
+  padding:26px 24px;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.hv-pm-x{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--muted);font-size:26px;line-height:1;cursor:pointer}
+.hv-pm-x:hover{color:var(--text)}
+.hv-pm-title{margin:0 0 6px;font-size:22px;color:var(--text)}
+.hv-pm-title span{color:var(--accent)}
+.hv-pm-sub{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.5}
+.hv-pm-type{display:grid;gap:10px;margin-bottom:16px}
+.hv-pm-opt{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--border);
+  border-radius:12px;cursor:pointer;background:rgba(255,255,255,.02)}
+.hv-pm-opt:has(input:checked){border-color:rgba(108,140,255,.65);background:rgba(108,140,255,.08)}
+.hv-pm-opt input{margin-top:3px;accent-color:var(--accent)}
+.hv-pm-opt b{display:block;color:var(--text);font-size:14px}
+.hv-pm-opt em{display:block;color:var(--muted);font-size:12.5px;font-style:normal;margin-top:2px}
+.hv-pm-f{display:block;margin-bottom:12px}
+.hv-pm-f>span{display:block;font-size:12.5px;color:var(--muted);margin-bottom:5px}
+.hv-pm-f input,.hv-pm-f textarea{width:100%;box-sizing:border-box;background:#0d1220;border:1px solid var(--border);
+  color:var(--text);border-radius:10px;padding:11px 12px;font:inherit;font-size:14px}
+.hv-pm-f input:focus,.hv-pm-f textarea:focus{outline:2px solid rgba(108,140,255,.55);border-color:transparent}
+.hv-pm-send{width:100%;margin-top:6px;padding:13px 18px;border:none;border-radius:12px;cursor:pointer;
+  font-weight:800;font-size:15px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+.hv-pm-send:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(108,140,255,.35)}
+.hv-pm-send[disabled]{opacity:.6;cursor:default;transform:none;box-shadow:none}
+.hv-pm-small{margin:10px 0 0;font-size:12px;color:var(--muted);text-align:center}
+.hv-pm-err{margin:10px 0 0;font-size:13px;color:#ff8f8f}
+.hv-pm-done{text-align:center;padding:10px 0}
+.hv-pm-ok{width:56px;height:56px;margin:0 auto 14px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:28px;color:#0b1020;background:linear-gradient(135deg,#6c8cff,#9b6cff)}
+.hv-pm-done p{color:var(--text);font-size:15px;line-height:1.55;margin:0 0 16px}
+.hv-pm-close2{padding:11px 22px;border-radius:10px;border:1px solid var(--border);background:none;color:var(--text);
+  font-weight:700;cursor:pointer}
+@media(max-width:560px){.hv-pm-box{padding:22px 18px;border-radius:14px}}
+</style>
+
+<script>
+(function () {
+  var I = {
+    en: { sub:"Choose how you want to pay — we will send the invoice or the payment link.", bizT:"I am a company", bizD:"Invoice, VAT reverse charge",
+          indT:"I am a private person", indD:"Card payment, VAT included", email:"Email", name:"Your name", co:"Company name / VAT ID",
+          note:"Anything we should know? (optional)", send:"Send request", small:"No payment now. We reply within one business day.",
+          done:"Thank you! We received your request and will reply to {email} within one business day.",
+          errEmail:"Please enter a valid email.", errGeneric:"Something went wrong. Please try again or email hello@hyventa.net." },
+    es: { sub:"Elige cómo quieres pagar — te enviaremos la factura o el enlace de pago.", bizT:"Soy una empresa", bizD:"Factura, IVA invertido",
+          indT:"Soy particular", indD:"Pago con tarjeta, IVA incluido", email:"Correo electrónico", name:"Tu nombre", co:"Empresa / NIF-IVA",
+          note:"¿Algo que debamos saber? (opcional)", send:"Enviar solicitud", small:"Sin pago ahora. Respondemos en un día laborable.",
+          done:"¡Gracias! Hemos recibido tu solicitud y responderemos a {email} en un día laborable.",
+          errEmail:"Introduce un correo válido.", errGeneric:"Algo salió mal. Escríbenos a hello@hyventa.net." },
+    uk: { sub:"Оберіть спосіб оплати — ми надішлемо рахунок або посилання на оплату.", bizT:"Я компанія", bizD:"Рахунок, ПДВ за зворотним механізмом",
+          indT:"Я приватна особа", indD:"Оплата карткою, ПДВ включено", email:"Електронна пошта", name:"Ваше ім'я", co:"Назва компанії / номер ПДВ",
+          note:"Щось, що нам варто знати? (необов'язково)", send:"Надіслати запит", small:"Зараз без оплати. Відповімо протягом робочого дня.",
+          done:"Дякуємо! Запит отримано, відповімо на {email} протягом робочого дня.",
+          errEmail:"Введіть коректну пошту.", errGeneric:"Щось пішло не так. Напишіть на hello@hyventa.net." },
+    de: { sub:"Wählen Sie die Zahlungsart — wir senden Ihnen die Rechnung oder den Zahlungslink.", bizT:"Ich bin ein Unternehmen", bizD:"Rechnung, Reverse-Charge-USt",
+          indT:"Ich bin Privatperson", indD:"Kartenzahlung, inkl. USt", email:"E-Mail", name:"Ihr Name", co:"Firmenname / USt-IdNr.",
+          note:"Gibt es etwas, das wir wissen sollten? (optional)", send:"Anfrage senden", small:"Jetzt keine Zahlung. Antwort innerhalb eines Werktags.",
+          done:"Danke! Wir haben Ihre Anfrage erhalten und antworten an {email} innerhalb eines Werktags.",
+          errEmail:"Bitte geben Sie eine gültige E-Mail ein.", errGeneric:"Etwas ist schiefgelaufen. Schreiben Sie an hello@hyventa.net." }
+  };
+  var HOOK = 'https://n8n.hyventa.net/webhook/plan-start';
+  var NAMES = { starter:'Starter', growth:'Growth', scale:'Scale' };
+  var el = function (id) { return document.getElementById(id); };
+  var modal = el('hv-pm');
+
+  function apply(lang) {
+    var d = I[lang] || I.en;
+    el('hv-pm-sub').textContent = d.sub;
+    el('hv-pm-biz-t').textContent = d.bizT; el('hv-pm-biz-d').textContent = d.bizD;
+    el('hv-pm-ind-t').textContent = d.indT; el('hv-pm-ind-d').textContent = d.indD;
+    el('hv-pm-l-email').textContent = d.email; el('hv-pm-l-name').textContent = d.name;
+    el('hv-pm-l-co').textContent = d.co; el('hv-pm-l-note').textContent = d.note;
+    el('hv-pm-send').textContent = d.send; el('hv-pm-small').textContent = d.small;
+    modal.setAttribute('data-lang', lang);
+  }
+
+  function open(plan) {
+    el('hv-pm-plan').value = plan;
+    el('hv-pm-plan-name').textContent = NAMES[plan] || plan;
+    el('hv-pm-form').hidden = false;
+    el('hv-pm-done').hidden = true;
+    el('hv-pm-err').hidden = true;
+    el('hv-pm-send').disabled = false;
+    apply((typeof LANG !== 'undefined' && LANG) || 'en');
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    var f = document.querySelector('#hv-pm-form input[name="email"]');
+    if (f) setTimeout(function () { f.focus(); }, 60);
+  }
+  function close() { modal.hidden = true; document.body.style.overflow = ''; toggleCo(); }
+
+  function toggleCo() {
+    var t = document.querySelector('#hv-pm-form input[name="client_type"]:checked');
+    var co = document.querySelector('.hv-pm-co');
+    if (co) co.style.display = (t && t.value === 'business') ? '' : 'none';
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-plan]');
+    if (b) { e.preventDefault(); open(b.getAttribute('data-plan')); return; }
+    if (e.target === modal || e.target.classList.contains('hv-pm-x') ||
+        e.target.classList.contains('hv-pm-close2')) { close(); }
+  });
+  document.addEventListener('change', function (e) {
+    if (e.target && e.target.name === 'client_type') toggleCo();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) close(); });
+
+  document.getElementById('hv-pm-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target;
+    var lang = modal.getAttribute('data-lang') || 'en';
+    var d = I[lang] || I.en;
+    var email = (f.email.value || '').trim();
+    var err = el('hv-pm-err');
+    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)) {
+      err.textContent = d.errEmail; err.hidden = false; return;
+    }
+    err.hidden = true;
+    var btn = el('hv-pm-send'); btn.disabled = true; btn.textContent = '…';
+    fetch(HOOK, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        plan: el('hv-pm-plan').value,
+        client_type: (f.client_type.value || 'business'),
+        email: email,
+        name: f.name.value, company: f.company.value, note: f.note.value,
+        lang: lang
+      })
+    }).then(function (r) { return r.json(); }).then(function (r) {
+      if (!r || !r.ok) throw new Error((r && r.error) || 'failed');
+      el('hv-pm-form').hidden = true;
+      el('hv-pm-done-text').textContent = d.done.replace('{email}', email);
+      el('hv-pm-done').hidden = false;
+    }).catch(function () {
+      btn.disabled = false; btn.textContent = d.send;
+      err.textContent = d.errGeneric; err.hidden = false;
+    });
+  });
+
+  window.hvOpenPlan = open;
+})();
+</script>
+<!-- ===== /PLAN REQUEST MODAL ===== -->
+
 </body>
 </html>
