@@ -733,13 +733,55 @@
     <div class="sec-head">
       <h2 data-i18n="price_h">Simple pricing</h2>
     </div>
-    <div class="hv-price-ref">
-      <p class="hv-price-from" data-i18n="price_from_label">Standard AI employee solutions start from</p>
-      <div class="hv-price-anchor"><span class="hv-price-amt">$99</span><span class="hv-price-per" data-i18n="price_per">/month</span></div>
-      <p class="hv-price-support" data-i18n="price_support">Every AI employee is configured for your business. Your exact monthly service and one-time setup are calculated in the configurator and confirmed with Hyventa before payment.</p>
-      <p class="hv-price-adv" data-i18n="price_advanced">Advanced or usage-intensive configurations may have a higher monthly price.</p>
-      <a href="#configurator" class="hv-price-cta" data-i18n="price_cfg_cta">Configure your AI employee</a>
+    <div class="hv-pkg-grid">
+      <div class="hv-pkg">
+        <div class="hv-pkg-name">Starter</div>
+        <div class="hv-pkg-setup">$299 <span data-i18n="pkg_setup">one-time setup</span></div>
+        <div class="hv-pkg-month"><b>$59</b><span data-i18n="pkg_month">/month</span></div>
+        <ul class="hv-pkg-list">
+          <li data-i18n="pkg_one_agent">1 AI employee</li>
+          <li data-i18n="pkg_webchat">Website chat</li>
+          <li data-i18n="pkg_500">500 conversations / month</li>
+          <li data-i18n="pkg_fast">Live in 3-5 days</li>
+        </ul>
+        <a href="#configurator" class="hv-pkg-cta" data-i18n="pkg_cta1">Choose Starter</a>
+      </div>
+
+      <div class="hv-pkg hv-pkg-featured">
+        <div class="hv-pkg-badge" data-i18n="pkg_popular">Most popular</div>
+        <div class="hv-pkg-name">Growth</div>
+        <div class="hv-pkg-setup">$699 <span data-i18n="pkg_setup">one-time setup</span></div>
+        <div class="hv-pkg-month"><b>$139</b><span data-i18n="pkg_month">/month</span></div>
+        <ul class="hv-pkg-list">
+          <li data-i18n="pkg_three">Up to 3 AI employees</li>
+          <li data-i18n="pkg_channels">Website chat, Telegram, WhatsApp</li>
+          <li data-i18n="pkg_1500">1,500 conversations / month</li>
+          <li data-i18n="pkg_crm">CRM / calendar integration</li>
+          <li data-i18n="pkg_tuning">Monthly tuning included</li>
+        </ul>
+        <a href="#configurator" class="hv-pkg-cta" data-i18n="pkg_cta2">Choose Growth</a>
+      </div>
+
+      <div class="hv-pkg">
+        <div class="hv-pkg-name">Scale</div>
+        <div class="hv-pkg-setup">$1,490 <span data-i18n="pkg_setup">one-time setup</span></div>
+        <div class="hv-pkg-month"><b>$299</b><span data-i18n="pkg_month">/month</span></div>
+        <ul class="hv-pkg-list">
+          <li data-i18n="pkg_five">5+ AI employees</li>
+          <li data-i18n="pkg_custom_int">Custom integrations and API</li>
+          <li data-i18n="pkg_5000">5,000 conversations / month</li>
+          <li data-i18n="pkg_priority">Priority support</li>
+        </ul>
+        <a href="#configurator" class="hv-pkg-cta" data-i18n="pkg_cta3">Choose Scale</a>
+      </div>
     </div>
+    <p class="hv-pkg-note">
+      <span data-i18n="pkg_note1">The monthly fee is 20% of the setup — no lock-in, cancel anytime.</span>
+      <b data-i18n="pkg_note2">Founding clients: 50% off setup for the first 10.</b>
+      <span data-i18n="pkg_note3">Need something bigger?</span>
+      <a href="#contact" data-i18n="pkg_note4">Talk to us</a>
+      <span data-i18n="pkg_note5">for a custom quote.</span>
+    </p>
   </div>
 </section>
 
@@ -836,7 +878,11 @@ const I18N = {
     how4_h:"Scale up", how4_p:"Add more employees or skills anytime. It grows with your company.",
     price_h:"Simple pricing", price_sub:"Simple monthly plans. Setup is tailored to your business and confirmed before launch — your one-time setup estimate is shown in the configurator. Cancel anytime.",
     price_from_label:"Standard AI employee solutions start from", price_per:"/month", price_support:"Every AI employee is configured for your business. Your exact monthly service and one-time setup are calculated in the configurator and confirmed with Hyventa before payment.", price_advanced:"Advanced or usage-intensive configurations may have a higher monthly price.", price_cfg_cta:"Configure your AI employee",
-    pl_start_d:"For a solo business getting its first AI hire.", pl_start_1:"1 standard AI employee", pl_start_2:"Ongoing AI employee service", pl_start_3:"Email & chat support",
+ pkg_setup:"one-time setup", pkg_month:"/month", pkg_popular:"Most popular",
+      pkg_one_agent:"1 AI employee", pkg_webchat:"Website chat", pkg_500:"500 conversations / month", pkg_fast:"Live in 3-5 days", pkg_cta1:"Choose Starter",
+      pkg_three:"Up to 3 AI employees", pkg_channels:"Website chat, Telegram, WhatsApp", pkg_1500:"1,500 conversations / month", pkg_crm:"CRM / calendar integration", pkg_tuning:"Monthly tuning included", pkg_cta2:"Choose Growth",
+      pkg_five:"5+ AI employees", pkg_custom_int:"Custom integrations and API", pkg_5000:"5,000 conversations / month", pkg_priority:"Priority support", pkg_cta3:"Choose Scale",
+      pkg_note1:"The monthly fee is 20% of the setup - no lock-in, cancel anytime.", pkg_note2:"Founding clients: 50% off setup for the first 10.", pkg_note3:"Need something bigger?", pkg_note4:"Talk to us", pkg_note5:"for a custom quote.",    pl_start_d:"For a solo business getting its first AI hire.", pl_start_1:"1 standard AI employee", pl_start_2:"Ongoing AI employee service", pl_start_3:"Email & chat support",
     pl_popular:"Most popular", pl_biz_d:"For growing teams that need a few roles covered.", pl_biz_1:"Up to 3 standard AI employees", pl_biz_2:"Priority handling", pl_biz_3:"Ongoing support included",
     pl_pro_d:"For companies running a full AI department.", pl_pro_1:"Up to 6 standard AI employees", pl_pro_2:"Add-on skills included", pl_pro_3:"Priority support",
     pl_custom_price:"Let's talk", pl_custom_d:"Advanced AI employees and configurations that need an individualized solution.", pl_custom_1:"Advanced AI employees & complex requirements", pl_custom_2:"Custom integrations & enterprise/SLA", pl_custom_3:"Private deployment & other individualized setups",
@@ -864,7 +910,11 @@ const I18N = {
     how4_h:"Crece", how4_p:"Añade más empleados o habilidades cuando quieras. Crece con tu empresa.",
     price_h:"Precios simples", price_sub:"Planes mensuales sencillos. La configuración se adapta a tu negocio y se confirma antes del lanzamiento — tu estimación única de configuración se muestra en el configurador. Cancela cuando quieras.",
     price_from_label:"Las soluciones estándar de empleados de IA comienzan desde", price_per:"/mes", price_support:"Cada empleado de IA se configura para tu negocio. Tu servicio mensual exacto y la configuración inicial única se calculan en el configurador y se confirman con Hyventa antes del pago.", price_advanced:"Las configuraciones avanzadas o de uso intensivo pueden tener un precio mensual más alto.", price_cfg_cta:"Configura tu empleado de IA",
-    pl_start_d:"Para un negocio en solitario con su primera IA.", pl_start_1:"1 empleado de IA estándar", pl_start_2:"Servicio continuo de empleado de IA", pl_start_3:"Soporte por email y chat",
+ pkg_setup:"configuración inicial única", pkg_month:"/mes", pkg_popular:"Más popular",
+      pkg_one_agent:"1 empleado de IA", pkg_webchat:"Chat en la web", pkg_500:"500 conversaciones / mes", pkg_fast:"Listo en 3-5 días", pkg_cta1:"Elegir Starter",
+      pkg_three:"Hasta 3 empleados de IA", pkg_channels:"Web, Telegram, WhatsApp", pkg_1500:"1.500 conversaciones / mes", pkg_crm:"Integración con CRM / calendario", pkg_tuning:"Ajustes mensuales incluidos", pkg_cta2:"Elegir Growth",
+      pkg_five:"5+ empleados de IA", pkg_custom_int:"Integraciones propias y API", pkg_5000:"5.000 conversaciones / mes", pkg_priority:"Soporte prioritario", pkg_cta3:"Elegir Scale",
+      pkg_note1:"La cuota mensual es el 20% de la configuración, sin permanencia.", pkg_note2:"Clientes fundadores: 50% de descuento en la configuración para los primeros 10.", pkg_note3:"¿Necesitas algo más grande?", pkg_note4:"Háblanos", pkg_note5:"para un presupuesto a medida.",    pl_start_d:"Para un negocio en solitario con su primera IA.", pl_start_1:"1 empleado de IA estándar", pl_start_2:"Servicio continuo de empleado de IA", pl_start_3:"Soporte por email y chat",
     pl_popular:"Más popular", pl_biz_d:"Para equipos en crecimiento que necesitan varios roles.", pl_biz_1:"Hasta 3 empleados de IA estándar", pl_biz_2:"Atención prioritaria", pl_biz_3:"Soporte continuo incluido",
     pl_pro_d:"Para empresas con un departamento IA completo.", pl_pro_1:"Hasta 6 empleados de IA estándar", pl_pro_2:"Habilidades extra incluidas", pl_pro_3:"Soporte prioritario",
     pl_custom_price:"Hablemos", pl_custom_d:"Empleados de IA avanzados y configuraciones que requieren una solución individualizada.", pl_custom_1:"Empleados de IA avanzados y requisitos complejos", pl_custom_2:"Integraciones a medida y enterprise/SLA", pl_custom_3:"Despliegue privado y otras configuraciones individuales",
@@ -892,7 +942,11 @@ const I18N = {
     how4_h:"Масштабуйте", how4_p:"Додавайте співробітників чи навички будь-коли. Росте разом з вашою компанією.",
     price_h:"Прості тарифи", price_sub:"Прості щомісячні тарифи. Налаштування адаптується до вашого бізнесу та узгоджується перед запуском — ваша разова оцінка налаштування показана в конфігураторі. Скасовуйте в будь-який момент.",
     price_from_label:"Стандартні рішення AI-співробітників починаються від", price_per:"/міс.", price_support:"Кожен AI-співробітник налаштовується під ваш бізнес. Точна щомісячна вартість послуги та одноразового налаштування розраховується в конфігураторі та підтверджується Hyventa перед оплатою.", price_advanced:"Розширені конфігурації або конфігурації з інтенсивним використанням можуть мати вищу щомісячну вартість.", price_cfg_cta:"Налаштувати AI-співробітника",
-    pl_start_d:"Для соло-бізнесу з першим AI-наймом.", pl_start_1:"1 стандартний AI-співробітник", pl_start_2:"Постійне обслуговування AI-співробітника", pl_start_3:"Підтримка e-mail і чат",
+ pkg_setup:"одноразове налаштування", pkg_month:"/міс.", pkg_popular:"Найпопулярніший",
+      pkg_one_agent:"1 AI-співробітник", pkg_webchat:"Чат на сайті", pkg_500:"500 розмов / міс.", pkg_fast:"Запуск за 3-5 днів", pkg_cta1:"Обрати Starter",
+      pkg_three:"До 3 AI-співробітників", pkg_channels:"Сайт, Telegram, WhatsApp", pkg_1500:"1 500 розмов / міс.", pkg_crm:"Інтеграція з CRM / календарем", pkg_tuning:"Щомісячне налаштування включено", pkg_cta2:"Обрати Growth",
+      pkg_five:"5+ AI-співробітників", pkg_custom_int:"Власні інтеграції та API", pkg_5000:"5 000 розмов / міс.", pkg_priority:"Пріоритетна підтримка", pkg_cta3:"Обрати Scale",
+      pkg_note1:"Щомісячна плата — 20% від налаштування, без прив'язки до строку.", pkg_note2:"Першим 10 клієнтам — 50% знижки на налаштування.", pkg_note3:"Потрібно більше?", pkg_note4:"Напишіть нам", pkg_note5:"для індивідуального розрахунку.",    pl_start_d:"Для соло-бізнесу з першим AI-наймом.", pl_start_1:"1 стандартний AI-співробітник", pl_start_2:"Постійне обслуговування AI-співробітника", pl_start_3:"Підтримка e-mail і чат",
     pl_popular:"Найпопулярніший", pl_biz_d:"Для команд, що ростуть і потребують кількох ролей.", pl_biz_1:"До 3 стандартних AI-співробітників", pl_biz_2:"Пріоритетне обслуговування", pl_biz_3:"Постійна підтримка включена",
     pl_pro_d:"Для компаній з повним AI-відділом.", pl_pro_1:"До 6 стандартних AI-співробітників", pl_pro_2:"Додаткові навички включені", pl_pro_3:"Пріоритетна підтримка",
     pl_custom_price:"Обговорімо", pl_custom_d:"Просунуті AI-співробітники та конфігурації, що потребують індивідуального рішення.", pl_custom_1:"Просунуті AI-співробітники та складні вимоги", pl_custom_2:"Інтеграції під вас та enterprise/SLA", pl_custom_3:"Приватне розгортання та інші індивідуальні налаштування",
@@ -2628,6 +2682,26 @@ window.HV_PRICING={"stella":{"name":"Stella","role":"AI Stylist","cls":"B-Busine
 #pricing .hv-price-adv{color:var(--muted);font-size:13px;line-height:1.5;max-width:520px;margin:0 auto 24px}
 #pricing .hv-price-cta{display:inline-block;text-decoration:none;font-weight:700;font-size:16px;padding:14px 30px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;transition:.2s}
 #pricing .hv-price-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(108,140,255,.35)}
+#pricing .hv-pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1040px;margin:0 auto}
+#pricing .hv-pkg{position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(22,29,48,.9),rgba(12,16,28,.9));border:1px solid var(--border);border-radius:18px;padding:26px 22px;text-align:left}
+#pricing .hv-pkg-featured{border-color:rgba(108,140,255,.55);box-shadow:0 18px 50px rgba(108,140,255,.18)}
+#pricing .hv-pkg-badge{position:absolute;top:-11px;left:22px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+#pricing .hv-pkg-name{font-size:14px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+#pricing .hv-pkg-setup{font-size:26px;font-weight:800;color:var(--text);line-height:1.1}
+#pricing .hv-pkg-setup span{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:3px}
+#pricing .hv-pkg-month{display:flex;align-items:baseline;gap:4px;margin:14px 0 16px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+#pricing .hv-pkg-month b{font-size:34px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+#pricing .hv-pkg-month span{font-size:14px;color:var(--muted);font-weight:600}
+#pricing .hv-pkg-list{list-style:none;padding:0;margin:0 0 20px;flex:1}
+#pricing .hv-pkg-list li{position:relative;padding-left:22px;margin-bottom:9px;font-size:14px;line-height:1.45;color:var(--text)}
+#pricing .hv-pkg-list li:before{content:"✓";position:absolute;left:0;top:0;color:var(--accent);font-weight:800}
+#pricing .hv-pkg-cta{display:block;text-align:center;text-decoration:none;font-weight:700;font-size:15px;padding:12px 18px;border-radius:12px;border:1px solid rgba(108,140,255,.45);color:var(--text);transition:.2s}
+#pricing .hv-pkg-featured .hv-pkg-cta{background:linear-gradient(135deg,var(--accent),var(--accent-2));border-color:transparent;color:#fff}
+#pricing .hv-pkg-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(108,140,255,.3)}
+#pricing .hv-pkg-note{max-width:760px;margin:22px auto 0;text-align:center;font-size:13.5px;line-height:1.6;color:var(--muted)}
+#pricing .hv-pkg-note b{color:var(--text)}
+#pricing .hv-pkg-note a{color:var(--accent);text-decoration:none}
+@media(max-width:900px){#pricing .hv-pkg-grid{grid-template-columns:1fr;max-width:420px}}
 @media(max-width:560px){#pricing .hv-price-ref{padding:30px 20px}#pricing .hv-price-amt{font-size:52px}}
 </style>
 <!-- HYVENTA-V17-PRICING:END -->
