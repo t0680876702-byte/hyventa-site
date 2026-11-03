@@ -17,7 +17,7 @@ import { buildEstimate, matchAgents } from './engine.mjs';
 // n8n webhook that receives a configured-agent creation request, builds a TXT
 // brief and emails it to the Hyventa owner. CONFIGURATION VALUE — points at the
 // live "Agent Creation Request" webhook workflow. Update here if the path changes.
-const AGENT_REQUEST_WEBHOOK_URL = 'https://achalex.app.n8n.cloud/webhook/agent-creation-request';
+const AGENT_REQUEST_WEBHOOK_URL = 'https://n8n.hyventa.net/webhook/agent-creation-request';
 
 // English labels for the owner-facing brief (the operator reads one language;
 // the visitor still sees fully localized UI). No pricing is computed here.
